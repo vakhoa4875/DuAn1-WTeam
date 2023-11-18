@@ -4,6 +4,7 @@ testAPI\GoogleBooksPreviewViewer$1.class
 testAPI\GoogleBooksApiExample02.class
 testAPI\OpenLibraryApiExample.class
 testAPI\PDFViewer.class
+library\EmailSender$1.class
 testAPI\GoogleBooksPreviewViewer.class
 testAPI\GoogleBooksApiExample.class
 testAPI\OpenLibraryApiExample$OpenLibraryBook.class

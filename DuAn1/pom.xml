@@ -64,7 +64,7 @@
             <artifactId>pdfbox</artifactId>
             <version>2.0.30</version> <!-- Use the latest version available -->
         </dependency>
-<!--         https://mvnrepository.com/artifact/org.openjfx/javafx 
+        <!--         https://mvnrepository.com/artifact/org.openjfx/javafx 
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx</artifactId>
@@ -102,6 +102,13 @@
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+        </dependency>
+
 
     </dependencies>
 </project>
