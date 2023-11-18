@@ -12,17 +12,32 @@ import java.sql.Time;
  */
 public class Sach {
 
-    private String idSach, tenSach, moTa, version, ngonNgu[];
-    private Integer giaNiemYet, minAge, soTrang, likeCount, viewCount;
-    private String thumbnail, avatar, trueSizeAvatar, sourcePDF, sourceSound;
+    private String idSach, tenSach, moTa = "", version = "1.0", ngonNgu = "en";
+    private Integer giaNiemYet = 0, minAge = null, soTrang, likeCount = 0, viewCount = 0;
+    private String thumbnail = null, avatar = null, trueSizeAvatar, sourcePDF, sourceSound;
     private Double danhGiaTB;
-    private Boolean pdfAvai, audioAvai, free;
+    private Boolean pdfAvai = true, audioAvai = false, free = true;
     private Time thoiLuong;
 
     public Sach() {
     }
 
-    public Sach(String idSach, String tenSach, String moTa, String version, String[] ngonNgu, Integer giaNiemYet, Integer minAge, Integer soTrang, Integer likeCount, Integer viewCount, String thumbnail, String avatar, String trueSizeAvatar, String sourcePDF, String sourceSound, Double danhGiaTB, Boolean pdfAvai, Boolean audioAvai, Boolean free, Time thoiLuong) {
+    public Sach(String idSach, String tenSach, String moTa, Integer giaNiemYet, Integer soTrang, String trueSizeAvatar, String sourcePDF, String sourceSound, Boolean pdfAvai, Boolean audioAvai, Boolean free, Time thoiLuong) {
+        this.idSach = idSach;
+        this.tenSach = tenSach;
+        this.moTa = moTa;
+        this.giaNiemYet = giaNiemYet;
+        this.soTrang = soTrang;
+        this.trueSizeAvatar = trueSizeAvatar;
+        this.sourcePDF = sourcePDF;
+        this.sourceSound = sourceSound;
+        this.pdfAvai = pdfAvai;
+        this.audioAvai = audioAvai;
+        this.free = free;
+        this.thoiLuong = thoiLuong;
+    }
+
+    public Sach(String idSach, String tenSach, String moTa, String version, String ngonNgu, Integer giaNiemYet, Integer minAge, Integer soTrang, Integer likeCount, Integer viewCount, String thumbnail, String avatar, String trueSizeAvatar, String sourcePDF, String sourceSound, Double danhGiaTB, Boolean pdfAvai, Boolean audioAvai, Boolean free, Time thoiLuong) {
         this.idSach = idSach;
         this.tenSach = tenSach;
         this.moTa = moTa;
@@ -77,11 +92,11 @@ public class Sach {
         this.version = version;
     }
 
-    public String[] getNgonNgu() {
+    public String getNgonNgu() {
         return ngonNgu;
     }
 
-    public void setNgonNgu(String[] ngonNgu) {
+    public void setNgonNgu(String ngonNgu) {
         this.ngonNgu = ngonNgu;
     }
 
