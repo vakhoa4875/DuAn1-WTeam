@@ -55,7 +55,7 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Quản Lý Thông Tin Khách Hàng");
+        jLabel1.setText("Quản Lý Thông Tin Nhân Viên");
 
         tblQuanLiThongTinKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
