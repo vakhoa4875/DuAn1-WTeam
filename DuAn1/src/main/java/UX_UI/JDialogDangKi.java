@@ -114,7 +114,7 @@ public class JDialogDangKi extends javax.swing.JDialog {
                         .addGap(180, 180, 180))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(231, 231, 231))))
+                        .addGap(226, 226, 226))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
