@@ -4,14 +4,32 @@ go
 --Procedure Thống kê----
 
 --THống kê doanh thu theo thời gian
-
+go
 create or alter procedure doanhThu @time nvarchar(10)
 as
 begin
 	select * from DONHANG
 end
 go
+-- search Sách theo idSach | tenSach | tenTacGia | tenTheLoai
 
+go
+create or alter procedure searchSach
+	@searchValue nvarchar(127)
+as
+begin
+	select * from SACH s1
+	where 
+		IDSACH like '%' +@searchValue+ '%' or TENSACH like '%' +@searchValue+ '%' or
+		IDSACH in (select IDSACH from TACGIA tg
+				join SVTG s2 on tg.IDTACGIA = s2.IDTACGIA
+				where TENTACGIA like '%' +@searchValue+ '%') or
+		IDSACH in (select IDSACH from THELOAI tl
+				join SVTL s3 on tl.IDTHELOAI = s3.IDTHELOAI
+				where TENTHELOAI like '%' +@searchValue+ '%')
+end
+
+exec searchSach 's'
 
 ------
 
@@ -31,6 +49,25 @@ BEGIN
     INSERT INTO GIOHANG (IDGIOHANG, SELECTALL, TONGTIEN, ITEMSCOUNT) VALUES (@idReader, 0, 0, 0); 
 END;
 GO
+
+
+go
+create or alter procedure searchSach
+	@searchValue nvarchar(127)
+as
+begin
+	select * from SACH s1
+	where 
+		IDSACH like '%' +@searchValue+ '%' or TENSACH like '%' +@searchValue+ '%' or
+		IDSACH in (select IDSACH from TACGIA tg
+				join SVTG s2 on tg.IDTACGIA = s2.IDTACGIA
+				where TENTACGIA like '%' +@searchValue+ '%') or
+		IDSACH in (select IDSACH from THELOAI tl
+				join SVTL s3 on tl.IDTHELOAI = s3.IDTHELOAI
+				where TENTHELOAI like '%' +@searchValue+ '%')
+end
+
+exec searchSach 's'
 /*
 -- Insert rows into table 'Users' in schema '[dbo]'
 INSERT INTO [dbo].[Users]
@@ -51,7 +88,7 @@ GO
 
 
 
-
+go
 create or alter TRIGGER tinh_subtotal
 ON DHCT
 AFTER INSERT
