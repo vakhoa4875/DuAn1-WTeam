@@ -8,12 +8,12 @@ package UX_UI;
  *
  * @author Admin
  */
-public class JDialogQuanLyThongTinKhachHang2 extends javax.swing.JDialog {
+public class JDialogQuanLyThongTinKhachHang extends javax.swing.JDialog {
 
     /**
      * Creates new form JDialogQuanLyThongTinKhachHang2
      */
-    public JDialogQuanLyThongTinKhachHang2(java.awt.Frame parent, boolean modal) {
+    public JDialogQuanLyThongTinKhachHang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -287,20 +287,21 @@ public class JDialogQuanLyThongTinKhachHang2 extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialogQuanLyThongTinKhachHang2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogQuanLyThongTinKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialogQuanLyThongTinKhachHang2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogQuanLyThongTinKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialogQuanLyThongTinKhachHang2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogQuanLyThongTinKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialogQuanLyThongTinKhachHang2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogQuanLyThongTinKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogQuanLyThongTinKhachHang2 dialog = new JDialogQuanLyThongTinKhachHang2(new javax.swing.JFrame(), true);
+                JDialogQuanLyThongTinKhachHang dialog = new JDialogQuanLyThongTinKhachHang(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
