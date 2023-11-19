@@ -11,8 +11,6 @@ begin
 	select * from DONHANG
 end
 go
-
-
 ------
 
 --trigger
