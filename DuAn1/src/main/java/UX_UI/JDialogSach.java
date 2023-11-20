@@ -16,6 +16,7 @@ public class JDialogSach extends javax.swing.JDialog {
     public JDialogSach(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

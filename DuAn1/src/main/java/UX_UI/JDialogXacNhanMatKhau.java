@@ -16,6 +16,7 @@ public class JDialogXacNhanMatKhau extends javax.swing.JDialog {
     public JDialogXacNhanMatKhau(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

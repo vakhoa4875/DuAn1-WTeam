@@ -16,6 +16,7 @@ public class JDialogHeThongGiamGia extends javax.swing.JDialog {
     public JDialogHeThongGiamGia(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

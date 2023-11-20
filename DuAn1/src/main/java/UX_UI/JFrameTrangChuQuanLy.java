@@ -15,6 +15,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
      */
     public JFrameTrangChuQuanLy() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
