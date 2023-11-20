@@ -15,6 +15,7 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
      */
     public JFrameTrangChuKhachHang() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
