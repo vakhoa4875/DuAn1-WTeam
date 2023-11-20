@@ -4,6 +4,15 @@
  */
 package UX_UI;
 
+import dao.UserDAO;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import library.DialogHelper;
+import library.Extension;
+import model.User;
+
 /**
  *
  * @author PHAT
@@ -16,8 +25,74 @@ public class JDialogDangKi extends javax.swing.JDialog {
     public JDialogDangKi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
+        init();
+    }
+
+    private void init() {
+        txtPass1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                txtPass1.setEchoChar((char) 0);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                txtPass1.setEchoChar('*');
+            }
+        });
+        txtPass2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                txtPass2.setEchoChar((char) 0);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                txtPass2.setEchoChar('*');
+            }
+        });
+    }
+    
+    UserDAO dao = new UserDAO();
+    
+    ArrayList<User> userList = dao.select(); 
+    
+    Boolean isDuplicated(String userID, String userName, String email) {
+//        boolean check = true;
+        for (User user : userList) {
+            if (userName.equals(user.getUserName()) || email.equals(user.getEmail()) || userID.equals(user.getUserID())) 
+                return true;
+        }
+        return true;
+    }
+
+    User setModel() {
+//        User user = new User();
+        String userID = Extension.randomUserID(15);
+        String userName = txtTaiKhoan.getText();
+        String email = txtEmail.getText();
+        String sdt = txtSoDienThoai.getText();
+        String pass1 = Arrays.toString(txtPass1.getPassword());
+        String pass2 = Arrays.toString(txtPass2.getPassword());
+        if (Extension.areEmpty(txtTaiKhoan, txtEmail)) {
+            DialogHelper.alert(jLabel1, "Tên tài khoản và Email không được để trống");
+            return null;
+        }
+        if (!pass1.equals(pass2)) {
+            DialogHelper.alert(jLabel1, "Xác Nhận Mật khẩu không khớp.");
+            return null;
+        }
+        if (isDuplicated(userID, userName, email)) {
+            DialogHelper.alert(jLabel1, "Username hoặc Email đã tồn tại.");
+            return null;
+        }
+        User user = new User();
+        return user;
         
+    }
+
+    void insertUser() {
+
     }
 
     /**
@@ -32,10 +107,8 @@ public class JDialogDangKi extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         txtTaiKhoan = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtMtaKhau = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        txtXacNhanMatKhau = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtSoDienThoai = new javax.swing.JTextField();
@@ -44,6 +117,8 @@ public class JDialogDangKi extends javax.swing.JDialog {
         btnDangKi = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtPass1 = new javax.swing.JPasswordField();
+        txtPass2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,7 +146,6 @@ public class JDialogDangKi extends javax.swing.JDialog {
 
         btnDangKi.setBackground(new java.awt.Color(204, 204, 204));
         btnDangKi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDangKi.setForeground(new java.awt.Color(0, 0, 0));
         btnDangKi.setText("Đăng kí");
         btnDangKi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,9 +163,13 @@ public class JDialogDangKi extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(258, 258, 258)
+                        .addComponent(btnDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(210, 210, 210))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
@@ -99,20 +177,16 @@ public class JDialogDangKi extends javax.swing.JDialog {
                             .addComponent(jLabel6)
                             .addComponent(txtSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMtaKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
-                            .addComponent(txtXacNhanMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDangNhap))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(210, 210, 210)))
+                                .addComponent(txtDangNhap))
+                            .addComponent(txtPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPass2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(14, 14, 14))
             .addGroup(layout.createSequentialGroup()
                 .addGap(164, 164, 164)
@@ -137,18 +211,17 @@ public class JDialogDangKi extends javax.swing.JDialog {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtMtaKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPass1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtXacNhanMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPass2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -222,9 +295,9 @@ public class JDialogDangKi extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel txtDangNhap;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtMtaKhau;
+    private javax.swing.JPasswordField txtPass1;
+    private javax.swing.JPasswordField txtPass2;
     private javax.swing.JTextField txtSoDienThoai;
     private javax.swing.JTextField txtTaiKhoan;
-    private javax.swing.JTextField txtXacNhanMatKhau;
     // End of variables declaration//GEN-END:variables
 }
