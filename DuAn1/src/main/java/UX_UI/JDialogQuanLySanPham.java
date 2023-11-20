@@ -16,6 +16,7 @@ public class JDialogQuanLySanPham extends javax.swing.JDialog {
     public JDialogQuanLySanPham(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

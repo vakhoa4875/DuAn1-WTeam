@@ -61,11 +61,17 @@ public class Sach {
 //        this.free = free;
 //        this.thoiLuong = thoiLuong;
 //    }
-    private String idSach, tenSach, moTa, version, ngonNgu;
-    private Integer giaNiemYet, minAge, soTrang, likeCount, viewCount;
-    private String thumbnail, avatar, trueSizeAvatar, sourcePDF, sourceSound;
+    private String idSach, tenSach;
+    private Integer giaNiemYet;
+    private String thumbnail, avatar, trueSizeAvatar, moTa;
     private Double danhGiaTB;
-    private Boolean pdfAvai, audioAvai, free;
+    private Integer minAge;
+    private Boolean pdfAvai, audioAvai;
+    private String version;
+    private Integer soTrang;
+    private String ngonNgu, sourcePDF, sourceSound;
+    private Boolean free;
+    private Integer likeCount, viewCount;
     private Time thoiLuong;
 
     // Constructors, getters, and setters...

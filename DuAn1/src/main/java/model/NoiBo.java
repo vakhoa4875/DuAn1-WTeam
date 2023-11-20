@@ -19,7 +19,7 @@ public class NoiBo {
     private Integer luong;
     private Boolean fulltime;
     private Date ngayThue;
-    private String[] caLam;
+    private String caLam;
     private Boolean quanLy;
     private Integer luongBong;
     private Date ngaySinh;
@@ -31,7 +31,7 @@ public class NoiBo {
     public NoiBo() {
     }
 
-    public NoiBo(Integer idNoiBo, String userID, Integer idPB, Integer idQuanLy, Integer luong, Boolean fulltime, Date ngayThue, String[] caLam, Boolean quanLy, Integer luongBong, Date ngaySinh, String avatar, String hoTen) {
+    public NoiBo(Integer idNoiBo, String userID, Integer idPB, Integer idQuanLy, Integer luong, Boolean fulltime, Date ngayThue, String caLam, Boolean quanLy, Integer luongBong, Date ngaySinh, String avatar, String hoTen) {
         this.idNoiBo = idNoiBo;
         this.userID = userID;
         this.idPB = idPB;
@@ -127,11 +127,11 @@ public class NoiBo {
         this.hoTen = hoTen;
     }
 
-    public String[] getCaLam() {
+    public String getCaLam() {
         return caLam;
     }
 
-    public void setCaLam(String[] caLam) {
+    public void setCaLam(String caLam) {
         this.caLam = caLam;
     }
 

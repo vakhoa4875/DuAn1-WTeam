@@ -15,13 +15,13 @@ public class Comment {
     private String idSach;
     private Integer sao;
     private String content;
-    private String images[], videos[];
+    private String images, videos;
     private Boolean editable, enable;
 
     public Comment() {
     }
 
-    public Comment(String idDanhGia, Integer idReader, String idSach, Integer sao, String content, String[] images, String[] videos, Boolean editable, Boolean enable) {
+    public Comment(String idDanhGia, Integer idReader, String idSach, Integer sao, String content, String images, String videos, Boolean editable, Boolean enable) {
         this.idDanhGia = idDanhGia;
         this.idReader = idReader;
         this.idSach = idSach;
@@ -73,19 +73,19 @@ public class Comment {
         this.content = content;
     }
 
-    public String[] getImages() {
+    public String getImages() {
         return images;
     }
 
-    public void setImages(String[] images) {
+    public void setImages(String images) {
         this.images = images;
     }
 
-    public String[] getVideos() {
+    public String getVideos() {
         return videos;
     }
 
-    public void setVideos(String[] videos) {
+    public void setVideos(String videos) {
         this.videos = videos;
     }
 

@@ -16,6 +16,7 @@ public class JDialogQuanLyThongTinKhachHang extends javax.swing.JDialog {
     public JDialogQuanLyThongTinKhachHang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
