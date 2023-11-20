@@ -10,20 +10,29 @@ package model;
  * @author Vu Anh Khoa <vakhoa4875@gmail.com>
  */
 public class GHCT {
-    private Integer idGioHang, soLuongSach;
+    private Integer idGioHang;
     private String idSach, selectedOption;
+    private Integer soLuongSach; 
     private Boolean selected;
 
     public GHCT() {
     }
 
-    public GHCT(Integer idGioHang, Integer soLuongSach, String idSach, String selectedOption, Boolean selected) {
+    public GHCT(Integer idGioHang, String idSach, String selectedOption, Integer soLuongSach, Boolean selected) {
         this.idGioHang = idGioHang;
-        this.soLuongSach = soLuongSach;
         this.idSach = idSach;
         this.selectedOption = selectedOption;
+        this.soLuongSach = soLuongSach;
         this.selected = selected;
     }
+
+//    public GHCT(Integer idGioHang, Integer soLuongSach, String idSach, String selectedOption, Boolean selected) {
+//        this.idGioHang = idGioHang;
+//        this.soLuongSach = soLuongSach;
+//        this.idSach = idSach;
+//        this.selectedOption = selectedOption;
+//        this.selected = selected;
+//    }
 
     public Integer getIdGioHang() {
         return idGioHang;

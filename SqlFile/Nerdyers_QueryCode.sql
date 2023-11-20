@@ -50,24 +50,33 @@ BEGIN
 END;
 GO
 
-
+--trigger khi insert User
 go
-create or alter procedure searchSach
-	@searchValue nvarchar(127)
+create or alter trigger insert_user
+on [user]
+after insert
 as
 begin
-	select * from SACH s1
-	where 
-		IDSACH like '%' +@searchValue+ '%' or TENSACH like '%' +@searchValue+ '%' or
-		IDSACH in (select IDSACH from TACGIA tg
-				join SVTG s2 on tg.IDTACGIA = s2.IDTACGIA
-				where TENTACGIA like '%' +@searchValue+ '%') or
-		IDSACH in (select IDSACH from THELOAI tl
-				join SVTL s3 on tl.IDTHELOAI = s3.IDTHELOAI
-				where TENTHELOAI like '%' +@searchValue+ '%')
-end
+	declare @isReader bit, @idUser nvarchar(127), @userName nvarchar(127);
+	select	@isReader = reader,
+			@idUser = userID, 
+			@userName = username 
+	from inserted;
 
-exec searchSach 's'
+	if (@isReader = 1)
+	begin
+		insert into Reader (userID, hoTen)
+		values
+		(@idUser, @userName);
+	end
+	else if (@isReader = 0)
+	begin
+		insert into noiBo (userID, hoTen)
+		values
+		(@idUser, @userName);
+	end
+end
+go
 /*
 -- Insert rows into table 'Users' in schema '[dbo]'
 INSERT INTO [dbo].[Users]
@@ -166,8 +175,8 @@ SET [enable] = 0, editable = 0
 WHERE IDDANHGIA = @iddanhgia;
 
 -- Thêm bản ghi mới với ENABLES = 1 và không thể chỉnh sửa (EDITTABLE = 0)
-INSERT INTO COMMENT (IDDANHGIA, IDREADER, IDSACH, SAO, CONTENT, IMAGES, VIDEOS, editable, [enable])
-SELECT @iddanhgia + '.v2', @IDREADER, @IDSACH, SAO, CONTENT, IMAGES, VIDEOS, 0, 1
+INSERT INTO COMMENT (IDDANHGIA, IDREADER, IDSACH, SAO, CONTENT, [image], [video], editable, [enable])
+SELECT @iddanhgia + '.v2', @IDREADER, @IDSACH, SAO, CONTENT, [image], [video], 0, 1
 FROM INSERTED;
 
 END;

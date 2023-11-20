@@ -10,18 +10,26 @@ package model;
  */
 public class DHCT {
 
-    private Integer idDonHang, soLuongSach, subTotal;
+    private Integer idDonHang;
     private String idSach;
+    private Integer soLuongSach, subTotal;
 
     public DHCT() {
     }
 
-    public DHCT(Integer idDonHang, Integer soLuongSach, Integer subTotal, String idSach) {
+    public DHCT(Integer idDonHang, String idSach, Integer soLuongSach, Integer subTotal) {
         this.idDonHang = idDonHang;
+        this.idSach = idSach;
         this.soLuongSach = soLuongSach;
         this.subTotal = subTotal;
-        this.idSach = idSach;
     }
+
+//    public DHCT(Integer idDonHang, Integer soLuongSach, Integer subTotal, String idSach) {
+//        this.idDonHang = idDonHang;
+//        this.soLuongSach = soLuongSach;
+//        this.subTotal = subTotal;
+//        this.idSach = idSach;
+//    }
 
     public Integer getIdDonHang() {
         return idDonHang;
