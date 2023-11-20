@@ -72,9 +72,9 @@ public class Extension {
         return matcher.matches();
     }
     
-    public static String randomUserID(int length) {
+    public static String randomString(String init, int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder randomString = new StringBuilder("user_");
+        StringBuilder randomString = new StringBuilder(init);
 
         Random random = new Random();
         for (int i = 0; i < length; i++) {
@@ -84,4 +84,17 @@ public class Extension {
 
         return randomString.toString();
     }
+    
+//    public static String randomOTP(int length) {
+//        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//        StringBuilder randomString = new StringBuilder("user_");
+//
+//        Random random = new Random();
+//        for (int i = 0; i < length; i++) {
+//            int index = random.nextInt(characters.length());
+//            randomString.append(characters.charAt(index));
+//        }
+//
+//        return randomString.toString();
+//    }
 }

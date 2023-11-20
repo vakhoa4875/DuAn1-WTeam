@@ -60,11 +60,11 @@ public class EmailSender {
 
             // Send the message
             Transport.send(message);
-            DialogHelper.alert(new JFrame(), "Email sent successfully!");
+            DialogHelper.alert(null, "Email sent successfully!");
 
         } catch (MessagingException e) {
             
-            DialogHelper.alert(new JFrame(), "Email sent failed!");
+            DialogHelper.alert(null, "Email sent failed!");
             e.printStackTrace();
         }
     }
