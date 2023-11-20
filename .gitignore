@@ -1,5 +1,8 @@
-/DuAn1/target/
 .idea/
-/DuAn1/bin/target/
+.gitattributes
+.project
 DuAn1/target/
-
+DuAn1/bin/
+DuAn1/.settings/
+DuAn1/.gitignore
+DuAn1/.project

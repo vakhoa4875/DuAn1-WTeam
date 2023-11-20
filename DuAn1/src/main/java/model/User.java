@@ -16,7 +16,7 @@ public class User {
     private String userName;
     private String password;
     private String email;
-    private Boolean verificated, reader;
+    private Boolean reader, verificated;
 //    private String hoTen;
 //    private String avatar;
 //    private Date dob;
@@ -25,7 +25,7 @@ public class User {
 
     }
 
-    public User(String userID, String userName, String password, String email, Boolean verificated, Boolean reader) {
+    public User(String userID, String userName, String password, String email, Boolean reader, Boolean verificated) {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
@@ -80,6 +80,18 @@ public class User {
 
     public void setReader(Boolean reader) {
         this.reader = reader;
+    }
+    
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID='" + userID + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", reader=" + reader +
+                ", verificated=" + verificated +
+                '}';
     }
 
 }

@@ -12,36 +12,101 @@ import java.sql.Time;
  */
 public class Sach {
 
-    private String idSach, tenSach, moTa, version, ngonNgu[];
-    private Integer giaNiemYet, minAge, soTrang, likeCount, viewCount;
-    private String thumbnail, avatar, trueSizeAvatar, sourcePDF, sourceSound;
+//    private String idSach, tenSach, moTa, version, ngonNgu;
+//    private Integer giaNiemYet, minAge, soTrang, likeCount, viewCount;
+//    private String thumbnail, avatar, trueSizeAvatar, sourcePDF, sourceSound;
+//    private Double danhGiaTB;
+//    private Boolean pdfAvai, audioAvai, free;
+//    private Time thoiLuong;
+//
+//    public Sach() {
+//    }
+//    
+//    
+//
+////    public Sach(String idSach, String tenSach, String moTa, Integer giaNiemYet, Integer soTrang, String trueSizeAvatar, String sourcePDF, String sourceSound, Boolean pdfAvai, Boolean audioAvai, Boolean free, Time thoiLuong) {
+////        this.idSach = idSach;
+////        this.tenSach = tenSach;
+////        this.moTa = moTa;
+////        this.giaNiemYet = giaNiemYet;
+////        this.soTrang = soTrang;
+////        this.trueSizeAvatar = trueSizeAvatar;
+////        this.sourcePDF = sourcePDF;
+////        this.sourceSound = sourceSound;
+////        this.pdfAvai = pdfAvai;
+////        this.audioAvai = audioAvai;
+////        this.free = free;
+////        this.thoiLuong = thoiLuong;
+////    }
+//
+//    public Sach(String idSach, String tenSach, String moTa, String version, String ngonNgu, Integer giaNiemYet, Integer minAge, Integer soTrang, Integer likeCount, Integer viewCount, String thumbnail, String avatar, String trueSizeAvatar, String sourcePDF, String sourceSound, Double danhGiaTB, Boolean pdfAvai, Boolean audioAvai, Boolean free, Time thoiLuong) {
+//        this.idSach = idSach;
+//        this.tenSach = tenSach;
+//        this.moTa = moTa;
+//        this.version = version;
+//        this.ngonNgu = ngonNgu;
+//        this.giaNiemYet = giaNiemYet;
+//        this.minAge = minAge;
+//        this.soTrang = soTrang;
+//        this.likeCount = likeCount;
+//        this.viewCount = viewCount;
+//        this.thumbnail = thumbnail;
+//        this.avatar = avatar;
+//        this.trueSizeAvatar = trueSizeAvatar;
+//        this.sourcePDF = sourcePDF;
+//        this.sourceSound = sourceSound;
+//        this.danhGiaTB = danhGiaTB;
+//        this.pdfAvai = pdfAvai;
+//        this.audioAvai = audioAvai;
+//        this.free = free;
+//        this.thoiLuong = thoiLuong;
+//    }
+    private String idSach, tenSach;
+    private Integer giaNiemYet;
+    private String thumbnail, avatar, trueSizeAvatar, moTa;
     private Double danhGiaTB;
-    private Boolean pdfAvai, audioAvai, free;
+    private Integer minAge;
+    private Boolean pdfAvai, audioAvai;
+    private String version;
+    private Integer soTrang;
+    private String ngonNgu, sourcePDF, sourceSound;
+    private Boolean free;
+    private Integer likeCount, viewCount;
     private Time thoiLuong;
 
+    // Constructors, getters, and setters...
+
+    // Default constructor
     public Sach() {
     }
 
-    public Sach(String idSach, String tenSach, String moTa, String version, String[] ngonNgu, Integer giaNiemYet, Integer minAge, Integer soTrang, Integer likeCount, Integer viewCount, String thumbnail, String avatar, String trueSizeAvatar, String sourcePDF, String sourceSound, Double danhGiaTB, Boolean pdfAvai, Boolean audioAvai, Boolean free, Time thoiLuong) {
+    // Parameterized constructor to initialize all fields
+    public Sach(String idSach, String tenSach, Integer giaNiemYet, 
+                String thumbnail, String avatar, String trueSizeAvatar,
+                String moTa, Double danhGiaTB, Integer minAge, 
+                Boolean pdfAvai, Boolean audioAvai, String version,
+                Integer soTrang, String ngonNgu, String sourcePDF,
+                String sourceSound, Boolean free, Integer likeCount, 
+                Integer viewCount, Time thoiLuong) {
         this.idSach = idSach;
         this.tenSach = tenSach;
-        this.moTa = moTa;
-        this.version = version;
-        this.ngonNgu = ngonNgu;
         this.giaNiemYet = giaNiemYet;
-        this.minAge = minAge;
-        this.soTrang = soTrang;
-        this.likeCount = likeCount;
-        this.viewCount = viewCount;
         this.thumbnail = thumbnail;
         this.avatar = avatar;
         this.trueSizeAvatar = trueSizeAvatar;
-        this.sourcePDF = sourcePDF;
-        this.sourceSound = sourceSound;
+        this.moTa = moTa;
         this.danhGiaTB = danhGiaTB;
+        this.minAge = minAge;
         this.pdfAvai = pdfAvai;
         this.audioAvai = audioAvai;
+        this.version = version;
+        this.soTrang = soTrang;
+        this.ngonNgu = ngonNgu;
+        this.sourcePDF = sourcePDF;
+        this.sourceSound = sourceSound;
         this.free = free;
+        this.likeCount = likeCount;
+        this.viewCount = viewCount;
         this.thoiLuong = thoiLuong;
     }
 
@@ -77,11 +142,11 @@ public class Sach {
         this.version = version;
     }
 
-    public String[] getNgonNgu() {
+    public String getNgonNgu() {
         return ngonNgu;
     }
 
-    public void setNgonNgu(String[] ngonNgu) {
+    public void setNgonNgu(String ngonNgu) {
         this.ngonNgu = ngonNgu;
     }
 
