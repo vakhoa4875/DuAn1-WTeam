@@ -16,6 +16,7 @@ public class JDialogQuenMatKhau extends javax.swing.JDialog {
     public JDialogQuenMatKhau(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
