@@ -51,19 +51,33 @@ public class JDialogDangKi extends javax.swing.JDialog {
                 txtPass2.setEchoChar('*');
             }
         });
+
+        btnDangKi.addActionListener(e -> {
+            insertUser();
+        });
     }
-    
+
     UserDAO dao = new UserDAO();
-    
-    ArrayList<User> userList = dao.select(); 
-    
-    Boolean isDuplicated(String userID, String userName, String email) {
+
+    ArrayList<User> userList = dao.select();
+
+    Boolean isDuplicated(String userName, String email) {
 //        boolean check = true;
         for (User user : userList) {
-            if (userName.equals(user.getUserName()) || email.equals(user.getEmail()) || userID.equals(user.getUserID())) 
+            if (userName.equals(user.getUserName()) || email.equals(user.getEmail())) {
                 return true;
+            }
         }
-        return true;
+        return false;
+    }
+
+    Boolean isDupID(String userID) {
+        for (User user : userList) {
+            if (userID.equals(user.getUserID())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     User setModel() {
@@ -82,17 +96,22 @@ public class JDialogDangKi extends javax.swing.JDialog {
             DialogHelper.alert(jLabel1, "Xác Nhận Mật khẩu không khớp.");
             return null;
         }
-        if (isDuplicated(userID, userName, email)) {
+        if (isDuplicated(userName, email)) {
             DialogHelper.alert(jLabel1, "Username hoặc Email đã tồn tại.");
             return null;
         }
-        User user = new User();
+        User user = new User(userID, userName, pass1, email, true, false);
         return user;
-        
+
     }
 
     void insertUser() {
-
+        User user = setModel();
+        if (user == null) {
+            return;
+        }
+        dao.insert(user);
+        DialogHelper.alert(jLabel1, "Đăng kí tài khoản thành công!");
     }
 
     /**
