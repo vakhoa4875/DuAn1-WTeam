@@ -15,9 +15,9 @@ public class TacGia {
     private Integer idTacGia;
     private String tenTacGia, moTa;
     private Date ngaySinh, ngayMat;
-    private String quocTich[];
+    private String quocTich;
 
-    public TacGia(Integer idTacGia, String tenTacGia, String moTa, Date ngaySinh, Date ngayMat, String[] quocTich) {
+    public TacGia(Integer idTacGia, String tenTacGia, String moTa, Date ngaySinh, Date ngayMat, String quocTich) {
         this.idTacGia = idTacGia;
         this.tenTacGia = tenTacGia;
         this.moTa = moTa;
@@ -69,11 +69,11 @@ public class TacGia {
         this.ngayMat = ngayMat;
     }
 
-    public String[] getQuocTich() {
+    public String getQuocTich() {
         return quocTich;
     }
 
-    public void setQuocTich(String[] quocTich) {
+    public void setQuocTich(String quocTich) {
         this.quocTich = quocTich;
     }
 

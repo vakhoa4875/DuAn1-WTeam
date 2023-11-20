@@ -39,7 +39,7 @@ CREATE TABLE [Access] (
 CREATE TABLE [User] (
   userID NVARCHAR(127),
   username NVARCHAR(127) unique,
-  passwords NVARCHAR(127) NOT NULL,
+  [password] NVARCHAR(127) NOT NULL,
   email NVARCHAR(127) unique,
   reader bit default 0,
   verificated bit default 0,
@@ -97,7 +97,7 @@ CREATE TABLE KHUYENMAI(
 	NGAYEND DATETIME default cast(getdate() + 7 as Datetime),
 	SOLUONG INT default 127,
 	DISCOUNT INT default 20,
-	MAXS INT default 50000,
+	[max] INT default 50000,
 	MINSPENT INT default 50000,
 	PRIMARY KEY(MAKHUYENMAI)
 );
@@ -225,8 +225,8 @@ CREATE TABLE COMMENT(
 	IDSACH NVARCHAR(127) NOT NULL,
 	SAO INT default 5,
 	CONTENT NVARCHAR(127) default '',
-	IMAGES NVARCHAR(127),
-	VIDEOS NVARCHAR(127),
+	[image] NVARCHAR(127),
+	[video] NVARCHAR(127),
 	EDITABLE BIT default 1,
 	[ENABLE] BIT default 1,
 	PRIMARY KEY (IDDANHGIA),

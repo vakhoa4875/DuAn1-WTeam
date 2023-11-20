@@ -43,3 +43,32 @@ begin
 end
 
 exec searchSach 's'
+
+
+--trigger khi insert User
+go
+create or alter trigger insert_user
+on [user]
+after insert
+as
+begin
+	declare @isReader bit, @idUser nvarchar(127), @userName nvarchar(127);
+	select	@isReader = reader,
+			@idUser = userID, 
+			@userName = username 
+	from inserted;
+
+	if (@isReader = 1)
+	begin
+		insert into Reader (userID, hoTen)
+		values
+		(@idUser, @userName);
+	end
+	else if (@isReader = 0)
+	begin
+		insert into noiBo (userID, hoTen)
+		values
+		(@idUser, @userName);
+	end
+end
+go
