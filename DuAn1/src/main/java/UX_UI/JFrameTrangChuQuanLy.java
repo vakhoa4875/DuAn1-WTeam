@@ -17,6 +17,14 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
+    
+    String userID;
+    
+    public JFrameTrangChuQuanLy(String userID) {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.userID = userID;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

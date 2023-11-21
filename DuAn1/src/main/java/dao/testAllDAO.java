@@ -19,9 +19,9 @@ public class testAllDAO {
 //        
 //        User user = new User("user_abc0", "khoa0", "abc", "vakhoa4875abc@gmail.com", true, false);
 //        
-//        dao.insert(user);
+//        dao.insert(user);dao.search("khoa").isEmpty() ?  : dao.search("khoa")
         
-        ArrayList<User> userList = dao.search("khoa").isEmpty() ? dao.select() : dao.search("khoa");
+        ArrayList<User> userList = dao.select();
         
         for (User u : userList) {
             System.out.println(u.toString());
