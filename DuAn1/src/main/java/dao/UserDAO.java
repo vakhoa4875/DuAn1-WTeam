@@ -15,7 +15,7 @@ import model.User;
 public class UserDAO {
 
     public void insert(User user) {
-        String insertQuery = "INSERT INTO [User] (UserID, UserName, passwords, Email, Reader, Verificated) VALUES (?, ?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO [User] (UserID, UserName, [password], Email, Reader, Verificated) VALUES (?, ?, ?, ?, ?, ?)";
         Jdbc.executeUpdate(insertQuery, 
                 user.getUserID(), 
                 user.getUserName(), 
@@ -31,7 +31,7 @@ public class UserDAO {
     }
 
     public void update(User user) {
-        String updateQuery = "UPDATE [User] SET UserName = ?, passwords = ?, Email = ?, Reader = ?, Verificated = ? WHERE UserID = ?";
+        String updateQuery = "UPDATE [User] SET UserName = ?, [password] = ?, Email = ?, Reader = ?, Verificated = ? WHERE UserID = ?";
         Jdbc.executeUpdate(updateQuery, 
                 user.getUserName(), 
                 user.getPassword(), 
@@ -77,7 +77,7 @@ public class UserDAO {
         User user = new User(
                 resultSet.getString("UserID"),
                 resultSet.getString("UserName"),
-                resultSet.getString("passwords"),
+                resultSet.getString("password"),
                 resultSet.getString("Email"),
                 resultSet.getBoolean("Reader"),
                 resultSet.getBoolean("Verificated")
