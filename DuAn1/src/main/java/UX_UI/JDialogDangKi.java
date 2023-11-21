@@ -40,29 +40,10 @@ public class JDialogDangKi extends javax.swing.JDialog {
 
     private void init() {
         this.setLocationRelativeTo(null);
-        txtPass1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                txtPass1.setEchoChar((char) 0);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                txtPass1.setEchoChar('*');
-            }
-        });
-        txtPass2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                txtPass2.setEchoChar((char) 0);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                txtPass2.setEchoChar('*');
-            }
-        });
-
+        
+        Extension.togglePassword(txtPass1);
+        Extension.togglePassword(txtPass2);
+        
         btnDangKi.addActionListener(e -> {
             insertUser();
         });
@@ -143,7 +124,7 @@ public class JDialogDangKi extends javax.swing.JDialog {
             DialogHelper.alert(null, "Tài khoản đã tồn tại!");
             return;
         }
-        if (check == 0){
+        if (check == 0) {
             dao.insert(user);
         } else if (check == 1) {
             dao.update(user);

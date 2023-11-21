@@ -26,6 +26,17 @@ VALUES
 	
 --end
 --go
+-- Sample SQL insert statements for the Sach table
+INSERT INTO Sach (idSach, tenSach, free, giaNiemYet, danhGiaTB, moTa, ngonNgu, thumbnail, avatar, trueSizeAvatar, pdfAvai, sourcePDF, soTrang, audioAvai, sourceSound, thoiLuong, namSangTac, version, namXB, minAge, likeCount, viewCount)
+VALUES 
+    ('1', 'Book 1', 1, 50, 4.5, 'Description 1', 'vn', 'thumb_1.jpg', 'avatar_1.jpg', 'true_avatar_1.jpg', 1, 'book1.pdf', 200, 0, 'sound1.mp3', '01:30:00', 2000, '1.0', 2022, 18, 20, 100);
+
+INSERT INTO Sach (idSach, tenSach, free, giaNiemYet, danhGiaTB, moTa, ngonNgu, thumbnail, avatar, trueSizeAvatar, pdfAvai, sourcePDF, soTrang, audioAvai, sourceSound, thoiLuong, namSangTac, version, namXB, minAge, likeCount, viewCount)
+VALUES 
+    ('2', 'Book 2', 1, 30, 4.2, 'Description 2', 'vn', 'thumb_2.jpg', 'avatar_2.jpg', 'true_avatar_2.jpg', 1, 'book2.pdf', 150, 1, 'sound2.mp3', '02:15:00', 2010, '2.0', 2023, 16, 15, 80);
+
+
+
 go
 create or alter procedure searchSach
 	@searchValue nvarchar(127)
