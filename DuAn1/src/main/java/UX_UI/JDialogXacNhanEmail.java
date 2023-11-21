@@ -94,7 +94,7 @@ public class JDialogXacNhanEmail extends javax.swing.JDialog {
 
     void directToLogin() {
         this.dispose();
-        new JDialogLogin(new JFrame(), true).setVisible(true);
+        new JDialogLogin(this.user).setVisible(true);
     }
 
     /**
