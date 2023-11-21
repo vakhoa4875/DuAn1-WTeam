@@ -2,6 +2,7 @@ package testAPI;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.awt.Desktop;
 import okhttp3.HttpUrl;
@@ -43,6 +44,7 @@ public class GoogleBooksApiExample02 {
                 .url(url)
                 .build();
 
+        // pdf -> downloadLink
         try {
             // Execute the request
             Response response = client.newCall(request).execute();
@@ -54,25 +56,40 @@ public class GoogleBooksApiExample02 {
 
                 // Extract information about the books
                 JsonArray items = jsonResponse.getAsJsonArray("items");
+
+//                for (JsonElement item : items) {
+//                    System.out.println(item.toString());
+//                }
                 if (items != null && items.size() > 0) {
-//                    for (int i = 0; i < items.size(); i++) {
-                    JsonObject volumeInfo = items.get(0).getAsJsonObject().getAsJsonObject("volumeInfo");
-                    String title = volumeInfo.get("title").getAsString();
-                    String previewLink = volumeInfo.get("previewLink").toString();
-                    String authors = "";
-                    if (volumeInfo.getAsJsonArray("authors") != null) {
-                        authors = volumeInfo.getAsJsonArray("authors").toString();
+                    for (JsonElement item : items) {
+
+                        JsonObject pdf = item.getAsJsonObject().getAsJsonObject("accessInfo").getAsJsonObject("pdf");
+                        if (pdf.getAsJsonPrimitive("isAvailable").getAsBoolean()) {
+
+                            String downloadLink = pdf.getAsJsonPrimitive("downloadLink").getAsString();
+                            System.out.println(item.toString() + "\n" + downloadLink);
+                            openURL(downloadLink);
+                        }
+
                     }
-
-                    System.out.println(items.toString());
-
-                    System.out.println("Title: " + title);
-                    System.out.println("Link pdf: " + previewLink);
-                    System.out.println("Authors: " + authors);
-                    System.out.println("------");
-                        String urlToOpen = previewLink.substring(1, previewLink.length() - 2);
-                        
-//                        openURL(urlToOpen);
+//                    for (int i = 0; i < items.size(); i++) {
+//                        JsonObject volumeInfo = items.get(i).getAsJsonObject().getAsJsonObject("volumeInfo");
+//                        String title = volumeInfo.get("title").getAsString();
+//                        String previewLink = volumeInfo.get("previewLink").toString();
+//                        String authors = "";
+//                        if (volumeInfo.getAsJsonArray("authors") != null) {
+//                            authors = volumeInfo.getAsJsonArray("authors").toString();
+//                        }
+//
+//                        System.out.println(items.toString());
+//
+//                        System.out.println("Title: " + title);
+//                        System.out.println("Link pdf: " + previewLink);
+//                        System.out.println("Authors: " + authors);
+//                        System.out.println("------");
+////                        String urlToOpen = previewLink.substring(1, previewLink.length() - 2);
+//
+////                        openURL(urlToOpen);
 //                    }
                 } else {
                     System.out.println("No books found.");

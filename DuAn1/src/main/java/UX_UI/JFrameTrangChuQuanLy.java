@@ -57,7 +57,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Quản Lý Thông Tin Khách Hàng ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +66,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Quản Lý Sản Phẩm ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,7 +75,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Quản Lý Chi Tiết Danh Mục");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +84,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Quản Lý Khuyến Mãi ");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +93,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Thống Kê");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,7 +138,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         btnQuanLyThongTinKhachHang.setBackground(new java.awt.Color(255, 255, 255));
         btnQuanLyThongTinKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnQuanLyThongTinKhachHang.setForeground(new java.awt.Color(0, 0, 0));
         btnQuanLyThongTinKhachHang.setText("Quản Lý Thông Tin Khách Hàng ");
         btnQuanLyThongTinKhachHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +147,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         btnQuanLySanPham.setBackground(new java.awt.Color(255, 255, 255));
         btnQuanLySanPham.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnQuanLySanPham.setForeground(new java.awt.Color(0, 0, 0));
         btnQuanLySanPham.setText("Quản Lý Sản Phẩm ");
         btnQuanLySanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,7 +156,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         btnQuanLyChiTietDanhMuc.setBackground(new java.awt.Color(255, 255, 255));
         btnQuanLyChiTietDanhMuc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnQuanLyChiTietDanhMuc.setForeground(new java.awt.Color(0, 0, 0));
         btnQuanLyChiTietDanhMuc.setText("Quản Lý Chi Tiết Danh Mục");
         btnQuanLyChiTietDanhMuc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +165,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         btnQuanLyKhuyenMai.setBackground(new java.awt.Color(255, 255, 255));
         btnQuanLyKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnQuanLyKhuyenMai.setForeground(new java.awt.Color(0, 0, 0));
         btnQuanLyKhuyenMai.setText("Quản Lý Khuyến Mãi ");
         btnQuanLyKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,7 +174,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         btnThongKe.setBackground(new java.awt.Color(255, 255, 255));
         btnThongKe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnThongKe.setForeground(new java.awt.Color(0, 0, 0));
         btnThongKe.setText("Thống Kê");
         btnThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,7 +216,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -339,14 +329,14 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Windows look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* If Windows (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
