@@ -4,12 +4,19 @@
  */
 package UX_UI;
 
+import dao.UserDAO;
+import library.Auth;
+import library.MsgBox;
+import model.User;
+
 /**
  *
  * @author phamhuy
  */
 public class JDialogDoiMK extends javax.swing.JDialog {
 
+    UserDAO dao = new UserDAO();
+    
     /**
      * Creates new form JDialogDoiMK
      */
@@ -35,6 +42,8 @@ public class JDialogDoiMK extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         btnConfirm = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        txtNewPWCu = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -48,11 +57,16 @@ public class JDialogDoiMK extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(255, 102, 0));
         jLabel3.setText("Mật khẩu mới:");
 
+        txtNewPW.setMinimumSize(new java.awt.Dimension(65, 30));
+        txtNewPW.setPreferredSize(new java.awt.Dimension(65, 30));
         txtNewPW.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNewPWActionPerformed(evt);
             }
         });
+
+        txtConfirmPW.setMinimumSize(new java.awt.Dimension(65, 30));
+        txtConfirmPW.setPreferredSize(new java.awt.Dimension(65, 30));
 
         jLabel4.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 102, 0));
@@ -69,12 +83,25 @@ public class JDialogDoiMK extends javax.swing.JDialog {
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backward.png"))); // NOI18N
 
+        txtNewPWCu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNewPWCuActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 102, 0));
+        jLabel5.setText("Mật Khẩu củ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(183, 183, 183)
+                        .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnBack)
@@ -85,14 +112,16 @@ public class JDialogDoiMK extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(129, 129, 129)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNewPW)
-                            .addComponent(txtConfirmPW, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                            .addComponent(txtConfirmPW, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(129, Short.MAX_VALUE))
+                            .addComponent(txtNewPW, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txtNewPWCu, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(1, 1, 1)))))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,15 +132,19 @@ public class JDialogDoiMK extends javax.swing.JDialog {
                         .addComponent(jLabel2)
                         .addComponent(jLabel1))
                     .addComponent(btnBack))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNewPW, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+                .addComponent(txtNewPWCu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtConfirmPW, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNewPW, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtConfirmPW, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
@@ -126,6 +159,10 @@ public class JDialogDoiMK extends javax.swing.JDialog {
     private void txtNewPWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPWActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNewPWActionPerformed
+
+    private void txtNewPWCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPWCuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNewPWCuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,7 +213,31 @@ public class JDialogDoiMK extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField txtConfirmPW;
     private javax.swing.JPasswordField txtNewPW;
+    private javax.swing.JPasswordField txtNewPWCu;
     // End of variables declaration//GEN-END:variables
+
+    void init(){
+        
+    }
+    
+    void checkLogin(){
+        
+        if(Auth.isLogin()){
+            MsgBox.alert(this, "Vui long đăng nhập");
+        }
+
+    }
+    
+    void changePassword(){
+        String passwordOld = "";
+        String passwordNew = "";
+        String confirmPassword = "";
+        
+        
+        
+    }
+
 }

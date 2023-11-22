@@ -72,3 +72,7 @@ begin
 	end
 end
 go
+
+ALTER LOGIN sa
+WITH PASSWORD = 'root';
+
