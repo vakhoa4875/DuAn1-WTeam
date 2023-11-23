@@ -47,6 +47,7 @@ CREATE TABLE [User] (
   --ngaysinh DATE NOT NULL,
   PRIMARY KEY (userID)
 );
+
 --insert into [User]
 --values
 --(N'a1',N'a',N'123',N'a',N'a','2022-1-1');
@@ -203,6 +204,7 @@ CREATE TABLE noiBo (
 	FOREIGN KEY (userID) REFERENCES [User](userID),
 	FOREIGN KEY (idQuanLy) REFERENCES noiBo(idNoiBo)
 );
+--insert into noibo values ()
 
 CREATE TABLE Wishlist (
     idWishlist nvarchar(127) NOT NULL,
