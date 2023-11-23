@@ -48,9 +48,13 @@ CREATE TABLE [User] (
   PRIMARY KEY (userID)
 );
 
+<<<<<<< HEAD
+--select * from [user]
+=======
 
 select * from [user]
 
+>>>>>>> main
 --insert into [User]
 --values
 --(N'a1',N'a',N'123',N'a',N'a','2022-1-1');
