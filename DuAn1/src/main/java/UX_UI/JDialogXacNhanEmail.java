@@ -5,6 +5,8 @@
 package UX_UI;
 
 import dao.UserDAO;
+import java.util.HashMap;
+import java.util.HashSet;
 import javax.swing.JFrame;
 import library.DialogHelper;
 import library.EmailSender;
@@ -30,7 +32,6 @@ public class JDialogXacNhanEmail extends javax.swing.JDialog {
     User user;
     UserDAO dao = new UserDAO();
 //    JDialogDangKi dialog;
-
     public JDialogXacNhanEmail(User user) {
         super();
 //        this.dialog = (JDialogDangKi) parent;
@@ -94,7 +95,7 @@ public class JDialogXacNhanEmail extends javax.swing.JDialog {
 
     void directToLogin() {
         this.dispose();
-        new JDialogLogin(new JFrame(), true).setVisible(true);
+        new JDialogLogin(this.user).setVisible(true);
     }
 
     /**
@@ -261,9 +262,9 @@ public class JDialogXacNhanEmail extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Windows look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* If Windows (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {

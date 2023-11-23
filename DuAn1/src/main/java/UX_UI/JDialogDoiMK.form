@@ -46,7 +46,7 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNewPWCu" alignment="0" min="-2" pref="346" max="-2" attributes="0"/>
+                                  <Component id="txtPWOld" alignment="0" min="-2" pref="346" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
@@ -72,7 +72,7 @@
               <EmptySpace pref="34" max="32767" attributes="0"/>
               <Component id="jLabel5" min="-2" pref="49" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtNewPWCu" min="-2" pref="37" max="-2" attributes="0"/>
+              <Component id="txtPWOld" min="-2" pref="37" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" pref="47" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -173,9 +173,9 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="txtNewPWCu">
+    <Component class="javax.swing.JPasswordField" name="txtPWOld">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNewPWCuActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPWOldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">

@@ -37,31 +37,12 @@ public class JDialogDangKi extends javax.swing.JDialog {
         this.user0 = user0;
         setModel(user0);
     }
-    
+
     private void init() {
         this.setLocationRelativeTo(null);
-        txtPass1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                txtPass1.setEchoChar((char) 0);
-            }
-            
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                txtPass1.setEchoChar('*');
-            }
-        });
-        txtPass2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                txtPass2.setEchoChar((char) 0);
-            }
-            
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                txtPass2.setEchoChar('*');
-            }
-        });
+        
+        Extension.togglePassword(txtPass1);
+        Extension.togglePassword(txtPass2);
         
         btnDangKi.addActionListener(e -> {
             insertUser();
@@ -70,11 +51,11 @@ public class JDialogDangKi extends javax.swing.JDialog {
             directToVerfication(user0);
         });
     }
-    
+
     UserDAO dao = new UserDAO();
-    
+
     ArrayList<User> userList = dao.select();
-    
+
     Boolean isDuplicated(String userName, String email) {
 //        boolean check = true;
         for (User user : userList) {
@@ -84,23 +65,26 @@ public class JDialogDangKi extends javax.swing.JDialog {
         }
         return false;
     }
-    
-    Boolean isDupID(String userID) {
+
+    Integer isUpdatable(String userID) {
         for (User user : userList) {
-            if (userID.equals(user.getUserID())) {
-                return true;
+            if (userID.equals(user.getUserID()) && user.getVerificated() == false) {
+                return 1;
+            }
+            if (userID.equals(user.getUserID()) && user.getVerificated() == true) {
+                return null;
             }
         }
-        return false;
+        return 0;
     }
-    
+
     void setModel(User user) {
         txtTaiKhoan.setText(user.getUserName());
 //        txtPass1.setText(user.getPassword());
 //        txtPass2.setText(user.getPassword());
         txtEmail.setText(user.getEmail());
     }
-    
+
     User getModel() {
 //        User user = new User();
         String userID = this.user0 == null ? Extension.randomString("user_", 15) : this.user0.getUserID();
@@ -126,15 +110,25 @@ public class JDialogDangKi extends javax.swing.JDialog {
         }
         User user = new User(userID, userName, pass1, email, true, false);
         return user;
-        
+
     }
-    
+
     void insertUser() {
         User user = getModel();
         if (user == null) {
             return;
         }
-        dao.insert(user);
+        Integer check = isUpdatable(user.getUserID());
+
+        if (check == null) {
+            DialogHelper.alert(null, "Tài khoản đã tồn tại!");
+            return;
+        }
+        if (check == 0) {
+            dao.insert(user);
+        } else if (check == 1) {
+            dao.update(user);
+        }
         boolean option = DialogHelper.confirm(null, "Cần xác nhận email?");
         this.user0 = user;
         if (option) {
@@ -145,7 +139,7 @@ public class JDialogDangKi extends javax.swing.JDialog {
 //        this.setVisible(false);
 //        new JDialogXacNhanEmail(this, OTP, user).setVisible(true);
     }
-    
+
     void directToVerfication(User user) {
         if (user == null) {
             DialogHelper.alert(null, "Không thể chuyển hướng khi không có thông tin đã được đăng kí!");

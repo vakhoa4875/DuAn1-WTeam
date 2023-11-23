@@ -5,7 +5,10 @@
 package UX_UI;
 
 import dao.UserDAO;
+import javax.swing.JOptionPane;
 import library.Auth;
+import library.DialogHelper;
+import library.Extension;
 import library.MsgBox;
 import model.User;
 
@@ -20,9 +23,10 @@ public class JDialogDoiMK extends javax.swing.JDialog {
     /**
      * Creates new form JDialogDoiMK
      */
-    public JDialogDoiMK(java.awt.Frame parent, boolean modal) {
+    public JDialogDoiMK(javax.swing.JDialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init();
     }
 
     /**
@@ -42,7 +46,7 @@ public class JDialogDoiMK extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         btnConfirm = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        txtNewPWCu = new javax.swing.JPasswordField();
+        txtPWOld = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -83,9 +87,9 @@ public class JDialogDoiMK extends javax.swing.JDialog {
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backward.png"))); // NOI18N
 
-        txtNewPWCu.addActionListener(new java.awt.event.ActionListener() {
+        txtPWOld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNewPWCuActionPerformed(evt);
+                txtPWOldActionPerformed(evt);
             }
         });
 
@@ -118,7 +122,7 @@ public class JDialogDoiMK extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(txtNewPWCu, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPWOld, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(1, 1, 1)))))
                 .addContainerGap(128, Short.MAX_VALUE))
@@ -135,7 +139,7 @@ public class JDialogDoiMK extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNewPWCu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPWOld, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -154,15 +158,16 @@ public class JDialogDoiMK extends javax.swing.JDialog {
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
+        changePassword();
     }//GEN-LAST:event_btnConfirmActionPerformed
 
     private void txtNewPWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPWActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNewPWActionPerformed
 
-    private void txtNewPWCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPWCuActionPerformed
+    private void txtPWOldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPWOldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNewPWCuActionPerformed
+    }//GEN-LAST:event_txtPWOldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,7 +199,7 @@ public class JDialogDoiMK extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogDoiMK dialog = new JDialogDoiMK(new javax.swing.JFrame(), true);
+                JDialogDoiMK dialog = new JDialogDoiMK(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -216,28 +221,31 @@ public class JDialogDoiMK extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField txtConfirmPW;
     private javax.swing.JPasswordField txtNewPW;
-    private javax.swing.JPasswordField txtNewPWCu;
+    private javax.swing.JPasswordField txtPWOld;
     // End of variables declaration//GEN-END:variables
 
     void init(){
-        
+        Extension.togglePassword(txtPWOld);
+        Extension.togglePassword(txtConfirmPW);
+        Extension.togglePassword(txtNewPW);
     }
     
-    void checkLogin(){
-        
-        if(Auth.isLogin()){
-            MsgBox.alert(this, "Vui long đăng nhập");
-        }
-
-    }
     
     void changePassword(){
-        String passwordOld = "";
-        String passwordNew = "";
-        String confirmPassword = "";
+        String passwordOld = new String(txtPWOld.getPassword());
+        String passwordNew = new String(txtNewPW.getPassword());
+        String confirmPassword = new String(txtConfirmPW.getPassword());
         
-        
-        
+        if(!passwordOld.equals(Auth.user.getPassword())){
+            DialogHelper.alert(this, "Vui lòng nhập đúng mật khẩu cũ!");
+        }else if(!passwordNew.equals(confirmPassword)){
+            DialogHelper.alert(this, "Xác nhận mật khẩu mới không đúng!");
+        }else{
+            Auth.user.setPassword(passwordNew);
+            dao.update(Auth.user);
+//            JOptionPane.showMessageDialog(rootPane, "Đổi mật khẩu thành công");
+            DialogHelper.alert(this, "Đổi mật khẩu thành công");
+        }  
     }
 
 }
