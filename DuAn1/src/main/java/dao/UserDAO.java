@@ -50,6 +50,13 @@ public class UserDAO {
         String selectQuery = "SELECT * FROM [User]";
         return select(selectQuery);
     }
+    
+    public User selectByID(String id) {
+        String selectQuery = "SELECT * FROM [User] WHERE userID = ?";
+        ArrayList<User> users = select(selectQuery, id);
+        return !users.isEmpty() ? users.get(0) : null;
+        
+    }
 
     private ArrayList<User> select(String sql, Object... args) {
         ArrayList<User> userList = new ArrayList<>();
