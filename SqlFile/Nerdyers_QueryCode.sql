@@ -71,7 +71,7 @@ begin
 	end
 	else if (@isReader = 0)
 	begin
-		insert into noiBo (idNoiBo, hoTen)
+		insert into noiBo (userID, hoTen)
 		values
 		(@idUser, @userName);
 	end

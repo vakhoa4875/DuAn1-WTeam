@@ -35,7 +35,7 @@ public class GoogleBooksApiExample02 {
                 .addPathSegment("v1")
                 .addPathSegment("volumes")
                 .addQueryParameter("q", query)
-                .addQueryParameter("filter", searchQuery)
+//                .addQueryParameter("filter", searchQuery)
                 .addQueryParameter("key", apiKey)
                 .build();
 
@@ -62,14 +62,18 @@ public class GoogleBooksApiExample02 {
 //                }
                 if (items != null && items.size() > 0) {
                     for (JsonElement item : items) {
+                        System.out.println(item.toString());
+                        
+//                        String id  = item.getAsJsonObject().getAsJsonPrimitive("id").getAsString();
 
-                        JsonObject pdf = item.getAsJsonObject().getAsJsonObject("accessInfo").getAsJsonObject("pdf");
-                        if (pdf.getAsJsonPrimitive("isAvailable").getAsBoolean()) {
-
-                            String downloadLink = pdf.getAsJsonPrimitive("downloadLink").getAsString();
-                            System.out.println(item.toString() + "\n" + downloadLink);
-                            openURL(downloadLink);
-                        }
+//                        JsonObject accessInfo = item.getAsJsonObject().getAsJsonObject("accessInfo");
+//                        JsonObject pdf =  accessInfo.getAsJsonObject("pdf");
+//                        if (pdf.getAsJsonPrimitive("isAvailable").getAsBoolean()) {
+//
+//                            String downloadLink = pdf.getAsJsonPrimitive("downloadLink").getAsString();
+//                            System.out.println(item.toString() + "\n" + downloadLink);
+////                            openURL(downloadLink);
+//                        }
 
                     }
 //                    for (int i = 0; i < items.size(); i++) {

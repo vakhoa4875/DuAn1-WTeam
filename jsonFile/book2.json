@@ -1,0 +1,70 @@
+{
+    "kind": "books#volume",
+    "id": "y6QNAAAAQAAJ",
+    "etag": "vOHE8UoMEnM",
+    "selfLink": "https://www.googleapis.com/books/v1/volumes/y6QNAAAAQAAJ",
+    "volumeInfo": {
+        "title": "Java",
+        "subtitle": "Or, How to Manage a Colony. Showing a Practical Solution of the Questions Now Affecting British India",
+        "authors": [
+            "James William Bayley Money"
+        ],
+        "publishedDate": "1861",
+        "industryIdentifiers": [
+            {
+                "type": "OTHER",
+                "identifier": "OXFORD:N10606956"
+            }
+        ],
+        "readingModes": {
+            "text": false,
+            "image": true
+        },
+        "pageCount": 366,
+        "printType": "BOOK",
+        "categories": [
+            "Great Britain"
+        ],
+        "averageRating": 1,
+        "ratingsCount": 1,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "1.4.7.0.full.1",
+        "panelizationSummary": {
+            "containsEpubBubbles": false,
+            "containsImageBubbles": false
+        },
+        "imageLinks": {
+            "smallThumbnail": "http://books.google.com/books/content?id=y6QNAAAAQAAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=y6QNAAAAQAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com.vn/books?id=y6QNAAAAQAAJ&printsec=frontcover&dq=java&hl=&as_brr=7&cd=10&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=y6QNAAAAQAAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=y6QNAAAAQAAJ"
+    },
+    "saleInfo": {
+        "country": "VN",
+        "saleability": "FREE",
+        "isEbook": true,
+        "buyLink": "https://play.google.com/store/books/details?id=y6QNAAAAQAAJ&rdid=book-y6QNAAAAQAAJ&rdot=1&source=gbs_api"
+    },
+    "accessInfo": {
+        "country": "VN",
+        "viewability": "ALL_PAGES",
+        "embeddable": true,
+        "publicDomain": true,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+            "isAvailable": false,
+            "downloadLink": "http://books.google.com.vn/books/download/Java.epub?id=y6QNAAAAQAAJ&hl=&output=epub&source=gbs_api"
+        },
+        "pdf": {
+            "isAvailable": true,
+            "downloadLink": "http://books.google.com.vn/books/download/Java.pdf?id=y6QNAAAAQAAJ&hl=&output=pdf&sig=ACfU3U30cczNI2BwTrk_kDmG9ZIDrbCFAw&source=gbs_api"
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=y6QNAAAAQAAJ&hl=&as_brr=7&source=gbs_api",
+        "accessViewStatus": "FULL_PUBLIC_DOMAIN",
+        "quoteSharingAllowed": false
+    }
+}
