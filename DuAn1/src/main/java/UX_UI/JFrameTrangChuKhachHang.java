@@ -4,6 +4,8 @@
  */
 package UX_UI;
 
+import library.Auth;
+
 /**
  *
  * @author PHAT
@@ -16,6 +18,16 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
     public JFrameTrangChuKhachHang() {
         initComponents();
         setLocationRelativeTo(null);
+//        tesst.setText(Auth.user.getUserID());
+    }
+    
+    String userID;
+    
+    public JFrameTrangChuKhachHang(String userID) {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.userID = userID;
+        tesst.setText(Auth.user.getUserID());
     }
 
     /**
@@ -48,6 +60,7 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
         cboYeuThich = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        tesst = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,7 +91,6 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
 
         btnDangXuat.setBackground(new java.awt.Color(204, 204, 204));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnDangXuat.setForeground(new java.awt.Color(0, 0, 0));
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,7 +100,6 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
 
         btnThongTin.setBackground(new java.awt.Color(204, 204, 204));
         btnThongTin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnThongTin.setForeground(new java.awt.Color(0, 0, 0));
         btnThongTin.setText("Thông tin");
         btnThongTin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +135,8 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(204, 204, 204));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Danh sách yêu thích ");
+
+        tesst.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,6 +195,10 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
                             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cboYeuThich, 0, 144, Short.MAX_VALUE))
                         .addContainerGap(34, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(328, 328, 328)
+                .addComponent(tesst, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +250,9 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(jLabel8)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addGap(80, 80, 80)
+                .addComponent(tesst)
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         pack();
@@ -248,21 +267,22 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void btnThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongTinActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:     
+        openJDialogThongTinKhachHang();
     }//GEN-LAST:event_btnThongTinActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Windows look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* If Windows (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -281,7 +301,9 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new JFrameTrangChuKhachHang().setVisible(true);
+                
             }
         });
     }
@@ -304,9 +326,15 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JRadioButton rdoThanThiet;
+    private javax.swing.JLabel tesst;
     private javax.swing.JLabel txtDocGia;
     private javax.swing.JLabel txtTichDiem;
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JLabel txtVaiTro;
     // End of variables declaration//GEN-END:variables
+    void openJDialogThongTinKhachHang(){
+        new JDialogThongTinKhachHang(this, rootPaneCheckingEnabled).setVisible(true);
+    }
+
+
 }

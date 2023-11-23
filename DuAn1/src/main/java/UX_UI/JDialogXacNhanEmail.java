@@ -4,6 +4,15 @@
  */
 package UX_UI;
 
+import dao.UserDAO;
+import java.util.HashMap;
+import java.util.HashSet;
+import javax.swing.JFrame;
+import library.DialogHelper;
+import library.EmailSender;
+import library.Extension;
+import model.User;
+
 /**
  *
  * @author PHAT
@@ -19,6 +28,76 @@ public class JDialogXacNhanEmail extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }
 
+    String OTP;
+    User user;
+    UserDAO dao = new UserDAO();
+//    JDialogDangKi dialog;
+    public JDialogXacNhanEmail(User user) {
+        super();
+//        this.dialog = (JDialogDangKi) parent;
+//        this.OTP = OTP;
+        this.user = user;
+        initComponents();
+        setLocationRelativeTo(null);
+        init();
+    }
+
+    void init() {
+        txtEmail.setText(user.getEmail());
+        Extension.setPlaceholder(txtOTP, "OTP CODE INPUT");
+        this.OTP = Extension.randomString("", 15);
+        EmailSender.emailSender(user.getEmail(), user.getUserName(), OTP);
+        btnConfirm.addActionListener(e -> {
+            update();
+        });
+        btnBack.addActionListener(e -> {
+            back();
+        });
+        btnResend.addActionListener(e -> {
+            EmailSender.emailSender(user.getEmail(), user.getUserName(), OTP);
+        });
+        btnToLogin.addActionListener(e -> {
+            directToLogin();
+        });
+    }
+
+    Boolean isOTP() {
+        String otp2 = txtOTP.getText();
+
+        return otp2.equals(this.OTP);
+//        if (otp2.equals(this.OTP)) {
+//            return true
+//        }
+//            user.setVerificated(true);
+//            dao.update(user);
+    }
+
+    void update() {
+        if (isOTP()) {
+            this.user.setVerificated(true);
+            dao.update(user);
+//            DialogHelper.alert(null, "Tài khoản đã được xác nhận, bạn có thể đăng nhập!");
+            btnResend.setEnabled(false);
+            btnConfirm.setEnabled(false);
+            boolean option = DialogHelper.confirm(null, "Tài khoản đã được xác nhận, bạn có muốn đăng nhập!");
+            if (option) {
+                directToLogin();
+            }
+        } else {
+            DialogHelper.alert(null, "Sai mã OTP, vui lòng xác nhận lại!");
+        }
+    }
+
+    void back() {
+        this.dispose();
+        new JDialogDangKi(this.user).setVisible(true);
+    }
+
+    void directToLogin() {
+        this.dispose();
+        new JDialogLogin(this.user).setVisible(true);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,9 +111,12 @@ public class JDialogXacNhanEmail extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtMaXacNhan = new javax.swing.JTextField();
-        btnDangKi = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        txtEmail = new javax.swing.JTextField();
+        btnConfirm = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        txtOTP = new javax.swing.JTextField();
+        btnResend = new javax.swing.JButton();
+        btnToLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -46,57 +128,89 @@ public class JDialogXacNhanEmail extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Code đã được gửi cho gmail của bạn vui lòng check email và nhập code để xác nhận");
 
-        txtMaXacNhan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtMaXacNhan.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtMaXacNhan.addActionListener(new java.awt.event.ActionListener() {
+        txtEmail.setEditable(false);
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaXacNhanActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
 
-        btnDangKi.setBackground(new java.awt.Color(204, 204, 204));
-        btnDangKi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDangKi.setForeground(new java.awt.Color(0, 0, 0));
-        btnDangKi.setText("Xác Nhận");
-        btnDangKi.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirm.setBackground(new java.awt.Color(204, 204, 204));
+        btnConfirm.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnConfirm.setText("Xác Nhận");
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDangKiActionPerformed(evt);
+                btnConfirmActionPerformed(evt);
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/return.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/return.png"))); // NOI18N
+        btnBack.setBorder(null);
+        btnBack.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+
+        txtOTP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtOTP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtOTP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOTPActionPerformed(evt);
+            }
+        });
+
+        btnResend.setFont(new java.awt.Font("Segoe UI Light", 3, 14)); // NOI18N
+        btnResend.setForeground(new java.awt.Color(102, 102, 255));
+        btnResend.setText("---Resend OTP Code---");
+        btnResend.setBorder(null);
+
+        btnToLogin.setFont(new java.awt.Font("Segoe UI Light", 3, 14)); // NOI18N
+        btnToLogin.setForeground(new java.awt.Color(51, 51, 255));
+        btnToLogin.setText("---Login---");
+        btnToLogin.setBorder(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(62, 62, 62))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(227, 227, 227))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)
-                        .addGap(93, 93, 93))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addComponent(txtMaXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(178, 178, 178)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)))
+                        .addGap(178, 178, 178)
+                        .addComponent(txtOTP, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 53, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)
+                                .addGap(93, 93, 93))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(62, 62, 62))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnToLogin)
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(264, 264, 264)
+                        .addComponent(btnResend))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(231, 231, 231)
+                        .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,37 +229,47 @@ public class JDialogXacNhanEmail extends javax.swing.JDialog {
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtMaXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(btnDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtOTP, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnResend)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBack)
+                    .addComponent(btnToLogin))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtMaXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaXacNhanActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaXacNhanActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void btnDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKiActionPerformed
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDangKiActionPerformed
+    }//GEN-LAST:event_btnConfirmActionPerformed
+
+    private void txtOTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOTPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOTPActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Windows look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* If Windows (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -177,12 +301,15 @@ public class JDialogXacNhanEmail extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDangKi;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnConfirm;
+    private javax.swing.JButton btnResend;
+    private javax.swing.JButton btnToLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField txtMaXacNhan;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtOTP;
     // End of variables declaration//GEN-END:variables
 }

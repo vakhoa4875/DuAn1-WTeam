@@ -41,7 +41,7 @@ ON Reader
 AFTER INSERT
 AS
 BEGIN
-    DECLARE @idReader NVARCHAR(100); 
+    DECLARE @idReader NVARCHAR(127); 
     SELECT @idReader = idReader FROM inserted;
     
     INSERT INTO Wishlist (idWishlist, totalCount) VALUES (@idReader, 0); 
@@ -65,7 +65,7 @@ begin
 
 	if (@isReader = 1)
 	begin
-		insert into Reader (userID, hoTen)
+		insert into Reader (idReader, hoTen)
 		values
 		(@idUser, @userName);
 	end

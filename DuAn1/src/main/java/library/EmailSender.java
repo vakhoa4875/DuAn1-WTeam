@@ -16,7 +16,7 @@ public class EmailSender {
     public static void emailSender(String recipient, String usernameF, String otp) {
         // Set up mail server and properties
         String host = "smtp.gmail.com"; // SMTP server host
-        final String username = "kaisamaslain@gmail.com";
+        final String username = "kaisamaslain+Nerdyers@gmail.com";
         final String password = "oanxsumpkcoisyrx";
 
         Properties properties = new Properties();
@@ -54,17 +54,17 @@ public class EmailSender {
                     + "Nếu bạn gặp bất kỳ vấn đề nào hoặc cần sự trợ giúp, vui lòng liên hệ với chúng tôi qua địa chỉ email này.\n"
                     + "\n"
                     + "Trân trọng,\n"
-                    + "Vũ Anh Khoa\n"
+                    + "CEO Nerdyers: Vũ Anh Khoa\n"
                     + "kaisamaslain@gmail.com\n"
                     + "0363457017");
 
             // Send the message
             Transport.send(message);
-            DialogHelper.alert(new JFrame(), "Email sent successfully!");
+            DialogHelper.alert(null, "Email sent successfully!");
 
         } catch (MessagingException e) {
             
-            DialogHelper.alert(new JFrame(), "Email sent failed!");
+            DialogHelper.alert(null, "Email sent failed!");
             e.printStackTrace();
         }
     }

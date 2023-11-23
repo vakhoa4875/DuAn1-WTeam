@@ -19,7 +19,7 @@ public class OpenLibraryApiExample {
         Gson gson = new Gson();
 
         // Replace "SEARCH_QUERY" with the query you want to search for
-        String searchQuery = "The Great Gatsby";
+        String searchQuery = "java";
 
         // Build the URL for the Open Library Search API
         HttpUrl url = new HttpUrl.Builder()
