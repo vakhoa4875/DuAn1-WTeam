@@ -3,6 +3,7 @@ package UX_UI;
 import dao.UserDAO;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import library.Auth;
 import library.DialogHelper;
 import library.Extension;
 import model.User;
@@ -49,9 +50,9 @@ public class JDialogLogin extends javax.swing.JDialog {
     }
 
     UserDAO dao = new UserDAO();
-    User user0;
+    User user0 = new User();
     ArrayList<User> userList = dao.select();
-
+    
     boolean validateInput() {
         if (Extension.areEmpty(txtTaiKhoan, txtMatKhau)) {
             DialogHelper.alert(null, "Username hoặc Mật khẩu không được để trống");
@@ -69,8 +70,11 @@ public class JDialogLogin extends javax.swing.JDialog {
         String pass = new String(txtMatKhau.getPassword());
         
         for (User user : userList) {
-            if (username.equals(user.getUserName()) || email.equals(user.getEmail())) {
+            if (username.equals(user.getUserName()) && pass.equals(user.getPassword())) {
                 this.user0 = user;
+                System.out.println(user0.getUserID());
+                System.out.println(user0.getPassword());
+                Auth.user = user0;
                 return true;
             }
         }

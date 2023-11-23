@@ -83,3 +83,10 @@ begin
 	end
 end
 go
+
+update [user] set [password] = 123 where userID = 'user_ka57vZlWeiPT1YZ'
+
+
+ALTER LOGIN sa
+WITH PASSWORD = 'root';
+
