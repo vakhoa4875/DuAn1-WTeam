@@ -12,17 +12,16 @@ import java.util.Date;
  */
 public class Reader {
 
-    private Integer idReader;
-    private String userID;
+//    private String idReader;
+    private String idReader;
     private Boolean thanThiet;
     private Integer tichDiem;
     private Date ngaySinh;
     private String avatar;
     private String hoTen;
 
-    public Reader(Integer idReader, String userID, Boolean thanThiet, Integer tichDiem, Date ngaySinh, String avatar, String hoTen) {
+    public Reader(String idReader, Boolean thanThiet, Integer tichDiem, Date ngaySinh, String avatar, String hoTen) {
         this.idReader = idReader;
-        this.userID = userID;
         this.thanThiet = thanThiet;
         this.tichDiem = tichDiem;
         this.ngaySinh = ngaySinh;
@@ -33,21 +32,21 @@ public class Reader {
     public Reader() {
     }
 
-    public Integer getIdReader() {
+    public String getIdReader() {
         return idReader;
     }
 
-    public void setIdReader(Integer idReader) {
+    public void setIdReader(String idReader) {
         this.idReader = idReader;
     }
 
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
+//    public String getUserID() {
+//        return userID;
+//    }
+//
+//    public void setUserID(String userID) {
+//        this.userID = userID;
+//    }
 
     public Boolean getThanThiet() {
         return thanThiet;

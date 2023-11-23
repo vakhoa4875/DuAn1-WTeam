@@ -62,18 +62,21 @@ public class GoogleBooksApiExample02 {
 //                }
                 if (items != null && items.size() > 0) {
                     for (JsonElement item : items) {
-                        System.out.println(item.toString());
                         
-//                        String id  = item.getAsJsonObject().getAsJsonPrimitive("id").getAsString();
+                        String idSach  = item.getAsJsonObject().getAsJsonPrimitive("id").getAsString();
+                        JsonObject volumeInfo = item.getAsJsonObject().getAsJsonObject("volumeInfo");
+                        String subTitle = volumeInfo.getAsJsonPrimitive("subTitle").getAsString() == null ? "" : volumeInfo.getAsJsonPrimitive("subTitle").getAsString();
+                        String tenSach = volumeInfo.getAsJsonPrimitive("title") + subTitle;
 
-//                        JsonObject accessInfo = item.getAsJsonObject().getAsJsonObject("accessInfo");
-//                        JsonObject pdf =  accessInfo.getAsJsonObject("pdf");
-//                        if (pdf.getAsJsonPrimitive("isAvailable").getAsBoolean()) {
-//
-//                            String downloadLink = pdf.getAsJsonPrimitive("downloadLink").getAsString();
-//                            System.out.println(item.toString() + "\n" + downloadLink);
-////                            openURL(downloadLink);
-//                        }
+                        JsonObject accessInfo = item.getAsJsonObject().getAsJsonObject("accessInfo");
+                        JsonObject pdf =  accessInfo.getAsJsonObject("pdf");
+                        if (pdf.getAsJsonPrimitive("isAvailable").getAsBoolean()) {
+
+                            String downloadLink = pdf.getAsJsonPrimitive("downloadLink").getAsString();
+                            System.out.println(item.toString() + "\n" + downloadLink);
+//                            openURL(downloadLink);
+                        }
+                        System.out.println(item.toString() + "\nid: " + idSach);
 
                     }
 //                    for (int i = 0; i < items.size(); i++) {
