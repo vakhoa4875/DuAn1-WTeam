@@ -65,14 +65,14 @@ public class GoogleBooksApiExample02 {
                         
                         String idSach  = item.getAsJsonObject().getAsJsonPrimitive("id").getAsString();
                         JsonObject volumeInfo = item.getAsJsonObject().getAsJsonObject("volumeInfo");
-                        String subTitle = volumeInfo.getAsJsonPrimitive("subTitle").getAsString() == null ? "" : volumeInfo.getAsJsonPrimitive("subTitle").getAsString();
+                        String subTitle = volumeInfo.getAsJsonPrimitive("subTitle") == null ? "" : volumeInfo.getAsJsonPrimitive("subTitle").getAsString();
                         String tenSach = volumeInfo.getAsJsonPrimitive("title") + subTitle;
 
                         JsonObject accessInfo = item.getAsJsonObject().getAsJsonObject("accessInfo");
                         JsonObject pdf =  accessInfo.getAsJsonObject("pdf");
                         if (pdf.getAsJsonPrimitive("isAvailable").getAsBoolean()) {
 
-                            String downloadLink = pdf.getAsJsonPrimitive("downloadLink").getAsString();
+                            String downloadLink = pdf.getAsJsonPrimitive("downloadLink")== null ? "" : pdf.getAsJsonPrimitive("downloadLink").getAsString();
                             System.out.println(item.toString() + "\n" + downloadLink);
 //                            openURL(downloadLink);
                         }
