@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 /**
@@ -10,23 +6,22 @@ package model;
  */
 public class TheLoai {
 
-    private Integer idTheLoai;
-    private String tenTheLoai, moTa;
+    private String idTheLoai;
+    private String tenTheLoai;
 
     public TheLoai() {
     }
 
-    public TheLoai(Integer idTheLoai, String tenTheLoai, String moTa) {
+    public TheLoai(String idTheLoai, String tenTheLoai) {
         this.idTheLoai = idTheLoai;
         this.tenTheLoai = tenTheLoai;
-        this.moTa = moTa;
     }
 
-    public Integer getIdTheLoai() {
+    public String getIdTheLoai() {
         return idTheLoai;
     }
 
-    public void setIdTheLoai(Integer idTheLoai) {
+    public void setIdTheLoai(String idTheLoai) {
         this.idTheLoai = idTheLoai;
     }
 
@@ -36,14 +31,6 @@ public class TheLoai {
 
     public void setTenTheLoai(String tenTheLoai) {
         this.tenTheLoai = tenTheLoai;
-    }
-
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
     }
 
 }

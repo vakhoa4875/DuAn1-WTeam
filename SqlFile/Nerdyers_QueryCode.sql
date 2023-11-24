@@ -4,23 +4,23 @@ go
 --Procedure Thống kê----
 
 --THống kê doanh thu theo thời gian
-go
-create or alter procedure doanhThu @time nvarchar(10)
-as
-begin
-	select * from DONHANG
-end
-go
+--go
+--create or alter procedure doanhThu @time nvarchar(10)
+--as
+--begin
+--	select * from DONHANG
+--end
+--go
 -- search Sách theo idSach | tenSach | tenTacGia | tenTheLoai
 
 go
 create or alter procedure searchSach
-	@searchValue nvarchar(127)
+	@searchValue nvarchar(255)
 as
 begin
 	select * from SACH s1
 	where 
-		IDSACH like '%' +@searchValue+ '%' or TENSACH like '%' +@searchValue+ '%' or
+		TENSACH like '%' +@searchValue+ '%' or
 		IDSACH in (select IDSACH from TACGIA tg
 				join SVTG s2 on tg.IDTACGIA = s2.IDTACGIA
 				where TENTACGIA like '%' +@searchValue+ '%') or
@@ -44,9 +44,13 @@ BEGIN
     DECLARE @idReader NVARCHAR(127); 
     SELECT @idReader = idReader FROM inserted;
     
-    INSERT INTO Wishlist (idWishlist, totalCount) VALUES (@idReader, 0); 
-    INSERT INTO READLIST (IDREADLIST, alternativeName, totalPDFCount, totalAudioCount) VALUES (@idReader, '', 0, 0); 
-    INSERT INTO GIOHANG (IDGIOHANG, SELECTALL, TONGTIEN, ITEMSCOUNT) VALUES (@idReader, 0, 0, 0); 
+    INSERT INTO Wishlist (idWishlist, totalCount) 
+	VALUES 
+	(@idReader, 0); 
+    INSERT INTO READLIST (IDREADLIST, alternativeName, totalPDFCount, totalAudioCount) 
+	VALUES 
+	(@idReader, '', 0, 0); 
+    --INSERT INTO GIOHANG (IDGIOHANG, SELECTALL, TONGTIEN, ITEMSCOUNT) VALUES (@idReader, 0, 0, 0); 
 END;
 GO
 
@@ -57,26 +61,37 @@ on [user]
 after insert
 as
 begin
-	declare @isReader bit, @idUser nvarchar(127), @userName nvarchar(127);
-	select	@isReader = reader,
-			@idUser = userID, 
-			@userName = username 
-	from inserted;
+    INSERT INTO Reader (idReader, hoTen)
+    SELECT userID, username
+    FROM inserted
+    WHERE reader = 1;
 
-	if (@isReader = 1)
-	begin
-		insert into Reader (idReader, hoTen)
-		values
-		(@idUser, @userName);
-	end
-	else if (@isReader = 0)
-	begin
-		insert into noiBo (userID, hoTen)
-		values
-		(@idUser, @userName);
-	end
+    INSERT INTO noiBo(userID, hoTen)
+    SELECT userID, username
+    FROM inserted
+    WHERE reader = 0;
+    --SET NOCOUNT ON;
+	--declare @isReader bit, @idUser nvarchar(127), @userName nvarchar(127);
+	--select	@isReader = reader,
+	--		@idUser = userID, 
+	--		@userName = username 
+	--from inserted;
+
+	--if (@isReader = 1)
+	--begin
+	--	insert into Reader (idReader, hoTen)
+	--	values
+	--	(@idUser, @userName);
+	--end
+	--else if (@isReader = 0)
+	--begin
+	--	insert into noiBo(userID, hoTen)
+	--	values
+	--	(@idUser, @userName);
+	--end
 end
 go
+
 /*
 -- Insert rows into table 'Users' in schema '[dbo]'
 INSERT INTO [dbo].[Users]
@@ -97,32 +112,32 @@ GO
 
 
 
-go
-create or alter TRIGGER tinh_subtotal
-ON DHCT
-AFTER INSERT
-AS
-BEGIN
-    DECLARE @iddonhang NVARCHAR(100);
-    DECLARE @subtotal INT;
+--go
+--create or alter TRIGGER tinh_subtotal
+--ON DHCT
+--AFTER INSERT
+--AS
+--BEGIN
+--    DECLARE @iddonhang NVARCHAR(100);
+--    DECLARE @subtotal INT;
 
-    -- Lấy ID đơn hàng từ dòng vừa được thêm vào bảng DHCT
-    SELECT @iddonhang = INSERTED.IDDONHANG FROM INSERTED;
+--    -- Lấy ID đơn hàng từ dòng vừa được thêm vào bảng DHCT
+--    SELECT @iddonhang = INSERTED.IDDONHANG FROM INSERTED;
 
-    -- Tính toán subtotal dựa trên số lượng sách và cập nhật vào bảng DHCT
-    UPDATE DHCT
-    SET SUBTOTAL = INSERTED.SOLUONGSACH * (SELECT GIANIEMYET FROM SACH WHERE IDSACH = INSERTED.IDSACH)
-    FROM DHCT
-    INNER JOIN INSERTED 
-	ON DHCT.IDSACH = INSERTED.IDSACH
+--    -- Tính toán subtotal dựa trên số lượng sách và cập nhật vào bảng DHCT
+--    UPDATE DHCT
+--    SET SUBTOTAL = INSERTED.SOLUONGSACH * (SELECT GIANIEMYET FROM SACH WHERE IDSACH = INSERTED.IDSACH)
+--    FROM DHCT
+--    INNER JOIN INSERTED 
+--	ON DHCT.IDSACH = INSERTED.IDSACH
 
-	-- Tính toán tổng tiền dựa trên subtotal và cập nhật vào bảng đơn hàng
-    SELECT @subtotal = SUM(SUBTOTAL) FROM DHCT WHERE IDDONHANG = @iddonhang;
-    UPDATE DONHANG
-    SET TONGTIEN = @subtotal
-    WHERE IDDONHANG = @iddonhang;
-END;
-GO
+--	-- Tính toán tổng tiền dựa trên subtotal và cập nhật vào bảng đơn hàng
+--    SELECT @subtotal = SUM(SUBTOTAL) FROM DHCT WHERE IDDONHANG = @iddonhang;
+--    UPDATE DONHANG
+--    SET TONGTIEN = @subtotal
+--    WHERE IDDONHANG = @iddonhang;
+--END;
+--GO
 /*
 -- Insert rows into table 'SACH' in schema '[dbo]'
 INSERT INTO [dbo].[SACH]
@@ -158,7 +173,7 @@ GO
 
 
 
-
+go
 create or alter TRIGGER tr_comment_update
 ON COMMENT
 INSTEAD OF UPDATE
@@ -196,3 +211,28 @@ CONTENT = N'OMG'
 WHERE IDDANHGIA = N'1'
 GO
 */
+
+
+--delete Reader
+--where idReader like '%'
+--go
+--delete noiBo
+--where userID like '%'
+--go
+--delete [user]
+--where userID like '%'
+--go
+
+insert into [User] values
+('user', 'reader', '123', 'user@gmail.com', 1, 1),
+('admin', 'noiBo', '123', 'admin@gmail.com', 0, 1);
+go
+
+--insert into noiBo (userID, hoTen) values
+--('admin', 'noiBo')
+
+select * from [user];
+go
+select * from noibo;
+go
+select * from reader;

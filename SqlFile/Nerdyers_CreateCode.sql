@@ -14,12 +14,12 @@ CREATE TABLE [Access] (
   uReadList BIT default 0,
   rWishList BIT default 0,
   uWishList BIT default 0,
-  rGioHang BIT default 0,
-  uGioHang BIT default 0,
-  rDonHang BIT default 0,
-  uDonHang BIT default 0,
-  rkhuyenMai BIT default 0,
-  uKhuyenMai BIT default 0,
+  --rGioHang BIT default 0,
+  --uGioHang BIT default 0,
+  --rDonHang BIT default 0,
+  --uDonHang BIT default 0,
+  --rkhuyenMai BIT default 0,
+  --uKhuyenMai BIT default 0,
   rUser BIT default 0,
   uUser BIT default 0,
   rPhongBan BIT default 0,
@@ -49,12 +49,6 @@ CREATE TABLE [User] (
 );
 
 
-select * from [user]
-
---insert into [User]
---values
---(N'a1',N'a',N'123',N'a',N'a','2022-1-1');
-
 --CREATE TABLE SACH(
 --	IDSACH NVARCHAR(127),
 --	TENSACH NVARCHAR(127) NOT NULL,
@@ -82,60 +76,87 @@ select * from [user]
 
 CREATE TABLE Sach (
     idSach NVARCHAR(127) PRIMARY KEY,
-    tenSach NVARCHAR(127) NOT NULL,
-    free BIT DEFAULT 1,
-    giaNiemYet INT DEFAULT 0,
-    danhGiaTB FLOAT DEFAULT 0,
-    moTa NVARCHAR(255),
-    ngonNgu NVARCHAR(50) DEFAULT 'vn', -- Adjust the length as needed
-    thumbnail NVARCHAR(255),
-    avatar NVARCHAR(255),
-    trueSizeAvatar NVARCHAR(255) NOT NULL,
-    pdfAvai BIT DEFAULT 1,
-    sourcePDF NVARCHAR(255),
-    soTrang INT,
-    audioAvai BIT DEFAULT 0,
-    sourceSound NVARCHAR(255),
-    thoiLuong TIME,
-    namSangTac INT,
-    [version] NVARCHAR(127) DEFAULT '1.0',
-    namXB INT,
-    minAge INT,
-    likeCount INT DEFAULT 0,
-    viewCount INT DEFAULT 0,
-	--publisher nvarchar(127),
-	authors nvarchar(255) default '',
-	categories nvarchar(255) default ''
+    tenSach NVARCHAR(255) NOT NULL,
+	namXB int default year(getdate()),
+    namSangTac INT default year(getdate()),
+    soTrang INT not null,
+    ebook_access NVARCHAR(63) default 'public',
+    has_fulltext BIT default 1,
+    public_scan_b BIT default 1,
+    urlLink NVARCHAR(255) not null,
+    cover_i nvarchar(255) not null,
+    moTa NVARCHAR(1023) default '',
+    ngonNgu NVARCHAR(63) default 'eng',
+    phienBan NVARCHAR(63) default 1,
+    viewCount INT default 0,
+    likeCount INT default 0,	
+    danhGiaTB float null,
+    --free BIT DEFAULT 1,
+ --   giaNiemYet INT DEFAULT 0,
+ --   danhGiaTB FLOAT DEFAULT 0,
+ --   moTa NVARCHAR(255),
+ --   ngonNgu NVARCHAR(50) DEFAULT 'vn', -- Adjust the length as needed
+ --   thumbnail NVARCHAR(255),
+ --   avatar NVARCHAR(255),
+ --   trueSizeAvatar NVARCHAR(255) NOT NULL,
+ --   pdfAvai BIT DEFAULT 1,
+ --   sourcePDF NVARCHAR(255),
+ --   soTrang INT,
+ --   audioAvai BIT DEFAULT 0,
+ --   sourceSound NVARCHAR(255),
+ --   thoiLuong TIME,
+ --   namSangTac INT,
+ --   [version] NVARCHAR(127) DEFAULT '1.0',
+ --   namXB INT,
+ --   minAge INT,
+ --   likeCount INT DEFAULT 0,
+ --   viewCount INT DEFAULT 0,
+	----publisher nvarchar(127),
+	--authors nvarchar(255) default '',
+	--categories nvarchar(255) default ''
 );
 
 
 
---CREATE TABLE TACGIA(
---	IDTACGIA INT,
---	TENTACGIA NVARCHAR(127) NOT NULL,
---	MOTA NVARCHAR(127) default '',
---	NGAYSINH DATE,
---	NGAYMAT DATE,
---	QUOCTICH NVARCHAR(127) default 'hooman',
---	primary key(IDTACGIA)
---)
+CREATE TABLE TACGIA(
+	IDTACGIA nvarchar(127),
+	TENTACGIA NVARCHAR(255) NOT NULL,
+	primary key(IDTACGIA)
+)
 
---CREATE TABLE THELOAI (
---	IDTHELOAI INT NOT NULL,
---	TENTHELOAI NVARCHAR(127) NOT NULL,
---	MOTA NVARCHAR(127) default '',
---	PRIMARY KEY(IDTHELOAI)
+CREATE TABLE THELOAI (
+	IDTHELOAI nvarchar(127) NOT NULL,
+	TENTHELOAI NVARCHAR(255) NOT NULL,
+	PRIMARY KEY(IDTHELOAI)
+);
+
+CREATE TABLE SVTG(
+	IDSACH NVARCHAR(127),
+	IDTACGIA NVARCHAR(127),
+	PRIMARY KEY(IDSACH,IDTACGIA),
+	FOREIGN KEY (IDSACH) REFERENCES SACH(idsach),
+	FOREIGN KEY (IDTACGIA) REFERENCES TACGIA(IDTACGIA)
+);
+
+CREATE TABLE SVTL(
+	IDSACH NVARCHAR(127) NOT NULL,
+	IDTHELOAI NVARCHAR(127) NOT NULL,
+	PRIMARY KEY (IDSACH, IDTHELOAI),
+	FOREIGN KEY (IDSACH) REFERENCES SACH(IDSACH),
+	FOREIGN KEY (idTHELOAI) REFERENCES THELOAI(IDtheloai)
+);
+
+
+--CREATE TABLE KHUYENMAI(
+--	MAKHUYENMAI NVARCHAR(127) NOT NULL,
+--	NGAYSTART DATETIME default getdate(),
+--	NGAYEND DATETIME default cast(getdate() + 7 as Datetime),
+--	SOLUONG INT default 127,
+--	DISCOUNT INT default 20,
+--	[max] INT default 50000,
+--	MINSPENT INT default 50000,
+--	PRIMARY KEY(MAKHUYENMAI)
 --);
-CREATE TABLE KHUYENMAI(
-	MAKHUYENMAI NVARCHAR(127) NOT NULL,
-	NGAYSTART DATETIME default getdate(),
-	NGAYEND DATETIME default cast(getdate() + 7 as Datetime),
-	SOLUONG INT default 127,
-	DISCOUNT INT default 20,
-	[max] INT default 50000,
-	MINSPENT INT default 50000,
-	PRIMARY KEY(MAKHUYENMAI)
-);
 --insert into KHUYENMAI values
 --(N'km1','2022-1-1','2022-2-2',1,1,23,12);
 
@@ -192,13 +213,13 @@ CREATE TABLE Reader(
 
 CREATE TABLE noiBo (
 	idNoiBo int identity(1,1) ,
-	userID NVARCHAR(127) NOT NULL,
-	idPB INT NOT NULL,
+	userID NVARCHAR(127) unique,
+	idPB INT null,
 	idQuanLy int null,
-	luong int NOT NULL,
+	luong int default 0,
 	fullTime BIT default 1,
-	ngayThue DATE NOT NULL,
-	caLam VARCHAR(127) NOT NULL,
+	ngayThue DATE default getdate(),
+	caLam VARCHAR(127) default 'ca123-thu246',
 	quanLy BIT default 0,
 	luongBong INT default 0,
 	ngaySinh date,
@@ -238,24 +259,24 @@ CREATE TABLE READLIST (
 	FOREIGN KEY (IDREADLIST) REFERENCES Reader(idReader)
 );
 
-CREATE TABLE GIOHANG (
-	IDGIOHANG nvarchar(127) NOT NULL,
-	SELECTALL BIT default 0,
-	TONGTIEN INT default 0,
-	ITEMSCOUNT INT default 0,
-	PRIMARY KEY (IDGIOHANG),
-	FOREIGN KEY (IDGIOHANG) REFERENCES Reader(idReader)
-);
+--CREATE TABLE GIOHANG (
+--	IDGIOHANG nvarchar(127) NOT NULL,
+--	SELECTALL BIT default 0,
+--	TONGTIEN INT default 0,
+--	ITEMSCOUNT INT default 0,
+--	PRIMARY KEY (IDGIOHANG),
+--	FOREIGN KEY (IDGIOHANG) REFERENCES Reader(idReader)
+--);
 
 
-CREATE TABLE KMVR(
-	MAKHUYENMAI NVARCHAR(127) NOT NULL,
-	IDREADER nvarchar(127) NOT NULL,
-	soLuong int default 1,
-	PRIMARY KEY(MAKHUYENMAI,IDREADER),
-	FOREIGN KEY (MAKHUYENMAI) REFERENCES KHUYENMAI(MAKHUYENMAI),
-	FOREIGN KEY (IDREADER) REFERENCES reader(idreader)
-);
+--CREATE TABLE KMVR(
+--	MAKHUYENMAI NVARCHAR(127) NOT NULL,
+--	IDREADER nvarchar(127) NOT NULL,
+--	soLuong int default 1,
+--	PRIMARY KEY(MAKHUYENMAI,IDREADER),
+--	FOREIGN KEY (MAKHUYENMAI) REFERENCES KHUYENMAI(MAKHUYENMAI),
+--	FOREIGN KEY (IDREADER) REFERENCES reader(idreader)
+--);
 
 CREATE TABLE COMMENT(
 	IDDANHGIA NVARCHAR(127) NOT NULL,
@@ -282,45 +303,45 @@ CREATE TABLE SACHPDF (
 	FOREIGN KEY (IDSACH) REFERENCES SACH(IDSACH)
 );
 
-CREATE TABLE SACHNOI(
-	IDREADLIST nvarchar(127) NOT NULL,
-	IDSACH NVARCHAR(127) NOT NULL,
-	LASTLEFT TIME default cast('00:00:00' as time),
-	ADDEDTIME DATETIME default getdate(),
-	PRIMARY KEY(IDREADLIST,IDSACH),
-	FOREIGN KEY (IDSACH) REFERENCES SACH(IDSACH),
-	FOREIGN KEY (IDREADLIST) REFERENCES READLIST(IDREADLIST)
-);
+--CREATE TABLE SACHNOI(
+--	IDREADLIST nvarchar(127) NOT NULL,
+--	IDSACH NVARCHAR(127) NOT NULL,
+--	LASTLEFT TIME default cast('00:00:00' as time),
+--	ADDEDTIME DATETIME default getdate(),
+--	PRIMARY KEY(IDREADLIST,IDSACH),
+--	FOREIGN KEY (IDSACH) REFERENCES SACH(IDSACH),
+--	FOREIGN KEY (IDREADLIST) REFERENCES READLIST(IDREADLIST)
+--);
 
-CREATE TABLE GHCT(
-	IDGIOHANG nvarchar(127) NOT NULL,
-	IDSACH NVARCHAR(127) NOT NULL,
-	SELECTEDOPTION NVARCHAR(127) default N'Sách PDF',
-	SOLUONGSACH INT default 1,
-	SELECTED BIT default 0,
-	PRIMARY KEY(IDGIOHANG,IDSACH),
-	FOREIGN KEY (IDGIOHANG) REFERENCES Giohang(IDGIOHANG),
-	FOREIGN KEY (IDSACH) REFERENCES SACH(IDSACH)
-);
+--CREATE TABLE GHCT(
+--	IDGIOHANG nvarchar(127) NOT NULL,
+--	IDSACH NVARCHAR(127) NOT NULL,
+--	SELECTEDOPTION NVARCHAR(127) default N'Sách PDF',
+--	SOLUONGSACH INT default 1,
+--	SELECTED BIT default 0,
+--	PRIMARY KEY(IDGIOHANG,IDSACH),
+--	FOREIGN KEY (IDGIOHANG) REFERENCES Giohang(IDGIOHANG),
+--	FOREIGN KEY (IDSACH) REFERENCES SACH(IDSACH)
+--);
 
-CREATE TABLE DONHANG(
-	IDDONHANG int identity(1, 1) NOT NULL,
-	IDGIOHANG nvarchar(127) NOT NULL,
-	MAKHUYENMAI NVARCHAR(127) null,
-	TONGTIEN INT default 0,
-	NGAYLAPDON DATETIME default getdate(),
-	PRIMARY KEY (IDDONHANG),
-	FOREIGN KEY (IDGIOHANG) REFERENCES GIOHANG(IDGIOHANG),
-	FOREIGN KEY (MAKHUYENMAI) REFERENCES KHUYENMAI(MAKHUYENMAI)
-);
+--CREATE TABLE DONHANG(
+--	IDDONHANG int identity(1, 1) NOT NULL,
+--	IDGIOHANG nvarchar(127) NOT NULL,
+--	MAKHUYENMAI NVARCHAR(127) null,
+--	TONGTIEN INT default 0,
+--	NGAYLAPDON DATETIME default getdate(),
+--	PRIMARY KEY (IDDONHANG),
+--	FOREIGN KEY (IDGIOHANG) REFERENCES GIOHANG(IDGIOHANG),
+--	FOREIGN KEY (MAKHUYENMAI) REFERENCES KHUYENMAI(MAKHUYENMAI)
+--);
 
 
-CREATE TABLE DHCT(
-	IDDONHANG int NOT NULL,
-	IDSACH NVARCHAR(127) NOT NULL,
-	SOLUONGSACH INT default 1,
-	SUBTOTAL INT default 0,
-	PRIMARY KEY(IDDONHANG,IDSACH),
-	FOREIGN KEY (IDSACH) REFERENCES SACH(IDSACH),
-	FOREIGN KEY (iddonhang) REFERENCES donhang(iddonhang)
-);
+--CREATE TABLE DHCT(
+--	IDDONHANG int NOT NULL,
+--	IDSACH NVARCHAR(127) NOT NULL,
+--	SOLUONGSACH INT default 1,
+--	SUBTOTAL INT default 0,
+--	PRIMARY KEY(IDDONHANG,IDSACH),
+--	FOREIGN KEY (IDSACH) REFERENCES SACH(IDSACH),
+--	FOREIGN KEY (iddonhang) REFERENCES donhang(iddonhang)
+--);
