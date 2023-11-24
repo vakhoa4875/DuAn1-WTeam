@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import library.Jdbc;
 import model.Sach;
 import model.TacGia;
@@ -29,7 +30,7 @@ public class SachDAO {
                 sach.getUrlLink(),
                 sach.getCoverI(),
                 sach.getMoTa(),
-                sach.getNgonNgu(),
+                String.join("|", sach.getNgonNgu()),
 //                sach.getIdTacGia(),
 //                sach.getTenTG(),
 //                sach.getIdTheLoai(),
@@ -94,7 +95,7 @@ public class SachDAO {
                 resultSet.getString("EBOOK_ACCESS"),
                 resultSet.getBoolean("HAS_FULLTEXT"),
                 resultSet.getBoolean("PUBLIC_SCAN_B"),
-                resultSet.getString("URL_LINK"),
+                resultSet.getString("URLLINK"),
                 resultSet.getString("COVER_I"),
                 resultSet.getString("MOTA"),
                 resultSet.getString("NGONNGU").split("\\|"),
@@ -105,7 +106,7 @@ public class SachDAO {
                 resultSet.getString("PHIENBAN"),
                 resultSet.getInt("VIEWCOUNT"),
                 resultSet.getInt("LIKECOUNT"),
-                resultSet.getDouble("DANHGIA_TB"));
+                resultSet.getDouble("DANHGIATB"));
         return sach;
     }
 
