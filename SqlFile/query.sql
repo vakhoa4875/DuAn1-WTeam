@@ -90,3 +90,5 @@ update [user] set [password] = 123 where userID = 'user_ka57vZlWeiPT1YZ'
 ALTER LOGIN sa
 WITH PASSWORD = 'root';
 
+
+select * from reader where idreader = 'user'
