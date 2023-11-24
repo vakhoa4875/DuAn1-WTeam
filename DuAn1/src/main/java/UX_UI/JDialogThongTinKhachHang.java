@@ -4,11 +4,27 @@
  */
 package UX_UI;
 
+import dao.readerDao;
+import java.awt.Image;
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import library.Auth;
+import library.MsgBox;
+import library.XImage;
+import model.Reader;
+
 /**
  *
  * @author TAN LOC
  */
 public class JDialogThongTinKhachHang extends javax.swing.JDialog {
+
+    readerDao dao = new readerDao();
+    JFileChooser filechooser = new JFileChooser();
 
     /**
      * Creates new form JDialogThongTinKhachHang
@@ -16,10 +32,9 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
     public JDialogThongTinKhachHang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init();
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,14 +58,11 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         lblSex = new javax.swing.JLabel();
         rdoMale = new javax.swing.JRadioButton();
         rdoFemale = new javax.swing.JRadioButton();
-        rdoDiff = new javax.swing.JRadioButton();
         lblDate = new javax.swing.JLabel();
-        cboDay = new javax.swing.JComboBox<>();
-        cboMonth = new javax.swing.JComboBox<>();
-        cboYear = new javax.swing.JComboBox<>();
         btnSave = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         lblChooseImage = new javax.swing.JLabel();
+        txtDate = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnChangePersonalInfo = new javax.swing.JButton();
@@ -97,21 +109,25 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         GioiTinh.add(rdoFemale);
         rdoFemale.setText("Nữ");
 
-        GioiTinh.add(rdoDiff);
-        rdoDiff.setText("Khác");
-
         lblDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblDate.setText("Ngày sinh");
 
-        cboDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-
-        cboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
-
-        cboYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", " " }));
-
         btnSave.setText("Lưu");
+        btnSave.setEnabled(false);
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         lblChooseImage.setText("Chọn Ảnh");
+        lblChooseImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblChooseImageMouseClicked(evt);
+            }
+        });
+
+        txtDate.setEditable(false);
 
         javax.swing.GroupLayout jpnPersonalInfoLayout = new javax.swing.GroupLayout(jpnPersonalInfo);
         jpnPersonalInfo.setLayout(jpnPersonalInfoLayout);
@@ -122,36 +138,28 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnPersonalInfoLayout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTen, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUserName)
+                            .addComponent(lblPhoneNumber)
+                            .addComponent(lblSex, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDate))
+                        .addGap(38, 38, 38)
+                        .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpnPersonalInfoLayout.createSequentialGroup()
-                                .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTen, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblUserName)
-                                    .addComponent(lblPhoneNumber)
-                                    .addComponent(lblSex, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(38, 38, 38)
-                                .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpnPersonalInfoLayout.createSequentialGroup()
-                                        .addComponent(rdoMale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(1, 1, 1)
-                                        .addComponent(rdoFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(22, 22, 22)
-                                        .addComponent(rdoDiff, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                                        .addComponent(txtName)
-                                        .addComponent(btnSave)
-                                        .addComponent(txtEmail)
-                                        .addComponent(lblFillUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(rdoMale, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                                .addGap(1, 1, 1)
+                                .addComponent(rdoFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE))
                             .addGroup(jpnPersonalInfoLayout.createSequentialGroup()
-                                .addComponent(lblDate)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                                .addComponent(cboDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(cboYear, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                                    .addComponent(txtName)
+                                    .addComponent(btnSave)
+                                    .addComponent(txtEmail)
+                                    .addComponent(lblFillUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtDate))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(lblChooseImage, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnPersonalInfoLayout.createSequentialGroup()
@@ -163,9 +171,6 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(22, 22, 22))
         );
-
-        jpnPersonalInfoLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cboDay, cboMonth, cboYear});
-
         jpnPersonalInfoLayout.setVerticalGroup(
             jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnPersonalInfoLayout.createSequentialGroup()
@@ -198,17 +203,14 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
                         .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSex)
                             .addComponent(rdoMale)
-                            .addComponent(rdoFemale)
-                            .addComponent(rdoDiff))))
+                            .addComponent(rdoFemale))))
                 .addGap(18, 18, 18)
                 .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cboYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jpnPersonalInfoLayout.createSequentialGroup()
                         .addComponent(lblDate)
-                        .addComponent(cboDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cboMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36)
-                .addComponent(btnSave)
+                        .addGap(38, 38, 38)
+                        .addComponent(btnSave))
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -218,6 +220,11 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
 
         btnChangePersonalInfo.setText("Sửa Hồ Sơ");
         btnChangePersonalInfo.setBorder(null);
+        btnChangePersonalInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangePersonalInfoActionPerformed(evt);
+            }
+        });
 
         btnChangePassword.setText("Đổi Mật Khẩu");
         btnChangePassword.setBorder(null);
@@ -240,7 +247,7 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
                     .addComponent(btnChangePassword))
                 .addGap(18, 18, 18)
                 .addComponent(jpnPersonalInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,6 +273,21 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         // TODO add your handling code here:
         openJDialogDoiMatKhau();
     }//GEN-LAST:event_btnChangePasswordActionPerformed
+
+    private void lblChooseImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChooseImageMouseClicked
+        // TODO add your handling code here:
+        uploadImage();
+    }//GEN-LAST:event_lblChooseImageMouseClicked
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        saveUpdate();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnChangePersonalInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePersonalInfoActionPerformed
+        // TODO add your handling code here:
+        changeInfo();
+    }//GEN-LAST:event_btnChangePersonalInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,9 +336,6 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
     private javax.swing.JButton btnChangePassword;
     private javax.swing.JButton btnChangePersonalInfo;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> cboDay;
-    private javax.swing.JComboBox<String> cboMonth;
-    private javax.swing.JComboBox<String> cboYear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JSeparator jSeparator1;
@@ -330,19 +349,99 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
     private javax.swing.JLabel lblTen;
     private javax.swing.JLabel lblTittle;
     private javax.swing.JLabel lblUserName;
-    private javax.swing.JRadioButton rdoDiff;
     private javax.swing.JRadioButton rdoFemale;
     private javax.swing.JRadioButton rdoMale;
+    private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhoneNumber;
     // End of variables declaration//GEN-END:variables
 
-    void openJDialogDoiMatKhau(){
-        new JDialogDoiMK(this,true).setVisible(true);
+    void init() {
+        setfrom();
+    }
+
+    void openJDialogDoiMatKhau() {
+        new JDialogDoiMK(this, true).setVisible(true);
+    }
+
+    void setfrom() {
+        Reader reader = dao.selectByID(Auth.user.getUserID());
+
+        lblFillUserName.setText(reader.getIdReader());
+        txtName.setText(reader.getHoTen());
+        txtEmail.setText(Auth.user.getEmail());
+
+        if (reader.getAvatar() != null) {
+            ImageIcon icon = XImage.read(reader.getAvatar());
+            Image img = icon.getImage().getScaledInstance(lblChooseImage.getWidth(), lblChooseImage.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(img);
+            lblChooseImage.setIcon(scaledIcon);
+            lblChooseImage.setToolTipText(reader.getAvatar());
+        }
+
+        if (reader.getGioitinh()) {
+            rdoMale.setSelected(true);
+        } else {
+            rdoFemale.setSelected(false);
+        }
+        txtDate.setText(reader.getNgaySinh() + "");
+    }
+
+    Reader getFrom() {
+        Reader rd = new Reader();
+
+        rd.setHoTen(txtName.getText());
+        String stringdate = txtDate.getText();
+        SimpleDateFormat simpledate = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date date = simpledate.parse(stringdate);
+            rd.setNgaySinh(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        boolean gioitinh;
+        if (rdoMale.isSelected()) {
+            gioitinh = true;
+        } else {
+            gioitinh = false;
+        }
+        rd.setGioitinh(gioitinh);
+        rd.setAvatar(lblChooseImage.getToolTipText());
+        return rd;
+
+    }
+
+    void uploadImage() {
+        if (filechooser.showOpenDialog(this) == filechooser.APPROVE_OPTION) {
+            File file = filechooser.getSelectedFile();
+            XImage.save(file);
+            ImageIcon icon = XImage.read(file.getName());
+            Image img = icon.getImage().getScaledInstance(lblChooseImage.getWidth(), lblChooseImage.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(img);
+            lblChooseImage.setIcon(scaledIcon);
+            lblChooseImage.setToolTipText(file.getName());
+        }
+
+    }
+
+    void saveUpdate() {
+        Reader reader = getFrom();
+        try {
+            dao.update(reader);
+            this.setfrom();
+            MsgBox.alert(this, "Cập nhật thông tin thành công!!!");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Cập nhật thông tin thất bài!!!");
+        }
+    }
+
+    
+    void changeInfo(){
+        txtName.setEditable(true);
+        txtEmail.setEditable(true);
+        txtDate.setEditable(true);
+        btnSave.setEnabled(true);
     }
     
-    
-    
-
 }
