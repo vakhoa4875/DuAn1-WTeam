@@ -72,6 +72,7 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         lblTen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblTen.setText("Tên");
 
+        txtName.setEditable(false);
         txtName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -80,8 +81,10 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         lblPhoneNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblPhoneNumber.setText("Số điện thoại");
 
+        txtEmail.setEditable(false);
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        txtPhoneNumber.setEditable(false);
         txtPhoneNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblSex.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
