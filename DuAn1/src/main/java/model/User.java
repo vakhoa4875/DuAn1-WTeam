@@ -4,7 +4,6 @@
  */
 package model;
 
-import java.util.Date;
 
 /**
  *
@@ -17,9 +16,6 @@ public class User {
     private String password;
     private String email;
     private Boolean reader, verificated;
-//    private String hoTen;
-//    private String avatar;
-//    private Date dob;
 
     public User() {
 

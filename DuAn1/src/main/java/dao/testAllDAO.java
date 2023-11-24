@@ -13,6 +13,16 @@ import model.*;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class testAllDAO {
+    
+    public static void main(String[] args) {
+        SachDAO dao = new SachDAO();
+        
+        ArrayList<Sach> sachs = dao.select();
+        
+        for (Sach sach : sachs) {
+            sach.toString();
+        }
+    }
 
     //userdao
 //    public static void main(String[] args) {
