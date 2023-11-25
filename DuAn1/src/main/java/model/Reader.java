@@ -19,15 +19,26 @@ public class Reader {
     private Date ngaySinh;
     private String avatar;
     private String hoTen;
+    private Boolean gioitinh;
 
-    public Reader(String idReader, Boolean thanThiet, Integer tichDiem, Date ngaySinh, String avatar, String hoTen) {
+    public Reader(String idReader, Boolean thanThiet, Integer tichDiem, Date ngaySinh, String avatar, String hoTen, Boolean gioitinh) {
         this.idReader = idReader;
         this.thanThiet = thanThiet;
         this.tichDiem = tichDiem;
         this.ngaySinh = ngaySinh;
         this.avatar = avatar;
         this.hoTen = hoTen;
+        this.gioitinh = gioitinh;
     }
+
+    public Boolean getGioitinh() {
+        return gioitinh;
+    }
+
+    public void setGioitinh(Boolean gioitinh) {
+        this.gioitinh = gioitinh;
+    }
+
 
     public Reader() {
     }

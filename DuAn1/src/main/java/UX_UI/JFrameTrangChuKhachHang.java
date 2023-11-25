@@ -21,14 +21,14 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
 //        tesst.setText(Auth.user.getUserID());
     }
     
-    String userID;
-    
-    public JFrameTrangChuKhachHang(String userID) {
-        initComponents();
-        setLocationRelativeTo(null);
-        this.userID = userID;
-        tesst.setText(Auth.user.getUserID());
-    }
+//    String userID;
+//    
+//    public JFrameTrangChuKhachHang(String userID) {
+//        initComponents();
+//        setLocationRelativeTo(null);
+//        this.userID = userID;
+//        tesst.setText(Auth.user.getUserID());
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,7 +60,6 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
         cboYeuThich = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        tesst = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,8 +135,6 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Danh sách yêu thích ");
 
-        tesst.setText("jLabel5");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,10 +192,6 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
                             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cboYeuThich, 0, 144, Short.MAX_VALUE))
                         .addContainerGap(34, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(328, 328, 328)
-                .addComponent(tesst, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,9 +243,7 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(jLabel8)
-                .addGap(80, 80, 80)
-                .addComponent(tesst)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         pack();
@@ -326,7 +317,6 @@ public class JFrameTrangChuKhachHang extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JRadioButton rdoThanThiet;
-    private javax.swing.JLabel tesst;
     private javax.swing.JLabel txtDocGia;
     private javax.swing.JLabel txtTichDiem;
     private javax.swing.JTextField txtTimKiem;

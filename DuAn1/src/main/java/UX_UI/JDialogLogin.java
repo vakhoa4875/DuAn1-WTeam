@@ -91,11 +91,12 @@ public class JDialogLogin extends javax.swing.JDialog {
     void toMainForm() {
         this.dispose();
         if (this.user0.getReader()) {
-            new JFrameTrangChuKhachHang(user0.getUserID()).setVisible(true);
+            new JFrameTrangChuKhachHang().setVisible(true);
         } else if (!this.user0.getReader()) {
             new JFrameTrangChuQuanLy(user0.getUserID()).setVisible(true);
         }
     }
+//    user0.getUserID()
     
     void toSignUpForm() {
         this.dispose();
