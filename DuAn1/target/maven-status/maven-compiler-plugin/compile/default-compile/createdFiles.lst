@@ -31,11 +31,9 @@ dao\TacGiaDAO.class
 UX_UI\JFrameTrangChuQuanLy$10.class
 UX_UI\JDialogBinhLuan$3.class
 dao\TheLoaiDAO.class
-testAPI\ImageDisplay.class
 UX_UI\JDialogXacNhanEmail.class
 UX_UI\JDialogLogin$6$1.class
 UX_UI\JDialogBinhLuan$1.class
-testAPI\ReadableBooksExample02.class
 testAPI\GoogleBooksApiExample.class
 UX_UI\JDialogDoiMK$2.class
 dao\UserDAO.class
@@ -79,7 +77,6 @@ UX_UI\JDialogGioHang$3.class
 UX_UI\JDialogQuenMatKhau$3.class
 UX_UI\JDialogEditBinhLuan$6.class
 UX_UI\JDialogXacNhanMatKhau$3.class
-testAPI\ReadableBooksExample.class
 dao\NoiBoDAO.class
 UX_UI\JDialogQuanLySanPham.class
 UX_UI\JDialogHeThongGiamGia$1.class
@@ -98,7 +95,6 @@ UX_UI\JDialogLogin$2.class
 UX_UI\JDialogEditBinhLuan$6$1.class
 UX_UI\JDialogQuenMatKhau$4.class
 UX_UI\JFrameTrangChuQuanLy$1.class
-UX_UI\JDialogThongTinKhachHang$2$1.class
 UX_UI\JDialogDangKi$1.class
 library\XDate.class
 UX_UI\JDialogQuanLyNhanVien$1.class

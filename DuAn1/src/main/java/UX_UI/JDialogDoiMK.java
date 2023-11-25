@@ -26,6 +26,7 @@ public class JDialogDoiMK extends javax.swing.JDialog {
     public JDialogDoiMK(javax.swing.JDialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         init();
     }
 
@@ -86,6 +87,11 @@ public class JDialogDoiMK extends javax.swing.JDialog {
         });
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backward.png"))); // NOI18N
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         txtPWOld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,6 +175,11 @@ public class JDialogDoiMK extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPWOldActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        back();
+    }//GEN-LAST:event_btnBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -248,4 +259,9 @@ public class JDialogDoiMK extends javax.swing.JDialog {
         }  
     }
 
+    
+    void back(){
+        this.dispose();
+        new JDialogThongTinKhachHang(this, rootPaneCheckingEnabled).setVisible(true);
+    }
 }

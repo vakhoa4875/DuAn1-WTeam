@@ -17,7 +17,7 @@ import model.Reader;
 public class readerDao {
 
     public void update(Reader reader) {
-        String upDateQuery = "UPDATE Reader SET thanthiet = ?, tichDiem = ?, ngaySinh = ?, avatar = ?, hoTen = ?, gioiTinh = ? WHERE idReader = ?";
+        String upDateQuery = "UPDATE Reader SET thanthiet = ?,  tichDiem = ?, ngaySinh = ?, avatar = ?, hoTen = ?, gioiTinh = ? WHERE idReader = ?";
         Jdbc.executeUpdate(upDateQuery,
                 reader.getThanThiet(),
                 reader.getTichDiem(),
@@ -27,7 +27,7 @@ public class readerDao {
                 reader.getGioitinh(),
                 reader.getIdReader());
     }
-
+    
     public ArrayList<Reader> selectALL(){
         String selectALl = "select * from reader";
         return select(selectALl);
