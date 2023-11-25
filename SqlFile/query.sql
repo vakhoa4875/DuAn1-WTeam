@@ -36,7 +36,7 @@ VALUES
     ('2', 'Book 2', 1, 30, 4.2, 'Description 2', 'vn', 'thumb_2.jpg', 'avatar_2.jpg', 'true_avatar_2.jpg', 1, 'book2.pdf', 150, 1, 'sound2.mp3', '02:15:00', 2010, '2.0', 2023, 16, 15, 80);
 
 
-
+-- procedure
 go
 create or alter procedure searchSach
 	@searchValue nvarchar(127)
