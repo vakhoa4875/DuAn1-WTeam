@@ -80,35 +80,43 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblTen" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
-                              <Component id="lblEmail" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
-                              <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblTichDIem" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblSex" alignment="0" min="-2" pref="65" max="-2" attributes="0"/>
-                              <Component id="lblDate" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="rdoMale" pref="127" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                  <Component id="rdoFemale" min="-2" pref="72" max="-2" attributes="0"/>
-                                  <EmptySpace pref="94" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtTichDiem" pref="263" max="32767" attributes="0"/>
-                                      <Component id="txtName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnSave" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="lblFillUserName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDate" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblTen" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="lblEmail" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblTichDIem" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblSex" alignment="0" min="-2" pref="65" max="-2" attributes="0"/>
+                                      <Component id="lblDate" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="rdoMale" pref="127" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                          <Component id="rdoFemale" min="-2" pref="72" max="-2" attributes="0"/>
+                                          <EmptySpace pref="94" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtTichDiem" pref="263" max="32767" attributes="0"/>
+                                              <Component id="txtName" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="btnSave" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="lblFillUserName" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtDate" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="lblChooseImage" min="-2" pref="118" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="lblTrangThai" min="-2" pref="194" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="lblChooseImage" min="-2" pref="118" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -132,7 +140,9 @@
                   <Component id="lblTittle" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lblTrangThai" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblUserName" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblFillUserName" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -308,6 +318,14 @@
         <Component class="javax.swing.JTextField" name="txtDate">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTrangThai">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel2"/>
           </Properties>
         </Component>
       </SubComponents>

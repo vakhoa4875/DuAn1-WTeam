@@ -90,12 +90,12 @@ update [user] set [password] = 123 where userID = 'user_ka57vZlWeiPT1YZ'
 ALTER LOGIN sa
 WITH PASSWORD = 'root';
 
-
+use nerdyers
 
 select * from reader where idreader = 'user'
-UPDATE Reader SET 
+UPDATE Reader SET thanthiet = 1
 ngaySinh = '2004-07-06', hoTen = 'reader1', 
-gioiTinh = 1 WHERE idReader = 'user'
+gioiTinh = 0 WHERE idReader = 'user'
 =======
 select * from Sach
 

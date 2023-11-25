@@ -26,13 +26,21 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
 
     readerDao dao = new readerDao();
     JFileChooser filechooser = new JFileChooser();
-
     /**
      * Creates new form JDialogThongTinKhachHang
      */
     public JDialogThongTinKhachHang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        init();
+    }
+    
+    
+    public JDialogThongTinKhachHang(javax.swing.JDialog parent, boolean modal){
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
         init();
     }
 
@@ -64,6 +72,7 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
         lblChooseImage = new javax.swing.JLabel();
         txtDate = new javax.swing.JTextField();
+        lblTrangThai = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnChangePersonalInfo = new javax.swing.JButton();
@@ -130,6 +139,9 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
 
         txtDate.setEditable(false);
 
+        lblTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTrangThai.setText("jLabel2");
+
         javax.swing.GroupLayout jpnPersonalInfoLayout = new javax.swing.GroupLayout(jpnPersonalInfo);
         jpnPersonalInfo.setLayout(jpnPersonalInfoLayout);
         jpnPersonalInfoLayout.setHorizontalGroup(
@@ -139,30 +151,35 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnPersonalInfoLayout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTen, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUserName)
-                            .addComponent(lblTichDIem)
-                            .addComponent(lblSex, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDate))
-                        .addGap(38, 38, 38)
-                        .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpnPersonalInfoLayout.createSequentialGroup()
-                                .addComponent(rdoMale, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                .addGap(1, 1, 1)
-                                .addComponent(rdoFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE))
+                                .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTen, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblUserName)
+                                    .addComponent(lblTichDIem)
+                                    .addComponent(lblSex, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblDate))
+                                .addGap(38, 38, 38)
+                                .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpnPersonalInfoLayout.createSequentialGroup()
+                                        .addComponent(rdoMale, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                                        .addGap(1, 1, 1)
+                                        .addComponent(rdoFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE))
+                                    .addGroup(jpnPersonalInfoLayout.createSequentialGroup()
+                                        .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtTichDiem, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                                            .addComponent(txtName)
+                                            .addComponent(btnSave)
+                                            .addComponent(txtEmail)
+                                            .addComponent(lblFillUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtDate))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(lblChooseImage, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32))
                             .addGroup(jpnPersonalInfoLayout.createSequentialGroup()
-                                .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtTichDiem, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                                    .addComponent(txtName)
-                                    .addComponent(btnSave)
-                                    .addComponent(txtEmail)
-                                    .addComponent(lblFillUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtDate))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(lblChooseImage, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))
+                                .addComponent(lblTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnPersonalInfoLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +196,9 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
                 .addComponent(lblTittle)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblTrangThai)
+                .addGap(12, 12, 12)
                 .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUserName)
                     .addComponent(lblFillUserName))
@@ -272,6 +291,8 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
 
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
         // TODO add your handling code here:
+        
+        
         openJDialogDoiMatKhau();
     }//GEN-LAST:event_btnChangePasswordActionPerformed
 
@@ -349,6 +370,7 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
     private javax.swing.JLabel lblTen;
     private javax.swing.JLabel lblTichDIem;
     private javax.swing.JLabel lblTittle;
+    private javax.swing.JLabel lblTrangThai;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JRadioButton rdoFemale;
     private javax.swing.JRadioButton rdoMale;
@@ -363,12 +385,14 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
     }
 
     void openJDialogDoiMatKhau() {
+        this.dispose();
         new JDialogDoiMK(this, true).setVisible(true);
     }
 
     void setfrom() {
         Reader reader = dao.selectByID(Auth.user.getUserID());
-
+        
+        lblTrangThai.setText(reader.getThanThiet() ? "Đọc giả thân thiết" : "Đọc giả bình thường");
         txtTichDiem.setText(reader.getTichDiem() + "");
         if (reader.getNgaySinh() != null && txtDate != null) {
             txtDate.setText(XDate.toString(reader.getNgaySinh(), "dd-MM-yyyy"));
@@ -384,27 +408,24 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         if (reader.getGioitinh()) {
             rdoMale.setSelected(true);
         } else {
-            rdoFemale.setSelected(false);
+            rdoFemale.setSelected(true);
         }
         lblFillUserName.setText(Auth.user.getUserName());
         txtEmail.setText(Auth.user.getEmail());
     }
 
     Reader getFrom() {
-        Reader rd = new Reader();
+        Reader rd = new Reader(); 
         
-        System.out.println(XDate.toDate(txtDate.getText(),"dd-MM-yyyy"));
-        System.out.println(lblChooseImage.getToolTipText());
-        System.out.println(Auth.user.getUserName());
-        
+        rd.setThanThiet(lblTrangThai.getText() == "Đọc giả thân thiết" ? true : false);
         rd.setTichDiem(Integer.parseInt(txtTichDiem.getText()));
         rd.setNgaySinh(XDate.toDate(txtDate.getText()));
         rd.setAvatar(lblChooseImage.getToolTipText());
         rd.setHoTen(txtName.getText());
-        boolean gioitinh;
+        boolean gioitinh = true;
         if (rdoMale.isSelected()) {
             gioitinh = true;
-        } else {
+        }else if(rdoFemale.isSelected()) {
             gioitinh = false;
         }
         rd.setGioitinh(gioitinh);
@@ -441,5 +462,8 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         txtDate.setEditable(true);
         btnSave.setEnabled(true);
     }
+    
+    
+    
 
 }
