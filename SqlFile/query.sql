@@ -91,11 +91,11 @@ ALTER LOGIN sa
 WITH PASSWORD = 'root';
 
 
-<<<<<<< HEAD
+
 select * from reader where idreader = 'user'
-UPDATE Reader SET thanthiet = ?, tichDiem = ?, 
-ngaySinh = ?, avatar = ?, hoTen = ?, 
-gioiTinh = ? WHERE idReader = ?
+UPDATE Reader SET 
+ngaySinh = '2004-07-06', hoTen = 'reader1', 
+gioiTinh = 1 WHERE idReader = 'user'
 =======
 select * from Sach
->>>>>>> main
+

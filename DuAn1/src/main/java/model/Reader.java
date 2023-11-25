@@ -31,6 +31,8 @@ public class Reader {
         this.gioitinh = gioitinh;
     }
 
+    
+ 
     public Boolean getGioitinh() {
         return gioitinh;
     }
@@ -41,6 +43,7 @@ public class Reader {
 
 
     public Reader() {
+        
     }
 
     public String getIdReader() {

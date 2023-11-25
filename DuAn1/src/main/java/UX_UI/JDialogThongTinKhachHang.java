@@ -369,10 +369,10 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
     void setfrom() {
         Reader reader = dao.selectByID(Auth.user.getUserID());
 
-        lblFillUserName.setText(reader.getIdReader());
-        txtName.setText(reader.getHoTen());
-        txtEmail.setText(Auth.user.getEmail());
-        txtTichDiem.setText(reader.getTichDiem()+"");
+        txtTichDiem.setText(reader.getTichDiem() + "");
+        if (reader.getNgaySinh() != null && txtDate != null) {
+            txtDate.setText(XDate.toString(reader.getNgaySinh(), "dd-MM-yyyy"));
+        }
         if (reader.getAvatar() != null) {
             ImageIcon icon = XImage.read(reader.getAvatar());
             Image img = icon.getImage().getScaledInstance(lblChooseImage.getWidth(), lblChooseImage.getHeight(), Image.SCALE_SMOOTH);
@@ -380,39 +380,27 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
             lblChooseImage.setIcon(scaledIcon);
             lblChooseImage.setToolTipText(reader.getAvatar());
         }
-
+        txtName.setText(reader.getHoTen());
         if (reader.getGioitinh()) {
             rdoMale.setSelected(true);
         } else {
             rdoFemale.setSelected(false);
         }
-
-        
-        txtDate.setText(reader.getNgaySinh()+"");
-//        if (reader.getNgaySinh() != null && txtDate != null) {
-//            txtDate.setText(XDate.toString(reader.getNgaySinh()));
-//        }
-
+        lblFillUserName.setText(Auth.user.getUserName());
+        txtEmail.setText(Auth.user.getEmail());
     }
 
     Reader getFrom() {
         Reader rd = new Reader();
-
-        rd.setIdReader(Auth.user.getUserName());
+        
+        System.out.println(XDate.toDate(txtDate.getText(),"dd-MM-yyyy"));
+        System.out.println(lblChooseImage.getToolTipText());
+        System.out.println(Auth.user.getUserName());
+        
         rd.setTichDiem(Integer.parseInt(txtTichDiem.getText()));
+        rd.setNgaySinh(XDate.toDate(txtDate.getText()));
+        rd.setAvatar(lblChooseImage.getToolTipText());
         rd.setHoTen(txtName.getText());
-        
-        String stringdate = txtDate.getText();
-        SimpleDateFormat simpledate = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            Date date = simpledate.parse(stringdate);
-            rd.setNgaySinh(date);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        
-//        rd.setNgaySinh(XDate.toDate(txtDate.getText()));
         boolean gioitinh;
         if (rdoMale.isSelected()) {
             gioitinh = true;
@@ -420,9 +408,8 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
             gioitinh = false;
         }
         rd.setGioitinh(gioitinh);
-        rd.setAvatar(lblChooseImage.getToolTipText());
+        rd.setIdReader(Auth.user.getUserID());
         return rd;
-
     }
 
     void uploadImage() {
@@ -435,7 +422,6 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
             lblChooseImage.setIcon(scaledIcon);
             lblChooseImage.setToolTipText(file.getName());
         }
-
     }
 
     void saveUpdate() {
