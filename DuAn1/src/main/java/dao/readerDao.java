@@ -27,19 +27,52 @@ public class readerDao {
                 reader.getGioitinh(),
                 reader.getIdReader());
     }
-    
-    public ArrayList<Reader> selectALL(){
+
+    public ArrayList<Reader> selectALL() {
         String selectALl = "select * from reader";
         return select(selectALl);
     }
-    
+
     public Reader selectByID(String id) {
         String selectByid = "select * from reader where idreader = ?";
         ArrayList<Reader> readerList = select(selectByid, id);
         return !readerList.isEmpty() ? readerList.get(0) : null;
     }
 
-    private ArrayList<Reader> select(String sql , Object ... args){
+    public ArrayList<Object[]> selectThongTinKhachHang() {
+        ArrayList<Object[]> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+            try {
+                String selectQuery = "select * from [User] join Reader on [User].userID = reader.idReader";
+                rs = Jdbc.executeQuery(selectQuery);
+                while (rs.next()) {
+                    Object[] model = {
+                        rs.getString("userID"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getBoolean("thanthiet"),
+                        rs.getInt("tichDiem"),
+                        rs.getDate("ngaySinh"),
+                        rs.getString("avatar"),
+                        rs.getString("hoTen"),
+                        rs.getBoolean("gioiTinh")
+                    };
+                    list.add(model);
+                }
+            } finally {
+                rs.getStatement().getConnection().close();
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return list;
+    }
+
+    private ArrayList<Reader> select(String sql, Object... args) {
         ArrayList<Reader> readerList = new ArrayList<>();
         try {
             ResultSet rs = null;
@@ -59,14 +92,8 @@ public class readerDao {
             throw new RuntimeException(e);
         }
         return readerList;
-    } 
-    
-    
-    
-    
-    
-    
-    
+    }
+
     private Reader readFromRS(ResultSet resultSet) throws SQLException {
         Reader reader = new Reader(
                 resultSet.getString("idReader"),
