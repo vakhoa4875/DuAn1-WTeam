@@ -9,10 +9,15 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -24,11 +29,9 @@ import javax.swing.JTextField;
 public class Extension {
 
 //    Class<Object> class = 
-    
-    
     // Chỉnh kích thước ảnh vừa với widthxheight của Jlabel
     public static void scaleImage(String path, JLabel anh) {
-        ImageIcon icon = new ImageIcon(Extension.class.getResource("/images/" + path));
+        ImageIcon icon = new ImageIcon(Extension.class.getResource(path));
         //scale image
         Image image = icon.getImage();
         Image scaledImage = image.getScaledInstance(anh.getWidth(), anh.getHeight(), Image.SCALE_SMOOTH);
@@ -56,9 +59,9 @@ public class Extension {
             }
         });
     }
-    
+
     // thêm sự kiện hiển thị Password cho passwordField
-    public static void togglePassword(JPasswordField passwordField) {        
+    public static void togglePassword(JPasswordField passwordField) {
         passwordField.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -96,7 +99,7 @@ public class Extension {
 
         return matcher.matches();
     }
-    
+
     // return một randomString với độ dài là length và có kiểu là randomString = "init" + randomPart;
     public static String randomString(String init, int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -110,7 +113,34 @@ public class Extension {
 
         return randomString.toString();
     }
-    
+
+    public static void setUnderline(JButton... args) {
+        for (JButton btn : args) {
+            String text = "<html><u style=\"color: blue;\">" + btn.getText() + "</u></html>";
+            btn.setText(text);
+        }
+    }
+
+    // show book cover thông qua url link ảnh
+    public static void setBookCover(String imageUrl, JLabel lbl) {
+        try {
+            URL url = new URL(imageUrl);
+            BufferedImage image = ImageIO.read(url);
+
+            if (image != null) {
+//                ImageIcon icon = new ImageIcon(image);
+                Image scaledImage = image.getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                lbl.setIcon(scaledIcon);
+            } else {
+                System.err.println("Không thể tải hình ảnh từ URL.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Lỗi khi tải hình ảnh từ URL.");
+        }
+    }
+
 //    public static String randomOTP(int length) {
 //        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 //        StringBuilder randomString = new StringBuilder("user_");
