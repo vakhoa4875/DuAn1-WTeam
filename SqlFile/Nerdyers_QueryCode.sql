@@ -236,3 +236,9 @@ go
 select * from noibo;
 go
 select * from reader;
+go
+select * from Sach;
+select * from TACGIA;
+select * from THELOAI;
+select * from SVTG;
+select * from SVTL;
