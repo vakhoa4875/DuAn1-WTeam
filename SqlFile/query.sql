@@ -91,4 +91,4 @@ ALTER LOGIN sa
 WITH PASSWORD = 'root';
 
 
-select * from reader where idreader = 'user'
+select * from Sach
