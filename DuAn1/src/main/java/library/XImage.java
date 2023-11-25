@@ -4,7 +4,10 @@
  */
 package library;
 
+import UX_UI.JFrameTrangChuKhachHang;
+import UX_UI.JFrameTrangChuQuanLy;
 import java.awt.Image;
+import java.awt.Window;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Files;
@@ -12,6 +15,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -19,11 +24,48 @@ import javax.swing.ImageIcon;
  */
 public class XImage {
 
+    public static String nerdyersLogo = "/images/logo_github.png";
+
+    // Logo là button và có thể return ra trang chủ tùy vào role của user
+    public static void setLogoButton(JButton btn) {
+        btn.setBorderPainted(false);
+        ImageIcon icon = new ImageIcon(Extension.class.getResource(nerdyersLogo));
+        //scale image
+        Image image = icon.getImage();
+        Image scaledImage = image.getScaledInstance(btn.getWidth(), btn.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        btn.setIcon(scaledIcon);
+        if (Auth.isLogin()) {
+            returnToMain(btn);
+        }
+    }
+
+    // set button event
+    public static void returnToMain(JButton btn) {
+        Window parentWindow = SwingUtilities.getWindowAncestor(btn);
+
+        if (parentWindow == null) {
+            return;
+        }
+        if (Auth.isReader()) {
+            btn.addActionListener(e -> {
+                parentWindow.dispose();
+                new JFrameTrangChuKhachHang().setVisible(true);
+            });
+        } else {
+            btn.addActionListener(e -> {
+                parentWindow.dispose();
+                new JFrameTrangChuQuanLy().setVisible(true);
+            });
+        }
+    }
+
     public static Image getAppIcon() {
-        URL url = XImage.class.getResource("/com/edusys/icon/fpt.png");
+        URL url = XImage.class.getResource("/images/logo_github.png");
         return new ImageIcon(url).getImage();
     }
 //src\\main\\resources\\com\\edusys\\
+
     public static boolean save(File src) {
         File dst = new File("logos", src.getName());
         if (!dst.getParentFile().exists()) {
@@ -32,15 +74,15 @@ public class XImage {
         try {
             Path from = Paths.get(src.getAbsolutePath());
             Path to = Paths.get(dst.getAbsolutePath());
-            Files.copy(from, to,StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
-    
-    public static ImageIcon read(String filename){
-        File path = new File("logos",filename);
+
+    public static ImageIcon read(String filename) {
+        File path = new File("logos", filename);
         return new ImageIcon(path.getAbsolutePath());
     }
 
