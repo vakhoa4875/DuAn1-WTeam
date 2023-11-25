@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import library.Auth;
 import library.MsgBox;
+import library.XDate;
 import library.XImage;
 import model.Reader;
 
@@ -52,9 +53,9 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         lblTen = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
-        lblPhoneNumber = new javax.swing.JLabel();
+        lblTichDIem = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        txtPhoneNumber = new javax.swing.JTextField();
+        txtTichDiem = new javax.swing.JTextField();
         lblSex = new javax.swing.JLabel();
         rdoMale = new javax.swing.JRadioButton();
         rdoFemale = new javax.swing.JRadioButton();
@@ -90,14 +91,14 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEmail.setText("Email");
 
-        lblPhoneNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblPhoneNumber.setText("Số điện thoại");
+        lblTichDIem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTichDIem.setText("Tích điểm");
 
         txtEmail.setEditable(false);
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtPhoneNumber.setEditable(false);
-        txtPhoneNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTichDiem.setEditable(false);
+        txtTichDiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblSex.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSex.setText("Giới tính");
@@ -141,7 +142,7 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
                             .addComponent(lblTen, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblUserName)
-                            .addComponent(lblPhoneNumber)
+                            .addComponent(lblTichDIem)
                             .addComponent(lblSex, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDate))
                         .addGap(38, 38, 38)
@@ -153,7 +154,7 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE))
                             .addGroup(jpnPersonalInfoLayout.createSequentialGroup()
                                 .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                                    .addComponent(txtTichDiem, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                                     .addComponent(txtName)
                                     .addComponent(btnSave)
                                     .addComponent(txtEmail)
@@ -197,8 +198,8 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPhoneNumber)
-                            .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTichDIem)
+                            .addComponent(txtTichDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jpnPersonalInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSex)
@@ -344,9 +345,9 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFillUserName;
-    private javax.swing.JLabel lblPhoneNumber;
     private javax.swing.JLabel lblSex;
     private javax.swing.JLabel lblTen;
+    private javax.swing.JLabel lblTichDIem;
     private javax.swing.JLabel lblTittle;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JRadioButton rdoFemale;
@@ -354,7 +355,7 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPhoneNumber;
+    private javax.swing.JTextField txtTichDiem;
     // End of variables declaration//GEN-END:variables
 
     void init() {
@@ -371,7 +372,7 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         lblFillUserName.setText(reader.getIdReader());
         txtName.setText(reader.getHoTen());
         txtEmail.setText(Auth.user.getEmail());
-
+        txtTichDiem.setText(reader.getTichDiem()+"");
         if (reader.getAvatar() != null) {
             ImageIcon icon = XImage.read(reader.getAvatar());
             Image img = icon.getImage().getScaledInstance(lblChooseImage.getWidth(), lblChooseImage.getHeight(), Image.SCALE_SMOOTH);
@@ -385,13 +386,22 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         } else {
             rdoFemale.setSelected(false);
         }
-        txtDate.setText(reader.getNgaySinh() + "");
+
+        
+        txtDate.setText(reader.getNgaySinh()+"");
+//        if (reader.getNgaySinh() != null && txtDate != null) {
+//            txtDate.setText(XDate.toString(reader.getNgaySinh()));
+//        }
+
     }
 
     Reader getFrom() {
         Reader rd = new Reader();
 
+        rd.setIdReader(Auth.user.getUserName());
+        rd.setTichDiem(Integer.parseInt(txtTichDiem.getText()));
         rd.setHoTen(txtName.getText());
+        
         String stringdate = txtDate.getText();
         SimpleDateFormat simpledate = new SimpleDateFormat("dd-MM-yyyy");
         try {
@@ -400,6 +410,9 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        
+//        rd.setNgaySinh(XDate.toDate(txtDate.getText()));
         boolean gioitinh;
         if (rdoMale.isSelected()) {
             gioitinh = true;
@@ -436,12 +449,11 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
         }
     }
 
-    
-    void changeInfo(){
+    void changeInfo() {
         txtName.setEditable(true);
         txtEmail.setEditable(true);
         txtDate.setEditable(true);
         btnSave.setEnabled(true);
     }
-    
+
 }

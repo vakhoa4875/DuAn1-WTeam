@@ -139,6 +139,7 @@ public class JDialogLogin extends javax.swing.JDialog {
         jLabel3.setText("Tài Khoản");
 
         txtTaiKhoan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTaiKhoan.setText("reader");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Mật Khẩu");
@@ -161,6 +162,7 @@ public class JDialogLogin extends javax.swing.JDialog {
         });
 
         txtMatKhau.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtMatKhau.setText("123");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon-gg.png"))); // NOI18N
 

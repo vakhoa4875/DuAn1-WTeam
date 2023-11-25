@@ -92,3 +92,6 @@ WITH PASSWORD = 'root';
 
 
 select * from reader where idreader = 'user'
+UPDATE Reader SET thanthiet = ?, tichDiem = ?, 
+ngaySinh = ?, avatar = ?, hoTen = ?, 
+gioiTinh = ? WHERE idReader = ?
