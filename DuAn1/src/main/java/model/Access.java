@@ -15,9 +15,9 @@ public class Access {
     private Boolean fullAccess;
     private Boolean rReadlist, uReadlist;
     private Boolean rWishlist, uWishlist;
-    private Boolean rGioHang, uGioHang;
-    private Boolean rDonHang, uDonHang;
-    private Boolean rKhuyenMai, uKhuyenMai;
+//    private Boolean rGioHang, uGioHang;
+//    private Boolean rDonHang, uDonHang;
+//    private Boolean rKhuyenMai, uKhuyenMai;
     private Boolean rUser, uUser;
     private Boolean rPhongBan, uPhongBan;
     private Boolean rSach, uSach;
@@ -29,7 +29,7 @@ public class Access {
     public Access() {
     }
 
-    public Access(Integer idAccess, String moTa, Boolean fullAccess, Boolean rReadlist, Boolean uReadlist, Boolean rWishlist, Boolean uWishlist, Boolean rGioHang, Boolean uGioHang, Boolean rDonHang, Boolean uDonHang, Boolean rKhuyenMai, Boolean uKhuyenMai, Boolean rUser, Boolean uUser, Boolean rPhongBan, Boolean uPhongBan, Boolean rSach, Boolean uSach, Boolean rReader, Boolean uReader, Boolean rNoiBo, Boolean uNoiBo, Boolean rTacGia, Boolean uTacGia, Boolean rTheLoai, Boolean uTheLoai) {
+    public Access(Integer idAccess, String moTa, Boolean fullAccess, Boolean rReadlist, Boolean uReadlist, Boolean rWishlist, Boolean uWishlist, Boolean rUser, Boolean uUser, Boolean rPhongBan, Boolean uPhongBan, Boolean rSach, Boolean uSach, Boolean rReader, Boolean uReader, Boolean rNoiBo, Boolean uNoiBo, Boolean rTacGia, Boolean uTacGia, Boolean rTheLoai, Boolean uTheLoai) {
         this.idAccess = idAccess;
         this.moTa = moTa;
         this.fullAccess = fullAccess;
@@ -37,12 +37,12 @@ public class Access {
         this.uReadlist = uReadlist;
         this.rWishlist = rWishlist;
         this.uWishlist = uWishlist;
-        this.rGioHang = rGioHang;
-        this.uGioHang = uGioHang;
-        this.rDonHang = rDonHang;
-        this.uDonHang = uDonHang;
-        this.rKhuyenMai = rKhuyenMai;
-        this.uKhuyenMai = uKhuyenMai;
+//        this.rGioHang = rGioHang;
+//        this.uGioHang = uGioHang;
+//        this.rDonHang = rDonHang;
+//        this.uDonHang = uDonHang;
+//        this.rKhuyenMai = rKhuyenMai;
+//        this.uKhuyenMai = uKhuyenMai;
         this.rUser = rUser;
         this.uUser = uUser;
         this.rPhongBan = rPhongBan;
@@ -113,54 +113,6 @@ public class Access {
 
     public void setuWishlist(Boolean uWishlist) {
         this.uWishlist = uWishlist;
-    }
-
-    public Boolean getrGioHang() {
-        return rGioHang;
-    }
-
-    public void setrGioHang(Boolean rGioHang) {
-        this.rGioHang = rGioHang;
-    }
-
-    public Boolean getuGioHang() {
-        return uGioHang;
-    }
-
-    public void setuGioHang(Boolean uGioHang) {
-        this.uGioHang = uGioHang;
-    }
-
-    public Boolean getrDonHang() {
-        return rDonHang;
-    }
-
-    public void setrDonHang(Boolean rDonHang) {
-        this.rDonHang = rDonHang;
-    }
-
-    public Boolean getuDonHang() {
-        return uDonHang;
-    }
-
-    public void setuDonHang(Boolean uDonHang) {
-        this.uDonHang = uDonHang;
-    }
-
-    public Boolean getrKhuyenMai() {
-        return rKhuyenMai;
-    }
-
-    public void setrKhuyenMai(Boolean rKhuyenMai) {
-        this.rKhuyenMai = rKhuyenMai;
-    }
-
-    public Boolean getuKhuyenMai() {
-        return uKhuyenMai;
-    }
-
-    public void setuKhuyenMai(Boolean uKhuyenMai) {
-        this.uKhuyenMai = uKhuyenMai;
     }
 
     public Boolean getrUser() {
