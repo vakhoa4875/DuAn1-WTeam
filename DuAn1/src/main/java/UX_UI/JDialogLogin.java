@@ -38,9 +38,9 @@ public class JDialogLogin extends javax.swing.JDialog {
 
     void init() {
         txtTaiKhoan.setText(user0 == null ? "" : user0.getUserName());
-        
+
         Extension.togglePassword(txtMatKhau);
-        
+
         btnDangNhap.addActionListener(e -> {
             login();
         });
@@ -52,7 +52,7 @@ public class JDialogLogin extends javax.swing.JDialog {
     UserDAO dao = new UserDAO();
     User user0 = new User();
     ArrayList<User> userList = dao.select();
-    
+
     boolean validateInput() {
         if (Extension.areEmpty(txtTaiKhoan, txtMatKhau)) {
             DialogHelper.alert(null, "Username hoặc Mật khẩu không được để trống");
@@ -66,18 +66,24 @@ public class JDialogLogin extends javax.swing.JDialog {
             return false;
         }
         String username = txtTaiKhoan.getText();
-        String email = txtTaiKhoan.getText();
         String pass = new String(txtMatKhau.getPassword());
-        
+
         for (User user : userList) {
-            if (username.equals(user.getUserName()) && pass.equals(user.getPassword())) {
+            if ((username.equals(user.getUserName()) || username.equals(user.getEmail()))) {
                 this.user0 = user;
-                System.out.println(user0.getUserID());
-                System.out.println(user0.getPassword());
-                Auth.user = user0;
-                return true;
+                if (pass.equals(user.getPassword())) {
+                    Auth.user = user0;
+//                    System.out.println(user0.getUserID());
+//                    System.out.println(user0.getPassword());
+                    return true;
+                } else {
+                    DialogHelper.alert(null, "Sai Mật Khẩu! Vui lòng thử lại");
+                    txtMatKhau.setText("");
+                    return false;
+                }
             }
         }
+        DialogHelper.alert(null, "Tài khoản không tồn tại! Vui lòng kiểm tra thông tin đăng nhập!");
         return false;
     }
 
@@ -87,7 +93,7 @@ public class JDialogLogin extends javax.swing.JDialog {
             toMainForm();
         }
     }
-    
+
     void toMainForm() {
         this.dispose();
         if (this.user0.getReader()) {
@@ -97,7 +103,7 @@ public class JDialogLogin extends javax.swing.JDialog {
         }
     }
 //    user0.getUserID()
-    
+
     void toSignUpForm() {
         this.dispose();
         new JDialogDangKi(new JFrame(), true).setVisible(true);
