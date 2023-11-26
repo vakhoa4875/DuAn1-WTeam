@@ -22,14 +22,12 @@ public class Auth {
         return Auth.user != null;
     }
 
-    public static boolean isReader() {
+    public static Boolean isReader() {
         if (Auth.isLogin()) {
-            return false;      
-        } else {
-            return user.getReader();
+            return null;
         }
-        
 
+        return user.getReader();
     }
 
 }
