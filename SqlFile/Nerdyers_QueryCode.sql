@@ -61,34 +61,35 @@ on [user]
 after insert
 as
 begin
-    INSERT INTO Reader (idReader, hoTen)
-    SELECT userID, username
-    FROM inserted
-    WHERE reader = 1;
+    --INSERT INTO noiBo (userID, hoTen)
+    --SELECT userID, username
+    --FROM inserted
+    --WHERE reader = 0;
 
-    INSERT INTO noiBo(userID, hoTen)
-    SELECT userID, username
-    FROM inserted
-    WHERE reader = 0;
+    --INSERT INTO Reader (idReader, hoTen)
+    --SELECT userID, username
+    --FROM inserted
+    --WHERE reader = 1;
+
     --SET NOCOUNT ON;
-	--declare @isReader bit, @idUser nvarchar(127), @userName nvarchar(127);
-	--select	@isReader = reader,
-	--		@idUser = userID, 
-	--		@userName = username 
-	--from inserted;
+	declare @isReader bit, @idUser nvarchar(127), @userName nvarchar(127);
+	select	@isReader = reader,
+			@idUser = userID, 
+			@userName = username 
+	from inserted;
 
-	--if (@isReader = 1)
-	--begin
-	--	insert into Reader (idReader, hoTen)
-	--	values
-	--	(@idUser, @userName);
-	--end
-	--else if (@isReader = 0)
-	--begin
-	--	insert into noiBo(userID, hoTen)
-	--	values
-	--	(@idUser, @userName);
-	--end
+	if (@isReader = 1)
+	begin
+		insert into Reader (idReader, hoTen)
+		values
+		(@idUser, @userName);
+	end
+	else if (@isReader = 0)
+	begin
+		insert into noiBo(userID, hoTen)
+		values
+		(@idUser, @userName);
+	end
 end
 go
 
@@ -213,20 +214,20 @@ GO
 */
 
 
---delete Reader
---where idReader like '%'
---go
---delete noiBo
---where userID like '%'
---go
---delete [user]
---where userID like '%'
---go
-
 insert into [User] values
-('user', 'reader', '123', 'user@gmail.com', 1, 1),
+('user', 'reader', '123', 'user@gmail.com', 1, 1);
+insert into [User] values
 ('admin', 'noiBo', '123', 'admin@gmail.com', 0, 1);
 go
+
+--('user1', 'reader1', '123', 'user1@gmail.com', 1, 1),
+--insert into [User] values
+--('nv', 'noiBo1', '123', 'user4@example.com', 0, 1);
+
+--insert into [Access] (idAccess, moTa, fullAccess) values
+--(1, 'admin accessibility', 1);
+--insert into [Access] (idAccess, moTa, rNoiBo, uNoiBo, rPhongBan, uPhongBan, ) values
+--(1, 'admin accessibility', 1);
 
 --insert into noiBo (userID, hoTen) values
 --('admin', 'noiBo')

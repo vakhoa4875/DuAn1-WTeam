@@ -234,6 +234,7 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/github50.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

@@ -213,7 +213,7 @@ CREATE TABLE Reader(
 
 CREATE TABLE noiBo (
 	idNoiBo int identity(1,1) ,
-	userID NVARCHAR(127) unique,
+	userID NVARCHAR(127) unique not null,
 	idPB INT null,
 	idQuanLy int null,
 	luong int default 0,
