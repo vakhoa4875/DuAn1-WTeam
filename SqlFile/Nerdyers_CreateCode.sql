@@ -178,7 +178,7 @@ CREATE TABLE Reader(
 	ngaySinh date,
 	avatar nvarchar(127),
 	hoTen nvarchar(127) not null,
-	gioiTinh bit,
+	s bit,
 	PRIMARY KEY (idReader),
 	FOREIGN KEY (idReader) REFERENCES [User](userID)
 );
