@@ -6,6 +6,7 @@ package library;
 
 import UX_UI.JFrameTrangChuKhachHang;
 import UX_UI.JFrameTrangChuQuanLy;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Window;
 import java.io.File;
@@ -28,13 +29,21 @@ public class XImage {
 
     // Logo là button và có thể return ra trang chủ tùy vào role của user
     public static void setLogoButton(JButton btn) {
-        btn.setBorderPainted(false);
+        // set none border
+        btn.setBorder(null);
+        // set dài rộng cho btn
+        btn.setSize(135, 50);
+        //set font
+        Font segoeUIFont = new Font("Segoe UI Black", Font.PLAIN, 16);
+        btn.setFont(segoeUIFont);
+        
         ImageIcon icon = new ImageIcon(Extension.class.getResource(nerdyersLogo));
         //scale image
         Image image = icon.getImage();
-        Image scaledImage = image.getScaledInstance(btn.getWidth(), btn.getHeight(), Image.SCALE_SMOOTH);
+        Image scaledImage = image.getScaledInstance(btn.getHeight() - 10, btn.getHeight() - 10, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         btn.setIcon(scaledIcon);
+        btn.setText("Nerdyers");
         if (Auth.isLogin()) {
             returnToMain(btn);
         }
@@ -42,6 +51,7 @@ public class XImage {
 
     // set button event
     public static void returnToMain(JButton btn) {
+        // lấy form chứa button logo
         Window parentWindow = SwingUtilities.getWindowAncestor(btn);
 
         if (parentWindow == null) {
