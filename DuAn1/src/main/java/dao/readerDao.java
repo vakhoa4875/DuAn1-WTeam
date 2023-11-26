@@ -107,4 +107,31 @@ public class readerDao {
         return reader;
     }
 
+    public ArrayList<Object[]> selectbykeyword(String keyword) {
+        ArrayList<Object[]> list = new ArrayList<>();
+        try {
+            String selectByKeyWord = "select * from [user] join reader on [user].userid = reader.idreader where username like ? or email like ? or hoten like ?";
+            ResultSet rs = null;
+            rs = Jdbc.executeQuery(selectByKeyWord,"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%");
+            while (rs.next()) {
+                Object[] row = {
+                    rs.getString("userID"),
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getString("email"),
+                    rs.getBoolean("thanthiet"),
+                    rs.getInt("tichDiem"),
+                    rs.getDate("ngaySinh"),
+                    rs.getString("avatar"),
+                    rs.getString("hoTen"),
+                    rs.getBoolean("gioiTinh")
+                };
+                list.add(row);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

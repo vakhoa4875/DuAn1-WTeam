@@ -287,6 +287,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -307,6 +308,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
     private void btnQuanLyThongTinKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyThongTinKhachHangActionPerformed
         // TODO add your handling code here:
+         openQuanLyThongTinKhachHang();
     }//GEN-LAST:event_btnQuanLyThongTinKhachHangActionPerformed
 
     private void btnQuanLySanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLySanPhamActionPerformed
@@ -379,4 +381,8 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables
+
+    void openQuanLyThongTinKhachHang(){
+        new JDialogQuanLyThongTinKhachHang(this, rootPaneCheckingEnabled).setVisible(true);
+    }
 }
