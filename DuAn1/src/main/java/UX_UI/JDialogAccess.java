@@ -6,6 +6,8 @@ package UX_UI;
 
 import dao.AccessDAO;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import library.Auth;
 import library.MsgBox;
 import model.Access;
 
@@ -16,6 +18,7 @@ import model.Access;
 public class JDialogAccess extends javax.swing.JDialog {
 
     AccessDAO dao = new AccessDAO();
+    int row = -1;
 
     /**
      * Creates new form JDialogAccess
@@ -24,6 +27,7 @@ public class JDialogAccess extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        init();
     }
 
     /**
@@ -93,8 +97,8 @@ public class JDialogAccess extends javax.swing.JDialog {
         last = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        tblAccess = new javax.swing.JTable();
+        txtFind = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -177,10 +181,20 @@ public class JDialogAccess extends javax.swing.JDialog {
         });
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
 
         btnNew.setText("New");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         first.setText("|<");
 
@@ -415,7 +429,7 @@ public class JDialogAccess extends javax.swing.JDialog {
 
         tabs.addTab("InserAcces", jPanel2);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAccess.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -426,7 +440,12 @@ public class JDialogAccess extends javax.swing.JDialog {
                 "idAccess", "fullAccess", "rReadList", "uReadList", "rWishList", "uWishList", "rUser", "uUser", "rPhongBan", "uPhongBan", "rSach", "uSach", "rReader", "uReader", "rNoiBo", "uNoiBo", "rTacGia", "uTacGia", "rTheLoai", "uTheLoai", "Mô Tả"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblAccess.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAccessMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblAccess);
 
         jButton1.setText("Tìm Kiếm");
 
@@ -439,7 +458,7 @@ public class JDialogAccess extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addContainerGap())))
@@ -449,7 +468,7 @@ public class JDialogAccess extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -508,6 +527,23 @@ public class JDialogAccess extends javax.swing.JDialog {
         // TODO add your handling code here:
         insert();
     }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void tblAccessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAccessMouseClicked
+        // TODO add your handling code here:
+        row = tblAccess.getSelectedRow();
+        edit();
+        
+    }//GEN-LAST:event_tblAccessMouseClicked
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+        New();
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -601,8 +637,6 @@ public class JDialogAccess extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton last;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRole;
@@ -611,9 +645,89 @@ public class JDialogAccess extends javax.swing.JDialog {
     private javax.swing.JButton next;
     private javax.swing.JButton prev;
     private javax.swing.JTabbedPane tabs;
+    private javax.swing.JTable tblAccess;
+    private javax.swing.JTextField txtFind;
     private javax.swing.JTextArea txtMota;
     private javax.swing.JTextField txtidAccess;
     // End of variables declaration//GEN-END:variables
+
+    void init() {
+        filltable();
+        
+    }
+
+    void filltable() {
+        DefaultTableModel model = (DefaultTableModel) tblAccess.getModel();
+        model.setRowCount(0);
+        ArrayList<Access> list = dao.selectAll();
+
+        for (Access access : list) {
+            Object[] row = {
+                access.getIdAccess(),
+                access.getMoTa(),
+                access.getFullAccess(),
+                access.getrReadlist(),
+                access.getuReadlist(),
+                access.getrWishlist(),
+                access.getuWishlist(),
+                access.getrUser(),
+                access.getuUser(),
+                access.getrPhongBan(),
+                access.getuPhongBan(),
+                access.getrSach(),
+                access.getuSach(),
+                access.getrReader(),
+                access.getuReader(),
+                access.getrNoiBo(),
+                access.getuNoiBo(),
+                access.getrTacGia(),
+                access.getuTacGia(),
+                access.getrTheLoai(),
+                access.getuTheLoai()
+            };
+
+            model.addRow(row);
+        }
+    }
+
+    void edit() {
+        try {  
+            Integer idaccess = (Integer) tblAccess.getValueAt(row, 0);
+            Access ac = dao.selectById(idaccess);
+
+            if (ac != null) {
+                setFrom(ac);
+                tabs.setSelectedIndex(0);
+            } 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    void setFrom(Access ac) {
+        txtidAccess.setText(String.valueOf(ac.getIdAccess()));
+        chkfullAccess.setSelected(ac.getFullAccess());
+        chkrReadList.setSelected(ac.getrReadlist());
+        chkuReadList.setSelected(ac.getuReadlist());
+        chkrWishList.setSelected(ac.getrWishlist());
+        chkuWishList.setSelected(ac.getuWishlist());
+        chkrUser.setSelected(ac.getrUser());
+        chkuUser.setSelected(ac.getuUser());
+        chkrPhongBan.setSelected(ac.getrPhongBan());
+        chkuPhongBan.setSelected(ac.getuPhongBan());
+        chkrSach.setSelected(ac.getrSach());
+        chkuSach.setSelected(ac.getuSach());
+        chkrReader.setSelected(ac.getrReader());
+        chkuReader.setSelected(ac.getuReader());
+        chkrNoiBo.setSelected(ac.getrNoiBo());
+        chkuNoiBo.setSelected(ac.getuNoiBo());
+        chkrTacGia.setSelected(ac.getrTacGia());
+        chkuTacGia.setSelected(ac.getuTacGia());
+        chkrTheLoai.setSelected(ac.getrTheLoai());
+        chkuTheLoai.setSelected(ac.getuTheLoai());
+        txtMota.setText(ac.getMoTa());
+    }
 
     void insert() {
         Access acInsert = getForm();
@@ -624,6 +738,17 @@ public class JDialogAccess extends javax.swing.JDialog {
         } catch (Exception e) {
             e.printStackTrace();
             MsgBox.alert(this, "Insert failed");
+        }
+    }
+    
+    void update(){
+        Access ac = getForm();
+        try {
+            dao.update(ac);
+            filltable();
+            MsgBox.alert(this, "Update thành công");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Update thất bại");
         }
     }
 
@@ -653,5 +778,11 @@ public class JDialogAccess extends javax.swing.JDialog {
 
         return ac;
     }
-
+    
+    
+    void New(){ 
+        Access ac = new Access();
+        setFrom(ac);
+        row = -1;
+    }
 }
