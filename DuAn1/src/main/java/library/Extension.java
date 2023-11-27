@@ -116,6 +116,7 @@ public class Extension {
 
     public static void setUnderline(JButton... args) {
         for (JButton btn : args) {
+            btn.setBorder(null);
             String text = "<html><u style=\"color: blue;\">" + btn.getText() + "</u></html>";
             btn.setText(text);
         }
