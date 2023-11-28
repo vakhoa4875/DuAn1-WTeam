@@ -44,6 +44,9 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        txtTiemKiem = new javax.swing.JTextField();
+        lblTimKiem = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -109,38 +112,62 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
             }
         });
 
+        txtTiemKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTiemKiemKeyReleased(evt);
+            }
+        });
+
+        lblTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/TimKiem.png"))); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setText("Tìm Kiếm");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnUpdate)
-                .addGap(113, 113, 113)
-                .addComponent(btnDelete)
-                .addGap(157, 157, 157))
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addComponent(jLabel7)
+                .addContainerGap(170, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addComponent(btnUpdate)
+                                .addGap(113, 113, 113)
+                                .addComponent(btnDelete)
+                                .addGap(95, 95, 95))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(txtTiemKiem)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTiemKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTimKiem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
-                .addGap(56, 56, 56))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Quản Lý", jPanel2);
@@ -359,6 +386,11 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         delete();        // TODO add your handling code here:
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void txtTiemKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTiemKiemKeyReleased
+        // TODO add your handling code here:
+        timKiem();
+    }//GEN-LAST:event_txtTiemKiemKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -413,6 +445,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -422,12 +455,14 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
     private javax.swing.JLabel lblFirst;
     private javax.swing.JLabel lblLast;
     private javax.swing.JLabel lblNext;
+    private javax.swing.JLabel lblTimKiem;
     private javax.swing.JTable tblQuanLyPhongBan;
     private javax.swing.JTextField txtIDPhongBan;
     private javax.swing.JTextArea txtMoTa;
     private javax.swing.JTextField txtNhanVienAccess;
     private javax.swing.JTextField txtQuanLiAccess;
     private javax.swing.JTextField txtTenPhongBan;
+    private javax.swing.JTextField txtTiemKiem;
     // End of variables declaration//GEN-END:variables
       private void init() {
         setLocationRelativeTo(null);
@@ -587,6 +622,27 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         } catch (Exception e) {
             MsgBox.alert(this, "Xóa không ok");
             e.printStackTrace();
+        }
+    }
+    
+    
+    private void timKiem(){
+        DefaultTableModel model = (DefaultTableModel) tblQuanLyPhongBan.getModel();
+        model.setRowCount(0);
+        try {
+            String keyWord = txtTiemKiem.getText();
+            List <PhongBan> list = new PhongBanDAO().selectByKeyWord(keyWord);
+            for (PhongBan phongBan : list) {
+                Object[] row = {
+                  phongBan.getIdPB(),
+                  phongBan.getQlAccess(),
+                  phongBan.getNvAccess(),
+                  phongBan.getTenPB()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Thông tin tìm kiếm bị lỗi");
         }
     }
 

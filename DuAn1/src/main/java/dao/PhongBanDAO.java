@@ -89,4 +89,11 @@ public class PhongBanDAO {
         );
         return pb;
     }
+    
+    public List<PhongBan> selectByKeyWord(String keyword){
+        
+        String sql = "select * from phongBan where idPB like ? or qlAccess like ? or nvAccess like ? or tenPB like ?";
+        
+        return select(sql, "%" +keyword, "%"+keyword, "%"+keyword , "%"+keyword);
+    }
 }
