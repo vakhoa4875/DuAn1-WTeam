@@ -13,6 +13,11 @@ public class PhongBan {
     private String tenPB;
     private String moTa;
 
+    public PhongBan() {
+    }
+
+    
+    
     public PhongBan(int idPB, int qlAccess, int nvAccess, String tenPB, String moTa) {
         this.idPB = idPB;
         this.qlAccess = qlAccess;
