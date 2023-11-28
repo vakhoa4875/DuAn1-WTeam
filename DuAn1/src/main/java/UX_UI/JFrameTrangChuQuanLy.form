@@ -377,7 +377,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblCover1" pref="150" max="32767" attributes="0"/>
                               <Component id="lblTenSach1" max="32767" attributes="0"/>
                           </Group>
@@ -400,7 +400,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblCover1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cover s&#xe1;ch"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder/>
@@ -454,8 +453,8 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblCover2" alignment="1" pref="150" max="32767" attributes="0"/>
-                              <Component id="lblTenSach2" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblCover2" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblTenSach2" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -476,7 +475,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblCover2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cover s&#xe1;ch"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder/>
@@ -506,9 +504,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblCover3" alignment="1" pref="150" max="32767" attributes="0"/>
-                              <Component id="lblTenSach3" alignment="1" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblCover3" max="32767" attributes="0"/>
+                              <Component id="lblTenSach3" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -529,7 +527,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblCover3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cover s&#xe1;ch"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder/>
@@ -560,8 +557,8 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblCover4" alignment="1" pref="150" max="32767" attributes="0"/>
-                              <Component id="lblTenSach4" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblCover4" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblTenSach4" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -582,7 +579,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblCover4">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cover s&#xe1;ch"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder/>
@@ -613,8 +609,8 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblCover5" alignment="1" pref="150" max="32767" attributes="0"/>
-                              <Component id="lblTenSach5" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblCover5" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblTenSach5" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -635,7 +631,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblCover5">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cover s&#xe1;ch"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder/>
@@ -666,8 +661,8 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblCover7" alignment="1" pref="150" max="32767" attributes="0"/>
-                              <Component id="lblTenSach7" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblCover7" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblTenSach7" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -688,7 +683,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblCover7">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cover s&#xe1;ch"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder/>
@@ -719,8 +713,8 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblCover10" alignment="1" pref="150" max="32767" attributes="0"/>
-                              <Component id="lblTenSach10" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblCover10" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblTenSach10" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -741,7 +735,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblCover10">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cover s&#xe1;ch"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder/>
@@ -771,9 +764,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblCover6" alignment="1" pref="150" max="32767" attributes="0"/>
-                              <Component id="lblTenSach6" alignment="1" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblCover6" pref="150" max="32767" attributes="0"/>
+                              <Component id="lblTenSach6" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -794,7 +787,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblCover6">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cover s&#xe1;ch"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder/>
@@ -825,8 +817,8 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblCover8" alignment="1" pref="150" max="32767" attributes="0"/>
-                              <Component id="lblTenSach8" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblCover8" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblTenSach8" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -847,7 +839,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblCover8">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cover s&#xe1;ch"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder/>
@@ -878,8 +869,8 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblCover9" alignment="1" pref="150" max="32767" attributes="0"/>
-                              <Component id="lblTenSach9" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblCover9" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblTenSach9" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -900,7 +891,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblCover9">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cover s&#xe1;ch"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder/>
