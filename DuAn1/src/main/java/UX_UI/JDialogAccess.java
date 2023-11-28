@@ -6,6 +6,7 @@ package UX_UI;
 
 import dao.AccessDAO;
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import library.Auth;
 import library.MsgBox;
@@ -91,10 +92,10 @@ public class JDialogAccess extends javax.swing.JDialog {
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
-        first = new javax.swing.JButton();
-        prev = new javax.swing.JButton();
-        next = new javax.swing.JButton();
-        last = new javax.swing.JButton();
+        btnfirst = new javax.swing.JButton();
+        btnprev = new javax.swing.JButton();
+        btnnext = new javax.swing.JButton();
+        btnlast = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAccess = new javax.swing.JTable();
@@ -188,6 +189,11 @@ public class JDialogAccess extends javax.swing.JDialog {
         });
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnNew.setText("New");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
@@ -196,13 +202,33 @@ public class JDialogAccess extends javax.swing.JDialog {
             }
         });
 
-        first.setText("|<");
+        btnfirst.setText("|<");
+        btnfirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnfirstActionPerformed(evt);
+            }
+        });
 
-        prev.setText("<<");
+        btnprev.setText("<<");
+        btnprev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnprevActionPerformed(evt);
+            }
+        });
 
-        next.setText(">>");
+        btnnext.setText(">>");
+        btnnext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnextActionPerformed(evt);
+            }
+        });
 
-        last.setText(">|");
+        btnlast.setText(">|");
+        btnlast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlastActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -316,13 +342,13 @@ public class JDialogAccess extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(btnNew)
                         .addGap(18, 18, 18)
-                        .addComponent(first)
+                        .addComponent(btnfirst)
                         .addGap(18, 18, 18)
-                        .addComponent(prev)
+                        .addComponent(btnprev)
                         .addGap(18, 18, 18)
-                        .addComponent(next)
+                        .addComponent(btnnext)
                         .addGap(18, 18, 18)
-                        .addComponent(last)
+                        .addComponent(btnlast)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -420,10 +446,10 @@ public class JDialogAccess extends javax.swing.JDialog {
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete)
                     .addComponent(btnNew)
-                    .addComponent(first)
-                    .addComponent(prev)
-                    .addComponent(next)
-                    .addComponent(last))
+                    .addComponent(btnfirst)
+                    .addComponent(btnprev)
+                    .addComponent(btnnext)
+                    .addComponent(btnlast))
                 .addGap(18, 18, 18))
         );
 
@@ -447,7 +473,18 @@ public class JDialogAccess extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblAccess);
 
+        txtFind.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFindKeyReleased(evt);
+            }
+        });
+
         jButton1.setText("Tìm Kiếm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -532,7 +569,7 @@ public class JDialogAccess extends javax.swing.JDialog {
         // TODO add your handling code here:
         row = tblAccess.getSelectedRow();
         edit();
-        
+
     }//GEN-LAST:event_tblAccessMouseClicked
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
@@ -544,6 +581,50 @@ public class JDialogAccess extends javax.swing.JDialog {
         // TODO add your handling code here:
         update();
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnfirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfirstActionPerformed
+        // TODO add your handling code here:
+        first();
+    }//GEN-LAST:event_btnfirstActionPerformed
+
+    private void btnprevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprevActionPerformed
+        // TODO add your handling code here:
+        prev();
+    }//GEN-LAST:event_btnprevActionPerformed
+
+    private void btnnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnextActionPerformed
+        // TODO add your handling code here:
+        next();
+    }//GEN-LAST:event_btnnextActionPerformed
+
+    private void btnlastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlastActionPerformed
+        // TODO add your handling code here:
+        last();
+    }//GEN-LAST:event_btnlastActionPerformed
+
+    private void txtFindKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindKeyReleased
+        // TODO add your handling code here:
+//        int keyword = Integer.parseInt(txtFind.getText());
+//        if()
+//        selectbykeyword(keyword);
+    }//GEN-LAST:event_txtFindKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            Integer keyword = Integer.parseInt(txtFind.getText());
+            selectbykeyword(keyword);
+        } catch (Exception e) {
+            System.out.println("Loi");
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -592,6 +673,10 @@ public class JDialogAccess extends javax.swing.JDialog {
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnfirst;
+    private javax.swing.JButton btnlast;
+    private javax.swing.JButton btnnext;
+    private javax.swing.JButton btnprev;
     private javax.swing.JCheckBox chkfullAccess;
     private javax.swing.JCheckBox chkrNoiBo;
     private javax.swing.JCheckBox chkrPhongBan;
@@ -611,7 +696,6 @@ public class JDialogAccess extends javax.swing.JDialog {
     private javax.swing.JCheckBox chkuTheLoai;
     private javax.swing.JCheckBox chkuUser;
     private javax.swing.JCheckBox chkuWishList;
-    private javax.swing.JButton first;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -637,13 +721,10 @@ public class JDialogAccess extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton last;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRole;
     private javax.swing.JLabel lblfullAccess1;
     private javax.swing.JLabel lblidAccess1;
-    private javax.swing.JButton next;
-    private javax.swing.JButton prev;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblAccess;
     private javax.swing.JTextField txtFind;
@@ -653,7 +734,7 @@ public class JDialogAccess extends javax.swing.JDialog {
 
     void init() {
         filltable();
-        
+        updateStatus();
     }
 
     void filltable() {
@@ -691,14 +772,15 @@ public class JDialogAccess extends javax.swing.JDialog {
     }
 
     void edit() {
-        try {  
+        try {
             Integer idaccess = (Integer) tblAccess.getValueAt(row, 0);
             Access ac = dao.selectById(idaccess);
 
             if (ac != null) {
                 setFrom(ac);
                 tabs.setSelectedIndex(0);
-            } 
+            }
+            updateStatus();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -727,12 +809,14 @@ public class JDialogAccess extends javax.swing.JDialog {
         chkrTheLoai.setSelected(ac.getrTheLoai());
         chkuTheLoai.setSelected(ac.getuTheLoai());
         txtMota.setText(ac.getMoTa());
+        updateStatus();
     }
 
     void insert() {
         Access acInsert = getForm();
         try {
             dao.insert(acInsert);
+            filltable();
             MsgBox.alert(this, "Insert sucessffuly");
 
         } catch (Exception e) {
@@ -740,15 +824,32 @@ public class JDialogAccess extends javax.swing.JDialog {
             MsgBox.alert(this, "Insert failed");
         }
     }
-    
-    void update(){
+
+    void update() {
         Access ac = getForm();
         try {
             dao.update(ac);
             filltable();
             MsgBox.alert(this, "Update thành công");
         } catch (Exception e) {
+            e.printStackTrace();
             MsgBox.alert(this, "Update thất bại");
+        }
+    }
+
+    void delete() {
+        if (MsgBox.confirm(this, "Bạn có muốn xóa access này không?")) {
+            int idaccess = Integer.parseInt(txtidAccess.getText());
+            try {
+                dao.delete(idaccess);
+                filltable();
+                New();
+                MsgBox.alert(this, "Xóa Access thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Xóa Access thất bại");
+
+            }
         }
     }
 
@@ -778,11 +879,108 @@ public class JDialogAccess extends javax.swing.JDialog {
 
         return ac;
     }
-    
-    
-    void New(){ 
+
+    void New() {
         Access ac = new Access();
+
+        ac.setIdAccess(0);
+        ac.setFullAccess(false);
+        ac.setrReadlist(false);
+        ac.setuReadlist(false);
+        ac.setrWishlist(false);
+        ac.setuWishlist(false);
+        ac.setrUser(false);
+        ac.setuUser(false);
+        ac.setrPhongBan(false);
+        ac.setuPhongBan(false);
+        ac.setrSach(false);
+        ac.setuSach(false);
+        ac.setrReader(false);
+        ac.setuReader(false);
+        ac.setrNoiBo(false);
+        ac.setuNoiBo(false);
+        ac.setrTacGia(false);
+        ac.setuTacGia(false);
+        ac.setrTheLoai(false);
+        ac.setuTheLoai(false);
+        ac.setMoTa("");
+
         setFrom(ac);
+
         row = -1;
     }
+
+    void first() {
+        this.row = 0;
+        this.edit();
+    }
+
+    void last() {
+        this.row = tblAccess.getRowCount() - 1;
+        this.edit();
+    }
+
+    void prev() {
+        if (row > 0) {
+            this.row--;
+            this.edit();
+        }
+    }
+
+    void next() {
+        if (this.row < tblAccess.getRowCount() - 1) {
+            this.row++;
+            this.edit();
+        }
+    }
+
+    void updateStatus() {
+        boolean edit = (this.row >= 0);
+        boolean first = (this.row == 0);
+        boolean last = (this.row == tblAccess.getRowCount() - 1);
+        //trang thai form
+//        txtMaNV.setEditable(!edit);
+        btnInsert.setEnabled(!edit);
+        btnUpdate.setEnabled(edit);
+        btnDelete.setEnabled(edit);
+        //trang thai deu huong
+        this.btnfirst.setEnabled(edit && !first);
+        btnprev.setEnabled(edit && !first);
+        btnnext.setEnabled(edit && !last);
+        btnlast.setEnabled(edit && !last);
+    }
+
+    void selectbykeyword(int idaccess) {
+        DefaultTableModel model = (DefaultTableModel) tblAccess.getModel();
+        model.setRowCount(0);
+        ArrayList<Access> list = dao.selectByKeyWord(idaccess);
+        for (Access access : list) {
+
+            Object[] row = {
+                access.getIdAccess(),
+                access.getMoTa(),
+                access.getFullAccess(),
+                access.getrReadlist(),
+                access.getuReadlist(),
+                access.getrWishlist(),
+                access.getuWishlist(),
+                access.getrUser(),
+                access.getuUser(),
+                access.getrPhongBan(),
+                access.getuPhongBan(),
+                access.getrSach(),
+                access.getuSach(),
+                access.getrReader(),
+                access.getuReader(),
+                access.getrNoiBo(),
+                access.getuNoiBo(),
+                access.getrTacGia(),
+                access.getuTacGia(),
+                access.getrTheLoai(),
+                access.getuTheLoai()
+            };
+            model.addRow(row);
+        }
+    }
+
 }

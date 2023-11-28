@@ -72,6 +72,12 @@ public class AccessDAO {
         );
     }
 
+    public void delete(int idaccess) {
+        String sql = "Delete From [access] where idaccess = ?";
+        Jdbc.executeUpdate(sql, idaccess);
+
+    }
+
     public Access selectById(Integer idaccess) {
         String sql = "Select * from access where idaccess = ?";
         ArrayList<Access> ac = select(sql, idaccess);
@@ -85,6 +91,13 @@ public class AccessDAO {
 
     ;
     
+    
+    public ArrayList<Access> selectByKeyWord(int keyword) {
+        ArrayList<Access> list = new ArrayList<>();
+        String sql = "select * from access where idAccess = ?";
+        return list = select(sql,keyword);
+    }
+
     private ArrayList<Access> select(String sql, Object... arys) {
         ArrayList<Access> listaccess = new ArrayList<>();
         try {
