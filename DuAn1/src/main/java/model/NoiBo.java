@@ -25,13 +25,14 @@ public class NoiBo {
     private Date ngaySinh;
     private String avatar;
     private String hoTen;
+    private Boolean gioiTinh;
 
 //    public NhanVien(User user) {
 //        
     public NoiBo() {
     }
 
-    public NoiBo(Integer idNoiBo, String userID, Integer idPB, Integer idQuanLy, Integer luong, Boolean fulltime, Date ngayThue, String caLam, Boolean quanLy, Integer luongBong, Date ngaySinh, String avatar, String hoTen) {
+    public NoiBo(Integer idNoiBo, String userID, Integer idPB, Integer idQuanLy, Integer luong, Boolean fulltime, Date ngayThue, String caLam, Boolean quanLy, Integer luongBong, Date ngaySinh, String avatar, String hoTen, Boolean gioiTinh) {
         this.idNoiBo = idNoiBo;
         this.userID = userID;
         this.idPB = idPB;
@@ -45,6 +46,7 @@ public class NoiBo {
         this.ngaySinh = ngaySinh;
         this.avatar = avatar;
         this.hoTen = hoTen;
+        this.gioiTinh = gioiTinh;
     }
 
     public Integer getIdNoiBo() {
@@ -149,6 +151,14 @@ public class NoiBo {
 
     public void setLuongBong(Integer luongBong) {
         this.luongBong = luongBong;
+    }
+
+    public Boolean getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(Boolean gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 
 }
