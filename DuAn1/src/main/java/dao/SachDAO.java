@@ -3,7 +3,8 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+//import java.util.Arrays;
 import library.Jdbc;
 import model.Sach;
 import model.TacGia;
@@ -31,10 +32,6 @@ public class SachDAO {
                 sach.getCoverI(),
                 sach.getMoTa(),
                 String.join("|", sach.getNgonNgu()),
-//                sach.getIdTacGia(),
-//                sach.getTenTG(),
-//                sach.getIdTheLoai(),
-//                sach.getTenTL(),
                 sach.getPhienBan(),
                 sach.getViewCount(),
                 sach.getLikeCount(),
@@ -74,10 +71,6 @@ public class SachDAO {
                 sach.getCoverI(),
                 sach.getMoTa(),
                 sach.getNgonNgu(),
-//                sach.getIdTacGia(),
-//                sach.getTenTG(),
-//                sach.getIdTheLoai(),
-//                sach.getTenTL(),
                 sach.getPhienBan(),
                 sach.getViewCount(),
                 sach.getLikeCount(),
@@ -99,10 +92,6 @@ public class SachDAO {
                 resultSet.getString("COVER_I"),
                 resultSet.getString("MOTA"),
                 resultSet.getString("NGONNGU").split("\\|"),
-//                resultSet.getString("ID_TACGIA").split("\\|"),
-//                resultSet.getString("TEN_TACGIA").split("\\|"),
-//                resultSet.getString("ID_THELOAI").split("\\|"),
-//                resultSet.getString("TEN_THELOAI").split("\\|"),
                 resultSet.getString("PHIENBAN"),
                 resultSet.getInt("VIEWCOUNT"),
                 resultSet.getInt("LIKECOUNT"),
@@ -110,38 +99,6 @@ public class SachDAO {
         return sach;
     }
 
-//    public void insert(Sach sach) {
-//        String insertQuery = """
-//                             INSERT INTO SACH
-//                             VALUES (?, ?, ?, ?, ?,
-//                             ?, ?, ?, ?, ?,
-//                             ?, ?, ?, ?, 
-//                             ?, ?, ?, ?, 
-//                             ?, ?, ?, ?)""";
-//        Jdbc.executeUpdate(insertQuery,
-//                sach.getIdSach(),
-//                sach.getTenSach(),
-//                sach.getFree(),
-//                sach.getGiaNiemYet(),
-//                sach.getDanhGiaTB(),
-//                sach.getMoTa(),
-//                sach.getNgonNgu(),
-//                sach.getThumbnail(),
-//                sach.getAvatar(),
-//                sach.getTrueSizeAvatar(),
-//                sach.getPdfAvai(),
-//                sach.getSourcePDF(),
-//                sach.getSoTrang(),
-//                sach.getAudioAvai(),
-//                sach.getSourceSound(),
-//                sach.getThoiLuong(),
-//                sach.getNamSangTac(),
-//                sach.getVersion(),
-//                sach.getNamXB(),
-//                sach.getMinAge(),
-//                sach.getLikeCount(),
-//                sach.getViewCount());
-//    }
     public void insertSvTG(Sach sach, TacGia tg) {
         String insertQuery = """
                              INSERT INTO SvTG (IDSACH, idTacGia)
@@ -196,57 +153,6 @@ public class SachDAO {
         Jdbc.executeUpdate(deleteQuery, sach.getIdSach());
     }
 
-//    public void update(Sach sach) {
-//        String updateQuery = """
-//                     UPDATE SACH
-//                     SET 
-//                         TENSACH = ?,
-//                         free = ?,
-//                         giaNiemYet = ?,
-//                             danhGiaTB =?,
-//                             moTa = ?,
-//                             ngonNgu =?,
-//                             thumbnail = ?,
-//                             avatar = ?,
-//                             trueSizeAvatar = ?,
-//                             pdfAvai = ?,
-//                             sourcePDF = ?,
-//                             soTrang =?,
-//                             audioAvai = ?,
-//                             sourceSound = ?,
-//                             thoiLuong = ?,
-//                             namSangTac = ?,
-//                             [version] = ?,
-//                             namXB = ? ,
-//                             minAge = ?,
-//                             likeCount = ? ,
-//                             viewCount = ?
-//                     WHERE IDSACH = ?;
-//                     """;
-//        Jdbc.executeUpdate(updateQuery,
-//                sach.getTenSach(),
-//                sach.getFree(),
-//                sach.getGiaNiemYet(),
-//                sach.getDanhGiaTB(),
-//                sach.getMoTa(),
-//                sach.getNgonNgu(),
-//                sach.getThumbnail(),
-//                sach.getAvatar(),
-//                sach.getTrueSizeAvatar(),
-//                sach.getPdfAvai(),
-//                sach.getSourcePDF(),
-//                sach.getSoTrang(),
-//                sach.getAudioAvai(),
-//                sach.getSourceSound(),
-//                sach.getThoiLuong(),
-//                sach.getNamSangTac(),
-//                sach.getVersion(),
-//                sach.getNamXB(),
-//                sach.getMinAge(),
-//                sach.getLikeCount(),
-//                sach.getViewCount(),
-//                sach.getIdSach());
-//    }
     public void updateSvTG(Sach sach, TacGia tg) {
         deleteSvTG(sach);
         insertSvTG(sach, tg);
@@ -278,6 +184,15 @@ public class SachDAO {
 
     }
     
+    public ArrayList<Sach> thongKeSach(Boolean isView, Boolean isAsc) {
+        String exec = "{call thongKeSach (?)}";
+        ArrayList<Sach> list = select(exec, isView);
+        if (!isAsc) {
+            Collections.reverse(list);
+        }
+        return list;
+    }
+    
     public Sach selectByID(String idSach) {
         String selectQuery = "select * from Sach "
                 + "where idSach = ?";
@@ -307,55 +222,4 @@ public class SachDAO {
         return list;
 
     }
-
-//    private Sach readFromRS(ResultSet resultSet) throws SQLException {
-//        Sach sach = new Sach(
-//                resultSet.getString("IDSACH"),
-//                resultSet.getString("TENSACH"),
-//                resultSet.getBoolean("FREE"),
-//                resultSet.getInt("GIANIEMYET"),
-//                resultSet.getDouble("DANHGIATB"),
-//                resultSet.getString("MOTA"),
-//                resultSet.getString("NGONNGU"),
-//                resultSet.getString("THUMBNAIL"),
-//                resultSet.getString("AVATAR"),
-//                resultSet.getString("TRUESIZEAVATAR"),
-//                resultSet.getBoolean("PDFAVAI"),
-//                resultSet.getString("SOURCEPDF"),
-//                resultSet.getInt("SOTRANG"),
-//                resultSet.getBoolean("AUDIOAVAI"),
-//                resultSet.getString("sourceSound"),
-//                resultSet.getTime("thoiLuong"),
-//                resultSet.getInt("NAMSANGTAC"),
-//                resultSet.getString("VERSION"),
-//                resultSet.getInt("NAMXB"),
-//                resultSet.getInt("MINAGE"),
-//                resultSet.getInt("LIKECOUNT"),
-//                resultSet.getInt("VIEWCOUNT"));
-//        return sach;
-//    }
-//    private Sach readFromRS(ResultSet resultSet) throws SQLException {
-//        Sach sach = new Sach(
-//                resultSet.getString("IDSACH"),
-//                resultSet.getString("TENSACH"),
-//                resultSet.getInt("GIANIEMYET"),
-//                resultSet.getString("THUMBNAIL"),
-//                resultSet.getString("AVATAR"),
-//                resultSet.getString("TRUESIZEAVATAR"),
-//                resultSet.getString("MOTA"),
-//                resultSet.getDouble("DANHGIATB"),
-//                resultSet.getInt("MINAGE"),
-//                resultSet.getBoolean("PDFAVAI"),
-//                resultSet.getBoolean("AUDIOAVAI"),
-//                resultSet.getString("VERSION"),
-//                resultSet.getInt("SOTRANG"),
-//                resultSet.getString("NGONNGU"),
-//                resultSet.getString("SOURCEPDF"),
-//                resultSet.getString("sourceSound"),
-//                resultSet.getBoolean("FREE"),
-//                resultSet.getInt("LIKECOUNT"),
-//                resultSet.getInt("viewcount"),
-//                resultSet.getTime("thoiLuong"));
-//        return sach;
-//    }
 }
