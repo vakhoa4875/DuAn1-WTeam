@@ -24,43 +24,39 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblName" min="-2" pref="183" max="-2" attributes="0"/>
-                          <Component id="lblRole" min="-2" pref="175" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Component id="tabs" min="-2" pref="866" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="tabs" min="-2" pref="1309" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblName" min="-2" pref="183" max="-2" attributes="0"/>
+                  <Component id="lblRole" min="-2" pref="175" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="487" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="14" max="-2" attributes="0"/>
                       <Component id="lblName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblRole" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" pref="114" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="tabs" min="-2" pref="474" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="tabs" min="-2" pref="351" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,8 +92,8 @@
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="InserAcces">
-                <Property name="tabTitle" type="java.lang.String" value="InserAcces"/>
+              <JTabbedPaneConstraints tabName="Chi ti&#x1ebf;t Quy&#x1ec1;n Truy C&#x1ead;p">
+                <Property name="tabTitle" type="java.lang.String" value="Chi ti&#x1ebf;t Quy&#x1ec1;n Truy C&#x1ead;p"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -107,267 +103,246 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblidAccess1" pref="53" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtidAccess" min="-2" pref="161" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="618" max="-2" attributes="0"/>
+                              <Component id="lblidAccess1" min="-2" pref="97" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtidAccess" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="2" attributes="0">
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="lblfullAccess1" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkfullAccess" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel38" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkrReadList" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel42" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkuReadList" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel43" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkrWishList" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel44" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkuWishList" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel44" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <Component id="jLabel38" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <Component id="lblfullAccess1" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <Component id="jLabel42" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel43" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="2" attributes="0">
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel45" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkrUser" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel46" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkuUser" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel47" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkrPhongBan" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel48" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkuPhongBan" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel49" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkrSach" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="chkfullAccess" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="chkrReadList" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="chkuReadList" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="chkrWishList" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="chkuWishList" min="-2" pref="85" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="2" attributes="0">
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel50" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkuSach" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel52" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkrReader" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel53" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkuReader" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel54" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkrNoiBo" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel51" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkuNoiBo" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="2" attributes="0">
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel55" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkrTacGia" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel56" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkuTacGia" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel57" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkrTheLoai" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Component id="jLabel58" min="-2" pref="65" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chkuTheLoai" min="-2" pref="85" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" pref="661" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                              <Component id="btnInsert" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnNew" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnfirst" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnprev" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnnext" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnlast" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel48" max="32767" attributes="0"/>
+                          <Component id="jLabel47" max="32767" attributes="0"/>
+                          <Component id="jLabel45" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel46" max="32767" attributes="0"/>
+                          <Component id="jLabel50" max="32767" attributes="0"/>
+                          <Component id="jLabel49" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="chkrPhongBan" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="chkuPhongBan" min="-2" pref="85" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel52" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel54" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel51" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="chkrUser" alignment="2" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="chkuUser" alignment="2" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="chkuSach" alignment="2" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="chkrSach" alignment="2" min="-2" pref="85" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel53" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="chkuNoiBo" min="-2" pref="85" max="-2" attributes="0"/>
+                          <Component id="chkrNoiBo" min="-2" pref="85" max="-2" attributes="0"/>
+                          <Component id="chkrReader" min="-2" pref="85" max="-2" attributes="0"/>
+                          <Component id="chkuReader" min="-2" pref="85" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel58" min="-2" pref="99" max="-2" attributes="0"/>
+                                  <Component id="jLabel57" min="-2" pref="99" max="-2" attributes="0"/>
+                                  <Component id="jLabel55" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="chkrTacGia" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="chkuTheLoai" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="chkuTacGia" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="chkrTheLoai" min="-2" pref="85" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jLabel56" min="-2" pref="99" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel3" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="431" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="355" max="-2" attributes="0"/>
+                      <Component id="btnInsert" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnNew" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnfirst" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnprev" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnnext" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnlast" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblidAccess1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtidAccess" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="138" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="lblidAccess1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtidAccess" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="chkfullAccess" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblfullAccess1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel38" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="chkrReadList" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel42" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="chkuReadList" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="chkrWishList" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel44" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="chkuWishList" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="chkrSach" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel49" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel50" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="chkuSach" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel45" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="chkrUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel46" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="chkuUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="chkrPhongBan" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel48" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="chkuPhongBan" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                                                  <Component id="jLabel57" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="jLabel55" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="chkrTacGia" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="jLabel56" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="chkuTacGia" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="chkrTheLoai" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabel58" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkuTheLoai" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabel52" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkrReader" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="chkuReader" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel53" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkrNoiBo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabel51" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="chkuNoiBo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel55" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkrTacGia" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel56" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkuTacGia" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel57" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkrTheLoai" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel58" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkuTheLoai" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel50" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkuSach" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel52" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkrReader" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel53" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkuReader" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkrNoiBo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel51" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkuNoiBo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel45" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkrUser" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel46" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkuUser" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel47" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkrPhongBan" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel48" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkuPhongBan" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkrSach" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblfullAccess1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkfullAccess" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkrReadList" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkuReadList" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel43" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkrWishList" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel44" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="chkuWishList" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnInsert" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -378,7 +353,7 @@
                           <Component id="btnnext" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnlast" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace pref="19" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -386,7 +361,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lblfullAccess1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="fullAccess"/>
+                <Property name="text" type="java.lang.String" value="To&#xe0;n Quy&#x1ec1;n"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkfullAccess">
@@ -398,33 +373,33 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel38">
               <Properties>
-                <Property name="text" type="java.lang.String" value="rReadList"/>
+                <Property name="text" type="java.lang.String" value="Xem Readlist"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkuReadList">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel42">
               <Properties>
-                <Property name="text" type="java.lang.String" value="uReadList"/>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh s&#x1eed;a Readlist"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkrWishList">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel43">
               <Properties>
-                <Property name="text" type="java.lang.String" value="rWishList"/>
+                <Property name="text" type="java.lang.String" value="Xem Wishlist"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel44">
               <Properties>
-                <Property name="text" type="java.lang.String" value="uWishList"/>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh s&#x1eed;a Wishlist"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkuWishList">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel45">
               <Properties>
-                <Property name="text" type="java.lang.String" value="rUser"/>
+                <Property name="text" type="java.lang.String" value="Xem T&#xe0;i Kho&#x1ea3;n"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkrUser">
@@ -433,12 +408,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel46">
               <Properties>
-                <Property name="text" type="java.lang.String" value="uUser"/>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh s&#x1eed;a T&#xe0;i Kho&#x1ea3;n"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel47">
               <Properties>
-                <Property name="text" type="java.lang.String" value="rPhongBan"/>
+                <Property name="text" type="java.lang.String" value="Xem Ph&#xf2;ng Ban"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkrPhongBan">
@@ -448,7 +423,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel48">
               <Properties>
-                <Property name="text" type="java.lang.String" value="uPhongBan"/>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh s&#x1eed;a Ph&#xf2;ng Ban"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkuPhongBan">
@@ -457,7 +432,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel49">
               <Properties>
-                <Property name="text" type="java.lang.String" value="rSach"/>
+                <Property name="text" type="java.lang.String" value="Xem S&#xe1;ch"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkrReader">
@@ -471,12 +446,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel50">
               <Properties>
-                <Property name="text" type="java.lang.String" value="uSach"/>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh s&#x1eed;a S&#xe1;ch"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel51">
               <Properties>
-                <Property name="text" type="java.lang.String" value="uNoiBo"/>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh s&#x1eed;a N&#x1ed9;i B&#x1ed9;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkuSach">
@@ -488,53 +463,65 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel52">
               <Properties>
-                <Property name="text" type="java.lang.String" value="rReader"/>
+                <Property name="text" type="java.lang.String" value="Xem Ng&#x1b0;&#x1edd;i &#x110;&#x1ecd;c"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel53">
               <Properties>
-                <Property name="text" type="java.lang.String" value="uReader"/>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh s&#x1eed;a Ng&#x1b0;&#x1edd;i &#x110;&#x1ecd;c"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel54">
               <Properties>
-                <Property name="text" type="java.lang.String" value="rNoiBo"/>
+                <Property name="text" type="java.lang.String" value="Xem N&#x1ed9;i B&#x1ed9;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkuTacGia">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkuTacGiaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkrTheLoai">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkrTheLoaiActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel55">
               <Properties>
-                <Property name="text" type="java.lang.String" value="rTacGia"/>
+                <Property name="text" type="java.lang.String" value="Xem T&#xe1;c Gi&#x1ea3;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkrTacGia">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkrTacGiaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkuTheLoai">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel56">
               <Properties>
-                <Property name="text" type="java.lang.String" value="uTacGia"/>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh s&#x1eed;a T&#xe1;c Gi&#x1ea3;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel57">
               <Properties>
-                <Property name="text" type="java.lang.String" value="rTheLoai"/>
+                <Property name="text" type="java.lang.String" value="Xem Th&#x1ec3; Lo&#x1ea1;i"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel58">
               <Properties>
-                <Property name="text" type="java.lang.String" value="uTheLoai"/>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh s&#x1eed;a Th&#x1ec3; Lo&#x1ea1;i"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblidAccess1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="idAccess"/>
+                <Property name="text" type="java.lang.String" value="Access ID:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtidAccess">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtidAccessActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -625,8 +612,8 @@
         <Container class="javax.swing.JPanel" name="jPanel1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="ShowAccess">
-                <Property name="tabTitle" type="java.lang.String" value="ShowAccess"/>
+              <JTabbedPaneConstraints tabName="Table Quy&#x1ec1;n Truy C&#x1ead;p">
+                <Property name="tabTitle" type="java.lang.String" value="Table Quy&#x1ec1;n Truy C&#x1ead;p"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -634,31 +621,33 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane1" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="txtFind" min="-2" pref="721" max="-2" attributes="0"/>
-                              <EmptySpace pref="53" max="32767" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="400" max="-2" attributes="0"/>
+                              <Component id="txtFind" min="-2" pref="321" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="471" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtFind" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="342" max="-2" attributes="0"/>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="263" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -675,27 +664,27 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="21" rowCount="4">
-                        <Column editable="true" title="idAccess" type="java.lang.Object"/>
-                        <Column editable="true" title="fullAccess" type="java.lang.Object"/>
-                        <Column editable="true" title="rReadList" type="java.lang.Object"/>
-                        <Column editable="true" title="uReadList" type="java.lang.Object"/>
-                        <Column editable="true" title="rWishList" type="java.lang.Object"/>
-                        <Column editable="true" title="uWishList" type="java.lang.Object"/>
-                        <Column editable="true" title="rUser" type="java.lang.Object"/>
-                        <Column editable="true" title="uUser" type="java.lang.Object"/>
-                        <Column editable="true" title="rPhongBan" type="java.lang.Object"/>
-                        <Column editable="true" title="uPhongBan" type="java.lang.Object"/>
-                        <Column editable="true" title="rSach" type="java.lang.Object"/>
-                        <Column editable="true" title="uSach" type="java.lang.Object"/>
-                        <Column editable="true" title="rReader" type="java.lang.Object"/>
-                        <Column editable="true" title="uReader" type="java.lang.Object"/>
-                        <Column editable="true" title="rNoiBo" type="java.lang.Object"/>
-                        <Column editable="true" title="uNoiBo" type="java.lang.Object"/>
-                        <Column editable="true" title="rTacGia" type="java.lang.Object"/>
-                        <Column editable="true" title="uTacGia" type="java.lang.Object"/>
-                        <Column editable="true" title="rTheLoai" type="java.lang.Object"/>
-                        <Column editable="true" title="uTheLoai" type="java.lang.Object"/>
-                        <Column editable="true" title="M&#xf4; T&#x1ea3;" type="java.lang.Object"/>
+                        <Column editable="false" title="ID" type="java.lang.Integer"/>
+                        <Column editable="false" title="Full Q`" type="java.lang.Boolean"/>
+                        <Column editable="false" title="rReadList" type="java.lang.Boolean"/>
+                        <Column editable="false" title="uReadList" type="java.lang.Boolean"/>
+                        <Column editable="false" title="rWishList" type="java.lang.Boolean"/>
+                        <Column editable="true" title="uWishList" type="java.lang.Boolean"/>
+                        <Column editable="false" title="rUser" type="java.lang.Boolean"/>
+                        <Column editable="false" title="uUser" type="java.lang.Boolean"/>
+                        <Column editable="false" title="Xem PB" type="java.lang.Boolean"/>
+                        <Column editable="false" title="Update PB" type="java.lang.Boolean"/>
+                        <Column editable="false" title="rSach" type="java.lang.Boolean"/>
+                        <Column editable="false" title="uSach" type="java.lang.Boolean"/>
+                        <Column editable="false" title="rReader" type="java.lang.Boolean"/>
+                        <Column editable="false" title="uReader" type="java.lang.Boolean"/>
+                        <Column editable="false" title="rNoiBo" type="java.lang.Boolean"/>
+                        <Column editable="false" title="uNoiBo" type="java.lang.Boolean"/>
+                        <Column editable="false" title="rTacGia" type="java.lang.Boolean"/>
+                        <Column editable="false" title="uTacGia" type="java.lang.Boolean"/>
+                        <Column editable="false" title="rTheLoai" type="java.lang.Boolean"/>
+                        <Column editable="false" title="uTheLoai" type="java.lang.Boolean"/>
+                        <Column editable="true" title="M&#xf4; T&#x1ea3;" type="java.lang.String"/>
                       </Table>
                     </Property>
                   </Properties>
