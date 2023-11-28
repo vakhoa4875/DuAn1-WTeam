@@ -59,17 +59,17 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 //        for (Sach sach : dao.select()) {
 //            URL_Dealer.downloadImage(sach.getCoverI(), false);
 //        }
-        pnlSach10.setVisible(false);
-        pnlSach9.setVisible(false);
-        pnlSach8.setVisible(false);
-        pnlSach7.setVisible(false);
-        pnlSach6.setVisible(false);
-        pnlSach5.setVisible(false);
-        pnlSach4.setVisible(false);
-        pnlSach3.setVisible(false);
-        pnlSach3.setVisible(false);
-        pnlSach2.setVisible(false);
-        pnlSach1.setVisible(false);
+//        pnlSach10.setVisible(false);
+//        pnlSach9.setVisible(false);
+//        pnlSach8.setVisible(false);
+//        pnlSach7.setVisible(false);
+//        pnlSach6.setVisible(false);
+//        pnlSach5.setVisible(false);
+//        pnlSach4.setVisible(false);
+//        pnlSach3.setVisible(false);
+//        pnlSach3.setVisible(false);
+//        pnlSach2.setVisible(false);
+//        pnlSach1.setVisible(false);
     }
 
     SachDAO dao = new SachDAO();
@@ -105,67 +105,67 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
     }
 
     void fillToLabel() {
-        pnlSach10.setVisible(false);
-        pnlSach9.setVisible(false);
-        pnlSach8.setVisible(false);
-        pnlSach7.setVisible(false);
-        pnlSach6.setVisible(false);
-        pnlSach5.setVisible(false);
-        pnlSach4.setVisible(false);
-        pnlSach3.setVisible(false);
-        pnlSach3.setVisible(false);
-        pnlSach2.setVisible(false);
-        pnlSach1.setVisible(false);
+//        pnlSach10.setVisible(false);
+//        pnlSach9.setVisible(false);
+//        pnlSach8.setVisible(false);
+//        pnlSach7.setVisible(false);
+//        pnlSach6.setVisible(false);
+//        pnlSach5.setVisible(false);
+//        pnlSach4.setVisible(false);
+//        pnlSach3.setVisible(false);
+//        pnlSach3.setVisible(false);
+//        pnlSach2.setVisible(false);
+//        pnlSach1.setVisible(false);
         for (int i = (curPage - 1) * sachCount; i < listSach.size() && i < curPage * sachCount; i++) {
             Sach sach = listSach.get(i);
             switch (i % sachCount) {
                 case (10 - 1) -> {
-                    Extension.scaleImage(sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover10);
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover10);
                     lblTenSach10.setText(sach.getTenSach());
                     pnlSach10.setVisible(true);
                 }
                 case (9 - 1) -> {
-                    Extension.scaleImage(sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover9);
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover9);
                     lblTenSach9.setText(sach.getTenSach());
                     pnlSach9.setVisible(true);
                 }
                 case (8 - 1) -> {
-                    Extension.scaleImage(sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover8);
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover8);
                     lblTenSach8.setText(sach.getTenSach());
                     pnlSach8.setVisible(true);
                 }
                 case (7 - 1) -> {
-                    Extension.scaleImage(sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover7);
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover7);
                     lblTenSach7.setText(sach.getTenSach());
                     pnlSach7.setVisible(true);
                 }
                 case (6 - 1) -> {
-                    Extension.scaleImage(sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover6);
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover6);
                     lblTenSach6.setText(sach.getTenSach());
                     pnlSach6.setVisible(true);
                 }
                 case (5 - 1) -> {
-                    Extension.scaleImage(sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover5);
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover5);
                     lblTenSach5.setText(sach.getTenSach());
                     pnlSach5.setVisible(true);
                 }
                 case (4 - 1) -> {
-                    Extension.scaleImage(sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover4);
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover4);
                     lblTenSach4.setText(sach.getTenSach());
                     pnlSach4.setVisible(true);
                 }
                 case (3 - 1) -> {
-                    Extension.scaleImage(sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover3);
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover3);
                     lblTenSach3.setText(sach.getTenSach());
                     pnlSach3.setVisible(true);
                 }
                 case (2 - 1) -> {
-                    Extension.scaleImage(sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover2);
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover2);
                     lblTenSach2.setText(sach.getTenSach());
                     pnlSach2.setVisible(true);
                 }
                 case (1 - 1) -> {
-                    Extension.scaleImage(sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover1);
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblCover1);
                     lblTenSach1.setText(sach.getTenSach());
                     pnlSach1.setVisible(true);
                 }
@@ -329,7 +329,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         pnlSach1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblCover1.setText("Cover sách");
         lblCover1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTenSach1.setText("Tên sách");
@@ -341,7 +340,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             pnlSach1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSach1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlSach1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlSach1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCover1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                     .addComponent(lblTenSach1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -371,7 +370,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         pnlSach2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblCover2.setText("Cover sách");
         lblCover2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTenSach2.setText("Tên sách");
@@ -384,8 +382,8 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSach2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlSach2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCover2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(lblTenSach2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblCover2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTenSach2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         pnlSach2Layout.setVerticalGroup(
@@ -400,7 +398,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         pnlSach3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblCover3.setText("Cover sách");
         lblCover3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTenSach3.setText("Tên sách");
@@ -412,9 +409,9 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             pnlSach3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSach3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlSach3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCover3, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(lblTenSach3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlSach3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCover3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTenSach3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         pnlSach3Layout.setVerticalGroup(
@@ -429,7 +426,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         pnlSach4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblCover4.setText("Cover sách");
         lblCover4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTenSach4.setText("Tên sách");
@@ -442,8 +438,8 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSach4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlSach4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCover4, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(lblTenSach4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblCover4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTenSach4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         pnlSach4Layout.setVerticalGroup(
@@ -458,7 +454,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         pnlSach5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblCover5.setText("Cover sách");
         lblCover5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTenSach5.setText("Tên sách");
@@ -471,8 +466,8 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSach5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlSach5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCover5, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(lblTenSach5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblCover5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTenSach5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         pnlSach5Layout.setVerticalGroup(
@@ -487,7 +482,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         pnlSach7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblCover7.setText("Cover sách");
         lblCover7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTenSach7.setText("Tên sách");
@@ -500,8 +494,8 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSach7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlSach7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCover7, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(lblTenSach7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblCover7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTenSach7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         pnlSach7Layout.setVerticalGroup(
@@ -516,7 +510,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         pnlSach10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblCover10.setText("Cover sách");
         lblCover10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTenSach10.setText("Tên sách");
@@ -529,8 +522,8 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSach10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlSach10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCover10, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(lblTenSach10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblCover10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTenSach10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         pnlSach10Layout.setVerticalGroup(
@@ -545,7 +538,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         pnlSach6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblCover6.setText("Cover sách");
         lblCover6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTenSach6.setText("Tên sách");
@@ -557,7 +549,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             pnlSach6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSach6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlSach6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlSach6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCover6, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                     .addComponent(lblTenSach6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -574,7 +566,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         pnlSach8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblCover8.setText("Cover sách");
         lblCover8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTenSach8.setText("Tên sách");
@@ -587,8 +578,8 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSach8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlSach8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCover8, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(lblTenSach8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblCover8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTenSach8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         pnlSach8Layout.setVerticalGroup(
@@ -603,7 +594,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         pnlSach9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblCover9.setText("Cover sách");
         lblCover9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTenSach9.setText("Tên sách");
@@ -616,8 +606,8 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSach9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlSach9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCover9, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(lblTenSach9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblCover9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTenSach9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         pnlSach9Layout.setVerticalGroup(
