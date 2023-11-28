@@ -393,6 +393,9 @@
                   <Image iconType="3" name="/images/skip-to-start-16.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblFirstMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblBack">
               <Properties>
@@ -401,6 +404,9 @@
                   <Image iconType="3" name="/images/rewind-16.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBackMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblLast">
               <Properties>
@@ -409,6 +415,9 @@
                   <Image iconType="3" name="/images/end-16.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblLastMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNext">
               <Properties>
@@ -417,6 +426,9 @@
                   <Image iconType="3" name="/images/fast-forward-16.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNextMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

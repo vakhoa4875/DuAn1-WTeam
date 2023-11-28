@@ -19,6 +19,8 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
 
     private int row;
 
+    static int indexRowStatic = 0;
+
     /**
      * Creates new form JDialogQuanLyPhongBan
      */
@@ -231,15 +233,35 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
 
         lblFirst.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
+        lblFirst.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblFirstMouseClicked(evt);
+            }
+        });
 
         lblBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rewind-16.png"))); // NOI18N
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBackMouseClicked(evt);
+            }
+        });
 
         lblLast.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/end-16.png"))); // NOI18N
+        lblLast.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLastMouseClicked(evt);
+            }
+        });
 
         lblNext.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fast-forward-16.png"))); // NOI18N
+        lblNext.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNextMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -374,6 +396,8 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
     private void tblQuanLyPhongBanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanLyPhongBanMouseClicked
         if (evt.getClickCount() == 2) {
             this.row = tblQuanLyPhongBan.getSelectedRow();
+            //lấy giá trị của hàng rồi truyền vào biến static
+            indexRowStatic = tblQuanLyPhongBan.getSelectedRow();
             this.edit();
         }
     }//GEN-LAST:event_tblQuanLyPhongBanMouseClicked
@@ -390,6 +414,26 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         // TODO add your handling code here:
         timKiem();
     }//GEN-LAST:event_txtTiemKiemKeyReleased
+
+    private void lblFirstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFirstMouseClicked
+        // TODO add your handling code here:
+        first();
+    }//GEN-LAST:event_lblFirstMouseClicked
+
+    private void lblLastMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLastMouseClicked
+        // TODO add your handling code here:
+        last();
+    }//GEN-LAST:event_lblLastMouseClicked
+
+    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
+        // TODO add your handling code here:
+        back();
+    }//GEN-LAST:event_lblBackMouseClicked
+
+    private void lblNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMouseClicked
+        // TODO add your handling code here:
+        next();
+    }//GEN-LAST:event_lblNextMouseClicked
 
     /**
      * @param args the command line arguments
@@ -624,20 +668,19 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-    
-    
-    private void timKiem(){
+
+    private void timKiem() {
         DefaultTableModel model = (DefaultTableModel) tblQuanLyPhongBan.getModel();
         model.setRowCount(0);
         try {
             String keyWord = txtTiemKiem.getText();
-            List <PhongBan> list = new PhongBanDAO().selectByKeyWord(keyWord);
+            List<PhongBan> list = new PhongBanDAO().selectByKeyWord(keyWord);
             for (PhongBan phongBan : list) {
                 Object[] row = {
-                  phongBan.getIdPB(),
-                  phongBan.getQlAccess(),
-                  phongBan.getNvAccess(),
-                  phongBan.getTenPB()
+                    phongBan.getIdPB(),
+                    phongBan.getQlAccess(),
+                    phongBan.getNvAccess(),
+                    phongBan.getTenPB()
                 };
                 model.addRow(row);
             }
@@ -646,4 +689,66 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         }
     }
 
+    private void first() {
+        //phần tử đầu tiên của của bảng
+        int first = 0;
+        //lấy id của phong ban đầu tiên
+        int idPhongBan = (int) (tblQuanLyPhongBan.getValueAt(first, 0));
+
+        //truyền idphongban vào dao để lấy thông tin bên data
+        PhongBan pb = new PhongBanDAO().selectByID(idPhongBan);
+        //set thông tin đó vào bảng
+        this.setForm(pb);
+    }
+
+    private void last() {
+        //lấy phần tử cuối cùng
+        //vì trong bằng giá trị đầu tiên là 0 nên phải trừ đi 1 để lấy giá trị cuối cùng
+        int last = tblQuanLyPhongBan.getRowCount() - 1;
+        //lấy id của phong ban cuối cùng
+        int idPhongBan = (int) (tblQuanLyPhongBan.getValueAt(last, 0));
+
+        //truyền idphongban vào dao để lấy thông tin bên data
+        PhongBan pb = new PhongBanDAO().selectByID(idPhongBan);
+        //set thông tin đó vào bảng
+        this.setForm(pb);
+    }
+
+    private void back() {
+        if (indexRowStatic <= 0) {
+            //gọi đến phương thức last lấy phần tử cuối cùng
+            last();
+            
+            //vì trong bằng giá trị đầu tiên là 0 nên phải trừ đi 1 để lấy giá trị cuối cùng
+            int last = tblQuanLyPhongBan.getRowCount() - 1;
+            indexRowStatic = last;
+        } else {
+            indexRowStatic -= 1;
+            int idPhongBan = (int) (tblQuanLyPhongBan.getValueAt(indexRowStatic, 0));
+
+            //truyền idphongban vào dao để lấy thông tin bên data
+            PhongBan pb = new PhongBanDAO().selectByID(idPhongBan);
+            //set dữ liệu lên form
+            this.setForm(pb);
+        }
+    }
+
+    
+    private void next() {
+        if (indexRowStatic >= tblQuanLyPhongBan.getRowCount()-1) {
+            //gọi đến phương thức first lấy phần tử đầu tiên
+            first();
+            
+            //đặt 0 vào indexRowStaic vì cho nó là phần từ đầu tiền của bảng
+            indexRowStatic = 0;
+        } else {
+            indexRowStatic += 1;
+            int idPhongBan = (int) (tblQuanLyPhongBan.getValueAt(indexRowStatic, 0));
+
+            //truyền idphongban vào dao để lấy thông tin bên data
+            PhongBan pb = new PhongBanDAO().selectByID(idPhongBan);
+            //set dữ liệu lên form
+            this.setForm(pb);
+        }
+    }
 }
