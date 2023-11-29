@@ -68,13 +68,9 @@ public class PhongBan {
 
     @Override
     public String toString() {
-        return "PhongBan{" +
-                "idPB=" + idPB +
-                ", qlAccess=" + qlAccess +
-                ", nvAccess=" + nvAccess +
-                ", tenPB='" + tenPB + '\'' +
-                ", moTa='" + moTa + '\'' +
-                '}';
+        return "PhongBan{" + "idPB=" + idPB + ", qlAccess=" + qlAccess + ", nvAccess=" + nvAccess + ", tenPB=" + tenPB + ", moTa=" + moTa + '}';
     }
+
+  
 }
 
