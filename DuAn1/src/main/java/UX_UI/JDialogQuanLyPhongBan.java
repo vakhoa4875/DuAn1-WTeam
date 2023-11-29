@@ -531,7 +531,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
             try {
                 PhongBan pb = new PhongBanDAO().selectByID(Integer.parseInt(idPhongBan));
                 if (pb != null) {
-                    MsgBox.alert(this, "Bạn đã nhập trùng mã chuyên đề");
+                    MsgBox.alert(this, "ID phòng ban đã tồn tại");
                     return;
                 }
             } catch (Exception e) {

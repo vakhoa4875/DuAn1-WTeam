@@ -51,6 +51,12 @@ public class PhongBanDAO {
         return !pb.isEmpty() ? pb.get(0) : null;
     }
 
+    public PhongBan selectByName(String name) {
+        String selectByID = "select * from phongban where tenpb = ?";
+        ArrayList<PhongBan> pb = select(selectByID, name);
+        return !pb.isEmpty() ? pb.get(0) : null;
+    }
+
     public ArrayList<PhongBan> selectAll() {
         String selectAll = "select * from phongban";
         ArrayList<PhongBan> pb = select(selectAll);
