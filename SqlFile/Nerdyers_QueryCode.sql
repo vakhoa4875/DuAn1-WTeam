@@ -225,10 +225,10 @@ go
 --insert into [User] values
 --('nv', 'noiBo1', '123', 'user4@example.com', 0, 1);
 
-insert into [Access] (idAccess, moTa, fullAccess) values
-(1, 'admin accessibility', 1);
-insert into [Access] (idAccess, moTa, rNoiBo, uNoiBo, rPhongBan, uPhongBan, ) values
-(2, N'quản lý accessibility', 1);
+--insert into [Access] (idAccess, moTa, fullAccess) values
+--(1, 'admin accessibility', 1);
+--insert into [Access] (idAccess, moTa, rNoiBo, uNoiBo, rPhongBan, uPhongBan, ) values
+--(2, N'quản lý accessibility', 1);
 
 --insert into noiBo (userID, hoTen) values
 --('admin', 'noiBo')
