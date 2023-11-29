@@ -5,33 +5,39 @@
 
 package model;
 
-import java.time.LocalDateTime;
+
+import java.util.Date;
 
 /**
  * 
  * @author Vu Anh Khoa <vakhoa4875@gmail.com>
  */
 public class SachPDF {
-    private Integer idReadlist;
+    private String idReadlist;
     private String idSach;
     private Integer lastSeenPage;
-    private LocalDateTime addedTime;
+    private Date addedTime = new Date();
 
     public SachPDF() {
     }
 
-    public SachPDF(Integer idReadlist, String idSach, Integer lastSeenPage, LocalDateTime addedTime) {
+    public SachPDF(String idReadlist, String idSach, Integer lastSeenPage, Date addedTime) {
         this.idReadlist = idReadlist;
         this.idSach = idSach;
         this.lastSeenPage = lastSeenPage;
         this.addedTime = addedTime;
     }
+    public SachPDF(String idReadlist, String idSach, Integer lastSeenPage) {
+        this.idReadlist = idReadlist;
+        this.idSach = idSach;
+        this.lastSeenPage = lastSeenPage;
+    }
 
-    public Integer getIdReadlist() {
+    public String getIdReadlist() {
         return idReadlist;
     }
 
-    public void setIdReadlist(Integer idReadlist) {
+    public void setIdReadlist(String idReadlist) {
         this.idReadlist = idReadlist;
     }
 
@@ -51,11 +57,11 @@ public class SachPDF {
         this.lastSeenPage = lastSeenPage;
     }
 
-    public LocalDateTime getAddedTime() {
+    public Date getAddedTime() {
         return addedTime;
     }
 
-    public void setAddedTime(LocalDateTime addedTime) {
+    public void setAddedTime(Date addedTime) {
         this.addedTime = addedTime;
     }
     

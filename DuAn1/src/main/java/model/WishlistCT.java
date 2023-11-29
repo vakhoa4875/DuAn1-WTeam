@@ -6,30 +6,31 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 
  * @author Vu Anh Khoa <vakhoa4875@gmail.com>
  */
 public class WishlistCT {
-    private Integer idWishlist;
+    private String idWishlist;
     private String idSach;
-    private LocalDateTime addedTime;
+    private Date addedTime = new Date();
 
     public WishlistCT() {
     }
 
-    public WishlistCT(Integer idWishlist, String idSach, LocalDateTime addedTime) {
+    public WishlistCT(String idWishlist, String idSach, Date addedTime) {
         this.idWishlist = idWishlist;
         this.idSach = idSach;
         this.addedTime = addedTime;
     }
 
-    public Integer getIdWishlist() {
+    public String getIdWishlist() {
         return idWishlist;
     }
 
-    public void setIdWishlist(Integer idWishlist) {
+    public void setIdWishlist(String idWishlist) {
         this.idWishlist = idWishlist;
     }
 
@@ -41,11 +42,11 @@ public class WishlistCT {
         this.idSach = idSach;
     }
 
-    public LocalDateTime getAddedTime() {
+    public Date getAddedTime() {
         return addedTime;
     }
 
-    public void setAddedTime(LocalDateTime addedTime) {
+    public void setAddedTime(Date addedTime) {
         this.addedTime = addedTime;
     }    
     

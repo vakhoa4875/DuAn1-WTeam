@@ -42,6 +42,10 @@ public class TacGiaDAO {
         ArrayList<TacGia> tacGias = select(selectQuery, id);
         return !tacGias.isEmpty() ? tacGias.get(0) : null;
     }
+    public ArrayList<TacGia> selectByIDSach(String id) {
+        String selectQuery = "SELECT * FROM TacGia WHERE idTacGia in (SELECT IDTACGIA from SVTG where IDSACH = ?)";
+        return select(selectQuery, id);
+    }
 
     private ArrayList<TacGia> select(String sql, Object... args) {
         ArrayList<TacGia> tacGiaList = new ArrayList<>();

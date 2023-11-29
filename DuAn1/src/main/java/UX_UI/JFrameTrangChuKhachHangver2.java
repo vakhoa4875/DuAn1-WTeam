@@ -5,20 +5,33 @@
 package UX_UI;
 
 import dao.SachDAO;
+import dao.SachPDFDAO;
+import dao.TheLoaiDAO;
+import dao.WishlistDAO;
 import dao.readerDao;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import library.Auth;
 import library.DialogHelper;
 import library.DownloadURL;
+import library.URL_Dealer;
 import library.XImage;
 import model.Reader;
 import model.Sach;
+import model.SachPDF;
+import model.TheLoai;
+import model.WishlistCT;
 
 /**
  *
@@ -31,10 +44,23 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
      */
     readerDao readDAO = new readerDao();
     SachDAO sachDAO = new SachDAO();
+    TheLoaiDAO tlDAO = new TheLoaiDAO();
+    WishlistDAO wlDAO = new WishlistDAO();
+    private SachPDFDAO pdfDAO = new SachPDFDAO();
     ArrayList<Sach> sachTDList;
     ArrayList<Sach> sachSearchList;
+    ArrayList<TheLoai> theloaiList;
+    ArrayList<Sach> sachTLList;
+    ArrayList<Sach> sachWLList = new ArrayList<>();
+    ArrayList<Sach> sachRBList = new ArrayList<>();
+    ArrayList<WishlistCT> wlList;
+    ArrayList<SachPDF> pdf = new ArrayList<>();
     int startTD = 0, endTD = 6;
+    int startEC = 6, endEC = 12;
     int startSearch = 0, endSearch = 12;
+    int startTL = 0, endTL = 12;
+    int startLB = 0, endLB = 12;
+    int startRB = 0, endRB = 12;
 
     public JFrameTrangChuKhachHangver2() {
         initComponents();
@@ -63,20 +89,19 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnThongTin = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
-        btnLikeList = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
-        pnTB1 = new javax.swing.JPanel();
-        lblTBIMG1 = new javax.swing.JLabel();
-        btnTBRead1 = new javax.swing.JButton();
-        btnTBDetail1 = new javax.swing.JButton();
         btnTBFirst = new javax.swing.JButton();
         btnTBPre = new javax.swing.JButton();
         btnTBNext = new javax.swing.JButton();
         btnTBEnd = new javax.swing.JButton();
+        pnTB1 = new javax.swing.JPanel();
+        lblTBIMG1 = new javax.swing.JLabel();
+        btnTBRead1 = new javax.swing.JButton();
+        btnTBDetail1 = new javax.swing.JButton();
         pnTB2 = new javax.swing.JPanel();
         lblTBIMG2 = new javax.swing.JLabel();
         btnTBRead2 = new javax.swing.JButton();
@@ -85,65 +110,57 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         lblTBIMG3 = new javax.swing.JLabel();
         btnTBRead3 = new javax.swing.JButton();
         btnTBDetail3 = new javax.swing.JButton();
-        pnTB6 = new javax.swing.JPanel();
-        lblTBIMG6 = new javax.swing.JLabel();
-        btnTBRead6 = new javax.swing.JButton();
-        btnTBDetail6 = new javax.swing.JButton();
-        pnTB5 = new javax.swing.JPanel();
-        lblTBIMG5 = new javax.swing.JLabel();
-        btnTBRead5 = new javax.swing.JButton();
-        btnTBDetail5 = new javax.swing.JButton();
         pnTB4 = new javax.swing.JPanel();
         lblTBIMG4 = new javax.swing.JLabel();
         btnTBRead4 = new javax.swing.JButton();
         btnTBDetail4 = new javax.swing.JButton();
+        pnTB5 = new javax.swing.JPanel();
+        lblTBIMG5 = new javax.swing.JLabel();
+        btnTBRead5 = new javax.swing.JButton();
+        btnTBDetail5 = new javax.swing.JButton();
+        pnTB6 = new javax.swing.JPanel();
+        lblTBIMG6 = new javax.swing.JLabel();
+        btnTBRead6 = new javax.swing.JButton();
+        btnTBDetail6 = new javax.swing.JButton();
         jPanel28 = new javax.swing.JPanel();
-        jPanel29 = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        jButton25 = new javax.swing.JButton();
-        jButton26 = new javax.swing.JButton();
-        btnStart2 = new javax.swing.JButton();
-        btnPrevious2 = new javax.swing.JButton();
-        btnNext2 = new javax.swing.JButton();
-        btnEnd2 = new javax.swing.JButton();
-        jPanel30 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jButton27 = new javax.swing.JButton();
-        jButton28 = new javax.swing.JButton();
-        jPanel31 = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jButton29 = new javax.swing.JButton();
-        jButton30 = new javax.swing.JButton();
-        jPanel32 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jButton31 = new javax.swing.JButton();
-        jButton32 = new javax.swing.JButton();
-        jPanel33 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        jButton33 = new javax.swing.JButton();
-        jButton34 = new javax.swing.JButton();
-        jPanel34 = new javax.swing.JPanel();
-        jLabel24 = new javax.swing.JLabel();
-        jButton35 = new javax.swing.JButton();
-        jButton36 = new javax.swing.JButton();
+        btnECStart = new javax.swing.JButton();
+        btnECPrevious = new javax.swing.JButton();
+        btnECNext = new javax.swing.JButton();
+        btnECEnd = new javax.swing.JButton();
+        pnEC1 = new javax.swing.JPanel();
+        lblECIMG1 = new javax.swing.JLabel();
+        btnECRead1 = new javax.swing.JButton();
+        btnECDetail1 = new javax.swing.JButton();
+        pnEC2 = new javax.swing.JPanel();
+        lblECIMG2 = new javax.swing.JLabel();
+        btnECRead2 = new javax.swing.JButton();
+        btnECDetail2 = new javax.swing.JButton();
+        pnEC3 = new javax.swing.JPanel();
+        lblECIMG3 = new javax.swing.JLabel();
+        btnECRead3 = new javax.swing.JButton();
+        btnECDetail3 = new javax.swing.JButton();
+        pnEC4 = new javax.swing.JPanel();
+        lblECIMG4 = new javax.swing.JLabel();
+        btnECRead4 = new javax.swing.JButton();
+        btnECDetail4 = new javax.swing.JButton();
+        pnEC5 = new javax.swing.JPanel();
+        lblECIMG5 = new javax.swing.JLabel();
+        btnECRead5 = new javax.swing.JButton();
+        btnECDetail5 = new javax.swing.JButton();
+        pnEC6 = new javax.swing.JPanel();
+        lblECIMG6 = new javax.swing.JLabel();
+        btnECRead6 = new javax.swing.JButton();
+        btnECDetail6 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel37 = new javax.swing.JPanel();
-        btnStart3 = new javax.swing.JButton();
-        btnPrevious3 = new javax.swing.JButton();
-        btnNext3 = new javax.swing.JButton();
-        btnEnd3 = new javax.swing.JButton();
+        btnSearchStart = new javax.swing.JButton();
+        btnSearchPrevious = new javax.swing.JButton();
+        btnSearchNext = new javax.swing.JButton();
+        btnSearchEnd = new javax.swing.JButton();
         pnSearch1 = new javax.swing.JPanel();
         lblSearchIMG1 = new javax.swing.JLabel();
         btnReadSearch1 = new javax.swing.JButton();
         btnDetailSearch1 = new javax.swing.JButton();
-        pnSearch7 = new javax.swing.JPanel();
-        lblSearchIMG7 = new javax.swing.JLabel();
-        btnReadSearch7 = new javax.swing.JButton();
-        btnDetailSearch7 = new javax.swing.JButton();
-        pnSearch8 = new javax.swing.JPanel();
-        lblSearchIMG8 = new javax.swing.JLabel();
-        btnReadSearch8 = new javax.swing.JButton();
-        btnDetailSearch8 = new javax.swing.JButton();
         pnSearch2 = new javax.swing.JPanel();
         lblSearchIMG2 = new javax.swing.JLabel();
         btnReadSearch2 = new javax.swing.JButton();
@@ -152,14 +169,6 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         lblSearchIMG3 = new javax.swing.JLabel();
         btnReadSearch3 = new javax.swing.JButton();
         btnDetailSearch3 = new javax.swing.JButton();
-        pnSearch9 = new javax.swing.JPanel();
-        lblSearchIMG9 = new javax.swing.JLabel();
-        btnReadSearch9 = new javax.swing.JButton();
-        btnDetailSearch9 = new javax.swing.JButton();
-        pnSearch10 = new javax.swing.JPanel();
-        lblSearchIMG10 = new javax.swing.JLabel();
-        btnReadSearch10 = new javax.swing.JButton();
-        btnDetailSearch10 = new javax.swing.JButton();
         pnSearch4 = new javax.swing.JPanel();
         lblSearchIMG4 = new javax.swing.JLabel();
         btnReadSearch4 = new javax.swing.JButton();
@@ -168,127 +177,197 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         lblSearchIMG5 = new javax.swing.JLabel();
         btnReadSearch5 = new javax.swing.JButton();
         btnDetailSearch5 = new javax.swing.JButton();
-        pnSearch11 = new javax.swing.JPanel();
-        lblSearchIMG11 = new javax.swing.JLabel();
-        btnReadSearch11 = new javax.swing.JButton();
-        btnDetailSearch11 = new javax.swing.JButton();
         pnSearch6 = new javax.swing.JPanel();
         lblSearchIMG6 = new javax.swing.JLabel();
         btnReadSearch6 = new javax.swing.JButton();
         btnDetailSearch6 = new javax.swing.JButton();
+        pnSearch7 = new javax.swing.JPanel();
+        lblSearchIMG7 = new javax.swing.JLabel();
+        btnReadSearch7 = new javax.swing.JButton();
+        btnDetailSearch7 = new javax.swing.JButton();
+        pnSearch8 = new javax.swing.JPanel();
+        lblSearchIMG8 = new javax.swing.JLabel();
+        btnReadSearch8 = new javax.swing.JButton();
+        btnDetailSearch8 = new javax.swing.JButton();
+        pnSearch9 = new javax.swing.JPanel();
+        lblSearchIMG9 = new javax.swing.JLabel();
+        btnReadSearch9 = new javax.swing.JButton();
+        btnDetailSearch9 = new javax.swing.JButton();
+        pnSearch10 = new javax.swing.JPanel();
+        lblSearchIMG10 = new javax.swing.JLabel();
+        btnReadSearch10 = new javax.swing.JButton();
+        btnDetailSearch10 = new javax.swing.JButton();
+        pnSearch11 = new javax.swing.JPanel();
+        lblSearchIMG11 = new javax.swing.JLabel();
+        btnReadSearch11 = new javax.swing.JButton();
+        btnDetailSearch11 = new javax.swing.JButton();
         pnSearch12 = new javax.swing.JPanel();
         lblSearchIMG12 = new javax.swing.JLabel();
         btnReadSearch12 = new javax.swing.JButton();
         btnDetailSearch12 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        cboTheLoai = new javax.swing.JComboBox<>();
         jPanel50 = new javax.swing.JPanel();
-        btnStart4 = new javax.swing.JButton();
-        btnPrevious4 = new javax.swing.JButton();
-        btnNext4 = new javax.swing.JButton();
-        btnEnd4 = new javax.swing.JButton();
-        jPanel51 = new javax.swing.JPanel();
-        jLabel38 = new javax.swing.JLabel();
-        jButton63 = new javax.swing.JButton();
-        jButton64 = new javax.swing.JButton();
-        jPanel52 = new javax.swing.JPanel();
-        jLabel39 = new javax.swing.JLabel();
-        jButton65 = new javax.swing.JButton();
-        jButton66 = new javax.swing.JButton();
-        jPanel53 = new javax.swing.JPanel();
-        jLabel40 = new javax.swing.JLabel();
-        jButton67 = new javax.swing.JButton();
-        jButton68 = new javax.swing.JButton();
-        jPanel54 = new javax.swing.JPanel();
-        jLabel41 = new javax.swing.JLabel();
-        jButton69 = new javax.swing.JButton();
-        jButton70 = new javax.swing.JButton();
-        jPanel55 = new javax.swing.JPanel();
-        jLabel42 = new javax.swing.JLabel();
-        jButton71 = new javax.swing.JButton();
-        jButton72 = new javax.swing.JButton();
-        jPanel56 = new javax.swing.JPanel();
-        jLabel43 = new javax.swing.JLabel();
-        jButton73 = new javax.swing.JButton();
-        jButton74 = new javax.swing.JButton();
-        jPanel57 = new javax.swing.JPanel();
-        jLabel44 = new javax.swing.JLabel();
-        jButton75 = new javax.swing.JButton();
-        jButton76 = new javax.swing.JButton();
-        jPanel58 = new javax.swing.JPanel();
-        jLabel45 = new javax.swing.JLabel();
-        jButton77 = new javax.swing.JButton();
-        jButton78 = new javax.swing.JButton();
-        jPanel59 = new javax.swing.JPanel();
-        jLabel46 = new javax.swing.JLabel();
-        jButton79 = new javax.swing.JButton();
-        jButton80 = new javax.swing.JButton();
-        jPanel60 = new javax.swing.JPanel();
-        jLabel47 = new javax.swing.JLabel();
-        jButton81 = new javax.swing.JButton();
-        jButton82 = new javax.swing.JButton();
-        jPanel61 = new javax.swing.JPanel();
-        jLabel48 = new javax.swing.JLabel();
-        jButton83 = new javax.swing.JButton();
-        jButton84 = new javax.swing.JButton();
-        jPanel62 = new javax.swing.JPanel();
-        jLabel49 = new javax.swing.JLabel();
-        jButton85 = new javax.swing.JButton();
-        jButton86 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        btnTLStart = new javax.swing.JButton();
+        btnTLPrevious = new javax.swing.JButton();
+        btnTLNext = new javax.swing.JButton();
+        btnTLEnd = new javax.swing.JButton();
+        pnTL1 = new javax.swing.JPanel();
+        lblTLIMG1 = new javax.swing.JLabel();
+        btnTLRead1 = new javax.swing.JButton();
+        btnTLDetail1 = new javax.swing.JButton();
+        pnTL2 = new javax.swing.JPanel();
+        lblTLIMG2 = new javax.swing.JLabel();
+        btnTLRead2 = new javax.swing.JButton();
+        btnTLDetail2 = new javax.swing.JButton();
+        pnTL3 = new javax.swing.JPanel();
+        lblTLIMG3 = new javax.swing.JLabel();
+        btnTLRead3 = new javax.swing.JButton();
+        btnTLDetail3 = new javax.swing.JButton();
+        pnTL4 = new javax.swing.JPanel();
+        lblTLIMG4 = new javax.swing.JLabel();
+        btnTLRead4 = new javax.swing.JButton();
+        btnTLDetail4 = new javax.swing.JButton();
+        pnTL5 = new javax.swing.JPanel();
+        lblTLIMG5 = new javax.swing.JLabel();
+        btnTLRead5 = new javax.swing.JButton();
+        btnTLDetail5 = new javax.swing.JButton();
+        pnTL6 = new javax.swing.JPanel();
+        lblTLIMG6 = new javax.swing.JLabel();
+        btnTLRead6 = new javax.swing.JButton();
+        btnTLDetail6 = new javax.swing.JButton();
+        pnTL7 = new javax.swing.JPanel();
+        lblTLIMG7 = new javax.swing.JLabel();
+        btnTLRead7 = new javax.swing.JButton();
+        btnTLDetail7 = new javax.swing.JButton();
+        pnTL8 = new javax.swing.JPanel();
+        lblTLIMG8 = new javax.swing.JLabel();
+        btnTLRead8 = new javax.swing.JButton();
+        btnTLDetail8 = new javax.swing.JButton();
+        pnTL9 = new javax.swing.JPanel();
+        lblTLIMG9 = new javax.swing.JLabel();
+        btnTLRead9 = new javax.swing.JButton();
+        btnTLDetail9 = new javax.swing.JButton();
+        pnTL10 = new javax.swing.JPanel();
+        lblTLIMG10 = new javax.swing.JLabel();
+        btnTLRead10 = new javax.swing.JButton();
+        btnTLDetail10 = new javax.swing.JButton();
+        pnTL11 = new javax.swing.JPanel();
+        lblTLIMG11 = new javax.swing.JLabel();
+        btnTLRead11 = new javax.swing.JButton();
+        btnTLDetail11 = new javax.swing.JButton();
+        pnTL12 = new javax.swing.JPanel();
+        lblTLIMG12 = new javax.swing.JLabel();
+        btnTLRead12 = new javax.swing.JButton();
+        btnTLDetail12 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel76 = new javax.swing.JPanel();
-        btnStart6 = new javax.swing.JButton();
-        btnPrevious6 = new javax.swing.JButton();
-        btnNext6 = new javax.swing.JButton();
-        btnEnd6 = new javax.swing.JButton();
+        btnLBStart = new javax.swing.JButton();
+        btnLBPrevious = new javax.swing.JButton();
+        btnLBNext = new javax.swing.JButton();
+        btnLBEnd = new javax.swing.JButton();
+        pnLB1 = new javax.swing.JPanel();
+        lblLBIMG1 = new javax.swing.JLabel();
+        btnLBRead1 = new javax.swing.JButton();
+        btnLBDetail1 = new javax.swing.JButton();
+        pnLB2 = new javax.swing.JPanel();
+        lblLBIMG2 = new javax.swing.JLabel();
+        btnLBRead2 = new javax.swing.JButton();
+        btnLBDetail2 = new javax.swing.JButton();
+        pnLB3 = new javax.swing.JPanel();
+        lblLBIMG3 = new javax.swing.JLabel();
+        btnLBRead3 = new javax.swing.JButton();
+        btnLBDetail3 = new javax.swing.JButton();
+        pnLB4 = new javax.swing.JPanel();
+        lblLBIMG4 = new javax.swing.JLabel();
+        btnLBRead4 = new javax.swing.JButton();
+        btnLBDetail4 = new javax.swing.JButton();
+        pnLB5 = new javax.swing.JPanel();
+        lblLBIMG5 = new javax.swing.JLabel();
+        btnLBRead5 = new javax.swing.JButton();
+        btnLBDetail5 = new javax.swing.JButton();
+        pnLB6 = new javax.swing.JPanel();
+        lblLBIMG6 = new javax.swing.JLabel();
+        btnLBRead6 = new javax.swing.JButton();
+        btnLBDetail6 = new javax.swing.JButton();
+        pnLB7 = new javax.swing.JPanel();
+        lblLBIMG7 = new javax.swing.JLabel();
+        btnLBRead7 = new javax.swing.JButton();
+        btnLBDetail7 = new javax.swing.JButton();
+        pnLB8 = new javax.swing.JPanel();
+        lblLBIMG8 = new javax.swing.JLabel();
+        btnLBRead8 = new javax.swing.JButton();
+        btnLBDetail8 = new javax.swing.JButton();
+        pnLB9 = new javax.swing.JPanel();
+        lblLBIMG9 = new javax.swing.JLabel();
+        btnLBRead9 = new javax.swing.JButton();
+        btnLBDetail9 = new javax.swing.JButton();
+        pnLB10 = new javax.swing.JPanel();
+        lblLBIMG10 = new javax.swing.JLabel();
+        btnLBRead10 = new javax.swing.JButton();
+        btnLBDetail10 = new javax.swing.JButton();
+        pnLB11 = new javax.swing.JPanel();
+        lblLBIMG11 = new javax.swing.JLabel();
+        btnLBRead11 = new javax.swing.JButton();
+        btnLBDetail11 = new javax.swing.JButton();
+        pnLB12 = new javax.swing.JPanel();
+        lblLBIMG12 = new javax.swing.JLabel();
+        btnLBRead12 = new javax.swing.JButton();
+        btnLBDetail12 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         jPanel77 = new javax.swing.JPanel();
-        jLabel62 = new javax.swing.JLabel();
-        jButton111 = new javax.swing.JButton();
-        jButton112 = new javax.swing.JButton();
-        jPanel78 = new javax.swing.JPanel();
-        jLabel63 = new javax.swing.JLabel();
-        jButton113 = new javax.swing.JButton();
-        jButton114 = new javax.swing.JButton();
-        jPanel79 = new javax.swing.JPanel();
-        jLabel64 = new javax.swing.JLabel();
-        jButton115 = new javax.swing.JButton();
-        jButton116 = new javax.swing.JButton();
-        jPanel80 = new javax.swing.JPanel();
-        jLabel65 = new javax.swing.JLabel();
-        jButton117 = new javax.swing.JButton();
-        jButton118 = new javax.swing.JButton();
-        jPanel81 = new javax.swing.JPanel();
-        jLabel66 = new javax.swing.JLabel();
-        jButton119 = new javax.swing.JButton();
-        jButton120 = new javax.swing.JButton();
-        jPanel82 = new javax.swing.JPanel();
-        jLabel67 = new javax.swing.JLabel();
-        jButton121 = new javax.swing.JButton();
-        jButton122 = new javax.swing.JButton();
-        jPanel83 = new javax.swing.JPanel();
-        jLabel68 = new javax.swing.JLabel();
-        jButton123 = new javax.swing.JButton();
-        jButton124 = new javax.swing.JButton();
-        jPanel84 = new javax.swing.JPanel();
-        jLabel69 = new javax.swing.JLabel();
-        jButton125 = new javax.swing.JButton();
-        jButton126 = new javax.swing.JButton();
-        jPanel85 = new javax.swing.JPanel();
-        jLabel70 = new javax.swing.JLabel();
-        jButton127 = new javax.swing.JButton();
-        jButton128 = new javax.swing.JButton();
-        jPanel86 = new javax.swing.JPanel();
-        jLabel71 = new javax.swing.JLabel();
-        jButton129 = new javax.swing.JButton();
-        jButton130 = new javax.swing.JButton();
-        jPanel87 = new javax.swing.JPanel();
-        jLabel72 = new javax.swing.JLabel();
-        jButton131 = new javax.swing.JButton();
-        jButton132 = new javax.swing.JButton();
-        jPanel88 = new javax.swing.JPanel();
-        jLabel73 = new javax.swing.JLabel();
-        jButton133 = new javax.swing.JButton();
-        jButton134 = new javax.swing.JButton();
+        btnLBStart1 = new javax.swing.JButton();
+        btnLBPrevious1 = new javax.swing.JButton();
+        btnLBNext1 = new javax.swing.JButton();
+        btnLBEnd1 = new javax.swing.JButton();
+        pnLB13 = new javax.swing.JPanel();
+        lblLBIMG13 = new javax.swing.JLabel();
+        btnLBRead13 = new javax.swing.JButton();
+        btnLBDetail13 = new javax.swing.JButton();
+        pnLB14 = new javax.swing.JPanel();
+        lblLBIMG14 = new javax.swing.JLabel();
+        btnLBRead14 = new javax.swing.JButton();
+        btnLBDetail14 = new javax.swing.JButton();
+        pnLB15 = new javax.swing.JPanel();
+        lblLBIMG15 = new javax.swing.JLabel();
+        btnLBRead15 = new javax.swing.JButton();
+        btnLBDetail15 = new javax.swing.JButton();
+        pnLB16 = new javax.swing.JPanel();
+        lblLBIMG16 = new javax.swing.JLabel();
+        btnLBRead16 = new javax.swing.JButton();
+        btnLBDetail16 = new javax.swing.JButton();
+        pnLB17 = new javax.swing.JPanel();
+        lblLBIMG17 = new javax.swing.JLabel();
+        btnLBRead17 = new javax.swing.JButton();
+        btnLBDetail17 = new javax.swing.JButton();
+        pnLB18 = new javax.swing.JPanel();
+        lblLBIMG18 = new javax.swing.JLabel();
+        btnLBRead18 = new javax.swing.JButton();
+        btnLBDetail18 = new javax.swing.JButton();
+        pnLB19 = new javax.swing.JPanel();
+        lblLBIMG19 = new javax.swing.JLabel();
+        btnLBRead19 = new javax.swing.JButton();
+        btnLBDetail19 = new javax.swing.JButton();
+        pnLB20 = new javax.swing.JPanel();
+        lblLBIMG20 = new javax.swing.JLabel();
+        btnLBRead20 = new javax.swing.JButton();
+        btnLBDetail20 = new javax.swing.JButton();
+        pnLB21 = new javax.swing.JPanel();
+        lblLBIMG21 = new javax.swing.JLabel();
+        btnLBRead21 = new javax.swing.JButton();
+        btnLBDetail21 = new javax.swing.JButton();
+        pnLB22 = new javax.swing.JPanel();
+        lblLBIMG22 = new javax.swing.JLabel();
+        btnLBRead22 = new javax.swing.JButton();
+        btnLBDetail22 = new javax.swing.JButton();
+        pnLB23 = new javax.swing.JPanel();
+        lblLBIMG23 = new javax.swing.JLabel();
+        btnLBRead23 = new javax.swing.JButton();
+        btnLBDetail23 = new javax.swing.JButton();
+        pnLB24 = new javax.swing.JPanel();
+        lblLBIMG24 = new javax.swing.JLabel();
+        btnLBRead24 = new javax.swing.JButton();
+        btnLBDetail24 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -300,6 +379,11 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         lblReaderName.setText("Tên người đọc ");
 
         btnSearchMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/TimKiem.png"))); // NOI18N
+        btnSearchMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchMainActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel5.setText("Nerdyers");
@@ -336,15 +420,6 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
             }
         });
 
-        btnLikeList.setBackground(new java.awt.Color(204, 204, 204));
-        btnLikeList.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnLikeList.setText("DS Yêu Thích");
-        btnLikeList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLikeListActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout testpanelLayout = new javax.swing.GroupLayout(testpanel);
         testpanel.setLayout(testpanelLayout);
         testpanelLayout.setHorizontalGroup(
@@ -356,7 +431,6 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                     .addGroup(testpanelLayout.createSequentialGroup()
                         .addGroup(testpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(testpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnLikeList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnThongTin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(testpanelLayout.createSequentialGroup()
                                     .addComponent(jLabel4)
@@ -378,52 +452,17 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addComponent(btnThongTin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLikeList)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDangXuat)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder("Trending Books"));
-
-        pnTB1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
-
-        lblTBIMG1.setText("image");
-
-        btnTBRead1.setText("Read");
-        btnTBRead1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTBRead1ActionPerformed(evt);
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
             }
         });
 
-        btnTBDetail1.setText("Detail");
-
-        javax.swing.GroupLayout pnTB1Layout = new javax.swing.GroupLayout(pnTB1);
-        pnTB1.setLayout(pnTB1Layout);
-        pnTB1Layout.setHorizontalGroup(
-            pnTB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnTB1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnTB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTBIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnTB1Layout.createSequentialGroup()
-                        .addComponent(btnTBRead1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTBDetail1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        pnTB1Layout.setVerticalGroup(
-            pnTB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnTB1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTBIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnTB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTBRead1)
-                    .addComponent(btnTBDetail1))
-                .addContainerGap())
-        );
+        jPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder("Trending Books"));
 
         btnTBFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
         btnTBFirst.addActionListener(new java.awt.event.ActionListener() {
@@ -453,13 +492,67 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
             }
         });
 
+        pnTB1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblTBIMG1.setText("image");
+
+        btnTBRead1.setText("Read");
+        btnTBRead1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBRead1ActionPerformed(evt);
+            }
+        });
+
+        btnTBDetail1.setText("Detail");
+        btnTBDetail1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBDetail1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnTB1Layout = new javax.swing.GroupLayout(pnTB1);
+        pnTB1.setLayout(pnTB1Layout);
+        pnTB1Layout.setHorizontalGroup(
+            pnTB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTB1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnTB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTBIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTB1Layout.createSequentialGroup()
+                        .addComponent(btnTBRead1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTBDetail1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnTB1Layout.setVerticalGroup(
+            pnTB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTB1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTBIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnTB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTBRead1)
+                    .addComponent(btnTBDetail1))
+                .addContainerGap())
+        );
+
         pnTB2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
         lblTBIMG2.setText("image");
 
         btnTBRead2.setText("Read");
+        btnTBRead2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBRead2ActionPerformed(evt);
+            }
+        });
 
         btnTBDetail2.setText("Detail");
+        btnTBDetail2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBDetail2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnTB2Layout = new javax.swing.GroupLayout(pnTB2);
         pnTB2.setLayout(pnTB2Layout);
@@ -492,8 +585,18 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         lblTBIMG3.setText("image");
 
         btnTBRead3.setText("Read");
+        btnTBRead3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBRead3ActionPerformed(evt);
+            }
+        });
 
         btnTBDetail3.setText("Detail");
+        btnTBDetail3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBDetail3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnTB3Layout = new javax.swing.GroupLayout(pnTB3);
         pnTB3.setLayout(pnTB3Layout);
@@ -521,37 +624,47 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnTB6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTB4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        lblTBIMG6.setText("image");
+        lblTBIMG4.setText("image");
 
-        btnTBRead6.setText("Read");
+        btnTBRead4.setText("Read");
+        btnTBRead4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBRead4ActionPerformed(evt);
+            }
+        });
 
-        btnTBDetail6.setText("Detail");
+        btnTBDetail4.setText("Detail");
+        btnTBDetail4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBDetail4ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout pnTB6Layout = new javax.swing.GroupLayout(pnTB6);
-        pnTB6.setLayout(pnTB6Layout);
-        pnTB6Layout.setHorizontalGroup(
-            pnTB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnTB6Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTB4Layout = new javax.swing.GroupLayout(pnTB4);
+        pnTB4.setLayout(pnTB4Layout);
+        pnTB4Layout.setHorizontalGroup(
+            pnTB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTB4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnTB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTBIMG6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnTB6Layout.createSequentialGroup()
-                        .addComponent(btnTBRead6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTBIMG4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTB4Layout.createSequentialGroup()
+                        .addComponent(btnTBRead4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnTBDetail6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTBDetail4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        pnTB6Layout.setVerticalGroup(
-            pnTB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnTB6Layout.createSequentialGroup()
+        pnTB4Layout.setVerticalGroup(
+            pnTB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTB4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTBIMG6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTBIMG4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnTB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTBRead6)
-                    .addComponent(btnTBDetail6))
+                .addGroup(pnTB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTBRead4)
+                    .addComponent(btnTBDetail4))
                 .addContainerGap())
         );
 
@@ -560,8 +673,18 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         lblTBIMG5.setText("image");
 
         btnTBRead5.setText("Read");
+        btnTBRead5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBRead5ActionPerformed(evt);
+            }
+        });
 
         btnTBDetail5.setText("Detail");
+        btnTBDetail5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBDetail5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnTB5Layout = new javax.swing.GroupLayout(pnTB5);
         pnTB5.setLayout(pnTB5Layout);
@@ -589,37 +712,47 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnTB4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTB6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        lblTBIMG4.setText("image");
+        lblTBIMG6.setText("image");
 
-        btnTBRead4.setText("Read");
+        btnTBRead6.setText("Read");
+        btnTBRead6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBRead6ActionPerformed(evt);
+            }
+        });
 
-        btnTBDetail4.setText("Detail");
+        btnTBDetail6.setText("Detail");
+        btnTBDetail6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBDetail6ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout pnTB4Layout = new javax.swing.GroupLayout(pnTB4);
-        pnTB4.setLayout(pnTB4Layout);
-        pnTB4Layout.setHorizontalGroup(
-            pnTB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnTB4Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTB6Layout = new javax.swing.GroupLayout(pnTB6);
+        pnTB6.setLayout(pnTB6Layout);
+        pnTB6Layout.setHorizontalGroup(
+            pnTB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTB6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnTB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTBIMG4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnTB4Layout.createSequentialGroup()
-                        .addComponent(btnTBRead4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTBIMG6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTB6Layout.createSequentialGroup()
+                        .addComponent(btnTBRead6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnTBDetail4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTBDetail6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        pnTB4Layout.setVerticalGroup(
-            pnTB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnTB4Layout.createSequentialGroup()
+        pnTB6Layout.setVerticalGroup(
+            pnTB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTB6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTBIMG4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTBIMG6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnTB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTBRead4)
-                    .addComponent(btnTBDetail4))
+                .addGroup(pnTB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTBRead6)
+                    .addComponent(btnTBDetail6))
                 .addContainerGap())
         );
 
@@ -679,215 +812,295 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
 
         jPanel28.setBorder(javax.swing.BorderFactory.createTitledBorder("Editor's Choice"));
 
-        jPanel29.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        btnECStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
+        btnECStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECStartActionPerformed(evt);
+            }
+        });
 
-        jLabel19.setText("image");
+        btnECPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rewind-16.png"))); // NOI18N
+        btnECPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECPreviousActionPerformed(evt);
+            }
+        });
 
-        jButton25.setText("Read");
+        btnECNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fast-forward-16.png"))); // NOI18N
+        btnECNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECNextActionPerformed(evt);
+            }
+        });
 
-        jButton26.setText("Detail");
+        btnECEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/end-16.png"))); // NOI18N
+        btnECEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECEndActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
-        jPanel29.setLayout(jPanel29Layout);
-        jPanel29Layout.setHorizontalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel29Layout.createSequentialGroup()
+        pnEC1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblECIMG1.setText("image");
+
+        btnECRead1.setText("Read");
+        btnECRead1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECRead1ActionPerformed(evt);
+            }
+        });
+
+        btnECDetail1.setText("Detail");
+        btnECDetail1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECDetail1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnEC1Layout = new javax.swing.GroupLayout(pnEC1);
+        pnEC1.setLayout(pnEC1Layout);
+        pnEC1Layout.setHorizontalGroup(
+            pnEC1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnEC1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblECIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnEC1Layout.createSequentialGroup()
+                        .addComponent(btnECRead1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnECDetail1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel29Layout.setVerticalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel29Layout.createSequentialGroup()
+        pnEC1Layout.setVerticalGroup(
+            pnEC1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblECIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton25)
-                    .addComponent(jButton26))
+                .addGroup(pnEC1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnECRead1)
+                    .addComponent(btnECDetail1))
                 .addContainerGap())
         );
 
-        btnStart2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
+        pnEC2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        btnPrevious2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rewind-16.png"))); // NOI18N
+        lblECIMG2.setText("image");
 
-        btnNext2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fast-forward-16.png"))); // NOI18N
+        btnECRead2.setText("Read");
+        btnECRead2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECRead2ActionPerformed(evt);
+            }
+        });
 
-        btnEnd2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/end-16.png"))); // NOI18N
+        btnECDetail2.setText("Detail");
+        btnECDetail2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECDetail2ActionPerformed(evt);
+            }
+        });
 
-        jPanel30.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
-
-        jLabel20.setText("image");
-
-        jButton27.setText("Read");
-
-        jButton28.setText("Detail");
-
-        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
-        jPanel30.setLayout(jPanel30Layout);
-        jPanel30Layout.setHorizontalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel30Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnEC2Layout = new javax.swing.GroupLayout(pnEC2);
+        pnEC2.setLayout(pnEC2Layout);
+        pnEC2Layout.setHorizontalGroup(
+            pnEC2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel30Layout.createSequentialGroup()
-                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnEC2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblECIMG2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnEC2Layout.createSequentialGroup()
+                        .addComponent(btnECRead2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnECDetail2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel30Layout.setVerticalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel30Layout.createSequentialGroup()
+        pnEC2Layout.setVerticalGroup(
+            pnEC2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addComponent(lblECIMG2, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton27)
-                    .addComponent(jButton28))
+                .addGroup(pnEC2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnECRead2)
+                    .addComponent(btnECDetail2))
                 .addContainerGap())
         );
 
-        jPanel31.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnEC3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel21.setText("image");
+        lblECIMG3.setText("image");
 
-        jButton29.setText("Read");
+        btnECRead3.setText("Read");
+        btnECRead3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECRead3ActionPerformed(evt);
+            }
+        });
 
-        jButton30.setText("Detail");
+        btnECDetail3.setText("Detail");
+        btnECDetail3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECDetail3ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
-        jPanel31.setLayout(jPanel31Layout);
-        jPanel31Layout.setHorizontalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel31Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnEC3Layout = new javax.swing.GroupLayout(pnEC3);
+        pnEC3.setLayout(pnEC3Layout);
+        pnEC3Layout.setHorizontalGroup(
+            pnEC3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel31Layout.createSequentialGroup()
-                        .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnEC3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblECIMG3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnEC3Layout.createSequentialGroup()
+                        .addComponent(btnECRead3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnECDetail3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel31Layout.setVerticalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel31Layout.createSequentialGroup()
+        pnEC3Layout.setVerticalGroup(
+            pnEC3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblECIMG3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton29)
-                    .addComponent(jButton30))
+                .addGroup(pnEC3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnECRead3)
+                    .addComponent(btnECDetail3))
                 .addContainerGap())
         );
 
-        jPanel32.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnEC4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel22.setText("image");
+        lblECIMG4.setText("image");
 
-        jButton31.setText("Read");
+        btnECRead4.setText("Read");
+        btnECRead4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECRead4ActionPerformed(evt);
+            }
+        });
 
-        jButton32.setText("Detail");
+        btnECDetail4.setText("Detail");
+        btnECDetail4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECDetail4ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
-        jPanel32.setLayout(jPanel32Layout);
-        jPanel32Layout.setHorizontalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel32Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnEC4Layout = new javax.swing.GroupLayout(pnEC4);
+        pnEC4.setLayout(pnEC4Layout);
+        pnEC4Layout.setHorizontalGroup(
+            pnEC4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel32Layout.createSequentialGroup()
-                        .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnEC4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblECIMG4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnEC4Layout.createSequentialGroup()
+                        .addComponent(btnECRead4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnECDetail4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel32Layout.setVerticalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel32Layout.createSequentialGroup()
+        pnEC4Layout.setVerticalGroup(
+            pnEC4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblECIMG4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton31)
-                    .addComponent(jButton32))
+                .addGroup(pnEC4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnECRead4)
+                    .addComponent(btnECDetail4))
                 .addContainerGap())
         );
 
-        jPanel33.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnEC5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel23.setText("image");
+        lblECIMG5.setText("image");
 
-        jButton33.setText("Read");
+        btnECRead5.setText("Read");
+        btnECRead5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECRead5ActionPerformed(evt);
+            }
+        });
 
-        jButton34.setText("Detail");
+        btnECDetail5.setText("Detail");
+        btnECDetail5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECDetail5ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
-        jPanel33.setLayout(jPanel33Layout);
-        jPanel33Layout.setHorizontalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel33Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnEC5Layout = new javax.swing.GroupLayout(pnEC5);
+        pnEC5.setLayout(pnEC5Layout);
+        pnEC5Layout.setHorizontalGroup(
+            pnEC5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel33Layout.createSequentialGroup()
-                        .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnEC5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblECIMG5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnEC5Layout.createSequentialGroup()
+                        .addComponent(btnECRead5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnECDetail5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel33Layout.setVerticalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel33Layout.createSequentialGroup()
+        pnEC5Layout.setVerticalGroup(
+            pnEC5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblECIMG5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton33)
-                    .addComponent(jButton34))
+                .addGroup(pnEC5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnECRead5)
+                    .addComponent(btnECDetail5))
                 .addContainerGap())
         );
 
-        jPanel34.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnEC6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel24.setText("image");
+        lblECIMG6.setText("image");
 
-        jButton35.setText("Read");
+        btnECRead6.setText("Read");
+        btnECRead6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECRead6ActionPerformed(evt);
+            }
+        });
 
-        jButton36.setText("Detail");
+        btnECDetail6.setText("Detail");
+        btnECDetail6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnECDetail6ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
-        jPanel34.setLayout(jPanel34Layout);
-        jPanel34Layout.setHorizontalGroup(
-            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel34Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnEC6Layout = new javax.swing.GroupLayout(pnEC6);
+        pnEC6.setLayout(pnEC6Layout);
+        pnEC6Layout.setHorizontalGroup(
+            pnEC6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel34Layout.createSequentialGroup()
-                        .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnEC6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblECIMG6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnEC6Layout.createSequentialGroup()
+                        .addComponent(btnECRead6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnECDetail6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel34Layout.setVerticalGroup(
-            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel34Layout.createSequentialGroup()
+        pnEC6Layout.setVerticalGroup(
+            pnEC6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEC6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblECIMG6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton35)
-                    .addComponent(jButton36))
+                .addGroup(pnEC6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnECRead6)
+                    .addComponent(btnECDetail6))
                 .addContainerGap())
         );
 
@@ -897,27 +1110,27 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel28Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnEC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnEC2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnEC3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnEC4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnEC5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnEC6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel28Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnStart2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnECStart, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPrevious2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnECPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(btnNext2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnECNext, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEnd2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnECEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(394, 394, 394))
         );
         jPanel28Layout.setVerticalGroup(
@@ -926,23 +1139,23 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel28Layout.createSequentialGroup()
-                        .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnEC1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(33, 33, 33))
                     .addGroup(jPanel28Layout.createSequentialGroup()
-                        .addComponent(jPanel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnEC2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(34, 34, 34))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel28Layout.createSequentialGroup()
                         .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel34, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel33, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel32, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(pnEC4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnEC5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnEC6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnEC3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(btnEnd2)
-                            .addComponent(btnNext2)
-                            .addComponent(btnPrevious2)
-                            .addComponent(btnStart2)))))
+                            .addComponent(btnECEnd)
+                            .addComponent(btnECNext)
+                            .addComponent(btnECPrevious)
+                            .addComponent(btnECStart)))))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -970,21 +1183,51 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
 
         jPanel37.setBorder(javax.swing.BorderFactory.createTitledBorder("Result"));
 
-        btnStart3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
+        btnSearchStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
+        btnSearchStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchStartActionPerformed(evt);
+            }
+        });
 
-        btnPrevious3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rewind-16.png"))); // NOI18N
+        btnSearchPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rewind-16.png"))); // NOI18N
+        btnSearchPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchPreviousActionPerformed(evt);
+            }
+        });
 
-        btnNext3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fast-forward-16.png"))); // NOI18N
+        btnSearchNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fast-forward-16.png"))); // NOI18N
+        btnSearchNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchNextActionPerformed(evt);
+            }
+        });
 
-        btnEnd3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/end-16.png"))); // NOI18N
+        btnSearchEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/end-16.png"))); // NOI18N
+        btnSearchEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchEndActionPerformed(evt);
+            }
+        });
 
         pnSearch1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
         lblSearchIMG1.setText("image");
 
         btnReadSearch1.setText("Read");
+        btnReadSearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch1ActionPerformed(evt);
+            }
+        });
 
         btnDetailSearch1.setText("Detail");
+        btnDetailSearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnSearch1Layout = new javax.swing.GroupLayout(pnSearch1);
         pnSearch1.setLayout(pnSearch1Layout);
@@ -1004,79 +1247,11 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
             pnSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSearch1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblSearchIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addComponent(lblSearchIMG1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReadSearch1)
                     .addComponent(btnDetailSearch1))
-                .addContainerGap())
-        );
-
-        pnSearch7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
-
-        lblSearchIMG7.setText("image");
-
-        btnReadSearch7.setText("Read");
-
-        btnDetailSearch7.setText("Detail");
-
-        javax.swing.GroupLayout pnSearch7Layout = new javax.swing.GroupLayout(pnSearch7);
-        pnSearch7.setLayout(pnSearch7Layout);
-        pnSearch7Layout.setHorizontalGroup(
-            pnSearch7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSearch7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnSearch7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSearchIMG7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnSearch7Layout.createSequentialGroup()
-                        .addComponent(btnReadSearch7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDetailSearch7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        pnSearch7Layout.setVerticalGroup(
-            pnSearch7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSearch7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblSearchIMG7, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnSearch7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReadSearch7)
-                    .addComponent(btnDetailSearch7))
-                .addContainerGap())
-        );
-
-        pnSearch8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
-
-        lblSearchIMG8.setText("image");
-
-        btnReadSearch8.setText("Read");
-
-        btnDetailSearch8.setText("Detail");
-
-        javax.swing.GroupLayout pnSearch8Layout = new javax.swing.GroupLayout(pnSearch8);
-        pnSearch8.setLayout(pnSearch8Layout);
-        pnSearch8Layout.setHorizontalGroup(
-            pnSearch8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSearch8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnSearch8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSearchIMG8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnSearch8Layout.createSequentialGroup()
-                        .addComponent(btnReadSearch8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDetailSearch8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        pnSearch8Layout.setVerticalGroup(
-            pnSearch8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSearch8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblSearchIMG8, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnSearch8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReadSearch8)
-                    .addComponent(btnDetailSearch8))
                 .addContainerGap())
         );
 
@@ -1085,8 +1260,18 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         lblSearchIMG2.setText("image");
 
         btnReadSearch2.setText("Read");
+        btnReadSearch2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch2ActionPerformed(evt);
+            }
+        });
 
         btnDetailSearch2.setText("Detail");
+        btnDetailSearch2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnSearch2Layout = new javax.swing.GroupLayout(pnSearch2);
         pnSearch2.setLayout(pnSearch2Layout);
@@ -1119,8 +1304,18 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         lblSearchIMG3.setText("image");
 
         btnReadSearch3.setText("Read");
+        btnReadSearch3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch3ActionPerformed(evt);
+            }
+        });
 
         btnDetailSearch3.setText("Detail");
+        btnDetailSearch3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnSearch3Layout = new javax.swing.GroupLayout(pnSearch3);
         pnSearch3.setLayout(pnSearch3Layout);
@@ -1148,81 +1343,24 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnSearch9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
-
-        lblSearchIMG9.setText("image");
-
-        btnReadSearch9.setText("Read");
-
-        btnDetailSearch9.setText("Detail");
-
-        javax.swing.GroupLayout pnSearch9Layout = new javax.swing.GroupLayout(pnSearch9);
-        pnSearch9.setLayout(pnSearch9Layout);
-        pnSearch9Layout.setHorizontalGroup(
-            pnSearch9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSearch9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnSearch9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSearchIMG9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnSearch9Layout.createSequentialGroup()
-                        .addComponent(btnReadSearch9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDetailSearch9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        pnSearch9Layout.setVerticalGroup(
-            pnSearch9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSearch9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblSearchIMG9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnSearch9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReadSearch9)
-                    .addComponent(btnDetailSearch9))
-                .addContainerGap())
-        );
-
-        pnSearch10.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
-
-        lblSearchIMG10.setText("image");
-
-        btnReadSearch10.setText("Read");
-
-        btnDetailSearch10.setText("Detail");
-
-        javax.swing.GroupLayout pnSearch10Layout = new javax.swing.GroupLayout(pnSearch10);
-        pnSearch10.setLayout(pnSearch10Layout);
-        pnSearch10Layout.setHorizontalGroup(
-            pnSearch10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSearch10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnSearch10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSearchIMG10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnSearch10Layout.createSequentialGroup()
-                        .addComponent(btnReadSearch10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDetailSearch10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        pnSearch10Layout.setVerticalGroup(
-            pnSearch10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSearch10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblSearchIMG10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnSearch10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReadSearch10)
-                    .addComponent(btnDetailSearch10))
-                .addContainerGap())
-        );
-
         pnSearch4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnSearch4.setSize(new java.awt.Dimension(0, 240));
 
         lblSearchIMG4.setText("image");
 
         btnReadSearch4.setText("Read");
+        btnReadSearch4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch4ActionPerformed(evt);
+            }
+        });
 
         btnDetailSearch4.setText("Detail");
+        btnDetailSearch4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnSearch4Layout = new javax.swing.GroupLayout(pnSearch4);
         pnSearch4.setLayout(pnSearch4Layout);
@@ -1255,8 +1393,18 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         lblSearchIMG5.setText("image");
 
         btnReadSearch5.setText("Read");
+        btnReadSearch5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch5ActionPerformed(evt);
+            }
+        });
 
         btnDetailSearch5.setText("Detail");
+        btnDetailSearch5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnSearch5Layout = new javax.swing.GroupLayout(pnSearch5);
         pnSearch5.setLayout(pnSearch5Layout);
@@ -1284,47 +1432,23 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnSearch11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
-
-        lblSearchIMG11.setText("image");
-
-        btnReadSearch11.setText("Read");
-
-        btnDetailSearch11.setText("Detail");
-
-        javax.swing.GroupLayout pnSearch11Layout = new javax.swing.GroupLayout(pnSearch11);
-        pnSearch11.setLayout(pnSearch11Layout);
-        pnSearch11Layout.setHorizontalGroup(
-            pnSearch11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSearch11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnSearch11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSearchIMG11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnSearch11Layout.createSequentialGroup()
-                        .addComponent(btnReadSearch11, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDetailSearch11, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        pnSearch11Layout.setVerticalGroup(
-            pnSearch11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSearch11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblSearchIMG11, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnSearch11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReadSearch11)
-                    .addComponent(btnDetailSearch11))
-                .addContainerGap())
-        );
-
         pnSearch6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
         lblSearchIMG6.setText("image");
 
         btnReadSearch6.setText("Read");
+        btnReadSearch6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch6ActionPerformed(evt);
+            }
+        });
 
         btnDetailSearch6.setText("Detail");
+        btnDetailSearch6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnSearch6Layout = new javax.swing.GroupLayout(pnSearch6);
         pnSearch6.setLayout(pnSearch6Layout);
@@ -1352,13 +1476,243 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        pnSearch7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblSearchIMG7.setText("image");
+
+        btnReadSearch7.setText("Read");
+        btnReadSearch7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch7ActionPerformed(evt);
+            }
+        });
+
+        btnDetailSearch7.setText("Detail");
+        btnDetailSearch7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnSearch7Layout = new javax.swing.GroupLayout(pnSearch7);
+        pnSearch7.setLayout(pnSearch7Layout);
+        pnSearch7Layout.setHorizontalGroup(
+            pnSearch7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSearch7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnSearch7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSearchIMG7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnSearch7Layout.createSequentialGroup()
+                        .addComponent(btnReadSearch7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDetailSearch7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnSearch7Layout.setVerticalGroup(
+            pnSearch7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSearch7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSearchIMG7, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnSearch7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReadSearch7)
+                    .addComponent(btnDetailSearch7))
+                .addContainerGap())
+        );
+
+        pnSearch8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblSearchIMG8.setText("image");
+
+        btnReadSearch8.setText("Read");
+        btnReadSearch8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch8ActionPerformed(evt);
+            }
+        });
+
+        btnDetailSearch8.setText("Detail");
+        btnDetailSearch8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnSearch8Layout = new javax.swing.GroupLayout(pnSearch8);
+        pnSearch8.setLayout(pnSearch8Layout);
+        pnSearch8Layout.setHorizontalGroup(
+            pnSearch8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSearch8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnSearch8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSearchIMG8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnSearch8Layout.createSequentialGroup()
+                        .addComponent(btnReadSearch8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDetailSearch8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnSearch8Layout.setVerticalGroup(
+            pnSearch8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSearch8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSearchIMG8, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnSearch8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReadSearch8)
+                    .addComponent(btnDetailSearch8))
+                .addContainerGap())
+        );
+
+        pnSearch9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblSearchIMG9.setText("image");
+
+        btnReadSearch9.setText("Read");
+        btnReadSearch9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch9ActionPerformed(evt);
+            }
+        });
+
+        btnDetailSearch9.setText("Detail");
+        btnDetailSearch9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch9ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnSearch9Layout = new javax.swing.GroupLayout(pnSearch9);
+        pnSearch9.setLayout(pnSearch9Layout);
+        pnSearch9Layout.setHorizontalGroup(
+            pnSearch9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSearch9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnSearch9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSearchIMG9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnSearch9Layout.createSequentialGroup()
+                        .addComponent(btnReadSearch9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDetailSearch9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnSearch9Layout.setVerticalGroup(
+            pnSearch9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSearch9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSearchIMG9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnSearch9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReadSearch9)
+                    .addComponent(btnDetailSearch9))
+                .addContainerGap())
+        );
+
+        pnSearch10.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblSearchIMG10.setText("image");
+
+        btnReadSearch10.setText("Read");
+        btnReadSearch10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch10ActionPerformed(evt);
+            }
+        });
+
+        btnDetailSearch10.setText("Detail");
+        btnDetailSearch10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch10ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnSearch10Layout = new javax.swing.GroupLayout(pnSearch10);
+        pnSearch10.setLayout(pnSearch10Layout);
+        pnSearch10Layout.setHorizontalGroup(
+            pnSearch10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSearch10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnSearch10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSearchIMG10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnSearch10Layout.createSequentialGroup()
+                        .addComponent(btnReadSearch10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDetailSearch10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnSearch10Layout.setVerticalGroup(
+            pnSearch10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSearch10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSearchIMG10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnSearch10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReadSearch10)
+                    .addComponent(btnDetailSearch10))
+                .addContainerGap())
+        );
+
+        pnSearch11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblSearchIMG11.setText("image");
+
+        btnReadSearch11.setText("Read");
+        btnReadSearch11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch11ActionPerformed(evt);
+            }
+        });
+
+        btnDetailSearch11.setText("Detail");
+        btnDetailSearch11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch11ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnSearch11Layout = new javax.swing.GroupLayout(pnSearch11);
+        pnSearch11.setLayout(pnSearch11Layout);
+        pnSearch11Layout.setHorizontalGroup(
+            pnSearch11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSearch11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnSearch11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSearchIMG11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnSearch11Layout.createSequentialGroup()
+                        .addComponent(btnReadSearch11, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDetailSearch11, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnSearch11Layout.setVerticalGroup(
+            pnSearch11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSearch11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSearchIMG11, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnSearch11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReadSearch11)
+                    .addComponent(btnDetailSearch11))
+                .addContainerGap())
+        );
+
         pnSearch12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
         lblSearchIMG12.setText("image");
 
         btnReadSearch12.setText("Read");
+        btnReadSearch12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadSearch12ActionPerformed(evt);
+            }
+        });
 
         btnDetailSearch12.setText("Detail");
+        btnDetailSearch12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailSearch12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnSearch12Layout = new javax.swing.GroupLayout(pnSearch12);
         pnSearch12.setLayout(pnSearch12Layout);
@@ -1420,13 +1774,13 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel37Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(btnStart3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearchStart, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPrevious3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearchPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
-                        .addComponent(btnNext3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearchNext, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEnd3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearchEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(394, 394, 394))))
         );
         jPanel37Layout.setVerticalGroup(
@@ -1434,10 +1788,10 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
             .addGroup(jPanel37Layout.createSequentialGroup()
                 .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(pnSearch5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnSearch4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnSearch3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnSearch2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnSearch6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnSearch6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnSearch4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel37Layout.createSequentialGroup()
@@ -1448,10 +1802,10 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                             .addComponent(pnSearch12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(btnEnd3)
-                            .addComponent(btnNext3)
-                            .addComponent(btnPrevious3)
-                            .addComponent(btnStart3)))
+                            .addComponent(btnSearchEnd)
+                            .addComponent(btnSearchNext)
+                            .addComponent(btnSearchPrevious)
+                            .addComponent(btnSearchStart)))
                     .addGroup(jPanel37Layout.createSequentialGroup()
                         .addComponent(pnSearch8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -1481,421 +1835,568 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Search", jPanel2);
 
+        cboTheLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboTheLoai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTheLoaiActionPerformed(evt);
+            }
+        });
+
         jPanel50.setBorder(javax.swing.BorderFactory.createTitledBorder("Result"));
 
-        btnStart4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
+        btnTLStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
+        btnTLStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLStartActionPerformed(evt);
+            }
+        });
 
-        btnPrevious4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rewind-16.png"))); // NOI18N
+        btnTLPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rewind-16.png"))); // NOI18N
+        btnTLPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLPreviousActionPerformed(evt);
+            }
+        });
 
-        btnNext4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fast-forward-16.png"))); // NOI18N
+        btnTLNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fast-forward-16.png"))); // NOI18N
+        btnTLNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLNextActionPerformed(evt);
+            }
+        });
 
-        btnEnd4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/end-16.png"))); // NOI18N
+        btnTLEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/end-16.png"))); // NOI18N
+        btnTLEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLEndActionPerformed(evt);
+            }
+        });
 
-        jPanel51.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel38.setText("image");
+        lblTLIMG1.setText("image");
 
-        jButton63.setText("Read");
+        btnTLRead1.setText("Read");
+        btnTLRead1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead1ActionPerformed(evt);
+            }
+        });
 
-        jButton64.setText("Detail");
+        btnTLDetail1.setText("Detail");
+        btnTLDetail1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail1ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel51Layout = new javax.swing.GroupLayout(jPanel51);
-        jPanel51.setLayout(jPanel51Layout);
-        jPanel51Layout.setHorizontalGroup(
-            jPanel51Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel51Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL1Layout = new javax.swing.GroupLayout(pnTL1);
+        pnTL1.setLayout(pnTL1Layout);
+        pnTL1Layout.setHorizontalGroup(
+            pnTL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel51Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel51Layout.createSequentialGroup()
-                        .addComponent(jButton63, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL1Layout.createSequentialGroup()
+                        .addComponent(btnTLRead1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton64, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel51Layout.setVerticalGroup(
-            jPanel51Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel51Layout.createSequentialGroup()
+        pnTL1Layout.setVerticalGroup(
+            pnTL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTLIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel51Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton63)
-                    .addComponent(jButton64))
+                .addGroup(pnTL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead1)
+                    .addComponent(btnTLDetail1))
                 .addContainerGap())
         );
 
-        jPanel52.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel39.setText("image");
+        lblTLIMG2.setText("image");
 
-        jButton65.setText("Read");
+        btnTLRead2.setText("Read");
+        btnTLRead2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead2ActionPerformed(evt);
+            }
+        });
 
-        jButton66.setText("Detail");
+        btnTLDetail2.setText("Detail");
+        btnTLDetail2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail2ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel52Layout = new javax.swing.GroupLayout(jPanel52);
-        jPanel52.setLayout(jPanel52Layout);
-        jPanel52Layout.setHorizontalGroup(
-            jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel52Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL2Layout = new javax.swing.GroupLayout(pnTL2);
+        pnTL2.setLayout(pnTL2Layout);
+        pnTL2Layout.setHorizontalGroup(
+            pnTL2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel52Layout.createSequentialGroup()
-                        .addComponent(jButton65, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL2Layout.createSequentialGroup()
+                        .addComponent(btnTLRead2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton66, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel52Layout.setVerticalGroup(
-            jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel52Layout.createSequentialGroup()
+        pnTL2Layout.setVerticalGroup(
+            pnTL2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addComponent(lblTLIMG2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton65)
-                    .addComponent(jButton66))
+                .addGroup(pnTL2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead2)
+                    .addComponent(btnTLDetail2))
                 .addContainerGap())
         );
 
-        jPanel53.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel40.setText("image");
+        lblTLIMG3.setText("image");
 
-        jButton67.setText("Read");
+        btnTLRead3.setText("Read");
+        btnTLRead3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead3ActionPerformed(evt);
+            }
+        });
 
-        jButton68.setText("Detail");
+        btnTLDetail3.setText("Detail");
+        btnTLDetail3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail3ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel53Layout = new javax.swing.GroupLayout(jPanel53);
-        jPanel53.setLayout(jPanel53Layout);
-        jPanel53Layout.setHorizontalGroup(
-            jPanel53Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel53Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL3Layout = new javax.swing.GroupLayout(pnTL3);
+        pnTL3.setLayout(pnTL3Layout);
+        pnTL3Layout.setHorizontalGroup(
+            pnTL3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel53Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel53Layout.createSequentialGroup()
-                        .addComponent(jButton67, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL3Layout.createSequentialGroup()
+                        .addComponent(btnTLRead3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton68, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel53Layout.setVerticalGroup(
-            jPanel53Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel53Layout.createSequentialGroup()
+        pnTL3Layout.setVerticalGroup(
+            pnTL3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTLIMG3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel53Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton67)
-                    .addComponent(jButton68))
+                .addGroup(pnTL3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead3)
+                    .addComponent(btnTLDetail3))
                 .addContainerGap())
         );
 
-        jPanel54.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel41.setText("image");
+        lblTLIMG4.setText("image");
 
-        jButton69.setText("Read");
+        btnTLRead4.setText("Read");
+        btnTLRead4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead4ActionPerformed(evt);
+            }
+        });
 
-        jButton70.setText("Detail");
+        btnTLDetail4.setText("Detail");
+        btnTLDetail4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail4ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel54Layout = new javax.swing.GroupLayout(jPanel54);
-        jPanel54.setLayout(jPanel54Layout);
-        jPanel54Layout.setHorizontalGroup(
-            jPanel54Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel54Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL4Layout = new javax.swing.GroupLayout(pnTL4);
+        pnTL4.setLayout(pnTL4Layout);
+        pnTL4Layout.setHorizontalGroup(
+            pnTL4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel54Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel54Layout.createSequentialGroup()
-                        .addComponent(jButton69, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL4Layout.createSequentialGroup()
+                        .addComponent(btnTLRead4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton70, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel54Layout.setVerticalGroup(
-            jPanel54Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel54Layout.createSequentialGroup()
+        pnTL4Layout.setVerticalGroup(
+            pnTL4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTLIMG4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel54Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton69)
-                    .addComponent(jButton70))
+                .addGroup(pnTL4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead4)
+                    .addComponent(btnTLDetail4))
                 .addContainerGap())
         );
 
-        jPanel55.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel42.setText("image");
+        lblTLIMG5.setText("image");
 
-        jButton71.setText("Read");
+        btnTLRead5.setText("Read");
+        btnTLRead5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead5ActionPerformed(evt);
+            }
+        });
 
-        jButton72.setText("Detail");
+        btnTLDetail5.setText("Detail");
+        btnTLDetail5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail5ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel55Layout = new javax.swing.GroupLayout(jPanel55);
-        jPanel55.setLayout(jPanel55Layout);
-        jPanel55Layout.setHorizontalGroup(
-            jPanel55Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel55Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL5Layout = new javax.swing.GroupLayout(pnTL5);
+        pnTL5.setLayout(pnTL5Layout);
+        pnTL5Layout.setHorizontalGroup(
+            pnTL5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel55Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel55Layout.createSequentialGroup()
-                        .addComponent(jButton71, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL5Layout.createSequentialGroup()
+                        .addComponent(btnTLRead5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton72, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel55Layout.setVerticalGroup(
-            jPanel55Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel55Layout.createSequentialGroup()
+        pnTL5Layout.setVerticalGroup(
+            pnTL5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addComponent(lblTLIMG5, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel55Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton71)
-                    .addComponent(jButton72))
+                .addGroup(pnTL5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead5)
+                    .addComponent(btnTLDetail5))
                 .addContainerGap())
         );
 
-        jPanel56.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel43.setText("image");
+        lblTLIMG6.setText("image");
 
-        jButton73.setText("Read");
+        btnTLRead6.setText("Read");
+        btnTLRead6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead6ActionPerformed(evt);
+            }
+        });
 
-        jButton74.setText("Detail");
+        btnTLDetail6.setText("Detail");
+        btnTLDetail6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail6ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel56Layout = new javax.swing.GroupLayout(jPanel56);
-        jPanel56.setLayout(jPanel56Layout);
-        jPanel56Layout.setHorizontalGroup(
-            jPanel56Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel56Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL6Layout = new javax.swing.GroupLayout(pnTL6);
+        pnTL6.setLayout(pnTL6Layout);
+        pnTL6Layout.setHorizontalGroup(
+            pnTL6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel56Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel43, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel56Layout.createSequentialGroup()
-                        .addComponent(jButton73, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL6Layout.createSequentialGroup()
+                        .addComponent(btnTLRead6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton74, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel56Layout.setVerticalGroup(
-            jPanel56Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel56Layout.createSequentialGroup()
+        pnTL6Layout.setVerticalGroup(
+            pnTL6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel43, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTLIMG6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel56Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton73)
-                    .addComponent(jButton74))
+                .addGroup(pnTL6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead6)
+                    .addComponent(btnTLDetail6))
                 .addContainerGap())
         );
 
-        jPanel57.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel44.setText("image");
+        lblTLIMG7.setText("image");
 
-        jButton75.setText("Read");
+        btnTLRead7.setText("Read");
+        btnTLRead7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead7ActionPerformed(evt);
+            }
+        });
 
-        jButton76.setText("Detail");
+        btnTLDetail7.setText("Detail");
+        btnTLDetail7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail7ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel57Layout = new javax.swing.GroupLayout(jPanel57);
-        jPanel57.setLayout(jPanel57Layout);
-        jPanel57Layout.setHorizontalGroup(
-            jPanel57Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel57Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL7Layout = new javax.swing.GroupLayout(pnTL7);
+        pnTL7.setLayout(pnTL7Layout);
+        pnTL7Layout.setHorizontalGroup(
+            pnTL7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel57Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel57Layout.createSequentialGroup()
-                        .addComponent(jButton75, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL7Layout.createSequentialGroup()
+                        .addComponent(btnTLRead7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton76, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel57Layout.setVerticalGroup(
-            jPanel57Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel57Layout.createSequentialGroup()
+        pnTL7Layout.setVerticalGroup(
+            pnTL7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTLIMG7, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel57Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton75)
-                    .addComponent(jButton76))
+                .addGroup(pnTL7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead7)
+                    .addComponent(btnTLDetail7))
                 .addContainerGap())
         );
 
-        jPanel58.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel45.setText("image");
+        lblTLIMG8.setText("image");
 
-        jButton77.setText("Read");
+        btnTLRead8.setText("Read");
+        btnTLRead8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead8ActionPerformed(evt);
+            }
+        });
 
-        jButton78.setText("Detail");
+        btnTLDetail8.setText("Detail");
+        btnTLDetail8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail8ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel58Layout = new javax.swing.GroupLayout(jPanel58);
-        jPanel58.setLayout(jPanel58Layout);
-        jPanel58Layout.setHorizontalGroup(
-            jPanel58Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel58Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL8Layout = new javax.swing.GroupLayout(pnTL8);
+        pnTL8.setLayout(pnTL8Layout);
+        pnTL8Layout.setHorizontalGroup(
+            pnTL8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel58Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel58Layout.createSequentialGroup()
-                        .addComponent(jButton77, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL8Layout.createSequentialGroup()
+                        .addComponent(btnTLRead8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton78, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel58Layout.setVerticalGroup(
-            jPanel58Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel58Layout.createSequentialGroup()
+        pnTL8Layout.setVerticalGroup(
+            pnTL8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addComponent(lblTLIMG8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel58Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton77)
-                    .addComponent(jButton78))
+                .addGroup(pnTL8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead8)
+                    .addComponent(btnTLDetail8))
                 .addContainerGap())
         );
 
-        jPanel59.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel46.setText("image");
+        lblTLIMG9.setText("image");
 
-        jButton79.setText("Read");
+        btnTLRead9.setText("Read");
+        btnTLRead9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead9ActionPerformed(evt);
+            }
+        });
 
-        jButton80.setText("Detail");
+        btnTLDetail9.setText("Detail");
+        btnTLDetail9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail9ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel59Layout = new javax.swing.GroupLayout(jPanel59);
-        jPanel59.setLayout(jPanel59Layout);
-        jPanel59Layout.setHorizontalGroup(
-            jPanel59Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel59Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL9Layout = new javax.swing.GroupLayout(pnTL9);
+        pnTL9.setLayout(pnTL9Layout);
+        pnTL9Layout.setHorizontalGroup(
+            pnTL9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel59Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel59Layout.createSequentialGroup()
-                        .addComponent(jButton79, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL9Layout.createSequentialGroup()
+                        .addComponent(btnTLRead9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton80, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel59Layout.setVerticalGroup(
-            jPanel59Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel59Layout.createSequentialGroup()
+        pnTL9Layout.setVerticalGroup(
+            pnTL9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addComponent(lblTLIMG9, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel59Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton79)
-                    .addComponent(jButton80))
+                .addGroup(pnTL9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead9)
+                    .addComponent(btnTLDetail9))
                 .addContainerGap())
         );
 
-        jPanel60.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL10.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel47.setText("image");
+        lblTLIMG10.setText("image");
 
-        jButton81.setText("Read");
+        btnTLRead10.setText("Read");
+        btnTLRead10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead10ActionPerformed(evt);
+            }
+        });
 
-        jButton82.setText("Detail");
+        btnTLDetail10.setText("Detail");
+        btnTLDetail10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail10ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel60Layout = new javax.swing.GroupLayout(jPanel60);
-        jPanel60.setLayout(jPanel60Layout);
-        jPanel60Layout.setHorizontalGroup(
-            jPanel60Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel60Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL10Layout = new javax.swing.GroupLayout(pnTL10);
+        pnTL10.setLayout(pnTL10Layout);
+        pnTL10Layout.setHorizontalGroup(
+            pnTL10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel60Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel60Layout.createSequentialGroup()
-                        .addComponent(jButton81, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL10Layout.createSequentialGroup()
+                        .addComponent(btnTLRead10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton82, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel60Layout.setVerticalGroup(
-            jPanel60Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel60Layout.createSequentialGroup()
+        pnTL10Layout.setVerticalGroup(
+            pnTL10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTLIMG10, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel60Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton81)
-                    .addComponent(jButton82))
+                .addGroup(pnTL10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead10)
+                    .addComponent(btnTLDetail10))
                 .addContainerGap())
         );
 
-        jPanel61.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel48.setText("image");
+        lblTLIMG11.setText("image");
 
-        jButton83.setText("Read");
+        btnTLRead11.setText("Read");
+        btnTLRead11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead11ActionPerformed(evt);
+            }
+        });
 
-        jButton84.setText("Detail");
+        btnTLDetail11.setText("Detail");
+        btnTLDetail11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail11ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel61Layout = new javax.swing.GroupLayout(jPanel61);
-        jPanel61.setLayout(jPanel61Layout);
-        jPanel61Layout.setHorizontalGroup(
-            jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel61Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL11Layout = new javax.swing.GroupLayout(pnTL11);
+        pnTL11.setLayout(pnTL11Layout);
+        pnTL11Layout.setHorizontalGroup(
+            pnTL11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel61Layout.createSequentialGroup()
-                        .addComponent(jButton83, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL11Layout.createSequentialGroup()
+                        .addComponent(btnTLRead11, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton84, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail11, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel61Layout.setVerticalGroup(
-            jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel61Layout.createSequentialGroup()
+        pnTL11Layout.setVerticalGroup(
+            pnTL11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel48, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addComponent(lblTLIMG11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton83)
-                    .addComponent(jButton84))
+                .addGroup(pnTL11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead11)
+                    .addComponent(btnTLDetail11))
                 .addContainerGap())
         );
 
-        jPanel62.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnTL12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel49.setText("image");
+        lblTLIMG12.setText("image");
 
-        jButton85.setText("Read");
+        btnTLRead12.setText("Read");
+        btnTLRead12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLRead12ActionPerformed(evt);
+            }
+        });
 
-        jButton86.setText("Detail");
+        btnTLDetail12.setText("Detail");
+        btnTLDetail12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLDetail12ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel62Layout = new javax.swing.GroupLayout(jPanel62);
-        jPanel62.setLayout(jPanel62Layout);
-        jPanel62Layout.setHorizontalGroup(
-            jPanel62Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel62Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnTL12Layout = new javax.swing.GroupLayout(pnTL12);
+        pnTL12.setLayout(pnTL12Layout);
+        pnTL12Layout.setHorizontalGroup(
+            pnTL12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel62Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel49, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel62Layout.createSequentialGroup()
-                        .addComponent(jButton85, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnTL12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTLIMG12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnTL12Layout.createSequentialGroup()
+                        .addComponent(btnTLRead12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton86, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTLDetail12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel62Layout.setVerticalGroup(
-            jPanel62Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel62Layout.createSequentialGroup()
+        pnTL12Layout.setVerticalGroup(
+            pnTL12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTL12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel49, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTLIMG12, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel62Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton85)
-                    .addComponent(jButton86))
+                .addGroup(pnTL12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTLRead12)
+                    .addComponent(btnTLDetail12))
                 .addContainerGap())
         );
 
@@ -1907,74 +2408,72 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel50Layout.createSequentialGroup()
-                        .addComponent(jPanel51, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnTL1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel50Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel53, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnTL2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel56, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnTL3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel57, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnTL4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel59, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnTL5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel62, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnTL6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel50Layout.createSequentialGroup()
                                 .addGap(206, 206, 206)
-                                .addComponent(btnStart4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTLStart, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPrevious4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTLPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)
-                                .addComponent(btnNext4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTLNext, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEnd4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTLEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(394, 394, 394))))
                     .addGroup(jPanel50Layout.createSequentialGroup()
-                        .addComponent(jPanel52, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnTL7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel54, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnTL8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel55, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnTL9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel58, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnTL10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel60, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnTL11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel61, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnTL12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel50Layout.setVerticalGroup(
             jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel50Layout.createSequentialGroup()
                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel59, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel57, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel56, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel53, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel51, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel62, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnTL5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnTL4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnTL3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnTL2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnTL1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnTL6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel60, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel58, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pnTL11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnTL10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jPanel55, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnTL9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel54, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel52, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel61, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnTL8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnTL7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pnTL12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnEnd4)
-                    .addComponent(btnNext4)
-                    .addComponent(btnPrevious4)
-                    .addComponent(btnStart4)))
+                    .addComponent(btnTLEnd)
+                    .addComponent(btnTLNext)
+                    .addComponent(btnTLPrevious)
+                    .addComponent(btnTLStart)))
         );
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -1983,7 +2482,7 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel50, javax.swing.GroupLayout.PREFERRED_SIZE, 1186, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1991,7 +2490,7 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel50, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -2001,419 +2500,559 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
 
         jPanel76.setBorder(javax.swing.BorderFactory.createTitledBorder("Like Book"));
 
-        btnStart6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
+        btnLBStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
+        btnLBStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBStartActionPerformed(evt);
+            }
+        });
 
-        btnPrevious6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rewind-16.png"))); // NOI18N
+        btnLBPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rewind-16.png"))); // NOI18N
+        btnLBPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBPreviousActionPerformed(evt);
+            }
+        });
 
-        btnNext6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fast-forward-16.png"))); // NOI18N
+        btnLBNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fast-forward-16.png"))); // NOI18N
+        btnLBNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBNextActionPerformed(evt);
+            }
+        });
 
-        btnEnd6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/end-16.png"))); // NOI18N
+        btnLBEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/end-16.png"))); // NOI18N
+        btnLBEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBEndActionPerformed(evt);
+            }
+        });
 
-        jPanel77.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel62.setText("image");
+        lblLBIMG1.setText("image");
 
-        jButton111.setText("Read");
+        btnLBRead1.setText("Read");
+        btnLBRead1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead1ActionPerformed(evt);
+            }
+        });
 
-        jButton112.setText("Detail");
+        btnLBDetail1.setText("Detail");
+        btnLBDetail1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail1ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel77Layout = new javax.swing.GroupLayout(jPanel77);
-        jPanel77.setLayout(jPanel77Layout);
-        jPanel77Layout.setHorizontalGroup(
-            jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel77Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB1Layout = new javax.swing.GroupLayout(pnLB1);
+        pnLB1.setLayout(pnLB1Layout);
+        pnLB1Layout.setHorizontalGroup(
+            pnLB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel62, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel77Layout.createSequentialGroup()
-                        .addComponent(jButton111, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB1Layout.createSequentialGroup()
+                        .addComponent(btnLBRead1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton112, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel77Layout.setVerticalGroup(
-            jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel77Layout.createSequentialGroup()
+        pnLB1Layout.setVerticalGroup(
+            pnLB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel62, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addComponent(lblLBIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton111)
-                    .addComponent(jButton112))
+                .addGroup(pnLB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead1)
+                    .addComponent(btnLBDetail1))
                 .addContainerGap())
         );
 
-        jPanel78.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel63.setText("image");
+        lblLBIMG2.setText("image");
 
-        jButton113.setText("Read");
+        btnLBRead2.setText("Read");
+        btnLBRead2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead2ActionPerformed(evt);
+            }
+        });
 
-        jButton114.setText("Detail");
+        btnLBDetail2.setText("Detail");
+        btnLBDetail2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail2ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel78Layout = new javax.swing.GroupLayout(jPanel78);
-        jPanel78.setLayout(jPanel78Layout);
-        jPanel78Layout.setHorizontalGroup(
-            jPanel78Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel78Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB2Layout = new javax.swing.GroupLayout(pnLB2);
+        pnLB2.setLayout(pnLB2Layout);
+        pnLB2Layout.setHorizontalGroup(
+            pnLB2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel78Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel78Layout.createSequentialGroup()
-                        .addComponent(jButton113, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB2Layout.createSequentialGroup()
+                        .addComponent(btnLBRead2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton114, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel78Layout.setVerticalGroup(
-            jPanel78Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel78Layout.createSequentialGroup()
+        pnLB2Layout.setVerticalGroup(
+            pnLB2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addComponent(lblLBIMG2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel78Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton113)
-                    .addComponent(jButton114))
+                .addGroup(pnLB2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead2)
+                    .addComponent(btnLBDetail2))
                 .addContainerGap())
         );
 
-        jPanel79.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel64.setText("image");
+        lblLBIMG3.setText("image");
 
-        jButton115.setText("Read");
+        btnLBRead3.setText("Read");
+        btnLBRead3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead3ActionPerformed(evt);
+            }
+        });
 
-        jButton116.setText("Detail");
+        btnLBDetail3.setText("Detail");
+        btnLBDetail3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail3ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel79Layout = new javax.swing.GroupLayout(jPanel79);
-        jPanel79.setLayout(jPanel79Layout);
-        jPanel79Layout.setHorizontalGroup(
-            jPanel79Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel79Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB3Layout = new javax.swing.GroupLayout(pnLB3);
+        pnLB3.setLayout(pnLB3Layout);
+        pnLB3Layout.setHorizontalGroup(
+            pnLB3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel79Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel64, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel79Layout.createSequentialGroup()
-                        .addComponent(jButton115, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB3Layout.createSequentialGroup()
+                        .addComponent(btnLBRead3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton116, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel79Layout.setVerticalGroup(
-            jPanel79Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel79Layout.createSequentialGroup()
+        pnLB3Layout.setVerticalGroup(
+            pnLB3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel64, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addComponent(lblLBIMG3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel79Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton115)
-                    .addComponent(jButton116))
+                .addGroup(pnLB3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead3)
+                    .addComponent(btnLBDetail3))
                 .addContainerGap())
         );
 
-        jPanel80.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel65.setText("image");
+        lblLBIMG4.setText("image");
 
-        jButton117.setText("Read");
+        btnLBRead4.setText("Read");
+        btnLBRead4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead4ActionPerformed(evt);
+            }
+        });
 
-        jButton118.setText("Detail");
+        btnLBDetail4.setText("Detail");
+        btnLBDetail4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail4ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel80Layout = new javax.swing.GroupLayout(jPanel80);
-        jPanel80.setLayout(jPanel80Layout);
-        jPanel80Layout.setHorizontalGroup(
-            jPanel80Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel80Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB4Layout = new javax.swing.GroupLayout(pnLB4);
+        pnLB4.setLayout(pnLB4Layout);
+        pnLB4Layout.setHorizontalGroup(
+            pnLB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel80Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel65, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel80Layout.createSequentialGroup()
-                        .addComponent(jButton117, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB4Layout.createSequentialGroup()
+                        .addComponent(btnLBRead4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton118, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel80Layout.setVerticalGroup(
-            jPanel80Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel80Layout.createSequentialGroup()
+        pnLB4Layout.setVerticalGroup(
+            pnLB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel65, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblLBIMG4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel80Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton117)
-                    .addComponent(jButton118))
+                .addGroup(pnLB4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead4)
+                    .addComponent(btnLBDetail4))
                 .addContainerGap())
         );
 
-        jPanel81.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel66.setText("image");
+        lblLBIMG5.setText("image");
 
-        jButton119.setText("Read");
+        btnLBRead5.setText("Read");
+        btnLBRead5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead5ActionPerformed(evt);
+            }
+        });
 
-        jButton120.setText("Detail");
+        btnLBDetail5.setText("Detail");
+        btnLBDetail5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail5ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel81Layout = new javax.swing.GroupLayout(jPanel81);
-        jPanel81.setLayout(jPanel81Layout);
-        jPanel81Layout.setHorizontalGroup(
-            jPanel81Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel81Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB5Layout = new javax.swing.GroupLayout(pnLB5);
+        pnLB5.setLayout(pnLB5Layout);
+        pnLB5Layout.setHorizontalGroup(
+            pnLB5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel81Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel66, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel81Layout.createSequentialGroup()
-                        .addComponent(jButton119, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB5Layout.createSequentialGroup()
+                        .addComponent(btnLBRead5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton120, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel81Layout.setVerticalGroup(
-            jPanel81Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel81Layout.createSequentialGroup()
+        pnLB5Layout.setVerticalGroup(
+            pnLB5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel66, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblLBIMG5, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel81Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton119)
-                    .addComponent(jButton120))
+                .addGroup(pnLB5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead5)
+                    .addComponent(btnLBDetail5))
                 .addContainerGap())
         );
 
-        jPanel82.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel67.setText("image");
+        lblLBIMG6.setText("image");
 
-        jButton121.setText("Read");
+        btnLBRead6.setText("Read");
+        btnLBRead6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead6ActionPerformed(evt);
+            }
+        });
 
-        jButton122.setText("Detail");
+        btnLBDetail6.setText("Detail");
+        btnLBDetail6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail6ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel82Layout = new javax.swing.GroupLayout(jPanel82);
-        jPanel82.setLayout(jPanel82Layout);
-        jPanel82Layout.setHorizontalGroup(
-            jPanel82Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel82Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB6Layout = new javax.swing.GroupLayout(pnLB6);
+        pnLB6.setLayout(pnLB6Layout);
+        pnLB6Layout.setHorizontalGroup(
+            pnLB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel82Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel82Layout.createSequentialGroup()
-                        .addComponent(jButton121, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB6Layout.createSequentialGroup()
+                        .addComponent(btnLBRead6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton122, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel82Layout.setVerticalGroup(
-            jPanel82Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel82Layout.createSequentialGroup()
+        pnLB6Layout.setVerticalGroup(
+            pnLB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblLBIMG6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel82Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton121)
-                    .addComponent(jButton122))
+                .addGroup(pnLB6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead6)
+                    .addComponent(btnLBDetail6))
                 .addContainerGap())
         );
 
-        jPanel83.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel68.setText("image");
+        lblLBIMG7.setText("image");
 
-        jButton123.setText("Read");
+        btnLBRead7.setText("Read");
+        btnLBRead7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead7ActionPerformed(evt);
+            }
+        });
 
-        jButton124.setText("Detail");
+        btnLBDetail7.setText("Detail");
+        btnLBDetail7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail7ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel83Layout = new javax.swing.GroupLayout(jPanel83);
-        jPanel83.setLayout(jPanel83Layout);
-        jPanel83Layout.setHorizontalGroup(
-            jPanel83Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel83Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB7Layout = new javax.swing.GroupLayout(pnLB7);
+        pnLB7.setLayout(pnLB7Layout);
+        pnLB7Layout.setHorizontalGroup(
+            pnLB7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel83Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel68, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel83Layout.createSequentialGroup()
-                        .addComponent(jButton123, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB7Layout.createSequentialGroup()
+                        .addComponent(btnLBRead7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton124, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel83Layout.setVerticalGroup(
-            jPanel83Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel83Layout.createSequentialGroup()
+        pnLB7Layout.setVerticalGroup(
+            pnLB7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel68, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblLBIMG7, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel83Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton123)
-                    .addComponent(jButton124))
+                .addGroup(pnLB7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead7)
+                    .addComponent(btnLBDetail7))
                 .addContainerGap())
         );
 
-        jPanel84.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel69.setText("image");
+        lblLBIMG8.setText("image");
 
-        jButton125.setText("Read");
+        btnLBRead8.setText("Read");
+        btnLBRead8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead8ActionPerformed(evt);
+            }
+        });
 
-        jButton126.setText("Detail");
+        btnLBDetail8.setText("Detail");
+        btnLBDetail8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail8ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel84Layout = new javax.swing.GroupLayout(jPanel84);
-        jPanel84.setLayout(jPanel84Layout);
-        jPanel84Layout.setHorizontalGroup(
-            jPanel84Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel84Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB8Layout = new javax.swing.GroupLayout(pnLB8);
+        pnLB8.setLayout(pnLB8Layout);
+        pnLB8Layout.setHorizontalGroup(
+            pnLB8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel84Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel69, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel84Layout.createSequentialGroup()
-                        .addComponent(jButton125, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB8Layout.createSequentialGroup()
+                        .addComponent(btnLBRead8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton126, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel84Layout.setVerticalGroup(
-            jPanel84Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel84Layout.createSequentialGroup()
+        pnLB8Layout.setVerticalGroup(
+            pnLB8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel69, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblLBIMG8, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel84Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton125)
-                    .addComponent(jButton126))
+                .addGroup(pnLB8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead8)
+                    .addComponent(btnLBDetail8))
                 .addContainerGap())
         );
 
-        jPanel85.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel70.setText("image");
+        lblLBIMG9.setText("image");
 
-        jButton127.setText("Read");
+        btnLBRead9.setText("Read");
+        btnLBRead9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead9ActionPerformed(evt);
+            }
+        });
 
-        jButton128.setText("Detail");
+        btnLBDetail9.setText("Detail");
+        btnLBDetail9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail9ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel85Layout = new javax.swing.GroupLayout(jPanel85);
-        jPanel85.setLayout(jPanel85Layout);
-        jPanel85Layout.setHorizontalGroup(
-            jPanel85Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel85Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB9Layout = new javax.swing.GroupLayout(pnLB9);
+        pnLB9.setLayout(pnLB9Layout);
+        pnLB9Layout.setHorizontalGroup(
+            pnLB9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel85Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel70, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel85Layout.createSequentialGroup()
-                        .addComponent(jButton127, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB9Layout.createSequentialGroup()
+                        .addComponent(btnLBRead9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton128, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel85Layout.setVerticalGroup(
-            jPanel85Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel85Layout.createSequentialGroup()
+        pnLB9Layout.setVerticalGroup(
+            pnLB9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel70, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addComponent(lblLBIMG9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel85Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton127)
-                    .addComponent(jButton128))
+                .addGroup(pnLB9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead9)
+                    .addComponent(btnLBDetail9))
                 .addContainerGap())
         );
 
-        jPanel86.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB10.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel71.setText("image");
+        lblLBIMG10.setText("image");
 
-        jButton129.setText("Read");
+        btnLBRead10.setText("Read");
+        btnLBRead10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead10ActionPerformed(evt);
+            }
+        });
 
-        jButton130.setText("Detail");
+        btnLBDetail10.setText("Detail");
+        btnLBDetail10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail10ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel86Layout = new javax.swing.GroupLayout(jPanel86);
-        jPanel86.setLayout(jPanel86Layout);
-        jPanel86Layout.setHorizontalGroup(
-            jPanel86Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel86Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB10Layout = new javax.swing.GroupLayout(pnLB10);
+        pnLB10.setLayout(pnLB10Layout);
+        pnLB10Layout.setHorizontalGroup(
+            pnLB10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel86Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel71, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel86Layout.createSequentialGroup()
-                        .addComponent(jButton129, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB10Layout.createSequentialGroup()
+                        .addComponent(btnLBRead10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton130, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel86Layout.setVerticalGroup(
-            jPanel86Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel86Layout.createSequentialGroup()
+        pnLB10Layout.setVerticalGroup(
+            pnLB10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel71, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addComponent(lblLBIMG10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel86Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton129)
-                    .addComponent(jButton130))
+                .addGroup(pnLB10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead10)
+                    .addComponent(btnLBDetail10))
                 .addContainerGap())
         );
 
-        jPanel87.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel72.setText("image");
+        lblLBIMG11.setText("image");
 
-        jButton131.setText("Read");
+        btnLBRead11.setText("Read");
+        btnLBRead11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead11ActionPerformed(evt);
+            }
+        });
 
-        jButton132.setText("Detail");
+        btnLBDetail11.setText("Detail");
+        btnLBDetail11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail11ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel87Layout = new javax.swing.GroupLayout(jPanel87);
-        jPanel87.setLayout(jPanel87Layout);
-        jPanel87Layout.setHorizontalGroup(
-            jPanel87Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel87Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB11Layout = new javax.swing.GroupLayout(pnLB11);
+        pnLB11.setLayout(pnLB11Layout);
+        pnLB11Layout.setHorizontalGroup(
+            pnLB11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel87Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel72, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel87Layout.createSequentialGroup()
-                        .addComponent(jButton131, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB11Layout.createSequentialGroup()
+                        .addComponent(btnLBRead11, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton132, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail11, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel87Layout.setVerticalGroup(
-            jPanel87Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel87Layout.createSequentialGroup()
+        pnLB11Layout.setVerticalGroup(
+            pnLB11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel72, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblLBIMG11, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel87Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton131)
-                    .addComponent(jButton132))
+                .addGroup(pnLB11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead11)
+                    .addComponent(btnLBDetail11))
                 .addContainerGap())
         );
 
-        jPanel88.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+        pnLB12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
 
-        jLabel73.setText("image");
+        lblLBIMG12.setText("image");
 
-        jButton133.setText("Read");
+        btnLBRead12.setText("Read");
+        btnLBRead12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead12ActionPerformed(evt);
+            }
+        });
 
-        jButton134.setText("Detail");
+        btnLBDetail12.setText("Detail");
+        btnLBDetail12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail12ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel88Layout = new javax.swing.GroupLayout(jPanel88);
-        jPanel88.setLayout(jPanel88Layout);
-        jPanel88Layout.setHorizontalGroup(
-            jPanel88Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel88Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnLB12Layout = new javax.swing.GroupLayout(pnLB12);
+        pnLB12.setLayout(pnLB12Layout);
+        pnLB12Layout.setHorizontalGroup(
+            pnLB12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel88Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel73, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel88Layout.createSequentialGroup()
-                        .addComponent(jButton133, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnLB12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB12Layout.createSequentialGroup()
+                        .addComponent(btnLBRead12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton134, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLBDetail12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel88Layout.setVerticalGroup(
-            jPanel88Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel88Layout.createSequentialGroup()
+        pnLB12Layout.setVerticalGroup(
+            pnLB12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel73, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblLBIMG12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel88Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton133)
-                    .addComponent(jButton134))
+                .addGroup(pnLB12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead12)
+                    .addComponent(btnLBDetail12))
                 .addContainerGap())
         );
 
@@ -2424,72 +3063,72 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
             .addGroup(jPanel76Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel77, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel78, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnLB1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnLB7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel80, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel79, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnLB2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnLB8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel76Layout.createSequentialGroup()
                         .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel81, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel82, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnLB3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnLB9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel84, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel83, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnLB4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnLB10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel85, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel86, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnLB5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnLB11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel87, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel88, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnLB6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnLB12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel76Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(btnStart6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLBStart, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPrevious6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLBPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
-                        .addComponent(btnNext6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLBNext, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEnd6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLBEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(394, 394, 394))))
         );
         jPanel76Layout.setVerticalGroup(
             jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel76Layout.createSequentialGroup()
                 .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel85, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel84, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel81, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel80, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel87, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnLB5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnLB4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnLB3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnLB2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnLB6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel76Layout.createSequentialGroup()
                         .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel86, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel83, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel82, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel88, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(pnLB11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnLB10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnLB9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnLB12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(btnEnd6)
-                            .addComponent(btnNext6)
-                            .addComponent(btnPrevious6)
-                            .addComponent(btnStart6)))
+                            .addComponent(btnLBEnd)
+                            .addComponent(btnLBNext)
+                            .addComponent(btnLBPrevious)
+                            .addComponent(btnLBStart)))
                     .addGroup(jPanel76Layout.createSequentialGroup()
-                        .addComponent(jPanel79, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnLB8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel76Layout.createSequentialGroup()
-                .addComponent(jPanel77, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnLB1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel78, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnLB7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 34, Short.MAX_VALUE))
         );
 
@@ -2512,6 +3151,659 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Like Book", jPanel4);
 
+        jPanel77.setBorder(javax.swing.BorderFactory.createTitledBorder("Books Read"));
+
+        btnLBStart1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
+        btnLBStart1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBStart1ActionPerformed(evt);
+            }
+        });
+
+        btnLBPrevious1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rewind-16.png"))); // NOI18N
+        btnLBPrevious1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBPrevious1ActionPerformed(evt);
+            }
+        });
+
+        btnLBNext1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fast-forward-16.png"))); // NOI18N
+        btnLBNext1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBNext1ActionPerformed(evt);
+            }
+        });
+
+        btnLBEnd1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/end-16.png"))); // NOI18N
+        btnLBEnd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBEnd1ActionPerformed(evt);
+            }
+        });
+
+        pnLB13.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG13.setText("image");
+
+        btnLBRead13.setText("Read");
+        btnLBRead13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead13ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail13.setText("Detail");
+        btnLBDetail13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail13ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB13Layout = new javax.swing.GroupLayout(pnLB13);
+        pnLB13.setLayout(pnLB13Layout);
+        pnLB13Layout.setHorizontalGroup(
+            pnLB13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB13Layout.createSequentialGroup()
+                        .addComponent(btnLBRead13, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail13, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB13Layout.setVerticalGroup(
+            pnLB13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG13, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead13)
+                    .addComponent(btnLBDetail13))
+                .addContainerGap())
+        );
+
+        pnLB14.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG14.setText("image");
+
+        btnLBRead14.setText("Read");
+        btnLBRead14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead14ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail14.setText("Detail");
+        btnLBDetail14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail14ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB14Layout = new javax.swing.GroupLayout(pnLB14);
+        pnLB14.setLayout(pnLB14Layout);
+        pnLB14Layout.setHorizontalGroup(
+            pnLB14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB14Layout.createSequentialGroup()
+                        .addComponent(btnLBRead14, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail14, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB14Layout.setVerticalGroup(
+            pnLB14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead14)
+                    .addComponent(btnLBDetail14))
+                .addContainerGap())
+        );
+
+        pnLB15.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG15.setText("image");
+
+        btnLBRead15.setText("Read");
+        btnLBRead15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead15ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail15.setText("Detail");
+        btnLBDetail15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail15ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB15Layout = new javax.swing.GroupLayout(pnLB15);
+        pnLB15.setLayout(pnLB15Layout);
+        pnLB15Layout.setHorizontalGroup(
+            pnLB15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB15Layout.createSequentialGroup()
+                        .addComponent(btnLBRead15, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail15, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB15Layout.setVerticalGroup(
+            pnLB15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead15)
+                    .addComponent(btnLBDetail15))
+                .addContainerGap())
+        );
+
+        pnLB16.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG16.setText("image");
+
+        btnLBRead16.setText("Read");
+        btnLBRead16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead16ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail16.setText("Detail");
+        btnLBDetail16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail16ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB16Layout = new javax.swing.GroupLayout(pnLB16);
+        pnLB16.setLayout(pnLB16Layout);
+        pnLB16Layout.setHorizontalGroup(
+            pnLB16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB16Layout.createSequentialGroup()
+                        .addComponent(btnLBRead16, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail16, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB16Layout.setVerticalGroup(
+            pnLB16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead16)
+                    .addComponent(btnLBDetail16))
+                .addContainerGap())
+        );
+
+        pnLB17.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG17.setText("image");
+
+        btnLBRead17.setText("Read");
+        btnLBRead17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead17ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail17.setText("Detail");
+        btnLBDetail17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail17ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB17Layout = new javax.swing.GroupLayout(pnLB17);
+        pnLB17.setLayout(pnLB17Layout);
+        pnLB17Layout.setHorizontalGroup(
+            pnLB17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB17Layout.createSequentialGroup()
+                        .addComponent(btnLBRead17, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail17, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB17Layout.setVerticalGroup(
+            pnLB17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG17, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead17)
+                    .addComponent(btnLBDetail17))
+                .addContainerGap())
+        );
+
+        pnLB18.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG18.setText("image");
+
+        btnLBRead18.setText("Read");
+        btnLBRead18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead18ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail18.setText("Detail");
+        btnLBDetail18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail18ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB18Layout = new javax.swing.GroupLayout(pnLB18);
+        pnLB18.setLayout(pnLB18Layout);
+        pnLB18Layout.setHorizontalGroup(
+            pnLB18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB18Layout.createSequentialGroup()
+                        .addComponent(btnLBRead18, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail18, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB18Layout.setVerticalGroup(
+            pnLB18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead18)
+                    .addComponent(btnLBDetail18))
+                .addContainerGap())
+        );
+
+        pnLB19.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG19.setText("image");
+
+        btnLBRead19.setText("Read");
+        btnLBRead19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead19ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail19.setText("Detail");
+        btnLBDetail19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail19ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB19Layout = new javax.swing.GroupLayout(pnLB19);
+        pnLB19.setLayout(pnLB19Layout);
+        pnLB19Layout.setHorizontalGroup(
+            pnLB19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB19Layout.createSequentialGroup()
+                        .addComponent(btnLBRead19, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail19, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB19Layout.setVerticalGroup(
+            pnLB19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG19, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead19)
+                    .addComponent(btnLBDetail19))
+                .addContainerGap())
+        );
+
+        pnLB20.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG20.setText("image");
+
+        btnLBRead20.setText("Read");
+        btnLBRead20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead20ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail20.setText("Detail");
+        btnLBDetail20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail20ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB20Layout = new javax.swing.GroupLayout(pnLB20);
+        pnLB20.setLayout(pnLB20Layout);
+        pnLB20Layout.setHorizontalGroup(
+            pnLB20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB20Layout.createSequentialGroup()
+                        .addComponent(btnLBRead20, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail20, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB20Layout.setVerticalGroup(
+            pnLB20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG20, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead20)
+                    .addComponent(btnLBDetail20))
+                .addContainerGap())
+        );
+
+        pnLB21.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG21.setText("image");
+
+        btnLBRead21.setText("Read");
+        btnLBRead21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead21ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail21.setText("Detail");
+        btnLBDetail21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail21ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB21Layout = new javax.swing.GroupLayout(pnLB21);
+        pnLB21.setLayout(pnLB21Layout);
+        pnLB21Layout.setHorizontalGroup(
+            pnLB21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB21Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB21Layout.createSequentialGroup()
+                        .addComponent(btnLBRead21, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail21, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB21Layout.setVerticalGroup(
+            pnLB21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB21Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead21)
+                    .addComponent(btnLBDetail21))
+                .addContainerGap())
+        );
+
+        pnLB22.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG22.setText("image");
+
+        btnLBRead22.setText("Read");
+        btnLBRead22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead22ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail22.setText("Detail");
+        btnLBDetail22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail22ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB22Layout = new javax.swing.GroupLayout(pnLB22);
+        pnLB22.setLayout(pnLB22Layout);
+        pnLB22Layout.setHorizontalGroup(
+            pnLB22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB22Layout.createSequentialGroup()
+                        .addComponent(btnLBRead22, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail22, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB22Layout.setVerticalGroup(
+            pnLB22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead22)
+                    .addComponent(btnLBDetail22))
+                .addContainerGap())
+        );
+
+        pnLB23.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG23.setText("image");
+
+        btnLBRead23.setText("Read");
+        btnLBRead23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead23ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail23.setText("Detail");
+        btnLBDetail23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail23ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB23Layout = new javax.swing.GroupLayout(pnLB23);
+        pnLB23.setLayout(pnLB23Layout);
+        pnLB23Layout.setHorizontalGroup(
+            pnLB23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB23Layout.createSequentialGroup()
+                        .addComponent(btnLBRead23, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail23, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB23Layout.setVerticalGroup(
+            pnLB23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG23, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead23)
+                    .addComponent(btnLBDetail23))
+                .addContainerGap())
+        );
+
+        pnLB24.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Title"));
+
+        lblLBIMG24.setText("image");
+
+        btnLBRead24.setText("Read");
+        btnLBRead24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBRead24ActionPerformed(evt);
+            }
+        });
+
+        btnLBDetail24.setText("Detail");
+        btnLBDetail24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBDetail24ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnLB24Layout = new javax.swing.GroupLayout(pnLB24);
+        pnLB24.setLayout(pnLB24Layout);
+        pnLB24Layout.setHorizontalGroup(
+            pnLB24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB24Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnLB24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLBIMG24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnLB24Layout.createSequentialGroup()
+                        .addComponent(btnLBRead24, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLBDetail24, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnLB24Layout.setVerticalGroup(
+            pnLB24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnLB24Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLBIMG24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnLB24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLBRead24)
+                    .addComponent(btnLBDetail24))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel77Layout = new javax.swing.GroupLayout(jPanel77);
+        jPanel77.setLayout(jPanel77Layout);
+        jPanel77Layout.setHorizontalGroup(
+            jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel77Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnLB13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnLB19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnLB14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnLB20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel77Layout.createSequentialGroup()
+                        .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pnLB15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnLB21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pnLB16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnLB22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pnLB17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnLB23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pnLB18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnLB24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel77Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(btnLBStart1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLBPrevious1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(btnLBNext1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLBEnd1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(394, 394, 394))))
+        );
+        jPanel77Layout.setVerticalGroup(
+            jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel77Layout.createSequentialGroup()
+                .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnLB17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnLB16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnLB15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnLB14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnLB18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel77Layout.createSequentialGroup()
+                        .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(pnLB23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnLB22, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnLB21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnLB24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btnLBEnd1)
+                            .addComponent(btnLBNext1)
+                            .addComponent(btnLBPrevious1)
+                            .addComponent(btnLBStart1)))
+                    .addGroup(jPanel77Layout.createSequentialGroup()
+                        .addComponent(pnLB20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel77Layout.createSequentialGroup()
+                .addComponent(pnLB13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnLB19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 34, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel77, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel77, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("History", jPanel5);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -2524,7 +3816,7 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1)
-                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -2545,26 +3837,24 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblReaderIMG)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblReaderName)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(jLabel5)
-                                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btnSearchMain, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(2, 2, 2))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(testpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(2, 2, 2)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblReaderIMG)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblReaderName)
+                                        .addComponent(btnSearchMain, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel5)
+                                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(2, 2, 2)))))
+                    .addComponent(testpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(290, 290, 290)
@@ -2574,7 +3864,7 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         testpanel.setVisible(false);
@@ -2591,10 +3881,6 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         openJDialogThongTinKhachHang();
     }//GEN-LAST:event_btnThongTinActionPerformed
 
-    private void btnLikeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLikeListActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLikeListActionPerformed
-
     private void lblReaderIMGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReaderIMGMouseClicked
         if (testpanel.isVisible()) {
             testpanel.setVisible(false);
@@ -2604,7 +3890,7 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     }//GEN-LAST:event_lblReaderIMGMouseClicked
 
     private void btnTBRead1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBRead1ActionPerformed
-
+        readBook(lblTBIMG1);
     }//GEN-LAST:event_btnTBRead1ActionPerformed
 
     private void btnTBFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBFirstActionPerformed
@@ -2626,6 +3912,716 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         // TODO add your handling code here:
         endTD();
     }//GEN-LAST:event_btnTBEndActionPerformed
+
+    private void btnSearchMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchMainActionPerformed
+        // TODO add your handling code here:
+        searchBook();
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_btnSearchMainActionPerformed
+
+    private void btnSearchStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchStartActionPerformed
+        // TODO add your handling code here:
+        firstSearch();
+    }//GEN-LAST:event_btnSearchStartActionPerformed
+
+    private void btnSearchPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchPreviousActionPerformed
+        // TODO add your handling code here:
+        preSearch();
+    }//GEN-LAST:event_btnSearchPreviousActionPerformed
+
+    private void btnSearchNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNextActionPerformed
+        // TODO add your handling code here:
+        nextSearch();
+    }//GEN-LAST:event_btnSearchNextActionPerformed
+
+    private void btnSearchEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchEndActionPerformed
+        // TODO add your handling code here:
+        endSearch();
+    }//GEN-LAST:event_btnSearchEndActionPerformed
+
+    private void btnECStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECStartActionPerformed
+        // TODO add your handling code here:
+        firstEC();
+    }//GEN-LAST:event_btnECStartActionPerformed
+
+    private void btnECPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECPreviousActionPerformed
+        // TODO add your handling code here:
+        preEC();
+    }//GEN-LAST:event_btnECPreviousActionPerformed
+
+    private void btnECNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECNextActionPerformed
+        // TODO add your handling code here:
+        nextEC();
+    }//GEN-LAST:event_btnECNextActionPerformed
+
+    private void btnECEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECEndActionPerformed
+        // TODO add your handling code here:
+        endEC();
+    }//GEN-LAST:event_btnECEndActionPerformed
+
+    private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
+        // TODO add your handling code here:
+        subjectBook();
+    }//GEN-LAST:event_cboTheLoaiActionPerformed
+
+    private void btnTLStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLStartActionPerformed
+        // TODO add your handling code here:
+        firstTL();
+    }//GEN-LAST:event_btnTLStartActionPerformed
+
+    private void btnTLPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLPreviousActionPerformed
+        // TODO add your handling code here:
+        preTL();
+    }//GEN-LAST:event_btnTLPreviousActionPerformed
+
+    private void btnTLNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLNextActionPerformed
+        // TODO add your handling code here:
+        nextTL();
+    }//GEN-LAST:event_btnTLNextActionPerformed
+
+    private void btnTLEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLEndActionPerformed
+        // TODO add your handling code here:
+        endTL();
+    }//GEN-LAST:event_btnTLEndActionPerformed
+
+    private void btnLBStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBStartActionPerformed
+        // TODO add your handling code here:
+        firstLB();
+    }//GEN-LAST:event_btnLBStartActionPerformed
+
+    private void btnLBPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBPreviousActionPerformed
+        // TODO add your handling code here:
+        preLB();
+    }//GEN-LAST:event_btnLBPreviousActionPerformed
+
+    private void btnLBNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBNextActionPerformed
+        // TODO add your handling code here:
+        nextLB();
+    }//GEN-LAST:event_btnLBNextActionPerformed
+
+    private void btnLBEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBEndActionPerformed
+        // TODO add your handling code here:
+        endLB();
+    }//GEN-LAST:event_btnLBEndActionPerformed
+
+    private void btnTBDetail1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBDetail1ActionPerformed
+        detailBook(lblTBIMG1);
+    }//GEN-LAST:event_btnTBDetail1ActionPerformed
+
+    private void btnTBDetail2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBDetail2ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTBIMG2);
+    }//GEN-LAST:event_btnTBDetail2ActionPerformed
+
+    private void btnTBDetail3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBDetail3ActionPerformed
+        detailBook(lblTBIMG3);
+    }//GEN-LAST:event_btnTBDetail3ActionPerformed
+
+    private void btnTBDetail4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBDetail4ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTBIMG4);
+    }//GEN-LAST:event_btnTBDetail4ActionPerformed
+
+    private void btnTBDetail5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBDetail5ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTBIMG5);
+    }//GEN-LAST:event_btnTBDetail5ActionPerformed
+
+    private void btnTBDetail6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBDetail6ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTBIMG6);
+    }//GEN-LAST:event_btnTBDetail6ActionPerformed
+
+    private void btnECDetail1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECDetail1ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblECIMG1);
+    }//GEN-LAST:event_btnECDetail1ActionPerformed
+
+    private void btnECDetail2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECDetail2ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblECIMG2);
+    }//GEN-LAST:event_btnECDetail2ActionPerformed
+
+    private void btnECDetail3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECDetail3ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblECIMG3);
+    }//GEN-LAST:event_btnECDetail3ActionPerformed
+
+    private void btnECDetail4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECDetail4ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblECIMG4);
+    }//GEN-LAST:event_btnECDetail4ActionPerformed
+
+    private void btnECDetail5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECDetail5ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblECIMG5);
+    }//GEN-LAST:event_btnECDetail5ActionPerformed
+
+    private void btnECDetail6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECDetail6ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblECIMG6);
+    }//GEN-LAST:event_btnECDetail6ActionPerformed
+
+    private void btnDetailSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch1ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG1);
+    }//GEN-LAST:event_btnDetailSearch1ActionPerformed
+
+    private void btnDetailSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch2ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG2);
+    }//GEN-LAST:event_btnDetailSearch2ActionPerformed
+
+    private void btnDetailSearch3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch3ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG3);
+    }//GEN-LAST:event_btnDetailSearch3ActionPerformed
+
+    private void btnDetailSearch4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch4ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG4);
+    }//GEN-LAST:event_btnDetailSearch4ActionPerformed
+
+    private void btnDetailSearch5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch5ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG5);
+    }//GEN-LAST:event_btnDetailSearch5ActionPerformed
+
+    private void btnDetailSearch6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch6ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG6);
+    }//GEN-LAST:event_btnDetailSearch6ActionPerformed
+
+    private void btnDetailSearch7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch7ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG7);
+    }//GEN-LAST:event_btnDetailSearch7ActionPerformed
+
+    private void btnDetailSearch8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch8ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG8);
+    }//GEN-LAST:event_btnDetailSearch8ActionPerformed
+
+    private void btnDetailSearch9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch9ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG9);
+    }//GEN-LAST:event_btnDetailSearch9ActionPerformed
+
+    private void btnDetailSearch10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch10ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG10);
+    }//GEN-LAST:event_btnDetailSearch10ActionPerformed
+
+    private void btnDetailSearch11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch11ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG11);
+    }//GEN-LAST:event_btnDetailSearch11ActionPerformed
+
+    private void btnDetailSearch12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailSearch12ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblSearchIMG12);
+    }//GEN-LAST:event_btnDetailSearch12ActionPerformed
+
+    private void btnTLDetail1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail1ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG1);
+    }//GEN-LAST:event_btnTLDetail1ActionPerformed
+
+    private void btnTLDetail2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail2ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG2);
+    }//GEN-LAST:event_btnTLDetail2ActionPerformed
+
+    private void btnTLDetail3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail3ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG3);
+    }//GEN-LAST:event_btnTLDetail3ActionPerformed
+
+    private void btnTLDetail4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail4ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG4);
+    }//GEN-LAST:event_btnTLDetail4ActionPerformed
+
+    private void btnTLDetail5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail5ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG5);
+    }//GEN-LAST:event_btnTLDetail5ActionPerformed
+
+    private void btnTLDetail6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail6ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG6);
+    }//GEN-LAST:event_btnTLDetail6ActionPerformed
+
+    private void btnTLDetail7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail7ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG7);
+    }//GEN-LAST:event_btnTLDetail7ActionPerformed
+
+    private void btnTLDetail8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail8ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG8);
+    }//GEN-LAST:event_btnTLDetail8ActionPerformed
+
+    private void btnTLDetail9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail9ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG9);
+    }//GEN-LAST:event_btnTLDetail9ActionPerformed
+
+    private void btnTLDetail10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail10ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG10);
+    }//GEN-LAST:event_btnTLDetail10ActionPerformed
+
+    private void btnTLDetail11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail11ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG11);
+    }//GEN-LAST:event_btnTLDetail11ActionPerformed
+
+    private void btnTLDetail12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLDetail12ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblTLIMG12);
+    }//GEN-LAST:event_btnTLDetail12ActionPerformed
+
+    private void btnLBDetail1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail1ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG1);
+    }//GEN-LAST:event_btnLBDetail1ActionPerformed
+
+    private void btnLBDetail2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail2ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG2);
+    }//GEN-LAST:event_btnLBDetail2ActionPerformed
+
+    private void btnLBDetail3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail3ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG3);
+    }//GEN-LAST:event_btnLBDetail3ActionPerformed
+
+    private void btnLBDetail4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail4ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG4);
+    }//GEN-LAST:event_btnLBDetail4ActionPerformed
+
+    private void btnLBDetail5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail5ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG5);
+    }//GEN-LAST:event_btnLBDetail5ActionPerformed
+
+    private void btnLBDetail6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail6ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG6);
+    }//GEN-LAST:event_btnLBDetail6ActionPerformed
+
+    private void btnLBDetail7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail7ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG7);
+    }//GEN-LAST:event_btnLBDetail7ActionPerformed
+
+    private void btnLBDetail8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail8ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG8);
+    }//GEN-LAST:event_btnLBDetail8ActionPerformed
+
+    private void btnLBDetail9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail9ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG9);
+    }//GEN-LAST:event_btnLBDetail9ActionPerformed
+
+    private void btnLBDetail10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail10ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG10);
+    }//GEN-LAST:event_btnLBDetail10ActionPerformed
+
+    private void btnLBDetail11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail11ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG11);
+    }//GEN-LAST:event_btnLBDetail11ActionPerformed
+
+    private void btnLBDetail12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail12ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG12);
+    }//GEN-LAST:event_btnLBDetail12ActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+        WLBook();
+        RBBook();
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void btnLBRead1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead1ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG1);
+    }//GEN-LAST:event_btnLBRead1ActionPerformed
+
+    private void btnTBRead2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBRead2ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTBIMG2);
+    }//GEN-LAST:event_btnTBRead2ActionPerformed
+
+    private void btnTBRead3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBRead3ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTBIMG3);
+    }//GEN-LAST:event_btnTBRead3ActionPerformed
+
+    private void btnTBRead4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBRead4ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTBIMG4);
+    }//GEN-LAST:event_btnTBRead4ActionPerformed
+
+    private void btnTBRead5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBRead5ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTBIMG5);
+    }//GEN-LAST:event_btnTBRead5ActionPerformed
+
+    private void btnTBRead6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBRead6ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTBIMG6);
+    }//GEN-LAST:event_btnTBRead6ActionPerformed
+
+    private void btnECRead1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECRead1ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblECIMG1);
+    }//GEN-LAST:event_btnECRead1ActionPerformed
+
+    private void btnECRead2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECRead2ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblECIMG2);
+    }//GEN-LAST:event_btnECRead2ActionPerformed
+
+    private void btnECRead3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECRead3ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblECIMG3);
+    }//GEN-LAST:event_btnECRead3ActionPerformed
+
+    private void btnECRead4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECRead4ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblECIMG4);
+    }//GEN-LAST:event_btnECRead4ActionPerformed
+
+    private void btnECRead5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECRead5ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblECIMG5);
+    }//GEN-LAST:event_btnECRead5ActionPerformed
+
+    private void btnECRead6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnECRead6ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblECIMG6);
+    }//GEN-LAST:event_btnECRead6ActionPerformed
+
+    private void btnReadSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch1ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG1);
+    }//GEN-LAST:event_btnReadSearch1ActionPerformed
+
+    private void btnReadSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch2ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG2);
+    }//GEN-LAST:event_btnReadSearch2ActionPerformed
+
+    private void btnReadSearch3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch3ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG3);
+    }//GEN-LAST:event_btnReadSearch3ActionPerformed
+
+    private void btnReadSearch4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch4ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG4);
+    }//GEN-LAST:event_btnReadSearch4ActionPerformed
+
+    private void btnReadSearch5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch5ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG5);
+    }//GEN-LAST:event_btnReadSearch5ActionPerformed
+
+    private void btnReadSearch6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch6ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG6);
+    }//GEN-LAST:event_btnReadSearch6ActionPerformed
+
+    private void btnReadSearch7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch7ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG7);
+    }//GEN-LAST:event_btnReadSearch7ActionPerformed
+
+    private void btnReadSearch8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch8ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG8);
+    }//GEN-LAST:event_btnReadSearch8ActionPerformed
+
+    private void btnReadSearch9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch9ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG9);
+    }//GEN-LAST:event_btnReadSearch9ActionPerformed
+
+    private void btnReadSearch10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch10ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG10);
+    }//GEN-LAST:event_btnReadSearch10ActionPerformed
+
+    private void btnReadSearch11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch11ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG11);
+    }//GEN-LAST:event_btnReadSearch11ActionPerformed
+
+    private void btnReadSearch12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadSearch12ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblSearchIMG12);
+    }//GEN-LAST:event_btnReadSearch12ActionPerformed
+
+    private void btnTLRead1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead1ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG1);
+    }//GEN-LAST:event_btnTLRead1ActionPerformed
+
+    private void btnTLRead2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead2ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG2);
+    }//GEN-LAST:event_btnTLRead2ActionPerformed
+
+    private void btnTLRead3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead3ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG3);
+    }//GEN-LAST:event_btnTLRead3ActionPerformed
+
+    private void btnTLRead4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead4ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG4);
+    }//GEN-LAST:event_btnTLRead4ActionPerformed
+
+    private void btnTLRead5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead5ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG5);
+    }//GEN-LAST:event_btnTLRead5ActionPerformed
+
+    private void btnTLRead6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead6ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG6);
+    }//GEN-LAST:event_btnTLRead6ActionPerformed
+
+    private void btnTLRead7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead7ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG7);
+    }//GEN-LAST:event_btnTLRead7ActionPerformed
+
+    private void btnTLRead8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead8ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG8);
+    }//GEN-LAST:event_btnTLRead8ActionPerformed
+
+    private void btnTLRead9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead9ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG9);
+    }//GEN-LAST:event_btnTLRead9ActionPerformed
+
+    private void btnTLRead10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead10ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG10);
+    }//GEN-LAST:event_btnTLRead10ActionPerformed
+
+    private void btnTLRead11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead11ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG11);
+    }//GEN-LAST:event_btnTLRead11ActionPerformed
+
+    private void btnTLRead12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLRead12ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblTLIMG12);
+    }//GEN-LAST:event_btnTLRead12ActionPerformed
+
+    private void btnLBRead2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead2ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG2);
+    }//GEN-LAST:event_btnLBRead2ActionPerformed
+
+    private void btnLBRead3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead3ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG3);
+    }//GEN-LAST:event_btnLBRead3ActionPerformed
+
+    private void btnLBRead4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead4ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG4);
+    }//GEN-LAST:event_btnLBRead4ActionPerformed
+
+    private void btnLBRead5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead5ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG5);
+    }//GEN-LAST:event_btnLBRead5ActionPerformed
+
+    private void btnLBRead6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead6ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG6);
+    }//GEN-LAST:event_btnLBRead6ActionPerformed
+
+    private void btnLBRead7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead7ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG7);
+    }//GEN-LAST:event_btnLBRead7ActionPerformed
+
+    private void btnLBRead8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead8ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG8);
+    }//GEN-LAST:event_btnLBRead8ActionPerformed
+
+    private void btnLBRead9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead9ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG9);
+    }//GEN-LAST:event_btnLBRead9ActionPerformed
+
+    private void btnLBRead10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead10ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG10);
+    }//GEN-LAST:event_btnLBRead10ActionPerformed
+
+    private void btnLBRead11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead11ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG11);
+    }//GEN-LAST:event_btnLBRead11ActionPerformed
+
+    private void btnLBRead12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead12ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG12);
+    }//GEN-LAST:event_btnLBRead12ActionPerformed
+
+    private void btnLBStart1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBStart1ActionPerformed
+        // TODO add your handling code here:
+        firstRB();
+    }//GEN-LAST:event_btnLBStart1ActionPerformed
+
+    private void btnLBPrevious1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBPrevious1ActionPerformed
+        // TODO add your handling code here:
+        preRB();
+    }//GEN-LAST:event_btnLBPrevious1ActionPerformed
+
+    private void btnLBNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBNext1ActionPerformed
+        // TODO add your handling code here:
+        nextRB();
+    }//GEN-LAST:event_btnLBNext1ActionPerformed
+
+    private void btnLBEnd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBEnd1ActionPerformed
+        // TODO add your handling code here:
+        endRB();
+    }//GEN-LAST:event_btnLBEnd1ActionPerformed
+
+    private void btnLBRead13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead13ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG13);
+    }//GEN-LAST:event_btnLBRead13ActionPerformed
+
+    private void btnLBDetail13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail13ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG13);
+    }//GEN-LAST:event_btnLBDetail13ActionPerformed
+
+    private void btnLBRead14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead14ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG14);
+    }//GEN-LAST:event_btnLBRead14ActionPerformed
+
+    private void btnLBDetail14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail14ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG14);
+    }//GEN-LAST:event_btnLBDetail14ActionPerformed
+
+    private void btnLBRead15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead15ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG15);
+    }//GEN-LAST:event_btnLBRead15ActionPerformed
+
+    private void btnLBDetail15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail15ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG15);
+    }//GEN-LAST:event_btnLBDetail15ActionPerformed
+
+    private void btnLBRead16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead16ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG16);
+    }//GEN-LAST:event_btnLBRead16ActionPerformed
+
+    private void btnLBDetail16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail16ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG16);
+    }//GEN-LAST:event_btnLBDetail16ActionPerformed
+
+    private void btnLBRead17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead17ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG17);
+    }//GEN-LAST:event_btnLBRead17ActionPerformed
+
+    private void btnLBDetail17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail17ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG17);
+    }//GEN-LAST:event_btnLBDetail17ActionPerformed
+
+    private void btnLBRead18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead18ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG18);
+    }//GEN-LAST:event_btnLBRead18ActionPerformed
+
+    private void btnLBDetail18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail18ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG18);
+    }//GEN-LAST:event_btnLBDetail18ActionPerformed
+
+    private void btnLBRead19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead19ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG19);
+    }//GEN-LAST:event_btnLBRead19ActionPerformed
+
+    private void btnLBDetail19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail19ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG19);
+    }//GEN-LAST:event_btnLBDetail19ActionPerformed
+
+    private void btnLBRead20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead20ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG20);
+    }//GEN-LAST:event_btnLBRead20ActionPerformed
+
+    private void btnLBDetail20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail20ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG20);
+    }//GEN-LAST:event_btnLBDetail20ActionPerformed
+
+    private void btnLBRead21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead21ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG21);
+    }//GEN-LAST:event_btnLBRead21ActionPerformed
+
+    private void btnLBDetail21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail21ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG21);
+    }//GEN-LAST:event_btnLBDetail21ActionPerformed
+
+    private void btnLBRead22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead22ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG22);
+    }//GEN-LAST:event_btnLBRead22ActionPerformed
+
+    private void btnLBDetail22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail22ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG22);
+    }//GEN-LAST:event_btnLBDetail22ActionPerformed
+
+    private void btnLBRead23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead23ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG23);
+    }//GEN-LAST:event_btnLBRead23ActionPerformed
+
+    private void btnLBDetail23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail23ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG23);
+    }//GEN-LAST:event_btnLBDetail23ActionPerformed
+
+    private void btnLBRead24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBRead24ActionPerformed
+        // TODO add your handling code here:
+        readBook(lblLBIMG24);
+    }//GEN-LAST:event_btnLBRead24ActionPerformed
+
+    private void btnLBDetail24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBDetail24ActionPerformed
+        // TODO add your handling code here:
+        detailBook(lblLBIMG24);
+    }//GEN-LAST:event_btnLBDetail24ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2679,19 +4675,78 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     private javax.swing.JButton btnDetailSearch7;
     private javax.swing.JButton btnDetailSearch8;
     private javax.swing.JButton btnDetailSearch9;
-    private javax.swing.JButton btnEnd2;
-    private javax.swing.JButton btnEnd3;
-    private javax.swing.JButton btnEnd4;
-    private javax.swing.JButton btnEnd6;
-    private javax.swing.JButton btnLikeList;
-    private javax.swing.JButton btnNext2;
-    private javax.swing.JButton btnNext3;
-    private javax.swing.JButton btnNext4;
-    private javax.swing.JButton btnNext6;
-    private javax.swing.JButton btnPrevious2;
-    private javax.swing.JButton btnPrevious3;
-    private javax.swing.JButton btnPrevious4;
-    private javax.swing.JButton btnPrevious6;
+    private javax.swing.JButton btnECDetail1;
+    private javax.swing.JButton btnECDetail2;
+    private javax.swing.JButton btnECDetail3;
+    private javax.swing.JButton btnECDetail4;
+    private javax.swing.JButton btnECDetail5;
+    private javax.swing.JButton btnECDetail6;
+    private javax.swing.JButton btnECEnd;
+    private javax.swing.JButton btnECNext;
+    private javax.swing.JButton btnECPrevious;
+    private javax.swing.JButton btnECRead1;
+    private javax.swing.JButton btnECRead2;
+    private javax.swing.JButton btnECRead3;
+    private javax.swing.JButton btnECRead4;
+    private javax.swing.JButton btnECRead5;
+    private javax.swing.JButton btnECRead6;
+    private javax.swing.JButton btnECStart;
+    private javax.swing.JButton btnLBDetail1;
+    private javax.swing.JButton btnLBDetail10;
+    private javax.swing.JButton btnLBDetail11;
+    private javax.swing.JButton btnLBDetail12;
+    private javax.swing.JButton btnLBDetail13;
+    private javax.swing.JButton btnLBDetail14;
+    private javax.swing.JButton btnLBDetail15;
+    private javax.swing.JButton btnLBDetail16;
+    private javax.swing.JButton btnLBDetail17;
+    private javax.swing.JButton btnLBDetail18;
+    private javax.swing.JButton btnLBDetail19;
+    private javax.swing.JButton btnLBDetail2;
+    private javax.swing.JButton btnLBDetail20;
+    private javax.swing.JButton btnLBDetail21;
+    private javax.swing.JButton btnLBDetail22;
+    private javax.swing.JButton btnLBDetail23;
+    private javax.swing.JButton btnLBDetail24;
+    private javax.swing.JButton btnLBDetail3;
+    private javax.swing.JButton btnLBDetail4;
+    private javax.swing.JButton btnLBDetail5;
+    private javax.swing.JButton btnLBDetail6;
+    private javax.swing.JButton btnLBDetail7;
+    private javax.swing.JButton btnLBDetail8;
+    private javax.swing.JButton btnLBDetail9;
+    private javax.swing.JButton btnLBEnd;
+    private javax.swing.JButton btnLBEnd1;
+    private javax.swing.JButton btnLBNext;
+    private javax.swing.JButton btnLBNext1;
+    private javax.swing.JButton btnLBPrevious;
+    private javax.swing.JButton btnLBPrevious1;
+    private javax.swing.JButton btnLBRead1;
+    private javax.swing.JButton btnLBRead10;
+    private javax.swing.JButton btnLBRead11;
+    private javax.swing.JButton btnLBRead12;
+    private javax.swing.JButton btnLBRead13;
+    private javax.swing.JButton btnLBRead14;
+    private javax.swing.JButton btnLBRead15;
+    private javax.swing.JButton btnLBRead16;
+    private javax.swing.JButton btnLBRead17;
+    private javax.swing.JButton btnLBRead18;
+    private javax.swing.JButton btnLBRead19;
+    private javax.swing.JButton btnLBRead2;
+    private javax.swing.JButton btnLBRead20;
+    private javax.swing.JButton btnLBRead21;
+    private javax.swing.JButton btnLBRead22;
+    private javax.swing.JButton btnLBRead23;
+    private javax.swing.JButton btnLBRead24;
+    private javax.swing.JButton btnLBRead3;
+    private javax.swing.JButton btnLBRead4;
+    private javax.swing.JButton btnLBRead5;
+    private javax.swing.JButton btnLBRead6;
+    private javax.swing.JButton btnLBRead7;
+    private javax.swing.JButton btnLBRead8;
+    private javax.swing.JButton btnLBRead9;
+    private javax.swing.JButton btnLBStart;
+    private javax.swing.JButton btnLBStart1;
     private javax.swing.JButton btnReadSearch1;
     private javax.swing.JButton btnReadSearch10;
     private javax.swing.JButton btnReadSearch11;
@@ -2704,11 +4759,11 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     private javax.swing.JButton btnReadSearch7;
     private javax.swing.JButton btnReadSearch8;
     private javax.swing.JButton btnReadSearch9;
+    private javax.swing.JButton btnSearchEnd;
     private javax.swing.JButton btnSearchMain;
-    private javax.swing.JButton btnStart2;
-    private javax.swing.JButton btnStart3;
-    private javax.swing.JButton btnStart4;
-    private javax.swing.JButton btnStart6;
+    private javax.swing.JButton btnSearchNext;
+    private javax.swing.JButton btnSearchPrevious;
+    private javax.swing.JButton btnSearchStart;
     private javax.swing.JButton btnTBDetail1;
     private javax.swing.JButton btnTBDetail2;
     private javax.swing.JButton btnTBDetail3;
@@ -2725,144 +4780,84 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     private javax.swing.JButton btnTBRead4;
     private javax.swing.JButton btnTBRead5;
     private javax.swing.JButton btnTBRead6;
+    private javax.swing.JButton btnTLDetail1;
+    private javax.swing.JButton btnTLDetail10;
+    private javax.swing.JButton btnTLDetail11;
+    private javax.swing.JButton btnTLDetail12;
+    private javax.swing.JButton btnTLDetail2;
+    private javax.swing.JButton btnTLDetail3;
+    private javax.swing.JButton btnTLDetail4;
+    private javax.swing.JButton btnTLDetail5;
+    private javax.swing.JButton btnTLDetail6;
+    private javax.swing.JButton btnTLDetail7;
+    private javax.swing.JButton btnTLDetail8;
+    private javax.swing.JButton btnTLDetail9;
+    private javax.swing.JButton btnTLEnd;
+    private javax.swing.JButton btnTLNext;
+    private javax.swing.JButton btnTLPrevious;
+    private javax.swing.JButton btnTLRead1;
+    private javax.swing.JButton btnTLRead10;
+    private javax.swing.JButton btnTLRead11;
+    private javax.swing.JButton btnTLRead12;
+    private javax.swing.JButton btnTLRead2;
+    private javax.swing.JButton btnTLRead3;
+    private javax.swing.JButton btnTLRead4;
+    private javax.swing.JButton btnTLRead5;
+    private javax.swing.JButton btnTLRead6;
+    private javax.swing.JButton btnTLRead7;
+    private javax.swing.JButton btnTLRead8;
+    private javax.swing.JButton btnTLRead9;
+    private javax.swing.JButton btnTLStart;
     private javax.swing.JButton btnThongTin;
-    private javax.swing.JButton jButton111;
-    private javax.swing.JButton jButton112;
-    private javax.swing.JButton jButton113;
-    private javax.swing.JButton jButton114;
-    private javax.swing.JButton jButton115;
-    private javax.swing.JButton jButton116;
-    private javax.swing.JButton jButton117;
-    private javax.swing.JButton jButton118;
-    private javax.swing.JButton jButton119;
-    private javax.swing.JButton jButton120;
-    private javax.swing.JButton jButton121;
-    private javax.swing.JButton jButton122;
-    private javax.swing.JButton jButton123;
-    private javax.swing.JButton jButton124;
-    private javax.swing.JButton jButton125;
-    private javax.swing.JButton jButton126;
-    private javax.swing.JButton jButton127;
-    private javax.swing.JButton jButton128;
-    private javax.swing.JButton jButton129;
-    private javax.swing.JButton jButton130;
-    private javax.swing.JButton jButton131;
-    private javax.swing.JButton jButton132;
-    private javax.swing.JButton jButton133;
-    private javax.swing.JButton jButton134;
-    private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton27;
-    private javax.swing.JButton jButton28;
-    private javax.swing.JButton jButton29;
-    private javax.swing.JButton jButton30;
-    private javax.swing.JButton jButton31;
-    private javax.swing.JButton jButton32;
-    private javax.swing.JButton jButton33;
-    private javax.swing.JButton jButton34;
-    private javax.swing.JButton jButton35;
-    private javax.swing.JButton jButton36;
-    private javax.swing.JButton jButton63;
-    private javax.swing.JButton jButton64;
-    private javax.swing.JButton jButton65;
-    private javax.swing.JButton jButton66;
-    private javax.swing.JButton jButton67;
-    private javax.swing.JButton jButton68;
-    private javax.swing.JButton jButton69;
-    private javax.swing.JButton jButton70;
-    private javax.swing.JButton jButton71;
-    private javax.swing.JButton jButton72;
-    private javax.swing.JButton jButton73;
-    private javax.swing.JButton jButton74;
-    private javax.swing.JButton jButton75;
-    private javax.swing.JButton jButton76;
-    private javax.swing.JButton jButton77;
-    private javax.swing.JButton jButton78;
-    private javax.swing.JButton jButton79;
-    private javax.swing.JButton jButton80;
-    private javax.swing.JButton jButton81;
-    private javax.swing.JButton jButton82;
-    private javax.swing.JButton jButton83;
-    private javax.swing.JButton jButton84;
-    private javax.swing.JButton jButton85;
-    private javax.swing.JButton jButton86;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel19;
+    private javax.swing.JComboBox<String> cboTheLoai;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
-    private javax.swing.JLabel jLabel68;
-    private javax.swing.JLabel jLabel69;
-    private javax.swing.JLabel jLabel70;
-    private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel28;
-    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel30;
-    private javax.swing.JPanel jPanel31;
-    private javax.swing.JPanel jPanel32;
-    private javax.swing.JPanel jPanel33;
-    private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel50;
-    private javax.swing.JPanel jPanel51;
-    private javax.swing.JPanel jPanel52;
-    private javax.swing.JPanel jPanel53;
-    private javax.swing.JPanel jPanel54;
-    private javax.swing.JPanel jPanel55;
-    private javax.swing.JPanel jPanel56;
-    private javax.swing.JPanel jPanel57;
-    private javax.swing.JPanel jPanel58;
-    private javax.swing.JPanel jPanel59;
-    private javax.swing.JPanel jPanel60;
-    private javax.swing.JPanel jPanel61;
-    private javax.swing.JPanel jPanel62;
     private javax.swing.JPanel jPanel76;
     private javax.swing.JPanel jPanel77;
-    private javax.swing.JPanel jPanel78;
-    private javax.swing.JPanel jPanel79;
-    private javax.swing.JPanel jPanel80;
-    private javax.swing.JPanel jPanel81;
-    private javax.swing.JPanel jPanel82;
-    private javax.swing.JPanel jPanel83;
-    private javax.swing.JPanel jPanel84;
-    private javax.swing.JPanel jPanel85;
-    private javax.swing.JPanel jPanel86;
-    private javax.swing.JPanel jPanel87;
-    private javax.swing.JPanel jPanel88;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblECIMG1;
+    private javax.swing.JLabel lblECIMG2;
+    private javax.swing.JLabel lblECIMG3;
+    private javax.swing.JLabel lblECIMG4;
+    private javax.swing.JLabel lblECIMG5;
+    private javax.swing.JLabel lblECIMG6;
+    private javax.swing.JLabel lblLBIMG1;
+    private javax.swing.JLabel lblLBIMG10;
+    private javax.swing.JLabel lblLBIMG11;
+    private javax.swing.JLabel lblLBIMG12;
+    private javax.swing.JLabel lblLBIMG13;
+    private javax.swing.JLabel lblLBIMG14;
+    private javax.swing.JLabel lblLBIMG15;
+    private javax.swing.JLabel lblLBIMG16;
+    private javax.swing.JLabel lblLBIMG17;
+    private javax.swing.JLabel lblLBIMG18;
+    private javax.swing.JLabel lblLBIMG19;
+    private javax.swing.JLabel lblLBIMG2;
+    private javax.swing.JLabel lblLBIMG20;
+    private javax.swing.JLabel lblLBIMG21;
+    private javax.swing.JLabel lblLBIMG22;
+    private javax.swing.JLabel lblLBIMG23;
+    private javax.swing.JLabel lblLBIMG24;
+    private javax.swing.JLabel lblLBIMG3;
+    private javax.swing.JLabel lblLBIMG4;
+    private javax.swing.JLabel lblLBIMG5;
+    private javax.swing.JLabel lblLBIMG6;
+    private javax.swing.JLabel lblLBIMG7;
+    private javax.swing.JLabel lblLBIMG8;
+    private javax.swing.JLabel lblLBIMG9;
     private javax.swing.JLabel lblReaderIMG;
     private javax.swing.JLabel lblReaderName;
     private javax.swing.JLabel lblSearchIMG1;
@@ -2883,7 +4878,49 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     private javax.swing.JLabel lblTBIMG4;
     private javax.swing.JLabel lblTBIMG5;
     private javax.swing.JLabel lblTBIMG6;
+    private javax.swing.JLabel lblTLIMG1;
+    private javax.swing.JLabel lblTLIMG10;
+    private javax.swing.JLabel lblTLIMG11;
+    private javax.swing.JLabel lblTLIMG12;
+    private javax.swing.JLabel lblTLIMG2;
+    private javax.swing.JLabel lblTLIMG3;
+    private javax.swing.JLabel lblTLIMG4;
+    private javax.swing.JLabel lblTLIMG5;
+    private javax.swing.JLabel lblTLIMG6;
+    private javax.swing.JLabel lblTLIMG7;
+    private javax.swing.JLabel lblTLIMG8;
+    private javax.swing.JLabel lblTLIMG9;
     private javax.swing.JLabel lblTichDiem;
+    private javax.swing.JPanel pnEC1;
+    private javax.swing.JPanel pnEC2;
+    private javax.swing.JPanel pnEC3;
+    private javax.swing.JPanel pnEC4;
+    private javax.swing.JPanel pnEC5;
+    private javax.swing.JPanel pnEC6;
+    private javax.swing.JPanel pnLB1;
+    private javax.swing.JPanel pnLB10;
+    private javax.swing.JPanel pnLB11;
+    private javax.swing.JPanel pnLB12;
+    private javax.swing.JPanel pnLB13;
+    private javax.swing.JPanel pnLB14;
+    private javax.swing.JPanel pnLB15;
+    private javax.swing.JPanel pnLB16;
+    private javax.swing.JPanel pnLB17;
+    private javax.swing.JPanel pnLB18;
+    private javax.swing.JPanel pnLB19;
+    private javax.swing.JPanel pnLB2;
+    private javax.swing.JPanel pnLB20;
+    private javax.swing.JPanel pnLB21;
+    private javax.swing.JPanel pnLB22;
+    private javax.swing.JPanel pnLB23;
+    private javax.swing.JPanel pnLB24;
+    private javax.swing.JPanel pnLB3;
+    private javax.swing.JPanel pnLB4;
+    private javax.swing.JPanel pnLB5;
+    private javax.swing.JPanel pnLB6;
+    private javax.swing.JPanel pnLB7;
+    private javax.swing.JPanel pnLB8;
+    private javax.swing.JPanel pnLB9;
     private javax.swing.JPanel pnSearch1;
     private javax.swing.JPanel pnSearch10;
     private javax.swing.JPanel pnSearch11;
@@ -2902,6 +4939,18 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     private javax.swing.JPanel pnTB4;
     private javax.swing.JPanel pnTB5;
     private javax.swing.JPanel pnTB6;
+    private javax.swing.JPanel pnTL1;
+    private javax.swing.JPanel pnTL10;
+    private javax.swing.JPanel pnTL11;
+    private javax.swing.JPanel pnTL12;
+    private javax.swing.JPanel pnTL2;
+    private javax.swing.JPanel pnTL3;
+    private javax.swing.JPanel pnTL4;
+    private javax.swing.JPanel pnTL5;
+    private javax.swing.JPanel pnTL6;
+    private javax.swing.JPanel pnTL7;
+    private javax.swing.JPanel pnTL8;
+    private javax.swing.JPanel pnTL9;
     private javax.swing.JPanel testpanel;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
@@ -2910,6 +4959,43 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         loadUserInfo();
         loadSach();
         loadSachTD();
+        loadSachEC();
+        loadSachSearch();
+        fillcboTL();
+        subjectBook();
+        WLBook();
+        RBBook();
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                searchBook();
+                jTabbedPane1.setSelectedIndex(1);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                searchBook();
+                jTabbedPane1.setSelectedIndex(1);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                searchBook();
+                jTabbedPane1.setSelectedIndex(1);
+            }
+        });
+    }
+
+    private void detailBook(JLabel lb) {
+        new JDialogChiTietSanPham(this, true, lb.getToolTipText()).setVisible(true);
+    }
+
+    private void readBook(JLabel lb) {
+        Sach temp = sachDAO.selectByID(lb.getToolTipText());
+        URL_Dealer.openURL(temp.getUrlLink());
+        
+        SachPDF pdftemp = new SachPDF(Auth.user.getUserID(), temp.getIdSach(), 0);
+        pdfDAO.insert(pdftemp);
     }
 
     private void openJDialogThongTinKhachHang() {
@@ -2934,8 +5020,64 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
 
     }
 
+    private void setBookForm(Sach sach, JLabel lbl, JPanel pn) {
+        pn.setBorder(new TitledBorder(sach.getTenSach()));
+        String name = sach.getTenSach() + ".jpg";
+        File out = new File("logos", name);
+        if (out.exists()) {
+            lbl.setText("");
+            ImageIcon icon = XImage.read(name);
+            Image img = icon.getImage().getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(img);
+            lbl.setIcon(scaledIcon);
+            lbl.setToolTipText(sach.getIdSach());
+        }
+    }
+
+    private void setBookFormFull(Sach sach, JLabel lbl, JPanel pn, JButton btnRead, JButton btnDetail) {
+        pn.setBorder(new TitledBorder(sach.getTenSach()));
+        String name = sach.getTenSach() + ".jpg";
+        File out = new File("logos", name);
+        if (out.exists()) {
+            lbl.setText("");
+            ImageIcon icon = XImage.read(name);
+            Image img = icon.getImage().getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(img);
+            lbl.setIcon(scaledIcon);
+            lbl.setToolTipText(sach.getIdSach());
+        }
+        btnRead.setOpaque(true);
+        btnRead.setContentAreaFilled(true);
+        btnRead.setBorderPainted(true);
+        btnRead.setText("Read");
+        btnRead.setEnabled(true);
+        btnDetail.setOpaque(true);
+        btnDetail.setContentAreaFilled(true);
+        btnDetail.setBorderPainted(true);
+        btnDetail.setText("Detail");
+        btnDetail.setEnabled(true);
+    }
+
+    private void clearBookForm(JLabel lbl, JPanel pn, JButton btnRead, JButton btnDetail) {
+        pn.setBorder(null);
+        lbl.setIcon(new ImageIcon());
+        lbl.setText(null);
+        lbl.setToolTipText(null);
+        btnRead.setOpaque(false);
+        btnRead.setContentAreaFilled(false);
+        btnRead.setBorderPainted(false);
+        btnRead.setText("    ");
+        btnRead.setEnabled(false);
+        btnDetail.setOpaque(false);
+        btnDetail.setContentAreaFilled(false);
+        btnDetail.setBorderPainted(false);
+        btnDetail.setText("    ");
+        btnDetail.setEnabled(false);
+    }
+
     private void loadSach() {
         sachTDList = sachDAO.select();
+        sachSearchList = sachDAO.select();
         for (Sach sach : sachTDList) {
             String name = sach.getTenSach() + ".jpg";
             String link = sach.getCoverI();
@@ -2965,20 +5107,6 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
                 }
             }
 
-        }
-    }
-
-    private void setBookForm(Sach sach, JLabel lbl, JPanel pn) {
-        pn.setBorder(new TitledBorder(sach.getTenSach()));
-        String name = sach.getTenSach() + ".jpg";
-        File out = new File("logos", name);
-        if (out.exists()) {
-            lbl.setText("");
-            ImageIcon icon = XImage.read(name);
-            Image img = icon.getImage().getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon scaledIcon = new ImageIcon(img);
-            lbl.setIcon(scaledIcon);
-            lbl.setToolTipText(sach.getIdSach());
         }
     }
 
@@ -3018,43 +5146,563 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         System.out.println("End: " + startTD + "-" + endTD);
     }
 
-    private void searchBook() {
-        String keyword = txtTimKiem.getText();
-        sachSearchList = sachDAO.search(keyword);
-        
-    }
-
-    private void loadSachSearch() {
-        for (int i = startSearch; i < endSearch; i++) {
-            switch (endSearch - i) {
-                case 12 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG1, pnTB1);
-                case 11 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG2, pnTB2);
-                case 10 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG3, pnTB3);
-                case 9 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG4, pnTB4);
-                case 8 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG5, pnTB5);
-                case 7 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG6, pnTB6);
+    private void loadSachEC() {
+        for (int i = startEC; i < endEC; i++) {
+            switch (endEC - i) {
                 case 6 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG1, pnTB1);
+                    setBookForm(sachTDList.get(i), lblECIMG1, pnEC1);
                 case 5 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG2, pnTB2);
+                    setBookForm(sachTDList.get(i), lblECIMG2, pnEC2);
                 case 4 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG3, pnTB3);
+                    setBookForm(sachTDList.get(i), lblECIMG3, pnEC3);
                 case 3 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG4, pnTB4);
+                    setBookForm(sachTDList.get(i), lblECIMG4, pnEC4);
                 case 2 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG5, pnTB5);
+                    setBookForm(sachTDList.get(i), lblECIMG5, pnEC5);
                 case 1 ->
-                    setBookForm(sachTDList.get(i), lblTBIMG6, pnTB6);
+                    setBookForm(sachTDList.get(i), lblECIMG6, pnEC6);
                 default -> {
                 }
             }
 
         }
+    }
+
+    private void nextEC() {
+        if (endEC < sachTDList.size()) {
+            startEC++;
+            endEC++;
+            loadSachEC();
+            System.out.println("Next: " + startTD + "-" + endTD);
+        } else {
+            DialogHelper.alert(this, "Last page");
+        }
+    }
+
+    private void preEC() {
+        if (startEC > 0) {
+            startEC--;
+            endEC--;
+            loadSachEC();
+            System.out.println("Pre: " + startTD + "-" + endTD);
+        } else {
+            DialogHelper.alert(this, "First page");
+        }
+    }
+
+    private void firstEC() {
+        startEC = 0;
+        endEC = 6;
+        loadSachEC();
+        System.out.println("First: " + startTD + "-" + endTD);
+    }
+
+    private void endEC() {
+        startEC = sachTDList.size() - 6;
+        endEC = sachTDList.size();
+        loadSachEC();
+        System.out.println("End: " + startTD + "-" + endTD);
+    }
+
+    private void searchBook() {
+        String keyword = txtTimKiem.getText();
+        sachSearchList = sachDAO.search(keyword);
+        System.out.println("test: " + sachSearchList.size());
+        if (sachSearchList.size() < 12) {
+            btnSearchStart.setEnabled(false);
+            btnSearchEnd.setEnabled(false);
+            btnSearchNext.setEnabled(false);
+            btnSearchPrevious.setEnabled(false);
+        } else {
+            btnSearchStart.setEnabled(true);
+            btnSearchEnd.setEnabled(true);
+            btnSearchNext.setEnabled(true);
+            btnSearchPrevious.setEnabled(true);
+        }
+        loadSachSearch();
+    }
+
+    private void loadSachSearch() {
+        for (int j = startSearch; j < endSearch; j++) {
+            switch (endSearch - j) {
+                case 12 ->
+                    clearBookForm(lblSearchIMG1, pnSearch1, btnReadSearch1, btnDetailSearch1);
+                case 11 ->
+                    clearBookForm(lblSearchIMG2, pnSearch2, btnReadSearch2, btnDetailSearch2);
+                case 10 ->
+                    clearBookForm(lblSearchIMG3, pnSearch3, btnReadSearch3, btnDetailSearch3);
+                case 9 ->
+                    clearBookForm(lblSearchIMG4, pnSearch4, btnReadSearch4, btnDetailSearch4);
+                case 8 ->
+                    clearBookForm(lblSearchIMG5, pnSearch5, btnReadSearch5, btnDetailSearch5);
+                case 7 ->
+                    clearBookForm(lblSearchIMG6, pnSearch6, btnReadSearch6, btnDetailSearch6);
+                case 6 ->
+                    clearBookForm(lblSearchIMG7, pnSearch7, btnReadSearch7, btnDetailSearch7);
+                case 5 ->
+                    clearBookForm(lblSearchIMG8, pnSearch8, btnReadSearch8, btnDetailSearch8);
+                case 4 ->
+                    clearBookForm(lblSearchIMG9, pnSearch9, btnReadSearch9, btnDetailSearch9);
+                case 3 ->
+                    clearBookForm(lblSearchIMG10, pnSearch10, btnReadSearch10, btnDetailSearch10);
+                case 2 ->
+                    clearBookForm(lblSearchIMG11, pnSearch11, btnReadSearch11, btnDetailSearch11);
+                case 1 ->
+                    clearBookForm(lblSearchIMG12, pnSearch12, btnReadSearch12, btnDetailSearch12);
+                default -> {
+                }
+            }
+        }
+        for (int i = startSearch; i < endSearch; i++) {
+            if (i == sachSearchList.size()) {
+
+                break;
+            } else {
+                switch (endSearch - i) {
+                    case 12 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG1, pnSearch1, btnReadSearch1, btnDetailSearch1);
+                    case 11 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG2, pnSearch2, btnReadSearch2, btnDetailSearch2);
+                    case 10 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG3, pnSearch3, btnReadSearch3, btnDetailSearch3);
+                    case 9 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG4, pnSearch4, btnReadSearch4, btnDetailSearch4);
+                    case 8 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG5, pnSearch5, btnReadSearch5, btnDetailSearch5);
+                    case 7 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG6, pnSearch6, btnReadSearch6, btnDetailSearch6);
+                    case 6 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG7, pnSearch7, btnReadSearch7, btnDetailSearch7);
+                    case 5 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG8, pnSearch8, btnReadSearch8, btnDetailSearch8);
+                    case 4 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG9, pnSearch9, btnReadSearch9, btnDetailSearch9);
+                    case 3 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG10, pnSearch10, btnReadSearch10, btnDetailSearch10);
+                    case 2 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG11, pnSearch11, btnReadSearch11, btnDetailSearch11);
+                    case 1 ->
+                        setBookFormFull(sachSearchList.get(i), lblSearchIMG12, pnSearch12, btnReadSearch12, btnDetailSearch12);
+                    default -> {
+                    }
+                }
+            }
+        }
+    }
+
+    private void nextSearch() {
+        if (endSearch < sachSearchList.size()) {
+            startSearch++;
+            endSearch++;
+            loadSachSearch();
+            System.out.println("Next: " + startSearch + "-" + endSearch);
+        } else {
+            DialogHelper.alert(this, "Last page");
+        }
+    }
+
+    private void preSearch() {
+        if (startSearch > 0) {
+            startSearch--;
+            endSearch--;
+            loadSachSearch();
+            System.out.println("Pre: " + startSearch + "-" + endSearch);
+        } else {
+            DialogHelper.alert(this, "First page");
+        }
+    }
+
+    private void firstSearch() {
+        startSearch = 0;
+        endSearch = 12;
+        loadSachSearch();
+        System.out.println("First: " + startSearch + "-" + endSearch);
+    }
+
+    private void endSearch() {
+        startSearch = sachSearchList.size() - 12;
+        endSearch = sachSearchList.size();
+        loadSachSearch();
+        System.out.println("End: " + startSearch + "-" + endSearch);
+    }
+
+    private void fillcboTL() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboTheLoai.getModel();
+        model.removeAllElements();
+        theloaiList = tlDAO.select();
+        for (TheLoai tl : theloaiList) {
+            model.addElement(tl.getIdTheLoai());
+        }
+    }
+
+    private void subjectBook() {
+        String keyword = (String) cboTheLoai.getSelectedItem();
+        sachTLList = sachDAO.search(keyword);
+        System.out.println("test: " + sachTLList.size());
+        if (sachTLList.size() < 12) {
+            btnTLStart.setEnabled(false);
+            btnTLEnd.setEnabled(false);
+            btnTLNext.setEnabled(false);
+            btnTLPrevious.setEnabled(false);
+        } else {
+            btnTLStart.setEnabled(true);
+            btnTLEnd.setEnabled(true);
+            btnTLNext.setEnabled(true);
+            btnTLPrevious.setEnabled(true);
+        }
+        loadSachSubject();
+    }
+
+    private void loadSachSubject() {
+        for (int j = startTL; j < endTL; j++) {
+            switch (endTL - j) {
+                case 12 ->
+                    clearBookForm(lblTLIMG1, pnTL1, btnTLRead1, btnTLDetail1);
+                case 11 ->
+                    clearBookForm(lblTLIMG2, pnTL2, btnTLRead2, btnTLDetail2);
+                case 10 ->
+                    clearBookForm(lblTLIMG3, pnTL3, btnTLRead3, btnTLDetail3);
+                case 9 ->
+                    clearBookForm(lblTLIMG4, pnTL4, btnTLRead4, btnTLDetail4);
+                case 8 ->
+                    clearBookForm(lblTLIMG5, pnTL5, btnTLRead5, btnTLDetail5);
+                case 7 ->
+                    clearBookForm(lblTLIMG6, pnTL6, btnTLRead6, btnTLDetail6);
+                case 6 ->
+                    clearBookForm(lblTLIMG7, pnTL7, btnTLRead7, btnTLDetail7);
+                case 5 ->
+                    clearBookForm(lblTLIMG8, pnTL8, btnTLRead8, btnTLDetail8);
+                case 4 ->
+                    clearBookForm(lblTLIMG9, pnTL9, btnTLRead9, btnTLDetail9);
+                case 3 ->
+                    clearBookForm(lblTLIMG10, pnTL10, btnTLRead10, btnTLDetail10);
+                case 2 ->
+                    clearBookForm(lblTLIMG11, pnTL11, btnTLRead11, btnTLDetail11);
+                case 1 ->
+                    clearBookForm(lblTLIMG12, pnTL12, btnTLRead12, btnTLDetail12);
+                default -> {
+                }
+            }
+        }
+        for (int i = startTL; i < endTL; i++) {
+            if (i == sachTLList.size()) {
+                break;
+            }
+            switch (endTL - i) {
+                case 12 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG1, pnTL1, btnTLRead1, btnTLDetail1);
+                case 11 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG2, pnTL2, btnTLRead2, btnTLDetail2);
+                case 10 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG3, pnTL3, btnTLRead3, btnTLDetail3);
+                case 9 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG4, pnTL4, btnTLRead4, btnTLDetail4);
+                case 8 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG5, pnTL5, btnTLRead5, btnTLDetail5);
+                case 7 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG6, pnTL6, btnTLRead6, btnTLDetail6);
+                case 6 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG7, pnTL7, btnTLRead7, btnTLDetail7);
+                case 5 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG8, pnTL8, btnTLRead8, btnTLDetail8);
+                case 4 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG9, pnTL9, btnTLRead9, btnTLDetail9);
+                case 3 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG10, pnTL10, btnTLRead10, btnTLDetail10);
+                case 2 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG11, pnTL11, btnTLRead11, btnTLDetail11);
+                case 1 ->
+                    setBookFormFull(sachTLList.get(i), lblTLIMG12, pnTL12, btnTLRead12, btnTLDetail12);
+                default -> {
+                }
+            }
+
+        }
+    }
+
+    private void nextTL() {
+        if (endTL < sachTLList.size()) {
+            startTL++;
+            endTL++;
+            loadSachSubject();
+            System.out.println("Next: " + startTL + "-" + endTL);
+        } else {
+            DialogHelper.alert(this, "Last page");
+        }
+    }
+
+    private void preTL() {
+        if (startTL > 0) {
+            startTL--;
+            endTL--;
+            loadSachSubject();
+            System.out.println("Pre: " + startTL + "-" + endTL);
+        } else {
+            DialogHelper.alert(this, "First page");
+        }
+    }
+
+    private void firstTL() {
+        startTL = 0;
+        endTL = 12;
+        loadSachSubject();
+        System.out.println("First: " + startTL + "-" + endTL);
+    }
+
+    private void endTL() {
+        startTL = sachTLList.size() - 12;
+        endTL = sachTLList.size();
+        loadSachSubject();
+        System.out.println("End: " + startTL + "-" + endTL);
+    }
+
+    private void WLBook() {
+        sachWLList.clear();
+        wlList = wlDAO.search(Auth.user.getUserID());
+        for (WishlistCT wishlistCT : wlList) {
+            Sach sachTEMP = sachDAO.selectByID(wishlistCT.getIdSach());
+            sachWLList.add(sachTEMP);
+        }
+
+        System.out.println("test: " + sachWLList.size());
+        if (sachWLList.size() < 12) {
+            btnLBStart.setEnabled(false);
+            btnLBEnd.setEnabled(false);
+            btnLBNext.setEnabled(false);
+            btnLBPrevious.setEnabled(false);
+        } else {
+            btnLBStart.setEnabled(true);
+            btnLBEnd.setEnabled(true);
+            btnLBNext.setEnabled(true);
+            btnLBPrevious.setEnabled(true);
+        }
+        loadSachLike();
+    }
+
+    private void loadSachLike() {
+        for (int j = startLB; j < endLB; j++) {
+            switch (endLB - j) {
+                case 12 ->
+                    clearBookForm(lblLBIMG1, pnLB1, btnLBRead1, btnLBDetail1);
+                case 11 ->
+                    clearBookForm(lblLBIMG2, pnLB2, btnLBRead2, btnLBDetail2);
+                case 10 ->
+                    clearBookForm(lblLBIMG3, pnLB3, btnLBRead3, btnLBDetail3);
+                case 9 ->
+                    clearBookForm(lblLBIMG4, pnLB4, btnLBRead4, btnLBDetail4);
+                case 8 ->
+                    clearBookForm(lblLBIMG5, pnLB5, btnLBRead5, btnLBDetail5);
+                case 7 ->
+                    clearBookForm(lblLBIMG6, pnLB6, btnLBRead6, btnLBDetail6);
+                case 6 ->
+                    clearBookForm(lblLBIMG7, pnLB7, btnLBRead7, btnLBDetail7);
+                case 5 ->
+                    clearBookForm(lblLBIMG8, pnLB8, btnLBRead8, btnLBDetail8);
+                case 4 ->
+                    clearBookForm(lblLBIMG9, pnLB9, btnLBRead9, btnLBDetail9);
+                case 3 ->
+                    clearBookForm(lblLBIMG10, pnLB10, btnLBRead10, btnLBDetail10);
+                case 2 ->
+                    clearBookForm(lblLBIMG11, pnLB11, btnLBRead11, btnLBDetail11);
+                case 1 ->
+                    clearBookForm(lblLBIMG12, pnLB12, btnLBRead12, btnLBDetail12);
+                default -> {
+                }
+            }
+        }
+        for (int i = startLB; i < endLB; i++) {
+            if (i == sachWLList.size()) {
+                break;
+            }
+            switch (endLB - i) {
+                case 12 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG1, pnLB1, btnLBRead1, btnLBDetail1);
+                case 11 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG2, pnLB2, btnLBRead2, btnLBDetail2);
+                case 10 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG3, pnLB3, btnLBRead3, btnLBDetail3);
+                case 9 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG4, pnLB4, btnLBRead4, btnLBDetail4);
+                case 8 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG5, pnLB5, btnLBRead5, btnLBDetail5);
+                case 7 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG6, pnLB6, btnLBRead6, btnLBDetail6);
+                case 6 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG7, pnLB7, btnLBRead7, btnLBDetail7);
+                case 5 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG8, pnLB8, btnLBRead8, btnLBDetail8);
+                case 4 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG9, pnLB9, btnLBRead9, btnLBDetail9);
+                case 3 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG10, pnLB10, btnLBRead10, btnLBDetail10);
+                case 2 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG11, pnLB11, btnLBRead11, btnLBDetail11);
+                case 1 ->
+                    setBookFormFull(sachWLList.get(i), lblLBIMG12, pnLB12, btnLBRead12, btnLBDetail12);
+                default -> {
+                }
+            }
+
+        }
+    }
+
+    private void nextLB() {
+        if (endLB < sachWLList.size()) {
+            startLB++;
+            endLB++;
+            loadSachLike();
+            System.out.println("Next: " + startLB + "-" + endLB);
+        } else {
+            DialogHelper.alert(this, "Last page");
+        }
+    }
+
+    private void preLB() {
+        if (startLB > 0) {
+            startLB--;
+            endLB--;
+            loadSachLike();
+            System.out.println("Pre: " + startLB + "-" + endLB);
+        } else {
+            DialogHelper.alert(this, "First page");
+        }
+    }
+
+    private void firstLB() {
+        startLB = 0;
+        endLB = 12;
+        loadSachLike();
+        System.out.println("First: " + startLB + "-" + endLB);
+    }
+
+    private void endLB() {
+        startLB = sachWLList.size() - 12;
+        endLB = sachWLList.size();
+        loadSachLike();
+        System.out.println("End: " + startLB + "-" + endLB);
+    }
+
+    private void RBBook() {
+        sachRBList.clear();
+        pdf = pdfDAO.selectByIdUser(Auth.user.getUserID());
+        for (SachPDF sachPDF : pdf) {
+               Sach sachTEMP = sachDAO.selectByID(sachPDF.getIdSach());
+               sachRBList.add(sachTEMP);
+        }
+        System.out.println("test: " + sachRBList.size());
+        if (sachRBList.size() < 12) {
+            btnLBStart1.setEnabled(false);
+            btnLBEnd1.setEnabled(false);
+            btnLBNext1.setEnabled(false);
+            btnLBPrevious1.setEnabled(false);
+        } else {
+            btnLBStart1.setEnabled(true);
+            btnLBEnd1.setEnabled(true);
+            btnLBNext1.setEnabled(true);
+            btnLBPrevious1.setEnabled(true);
+        }
+        loadSachDaDoc();
+    }
+
+    private void loadSachDaDoc() {
+        for (int j = startRB; j < endRB; j++) {
+            switch (endRB - j) {
+                case 12 ->
+                    clearBookForm(lblLBIMG13, pnLB13, btnLBRead13, btnLBDetail13);
+                case 11 ->
+                    clearBookForm(lblLBIMG14, pnLB14, btnLBRead14, btnLBDetail14);
+                case 10 ->
+                    clearBookForm(lblLBIMG15, pnLB15, btnLBRead15, btnLBDetail15);
+                case 9 ->
+                    clearBookForm(lblLBIMG16, pnLB16, btnLBRead16, btnLBDetail16);
+                case 8 ->
+                    clearBookForm(lblLBIMG17, pnLB17, btnLBRead17, btnLBDetail17);
+                case 7 ->
+                    clearBookForm(lblLBIMG18, pnLB18, btnLBRead18, btnLBDetail18);
+                case 6 ->
+                    clearBookForm(lblLBIMG19, pnLB19, btnLBRead19, btnLBDetail19);
+                case 5 ->
+                    clearBookForm(lblLBIMG20, pnLB20, btnLBRead20, btnLBDetail20);
+                case 4 ->
+                    clearBookForm(lblLBIMG21, pnLB21, btnLBRead21, btnLBDetail21);
+                case 3 ->
+                    clearBookForm(lblLBIMG22, pnLB22, btnLBRead22, btnLBDetail22);
+                case 2 ->
+                    clearBookForm(lblLBIMG23, pnLB23, btnLBRead23, btnLBDetail23);
+                case 1 ->
+                    clearBookForm(lblLBIMG24, pnLB24, btnLBRead24, btnLBDetail24);
+                default -> {
+                }
+            }
+        }
+        for (int i = startRB; i < endRB; i++) {
+            if (i == sachRBList.size()) {
+                break;
+            }
+            switch (endRB - i) {
+                case 12 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG13, pnLB13, btnLBRead13, btnLBDetail13);
+                case 11 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG14, pnLB14, btnLBRead14, btnLBDetail14);
+                case 10 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG15, pnLB15, btnLBRead15, btnLBDetail15);
+                case 9 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG16, pnLB16, btnLBRead16, btnLBDetail16);
+                case 8 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG17, pnLB17, btnLBRead17, btnLBDetail17);
+                case 7 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG18, pnLB18, btnLBRead18, btnLBDetail18);
+                case 6 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG19, pnLB19, btnLBRead19, btnLBDetail19);
+                case 5 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG20, pnLB20, btnLBRead20, btnLBDetail20);
+                case 4 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG21, pnLB21, btnLBRead21, btnLBDetail21);
+                case 3 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG22, pnLB22, btnLBRead22, btnLBDetail22);
+                case 2 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG23, pnLB23, btnLBRead23, btnLBDetail23);
+                case 1 ->
+                    setBookFormFull(sachRBList.get(i), lblLBIMG24, pnLB24, btnLBRead24, btnLBDetail24);
+                default -> {
+                }
+            }
+
+        }
+    }
+    private void nextRB() {
+        if (endRB < sachRBList.size()) {
+            startRB++;
+            endRB++;
+            loadSachDaDoc();
+            System.out.println("Next: " + startRB + "-" + endRB);
+        } else {
+            DialogHelper.alert(this, "Last page");
+        }
+    }
+
+    private void preRB() {
+        if (startRB > 0) {
+            startRB--;
+            endRB--;
+            loadSachDaDoc();
+            System.out.println("Pre: " + startRB + "-" + endRB);
+        } else {
+            DialogHelper.alert(this, "First page");
+        }
+    }
+
+    private void firstRB() {
+        startRB = 0;
+        endRB = 12;
+        loadSachDaDoc();
+        System.out.println("First: " + startRB + "-" + endRB);
+    }
+
+    private void endRB() {
+        startRB = sachRBList.size() - 12;
+        endRB = sachRBList.size();
+        loadSachDaDoc();
+        System.out.println("End: " + startRB + "-" + endRB);
     }
 }
