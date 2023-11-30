@@ -4,6 +4,9 @@
  */
 package UX_UI;
 
+import dao.AccessDAO;
+import dao.NoiBoDAO;
+import dao.PhongBanDAO;
 import dao.SachDAO;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +16,8 @@ import library.DialogHelper;
 import library.Extension;
 import library.URL_Dealer;
 import library.XImage;
+import model.NoiBo;
+import model.PhongBan;
 import model.Sach;
 import model.User;
 
@@ -31,22 +36,22 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         init();
     }
 
-    String userID;
-
-    public JFrameTrangChuQuanLy(String userID) {
-        initComponents();
-        setLocationRelativeTo(null);
-        this.userID = userID;
-        init();
-    }
-
+//    String userID;
+//
+//    public JFrameTrangChuQuanLy(String userID) {
+//        initComponents();
+//        setLocationRelativeTo(null);
+//        this.userID = userID;
+//        init();
+//    }
     private void init() {
         if (!Auth.isLogin()) {
-            DialogHelper.alert(null, "Vui lòng đăng nhập!");
-            new JDialogLogin(this, true).setVisible(true);
+            boolean choice = DialogHelper.confirm(null, "Bạn chưa đăng nhập, bạn có muốn đăng nhập không?");
             this.dispose();
+            if (choice) {
+                new JDialogLogin(this, true).setVisible(true);
+            }
         }
-//        Extension.scaleImage(XImage.nerdyersLogo, lblLogo);
 
         XImage.setLogoButton(btnLogo);
         resizeColumn();
@@ -54,7 +59,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         fillToTable();
         fillToLabel();
         checkPage();
-//        http://covers.openlibrary.org/b/id/11962006-L.jpg
 
         cmbTK.addActionListener(e -> {
             load();
@@ -81,6 +85,33 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             checkPage();
             fillToLabel();
         });
+        
+        btnAccess.addActionListener(e -> {
+            new JDialogAccess(this, true).setVisible(true);
+        });
+        btnPhongBan.addActionListener(e -> {
+            new JDialogQuanLyPhongBan(this, true).setVisible(true);
+        });
+        btnNoiBo.addActionListener(e -> {
+            new JDialogQuanLyNhanVien(this, true).setVisible(true);
+        });
+        btnNguoiDoc.addActionListener(e -> {
+            new JDialogQuanLyThongTinKhachHang(this, true).setVisible(true);
+        });
+        btnSach.addActionListener(e -> {
+            new JDialogSach(this, true).setVisible(true);
+        });
+        btnTacGia.addActionListener(e -> {
+//            new JDialogAccess(this, true).setVisible(true);
+        });
+        btnTheLoai.addActionListener(e -> {
+//            new JDialogAccess(this, true).setVisible(true);
+        });
+
+        //
+        setAccess();
+        setEnableBtn();
+
         // để ở 2 form chính || form login || form chờ
 //        for (Sach sach : dao.select()) {
 //            URL_Dealer.downloadImage(sach.getCoverI(), false);
@@ -99,12 +130,50 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
     }
 
     SachDAO dao = new SachDAO();
+    NoiBoDAO nbDao = new NoiBoDAO();
+    PhongBanDAO pbDao = new PhongBanDAO();
+    AccessDAO accDao = new AccessDAO();
     ArrayList<Sach> listSach;
     final Integer sachCount = 10;
     int curPage = 1;
 
-    void checkAccess() {
+    void setAccess() {
+        if (Auth.user == null) {
+            return;
+        }
+        NoiBo nb = nbDao.selectByUserID(Auth.user.getUserID());
+        PhongBan pb = pbDao.selectByID(nb.getIdPB());
+        Integer idAccess = (nb.getQuanLy()) ? pb.getQlAccess() : pb.getNvAccess();
+        Auth.access = accDao.selectById(idAccess);
+    }
 
+    void setEnableBtn() {
+        btnAccess.setEnabled(false);
+        btnPhongBan.setEnabled(false);
+        btnNoiBo.setEnabled(false);
+        btnNguoiDoc.setEnabled(false);
+        btnSach.setEnabled(false);
+        btnTacGia.setEnabled(false);
+        btnTheLoai.setEnabled(false);
+        if (Auth.access == null) {
+            return;
+        }
+        if (Auth.access.getFullAccess()) {
+            btnAccess.setEnabled(true);
+            btnPhongBan.setEnabled(true);
+            btnNoiBo.setEnabled(true);
+            btnNguoiDoc.setEnabled(true);
+            btnSach.setEnabled(true);
+            btnTacGia.setEnabled(true);
+            btnTheLoai.setEnabled(true);
+            return;
+        }
+        btnPhongBan.setEnabled(Auth.access.getrPhongBan() || Auth.access.getuPhongBan());
+        btnNoiBo.setEnabled(Auth.access.getrNoiBo() || Auth.access.getuNoiBo());
+        btnNguoiDoc.setEnabled(Auth.access.getrReader() || Auth.access.getuReader());
+        btnSach.setEnabled(Auth.access.getrSach() || Auth.access.getuSach());
+        btnTacGia.setEnabled(Auth.access.getrTacGia() || Auth.access.getuTacGia());
+        btnTheLoai.setEnabled(Auth.access.getrTheLoai() || Auth.access.getuTheLoai());
     }
 
     void showPersonalInfo() {
