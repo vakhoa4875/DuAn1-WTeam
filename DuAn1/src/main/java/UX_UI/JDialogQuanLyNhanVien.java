@@ -537,7 +537,8 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         fillTable();
         row = -1;
         Extension.togglePassword(txtPass);
-        Extension.setPlaceholder(txtUsername, "Nhập username");
+//        Extension.setPlaceholder(txtUsername, "Nhập username");
+        Extension.setPlaceholder(txtLuongThuong, "0");
     }
 
     private void fillComboBoxPhongBan() {
@@ -653,6 +654,15 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         User user = new User(Extension.randomString("nv", 10), txtUsername.getText(),
                 pass, txtEmail.getText(), false, true);
         return user;
+    }
+    
+    private User getFormUserUpdate(){
+         String pass = String.valueOf(txtPass.getPassword());
+         User user = new User();
+         user.setUserName(txtUsername.getText());
+         user.setPassword(pass);
+         user.setEmail(txtEmail.getText());
+         return user;
     }
 
     private NoiBo getFormNoiBo() {
@@ -777,7 +787,7 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         return true;
     }
 
-    void insert() {
+    private void insert() {
         if (check()) {
             String username = txtUsername.getText();
             try {
@@ -809,5 +819,17 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
 
         }
     }
+    
+    private void update(){
+        if(check()){
+            User u = getFormUser();
+            try {
+                new UserDAO().updateByUsername(u);
+                
+            } catch (Exception e) {
+            }
+        }
+    }
+    
 
 }
