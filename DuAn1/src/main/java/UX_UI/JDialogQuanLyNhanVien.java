@@ -90,11 +90,11 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         txtLuongThuong = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
         txtPass = new javax.swing.JPasswordField();
+        btnUpdate = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblQuanLiThongTinKhachHang = new javax.swing.JTable();
-        btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -179,6 +179,19 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
 
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -238,15 +251,16 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
                                 .addGap(0, 0, Short.MAX_VALUE))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(190, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(254, 254, 254))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(154, 154, 154))))
+                .addComponent(jLabel2)
+                .addGap(254, 254, 254))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {rdoNoFulltime, rdoYesFulltime});
@@ -328,7 +342,8 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -363,9 +378,6 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblQuanLiThongTinKhachHang);
 
-        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnEdit.setText("Edit");
-
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDelete.setText("Delete");
 
@@ -374,9 +386,7 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(464, 464, 464)
-                .addComponent(btnEdit)
-                .addGap(18, 18, 18)
+                .addGap(554, 554, 554)
                 .addComponent(btnDelete)
                 .addGap(0, 55, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -396,9 +406,7 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDelete)
-                    .addComponent(btnEdit))
+                .addComponent(btnDelete)
                 .addContainerGap(159, Short.MAX_VALUE))
         );
 
@@ -430,6 +438,8 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
             this.row = tblQuanLiThongTinKhachHang.getSelectedRow();
             this.edit();
+            btnUpdate.setEnabled(true);
+            btnLuu.setEnabled(false);
         }
     }//GEN-LAST:event_tblQuanLiThongTinKhachHangMouseClicked
 
@@ -440,6 +450,14 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         insert();
     }//GEN-LAST:event_btnLuuActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clear();
+    }//GEN-LAST:event_btnClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -487,8 +505,8 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnLuu;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -536,6 +554,7 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         fillComboBoxNguoiQuanLi();
         fillTable();
         row = -1;
+        btnUpdate.setEnabled(false);
         Extension.togglePassword(txtPass);
 //        Extension.setPlaceholder(txtUsername, "Nhập username");
         Extension.setPlaceholder(txtLuongThuong, "0");
@@ -655,14 +674,14 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
                 pass, txtEmail.getText(), false, true);
         return user;
     }
-    
-    private User getFormUserUpdate(){
-         String pass = String.valueOf(txtPass.getPassword());
-         User user = new User();
-         user.setUserName(txtUsername.getText());
-         user.setPassword(pass);
-         user.setEmail(txtEmail.getText());
-         return user;
+
+    private User getFormUserUpdate() {
+        String pass = String.valueOf(txtPass.getPassword());
+        User user = new User();
+        user.setUserName(txtUsername.getText());
+        user.setPassword(pass);
+        user.setEmail(txtEmail.getText());
+        return user;
     }
 
     private NoiBo getFormNoiBo() {
@@ -780,6 +799,9 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         if (txtNgaySinh.getText().trim().isEmpty()) {
             thongBao += "Bạn chưa nhập ngày sinh\n";
         }
+        if (lblAnh.getIcon() == null) {
+            thongBao += "Bạn chưa chọn ảnh\n";
+        }
         if (thongBao.length() > 0) {
             MsgBox.alert(this, thongBao);
             return false;
@@ -787,15 +809,41 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         return true;
     }
 
+    private void clear() {
+        this.row = -1;
+//        User user = new User();
+//        setFormUser(user);
+//        NoiBo nb = new NoiBo();
+//        setFormNoiBo(nb);
+        txtUsername.setText("");
+        txtPass.setText("");
+        txtEmail.setText("");
+        txtLuong.setText("");
+        txtNgayThue.setText("");
+        txtNgaySinh.setText("");
+        txtCaLam.setText("");
+        txtLuongThuong.setText("");
+        btnUpdate.setEnabled(false);
+    }
+
     private void insert() {
         if (check()) {
             String username = txtUsername.getText();
+            String email = txtEmail.getText();
             try {
-                User u = new UserDAO().selectByID(username);
-                if (u != null) {
+                User userUsername = new UserDAO().selectByUsername(username);
+                if (userUsername != null) {
                     MsgBox.alert(this, "Username đã tồn tại");
                     return;
+
                 }
+                User userEmail = new UserDAO().selectByEmail(email);
+                if (userEmail != null) {
+                    MsgBox.alert(this, "Email đã tồn tại");
+                    return;
+
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -819,17 +867,43 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
 
         }
     }
-    
-    private void update(){
-        if(check()){
-            User u = getFormUser();
+
+    private void update() {
+        if (check()) {
+            String username = txtUsername.getText();
+            String email = txtEmail.getText();
+            try {
+                User userUsername = new UserDAO().selectByUsername(username);
+                if (userUsername != null) {
+                    MsgBox.alert(this, "Username đã tồn tại");
+                    return;
+
+                }
+                User userEmail = new UserDAO().selectByEmail(email);
+                if (userEmail != null) {
+                    MsgBox.alert(this, "Email đã tồn tại");
+                    return;
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            User u = getFormUserUpdate();
             try {
                 new UserDAO().updateByUsername(u);
-                
+                User u2 = new UserDAO().selectByUsername(u.getUserName());
+
+                NoiBo nb = getFormNoiBo();
+                nb.setUserID(u2.getUserID());
+                new NoiBoDAO().update(nb);
+                MsgBox.alert(this, "Cập nhật thành công");
             } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Cập nhật thất bại");
             }
         }
     }
-    
 
 }
