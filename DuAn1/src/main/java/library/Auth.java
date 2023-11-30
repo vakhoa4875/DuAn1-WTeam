@@ -4,6 +4,7 @@
  */
 package library;
 
+import model.Access;
 import model.User;
 
 /**
@@ -13,6 +14,7 @@ import model.User;
 public class Auth {
 
     public static User user = null;
+    public static Access access = null;
 
     public static void clear() {
         Auth.user = null;
@@ -23,7 +25,7 @@ public class Auth {
     }
 
     public static Boolean isReader() {
-        if (Auth.isLogin()) {
+        if (!Auth.isLogin()) {
             return null;
         }
 

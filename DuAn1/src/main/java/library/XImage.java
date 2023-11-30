@@ -36,7 +36,7 @@ public class XImage {
         //set font
         Font segoeUIFont = new Font("Segoe UI Black", Font.PLAIN, 16);
         btn.setFont(segoeUIFont);
-        
+
         ImageIcon icon = new ImageIcon(Extension.class.getResource(nerdyersLogo));
         //scale image
         Image image = icon.getImage();
@@ -51,6 +51,9 @@ public class XImage {
 
     // set button event
     public static void returnToMain(JButton btn) {
+        if (!Auth.isLogin()) {
+            return;
+        }
         // lấy form chứa button logo
         Window parentWindow = SwingUtilities.getWindowAncestor(btn);
 
