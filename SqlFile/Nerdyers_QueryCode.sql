@@ -266,3 +266,17 @@ select * from TACGIA;
 select * from THELOAI;
 select * from SVTG;
 select * from SVTL;
+
+-- châu phát insert 1 access và phòng ban
+INSERT INTO [Access] (idAccess, moTa, fullAccess, rReadList, uReadList, rWishList, uWishList, rUser, uUser, rPhongBan, uPhongBan, rSach, uSach, rReader, uReader, rNoiBo, uNoiBo, rTacGia, uTacGia, rTheLoai, uTheLoai)
+VALUES (1, N'Mô tả quyền truy cập', 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0),
+(2, N'Mô tả quyền truy cập 2', 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0),
+(3, N'Mô tả quyền truy cập 2', 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0);
+
+
+insert into phongban values
+(1,1,2,N'Phòng Gì Đó',N'???'),
+(2,1,3,N'Phòng Gì Đó 2',N'???');
+
+select * from [Access]
+select * from phongban
