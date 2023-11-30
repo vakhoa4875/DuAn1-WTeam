@@ -552,7 +552,7 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
     private void fillComboBoxNguoiQuanLi() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboNguoiQuanLi.getModel();
         model.removeAllElements();
-        List<NoiBo> list = new NoiBoDAO().selectAll();
+        List<NoiBo> list = new NoiBoDAO().selectNguoiQuanLy();
         for (NoiBo nb : list) {
             model.addElement(nb.getIdQuanLy());
         }

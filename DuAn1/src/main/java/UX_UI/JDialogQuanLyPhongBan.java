@@ -8,6 +8,7 @@ import dao.PhongBanDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import library.Extension;
 import library.MsgBox;
 import model.PhongBan;
 
@@ -16,9 +17,9 @@ import model.PhongBan;
  * @author Admin
  */
 public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
-
+    
     private int row;
-
+    
     static int indexRowStatic = 0;
 
     /**
@@ -512,8 +513,12 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         fillTable();
         row = -1;
+        Extension.setPlaceholder(txtNhanVienAccess, "Nhập nhân viên access");
+        Extension.setPlaceholder(txtIDPhongBan, "Nhập ID");
+        Extension.setPlaceholder(txtQuanLiAccess, "Nhập quản lý access");
+        Extension.setPlaceholder(txtTenPhongBan, "Nhập tên phòng ban");
     }
-
+    
     private void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblQuanLyPhongBan.getModel();
         model.setRowCount(0);
@@ -528,7 +533,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
             MsgBox.alert(this, "Lỗi truy vấn");
         }
     }
-
+    
     private void setForm(PhongBan pb) {
         txtIDPhongBan.setText(pb.getIdPB() + "");
         txtQuanLiAccess.setText(pb.getQlAccess() + "");
@@ -536,7 +541,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         txtTenPhongBan.setText(pb.getTenPB());
         txtMoTa.setText(pb.getMoTa());
     }
-
+    
     private PhongBan getForm() {
         PhongBan phongBan = new PhongBan(Integer.parseInt(txtIDPhongBan.getText()),
                 Integer.parseInt(txtQuanLiAccess.getText()),
@@ -546,7 +551,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         );
         return phongBan;
     }
-
+    
     private void clearForm() {
         PhongBan pb = new PhongBan();
         this.setForm(pb);
@@ -556,56 +561,60 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         this.row = -1;
         btnSave.setEnabled(true);
     }
-
+    
     private void edit() {
         int idPhongBan = (int) (tblQuanLyPhongBan.getValueAt(this.row, 0));
-
+        
         PhongBan pb = new PhongBanDAO().selectByID(idPhongBan);
         this.setForm(pb);
         btnSave.setEnabled(false);
         jTabbedPane1.setSelectedIndex(1);
     }
-
+    
     private boolean check() {
         String thongBao = "";
-
-        if (txtIDPhongBan.getText().trim().isEmpty()) {
+        
+        String id = txtIDPhongBan.getText().trim();
+        if (id.isEmpty() || id.equals("Nhập ID")) {
             thongBao += "Bạn chưa nhập ID phòng ban\n";
         } else if (!txtIDPhongBan.getText().matches("\\d+")) {
             thongBao += "ID phòng ban chỉ được nhập số\n";
         }
-
-        if (txtQuanLiAccess.getText().trim().isEmpty()) {
+        
+        String quanLyAccess = txtQuanLiAccess.getText().trim();
+        if (quanLyAccess.isEmpty() || quanLyAccess.equals("Nhập quản lý access")) {
             thongBao += "Bạn chưa nhập quản lý access\n";
         } else if (!txtQuanLiAccess.getText().matches("\\d+")) {
             thongBao += "Quản lý access chỉ được nhập số\n";
         }
-
-        if (txtNhanVienAccess.getText().trim().isEmpty()) {
+        
+        String nhanVienAccess = txtNhanVienAccess.getText().trim();
+        if (nhanVienAccess.isEmpty() || nhanVienAccess.equals("Nhập nhân viên access")) {
             thongBao += "Bạn chưa nhập nhân viên access\n";
         } else if (!txtNhanVienAccess.getText().matches("\\d+")) {
             thongBao += "Nhân viên access chỉ được nhập số\n";
         }
-
-        if (txtTenPhongBan.getText().trim().isEmpty()) {
+        
+        String tenPhongBan = txtTenPhongBan.getText().trim();
+        if (tenPhongBan.isEmpty() || tenPhongBan.equals("Nhập tên phòng ban")) {
             thongBao += "Bạn chưa nhập tên phòng ban\n";
         }
-
+        
         if (txtMoTa.getText().trim().isEmpty()) {
             thongBao += "Bạn chưa nhập mô tả\n";
         }
-
+        
         if (thongBao.length() > 0) {
             MsgBox.alert(this, thongBao);
             return false;
         }
-
+        
         return true;
     }
-
+    
     private void insert() {
         if (check()) {
-
+            
             String idPhongBan = txtIDPhongBan.getText();
             try {
                 PhongBan pb = new PhongBanDAO().selectByID(Integer.parseInt(idPhongBan));
@@ -616,7 +625,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            
             PhongBan pb = getForm();
             try {
                 new PhongBanDAO().insert(pb);
@@ -625,18 +634,16 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
             } catch (Exception e) {
                 MsgBox.alert(this, "Thêm mới thất bại");
             }
-
+            
         }
     }
-
+    
     private void update() {
         try {
-
+            
             for (int i = 0; i < tblQuanLyPhongBan.getRowCount(); i++) {
                 int idphongban = (Integer) tblQuanLyPhongBan.getValueAt(i, 0);
                 PhongBan pb = new PhongBanDAO().selectByID(idphongban);
-//                double diem = Double.parseDouble(tblHocVien.getValueAt(i, 4).toString());
-//                hv.setDiem(diem);
                 int qlaccess = (int) tblQuanLyPhongBan.getValueAt(i, 1);
                 pb.setQlAccess(qlaccess);
                 int nvAccess = (int) tblQuanLyPhongBan.getValueAt(i, 2);
@@ -652,7 +659,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-
+    
     private void delete() {
         try {
             if (MsgBox.confirm(this, "Bạn muốn xóa các phòng ban được chọn?")) {
@@ -668,7 +675,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-
+    
     private void timKiem() {
         DefaultTableModel model = (DefaultTableModel) tblQuanLyPhongBan.getModel();
         model.setRowCount(0);
@@ -688,7 +695,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
             MsgBox.alert(this, "Thông tin tìm kiếm bị lỗi");
         }
     }
-
+    
     private void first() {
         //phần tử đầu tiên của của bảng
         int first = 0;
@@ -700,7 +707,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         //set thông tin đó vào bảng
         this.setForm(pb);
     }
-
+    
     private void last() {
         //lấy phần tử cuối cùng
         //vì trong bằng giá trị đầu tiên là 0 nên phải trừ đi 1 để lấy giá trị cuối cùng
@@ -713,12 +720,12 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         //set thông tin đó vào bảng
         this.setForm(pb);
     }
-
+    
     private void back() {
         if (indexRowStatic <= 0) {
             //gọi đến phương thức last lấy phần tử cuối cùng
             last();
-            
+
             //vì trong bằng giá trị đầu tiên là 0 nên phải trừ đi 1 để lấy giá trị cuối cùng
             int last = tblQuanLyPhongBan.getRowCount() - 1;
             indexRowStatic = last;
@@ -732,13 +739,12 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
             this.setForm(pb);
         }
     }
-
     
     private void next() {
-        if (indexRowStatic >= tblQuanLyPhongBan.getRowCount()-1) {
+        if (indexRowStatic >= tblQuanLyPhongBan.getRowCount() - 1) {
             //gọi đến phương thức first lấy phần tử đầu tiên
             first();
-            
+
             //đặt 0 vào indexRowStaic vì cho nó là phần từ đầu tiền của bảng
             indexRowStatic = 0;
         } else {
