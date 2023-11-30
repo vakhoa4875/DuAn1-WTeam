@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import library.Auth;
+import library.DialogHelper;
 import library.Extension;
 import library.URL_Dealer;
 import library.XImage;
 import model.Sach;
+import model.User;
 
 /**
  *
@@ -27,10 +29,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         init();
-
-        if (Auth.isLogin()) {
-
-        }
     }
 
     String userID;
@@ -43,6 +41,11 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
     }
 
     private void init() {
+        if (!Auth.isLogin()) {
+            DialogHelper.alert(null, "Vui lòng đăng nhập!");
+            new JDialogLogin(this, true).setVisible(true);
+            this.dispose();
+        }
 //        Extension.scaleImage(XImage.nerdyersLogo, lblLogo);
 
         XImage.setLogoButton(btnLogo);
@@ -64,7 +67,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             fillToLabel();
         });
         btnLast.addActionListener(e -> {
-            curPage = (int) Math.ceil(listSach.size() / (double)sachCount);
+            curPage = (int) Math.ceil(listSach.size() / (double) sachCount);
             checkPage();
             fillToLabel();
         });
@@ -99,13 +102,13 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
     ArrayList<Sach> listSach;
     final Integer sachCount = 10;
     int curPage = 1;
-    
+
     void checkAccess() {
-        
+
     }
-    
+
     void showPersonalInfo() {
-        
+
     }
 
     void load() {
@@ -120,7 +123,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         if (cmbTK.getSelectedIndex() == 0) {
             this.listSach = dao.select();
         } else {
-            this.listSach = dao.thongKeSach(isView, isAsc);
+            this.listSach = dao.thongKeSach(isView, isView);
         }
     }
 
@@ -143,10 +146,10 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
     }
 
     void checkPage() {
-            btnFirst.setEnabled(true);
-            btnPrev.setEnabled(true);
-            btnLast.setEnabled(true);
-            btnNext.setEnabled(true);
+        btnFirst.setEnabled(true);
+        btnPrev.setEnabled(true);
+        btnLast.setEnabled(true);
+        btnNext.setEnabled(true);
         if (curPage == 1) {
             btnFirst.setEnabled(false);
             btnPrev.setEnabled(false);
@@ -378,7 +381,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         btnDangXuat.setText("Đăng Xuất");
 
         cmbTK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbTK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Sách", "Most Viewed Sách", "Most Liked Sách", "Least Viewed Sách", "Least Liked Sách" }));
+        cmbTK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Books", "Most Viewed Books", "Most Liked Books", "Least Viewed Books", "Least Liked Books" }));
 
         pnlSach1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
