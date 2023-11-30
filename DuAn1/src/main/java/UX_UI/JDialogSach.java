@@ -4,12 +4,29 @@
  */
 package UX_UI;
 
+import dao.SachDAO;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.JLabel;
+import library.Extension;
+import model.Sach;
+
 /**
  *
  * @author TAN LOC
  */
 public class JDialogSach extends javax.swing.JDialog {
 
+    //mảng toàn cục dùng để lấy ảnh dễ hơn 
+    SachDAO dao = new SachDAO();
+    //mảng lishSách có kiểu dữ liệu là Sách
+    ArrayList<Sach> listSach;
+    //phần tử đầu tiên
+    int first = 0;
+    int center = 5;
+    
+    
     /**
      * Creates new form JDialogQuanLySanPham
      */
@@ -17,6 +34,7 @@ public class JDialogSach extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        init();
     }
 
     /**
@@ -69,11 +87,14 @@ public class JDialogSach extends javax.swing.JDialog {
         btnThemSach.setForeground(new java.awt.Color(0, 0, 0));
         btnThemSach.setText("Thêm Sách");
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setPreferredSize(new java.awt.Dimension(165, 240));
 
+        lblAnh1.setForeground(new java.awt.Color(255, 255, 255));
         lblAnh1.setText("anh");
 
+        lblTenSach1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenSach1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenSach1.setText("Tên Sách");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -97,11 +118,13 @@ public class JDialogSach extends javax.swing.JDialog {
                 .addGap(47, 47, 47))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
         jPanel3.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh3.setText("anh");
 
+        lblTenSach3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenSach3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenSach3.setText("Tên Sách");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -125,11 +148,13 @@ public class JDialogSach extends javax.swing.JDialog {
                 .addGap(41, 41, 41))
         );
 
-        jPanel7.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel7.setBackground(new java.awt.Color(153, 153, 153));
         jPanel7.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh2.setText("anh");
 
+        lblTenSach2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenSach2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenSach2.setText("Tên Sách");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -152,11 +177,13 @@ public class JDialogSach extends javax.swing.JDialog {
                 .addGap(40, 40, 40))
         );
 
-        jPanel6.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel6.setBackground(new java.awt.Color(153, 153, 153));
         jPanel6.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh4.setText("anh");
 
+        lblTenSach4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenSach4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenSach4.setText("Tên Sách");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -180,11 +207,13 @@ public class JDialogSach extends javax.swing.JDialog {
                 .addGap(39, 39, 39))
         );
 
-        jPanel8.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel8.setBackground(new java.awt.Color(153, 153, 153));
         jPanel8.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh5.setText("anh");
 
+        lblTenSach5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenSach5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenSach5.setText("Tên Sách");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -237,25 +266,22 @@ public class JDialogSach extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblQuanLySach)
-                                .addGap(193, 193, 193))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(243, 243, 243)
-                                .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72)
-                                .addComponent(btnThemSach, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblQuanLySach)
+                            .addGap(193, 193, 193))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(243, 243, 243)
+                            .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(72, 72, 72)
+                            .addComponent(btnThemSach, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(29, 29, 29)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(btnFirst)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnFirst)))
                 .addGap(177, 177, 177))
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -392,4 +418,28 @@ public class JDialogSach extends javax.swing.JDialog {
     private javax.swing.JLabel lblTenSach4;
     private javax.swing.JLabel lblTenSach5;
     // End of variables declaration//GEN-END:variables
+
+    private void init() {
+                fillTable();
+    }
+
+    private void fillTable() {
+        //thêm ảnh vào array để chứa 
+        List<JLabel> anhList = Arrays.asList(lblAnh1, lblAnh2, lblAnh3, lblAnh4, lblAnh5);
+        //thêm tên vào Array
+        List<JLabel> tenList = Arrays.asList(lblTenSach1, lblTenSach2, lblTenSach3, lblTenSach4, lblTenSach5);
+        
+        //gán tất cả dữ liệu của dao vào list sách
+        listSach = dao.select();
+        
+        for(int i = first ; i < center; i ++){
+            // trong lish sách lấy phần tử đầu tiên và thực hiện chức năng của entity Sach
+            Sach sach = listSach.get(i);
+            //lấy jbl của list và set tên vào
+            tenList.get(i).setText(sach.getTenSach());
+            Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), anhList.get(i));
+        }
+    }
+    
+
 }
