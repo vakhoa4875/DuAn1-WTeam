@@ -94,6 +94,28 @@ begin
 end
 go
 
+-- thongKeSach quanlyform
+create or alter procedure thongKeSach @isView bit
+as
+begin
+	if @isView = 1
+	begin
+		select * from Sach
+		order by viewCount asc
+	end
+	else if @isView = 0
+	begin
+		select * from Sach
+		order by likeCount asc		
+	end
+	else if @isView is null
+	begin
+		select * from Sach
+		order by danhGiaTB asc
+	end
+end
+
+
 /*
 -- Insert rows into table 'Users' in schema '[dbo]'
 INSERT INTO [dbo].[Users]

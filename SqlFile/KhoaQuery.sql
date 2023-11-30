@@ -14,6 +14,11 @@ begin
 		select * from Sach
 		order by likeCount asc		
 	end
+	else if @isView is null
+	begin
+		select * from Sach
+		order by danhGiaTB asc
+	end
 end
 
 go
