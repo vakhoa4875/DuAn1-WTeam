@@ -65,7 +65,6 @@ library\URL_Dealer.class
 UX_UI\JDialogQuanLyThongTinKhachHang$3.class
 model\Readlist.class
 library\EmailSender.class
-UX_UI\JDialogQuanLyNhanVien$2$1.class
 UX_UI\JDialogGioHang$1.class
 UX_UI\JDialogChiTietSanPham$4$1.class
 dao\TacGiaDAO.class
