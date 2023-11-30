@@ -36,6 +36,7 @@ public class UserDAO {
     }
 
     public void updateByUsername(User user) {
+        //hàm châu phát thêm
         String updateQuery = "UPDATE [User] SET [password] = ?, Email = ? WHERE username = ?";
         Jdbc.executeUpdate(updateQuery,
                 user.getPassword(),
@@ -58,6 +59,20 @@ public class UserDAO {
         ArrayList<User> users = select(selectQuery, id);
         return !users.isEmpty() ? users.get(0) : null;
 
+    }
+
+
+    public User selectByUsername(String username) {
+        //hàm châu phát thêm
+        String select = "select * from [user] where username = ?";
+        ArrayList<User> users = select(select, username);
+        return !users.isEmpty() ? users.get(0) : null;
+    }
+        public User selectByEmail(String email) {
+        //hàm châu phát thêm
+        String select = "select * from [user] where email = ?";
+        ArrayList<User> users = select(select, email);
+        return !users.isEmpty() ? users.get(0) : null;
     }
 
     private ArrayList<User> select(String sql, Object... args) {
