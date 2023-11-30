@@ -10,12 +10,12 @@ public class UserDAO {
 
     public void insert(User user) {
         String insertQuery = "INSERT INTO [User] (UserID, UserName, [password], Email, Reader, Verificated) VALUES (?, ?, ?, ?, ?, ?)";
-        Jdbc.executeUpdate(insertQuery, 
-                user.getUserID(), 
-                user.getUserName(), 
-                user.getPassword(), 
-                user.getEmail(), 
-                user.getReader(), 
+        Jdbc.executeUpdate(insertQuery,
+                user.getUserID(),
+                user.getUserName(),
+                user.getPassword(),
+                user.getEmail(),
+                user.getReader(),
                 user.getVerificated());
     }
 
@@ -26,13 +26,21 @@ public class UserDAO {
 
     public void update(User user) {
         String updateQuery = "UPDATE [User] SET UserName = ?, [password] = ?, Email = ?, Reader = ?, Verificated = ? WHERE UserID = ?";
-        Jdbc.executeUpdate(updateQuery, 
-                user.getUserName(), 
-                user.getPassword(), 
-                user.getEmail(), 
-                user.getReader(), 
-                user.getVerificated(), 
+        Jdbc.executeUpdate(updateQuery,
+                user.getUserName(),
+                user.getPassword(),
+                user.getEmail(),
+                user.getReader(),
+                user.getVerificated(),
                 user.getUserID());
+    }
+
+    public void updateByUsername(User user) {
+        String updateQuery = "UPDATE [User] SET [password] = ?, Email = ? WHERE username = ?";
+        Jdbc.executeUpdate(updateQuery,
+                user.getPassword(),
+                user.getEmail(),
+                user.getUserName());
     }
 
     public ArrayList<User> search(String val) {
@@ -44,12 +52,12 @@ public class UserDAO {
         String selectQuery = "SELECT * FROM [User]";
         return select(selectQuery);
     }
-    
+
     public User selectByID(String id) {
         String selectQuery = "SELECT * FROM [User] WHERE userID = ?";
         ArrayList<User> users = select(selectQuery, id);
         return !users.isEmpty() ? users.get(0) : null;
-        
+
     }
 
     private ArrayList<User> select(String sql, Object... args) {
@@ -85,6 +93,5 @@ public class UserDAO {
         );
         return user;
     }
-    
-    
+
 }
