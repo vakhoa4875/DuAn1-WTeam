@@ -280,3 +280,15 @@ insert into phongban values
 
 select * from [Access]
 select * from phongban
+
+insert into [user] values
+(N'qlPHATTEACHER',N'chauphat2111',N'123',N'hieuphung2111@gmail.com',0,1);
+insert into [user] values
+(N'qlKhoadb',N'khoa123',N'123',N'khoadz123@gmail.com',0,1);
+
+update noibo set idPB = 1, quanLy =1, ngaySinh = '2004-11-21', gioitinh = 1 where userid = N'qlPHATTEACHER';
+
+
+update noibo set idPB = 2, quanLy =1, ngaySinh = '2004-11-11', gioitinh = 0 where userid = N'qlKhoadb';
+
+select * from noiBo
