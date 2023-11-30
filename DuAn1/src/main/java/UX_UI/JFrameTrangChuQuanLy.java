@@ -47,10 +47,10 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
     private void init() {
         if (!Auth.isLogin()) {
             boolean choice = DialogHelper.confirm(null, "Bạn chưa đăng nhập, bạn có muốn đăng nhập không?");
+            this.dispose();
             if (choice) {
                 new JDialogLogin(this, true).setVisible(true);
             }
-            this.dispose();
         }
 
         XImage.setLogoButton(btnLogo);
@@ -84,6 +84,28 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             curPage++;
             checkPage();
             fillToLabel();
+        });
+        
+        btnAccess.addActionListener(e -> {
+            new JDialogAccess(this, true).setVisible(true);
+        });
+        btnPhongBan.addActionListener(e -> {
+            new JDialogQuanLyPhongBan(this, true).setVisible(true);
+        });
+        btnNoiBo.addActionListener(e -> {
+            new JDialogQuanLyNhanVien(this, true).setVisible(true);
+        });
+        btnNguoiDoc.addActionListener(e -> {
+            new JDialogQuanLyThongTinKhachHang(this, true).setVisible(true);
+        });
+        btnSach.addActionListener(e -> {
+            new JDialogSach(this, true).setVisible(true);
+        });
+        btnTacGia.addActionListener(e -> {
+//            new JDialogAccess(this, true).setVisible(true);
+        });
+        btnTheLoai.addActionListener(e -> {
+//            new JDialogAccess(this, true).setVisible(true);
         });
 
         //

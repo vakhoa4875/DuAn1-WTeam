@@ -12,3 +12,5 @@ DuAn1/target/DuAn1-1.0-SNAPSHOT.jar
 DuAn1/target/classes/testAPI/GoogleBooksApiExample02.class
 DuAn1/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 
+*.class
+DuAn1/target/classes/testAPI/GoogleBooksApiExample02.class
