@@ -293,3 +293,29 @@ update noibo set idPB = 1, quanLy =1, ngaySinh = '2004-11-21', gioitinh = 1 wher
 update noibo set idPB = 2, quanLy =1, ngaySinh = '2004-11-11', gioitinh = 0 where userid = N'qlKhoadb';
 
 select * from noiBo
+
+--go
+----create snapshot để lưu lại database dưới dạng snapShot
+--CREATE DATABASE Nerdyers_clone
+--ON
+--(
+--    NAME = Nerdyers,
+--    FILENAME = 'D:\Nerdyers_clone.ss'
+--) AS SNAPSHOT OF Nerdyers;
+
+
+--go
+---- drop nếu không muốn dùng snapShot nữa
+--DROP DATABASE Nerdyers_clone;
+
+--go
+---- backup database về lại bản snapShot đã được tạo
+--USE master;
+--RESTORE DATABASE Nerdyers
+--    FROM DATABASE_SNAPSHOT = 'Nerdyers_clone'
+--    WITH REPLACE;
+
+
+
+
+
