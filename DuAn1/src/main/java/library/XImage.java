@@ -48,6 +48,16 @@ public class XImage {
             returnToMain(btn);
         }
     }
+    
+    public static void setInfoBtn(JButton btn, String name, String avatar) {
+        ImageIcon icon = new ImageIcon(Extension.class.getResource(avatar));
+        //scale image
+        Image image = icon.getImage();
+        Image scaledImage = image.getScaledInstance(btn.getHeight(), btn.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        btn.setIcon(scaledIcon);   
+        btn.setText(name);     
+    }
 
     // set button event
     public static void returnToMain(JButton btn) {
@@ -96,6 +106,11 @@ public class XImage {
 
     public static ImageIcon read(String filename) {
         File path = new File("logos", filename);
+        return new ImageIcon(path.getAbsolutePath());
+    }
+    
+    public static ImageIcon getImageIcon(String filename) {
+        File path = new File("images", filename);
         return new ImageIcon(path.getAbsolutePath());
     }
 

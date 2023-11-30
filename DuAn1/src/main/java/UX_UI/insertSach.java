@@ -10,6 +10,7 @@ import dao.SachDAO;
 import dao.TacGiaDAO;
 import dao.TheLoaiDAO;
 import java.io.IOException;
+import library.URL_Dealer;
 import model.Sach;
 import model.TacGia;
 import model.TheLoai;
@@ -83,6 +84,11 @@ public class insertSach {
                         String urlLink = "https://archive.org/details/" + bookObj.getAsJsonArray("ia").get(0).getAsString() + "/mode/2up?ref=ol&view=theater";
                         // coverI là ảnh bìa quyển sách
                         String coverI = "http://covers.openlibrary.org/b/id/" + bookObj.get("cover_i").getAsString() + "-L.jpg";
+                        
+                        // nếu muốn tải ảnh khi pull data từ api
+//                        URL_Dealer.downloadImage(coverI, false);
+
+
                         // tìm trên json méo thấy mô tả nên lấy câu đầu tiên thay thế :>>
                         JsonArray firstSentence = bookObj.get("first_sentence") == null ? null : bookObj.get("first_sentence").getAsJsonArray();
                         String moTa = "", cauDau[];
