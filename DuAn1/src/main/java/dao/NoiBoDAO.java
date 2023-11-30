@@ -65,17 +65,12 @@ public class NoiBoDAO {
     }
 
     public ArrayList<NoiBo> selectNguoiQuanLy() {
-        String query = "select idNoiBo from noibo where quanLy = 1";
+        String query = "select * from noibo where quanLy = 1";
         ArrayList<NoiBo> nb = select(query);
         return nb;
 
     }
 
-//        public NoiBo selectByUserID(String id) {
-//        String query = "select * from noibo where userid = ?";
-//        ArrayList<NoiBo> nb = select(query, id);
-//        return !nb.isEmpty() ? nb.get(0) : null;
-//    }
     private ArrayList<NoiBo> select(String sql, Object... args) {
         ArrayList<NoiBo> noiBoList = new ArrayList<>();
         try {

@@ -554,7 +554,7 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         model.removeAllElements();
         List<NoiBo> list = new NoiBoDAO().selectNguoiQuanLy();
         for (NoiBo nb : list) {
-            model.addElement(nb.getIdQuanLy());
+            model.addElement(nb.getIdNoiBo());
         }
     }
 
