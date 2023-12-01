@@ -9,12 +9,15 @@ import dao.SachDAO;
 import dao.readerDao;
 import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import kotlin.coroutines.CombinedContext;
+import library.Auth;
 import library.DialogHelper;
+import library.MsgBox;
 import model.Comment;
 import model.Reader;
 import model.Sach;
@@ -29,8 +32,8 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
     Sach sachbl = new Sach();
     CommentDAO dao = new CommentDAO();
     readerDao daoreader = new readerDao();
-    ArrayList<Comment> list = dao.selectallByidSach("/works/OL1077449W");
-    int start = 0, end = 2;
+    ArrayList<Comment> list = new ArrayList<>();
+    int start = 0, end = 2, sao = 0;
 
     /**
      * Creates new form JDialogBinhLuan
@@ -38,14 +41,16 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
     public JDialogBinhLuan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         init();
     }
 
-    public JDialogBinhLuan(java.awt.Frame parent, boolean modal, Sach sach) {
+    public JDialogBinhLuan(javax.swing.JDialog parent, boolean modal, Sach sach) {
         super(parent, modal);
         initComponents();
-        init();
+        setLocationRelativeTo(null);
         this.sachbl = sach;
+        init();
     }
 
     /**
@@ -126,6 +131,11 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         jScrollPane2.setViewportView(txtUserComment);
 
         btnUpload.setText("Bình luận");
+        btnUpload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUploadActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Huỷ");
 
@@ -243,6 +253,11 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         lblBLStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png"))); // NOI18N
 
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -353,6 +368,11 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         lblBLStar10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png"))); // NOI18N
 
         btnEdit1.setText("Edit");
+        btnEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEdit1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -466,22 +486,27 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
 
     private void btnUserStar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar1ActionPerformed
         // TODO add your handling code here:
+        sao = 1;
     }//GEN-LAST:event_btnUserStar1ActionPerformed
 
     private void btnUserStar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar2ActionPerformed
         // TODO add your handling code here:
+        sao = 2;
     }//GEN-LAST:event_btnUserStar2ActionPerformed
 
     private void btnUserStar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar3ActionPerformed
         // TODO add your handling code here:
+        sao = 3;
     }//GEN-LAST:event_btnUserStar3ActionPerformed
 
     private void btnUserStar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar4ActionPerformed
         // TODO add your handling code here:
+        sao = 4;
     }//GEN-LAST:event_btnUserStar4ActionPerformed
 
     private void btnUserStar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar5ActionPerformed
         // TODO add your handling code here:
+        sao = 5;
     }//GEN-LAST:event_btnUserStar5ActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
@@ -503,6 +528,21 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         // TODO add your handling code here:
         endTD();
     }//GEN-LAST:event_btnEndActionPerformed
+
+    private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
+        // TODO add your handling code here:
+        insertComment();
+    }//GEN-LAST:event_btnUploadActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        openeditcomment();
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
+        // TODO add your handling code here:
+        openeditcomment();
+    }//GEN-LAST:event_btnEdit1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -595,25 +635,63 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     void init() {
-        System.out.println(list.size());
-        setLocationRelativeTo(null);
+        setfromUserComment();
+        loadCommentBySach();
+    }
+
+    void setfromUserComment() {
+        Reader rd = daoreader.selectByID(Auth.user.getUserID());
+        if (rd.getAvatar() != null) {
+            ImageIcon icon = XImage.read(rd.getAvatar());
+            Image img = icon.getImage().getScaledInstance(lblUserIMG.getWidth(), lblUserIMG.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(img);
+            lblUserIMG.setIcon(scaledIcon);
+            lblUserIMG.setToolTipText(rd.getAvatar());
+        };
+        lblUserName.setText(rd.getHoTen());
+
+    }
+
+    void loadCommentBySach() {
+        list.clear();
+        list = dao.selectallByidSach(sachbl.getIdSach());
         load();
+
     }
 
     void load() {
-        for (int i = start; i < end; i++) {
-            switch (end - i) {
+        for (int j = start; j < end; j++) {
+            switch (end - j) {
                 case 2 ->
-                    setfrom(list.get(i), lblBLIMG, lblBLName, txtBinhLuan);
+                    clearlFrom(lblBLIMG, lblBLName, txtBinhLuan);
                 case 1 ->
-                    setfrom(list.get(i), lblBLIMG1, lblBLName1, txtBinhLuan1);
+                    clearlFrom(lblBLIMG1, lblBLName1, txtBinhLuan1);
                 default -> {
+                }
+            }
+        }
+
+        for (int i = start; i < end; i++) {
+            if (i == list.size()) {
+                break;
+            } else {
+                switch (end - i) {
+                    case 2 -> {
+                        setfrom(list.get(i), lblBLIMG, lblBLName, txtBinhLuan, lblBLStar1, lblBLStar2, lblBLStar3, lblBLStar4, lblBLStar5);
+                        btnEdit.setEnabled(Auth.user.getUserID().equals(list.get(i).getIdReader()));
+                    }
+                    case 1 -> {
+                        setfrom(list.get(i), lblBLIMG1, lblBLName1, txtBinhLuan1, lblBLStar6, lblBLStar7, lblBLStar8, lblBLStar9, lblBLStar10);
+                        btnEdit1.setEnabled(Auth.user.getUserID().equals(list.get(i).getIdReader()));
+                    }
+                    default -> {
+                    }
                 }
             }
         }
     }
 
-    void setfrom(Comment cm, JLabel avatar, JLabel idreader, JTextArea noidung) {
+    void setfrom(Comment cm, JLabel avatar, JLabel idreader, JTextArea noidung, JLabel motsao, JLabel haisao, JLabel basao, JLabel bonsao, JLabel namsao) {
         noidung.setText(cm.getContent());
         cm.getSao();
         Reader rd = daoreader.selectByID(cm.getIdReader());
@@ -625,14 +703,59 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
             avatar.setToolTipText(rd.getAvatar());
         };
         idreader.setText(rd.getHoTen());
+        if (cm.getSao() != 0) {
+            switch (cm.getSao()) {
+                case 1 -> {
+                    motsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    haisao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    basao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    bonsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    namsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                }
+                case 2 -> {
+                    motsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    haisao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    basao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    bonsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    namsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                }
+                case 3 -> {
+                    motsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    haisao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    basao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    bonsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    namsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                }
+                case 4 -> {
+                    motsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    haisao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    basao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    bonsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    namsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                }
+                case 5 -> {
+                    motsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    haisao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    basao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    bonsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    namsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                }
+            }
+        }
 
     }
-    
-     private void nextTD() {
+
+    private void clearlFrom(JLabel avatar, JLabel idreader, JTextArea noidung) {
+        avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/github50.png")));
+        idreader.setText(null);
+        noidung.setText(null);
+    }
+
+    private void nextTD() {
         if (end < list.size()) {
             start++;
             end++;
-            load();
+            loadCommentBySach();
             System.out.println("Next: " + start + "-" + end);
         } else {
             DialogHelper.alert(this, "Last page");
@@ -643,7 +766,7 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         if (start > 0) {
             start--;
             end--;
-            load();
+            loadCommentBySach();
             System.out.println("Pre: " + start + "-" + end);
         } else {
             DialogHelper.alert(this, "First page");
@@ -653,18 +776,86 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
     private void firstTD() {
         start = 0;
         end = 2;
-        load();
+        loadCommentBySach();
         System.out.println("First: " + start + "-" + end);
     }
 
     private void endTD() {
         start = list.size() - 2;
         end = list.size();
-        load();
+        loadCommentBySach();
         System.out.println("End: " + start + "-" + end);
     }
-    
-    void clearlFrom(){
-        
+
+//======================================insert================================================
+    boolean check() {
+        if (txtBinhLuan.getText().isEmpty()) {
+            MsgBox.alert(this, "không được để trống");
+            return false;
+        }
+        if (sao == 0) {
+            MsgBox.alert(this, "vui lòng chọn sao");
+            return false;
+        }
+
+        for (Comment comment : list) {
+            if (comment.getIdDanhGia().equals(Auth.user.getUserID() + sachbl.getIdSach())) {
+                MsgBox.alert(this, "Bạn đã bình luận");
+                return false;
+            }
+        }
+        return true;
     }
+
+    public void insertComment() {
+        if (check()) {
+            Comment cm = getFrom();
+            try {
+                dao.insert(cm);
+                loadCommentBySach();
+                txtBinhLuan.setText("");
+                sao = 0;
+                MsgBox.alert(this, "thêm thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "thêm thất bại");
+            }
+        }
+
+    }
+
+    Comment getFrom() {
+        Comment cm = new Comment();
+        cm.setIdDanhGia(Auth.user.getUserID() + sachbl.getIdSach());
+        cm.setIdReader(Auth.user.getUserID());
+        cm.setIdSach(sachbl.getIdSach());
+        cm.setSao(sao);
+        cm.setContent(txtUserComment.getText());
+        cm.setImages(null);
+        cm.setVideos(null);
+        cm.setEditable(true);
+        cm.setEnable(true);
+
+        return cm;
+    }
+//====================================Update==========================================
+
+    void update() {
+        Comment cm = getFrom();
+        try {
+            dao.update(cm);
+            loadCommentBySach();
+            MsgBox.alert(this, "Update thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Update thành công");
+        }
+    }
+
+    void openeditcomment(){
+        Comment comment = dao.selectallByIdcomment(Auth.user.getUserID()+sachbl.getIdSach());
+        this.dispose();
+        new JDialogEditBinhLuan(this, true,  comment).setVisible(true);
+    }
+
 }

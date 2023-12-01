@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class CommentDAO {
 
     public void insert(Comment cm) {
-        String sql = "INSERT INTO COMMENT (IDDANHGIA, IDREADER, IDSACH, SAO, CONTENT, [image], [video], EDITABLE, [ENABLE]) "
+        String sql = "INSERT INTO COMMENT (IDDANHGIA, IDREADER, IDSACH, SAO, CONTENT, [image], [video] , EDITABLE , [ENABLE]) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
 
@@ -39,7 +39,7 @@ public class CommentDAO {
     }
 
     public void update(Comment cm) {
-        String updateQuery = "UPDATE COMMENT SET SAO = ?, CONTENT = ?, [image] = ?, [video] = ?, EDITABLE = ?, [ENABLE] = ? WHERE IDDANHGIA = ? AND IDREADER = ? AND IDSACH = ?";
+        String updateQuery = "UPDATE COMMENT SET SAO = ?, CONTENT = ?, [image] = ?, [video] = ?, EDITABLE = ?, [ENABLE] = ? WHERE IDDANHGIA = ?";
 
         try {
             Jdbc.executeUpdate(updateQuery,
@@ -49,9 +49,8 @@ public class CommentDAO {
                     cm.getVideos(),
                     cm.getEditable(),
                     cm.getEnable(),
-                    cm.getIdDanhGia(),
-                    cm.getIdReader(),
-                    cm.getIdSach());
+                    cm.getIdDanhGia());
+                    
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,11 +69,16 @@ public class CommentDAO {
 
     public ArrayList<Comment> selectallByidSach(String idsach) {
         String sql = "select * from comment where idsach = ?";
-        ArrayList<Comment> list = select(sql,idsach);
+        ArrayList<Comment> list = select(sql, idsach);
         return list;
     }
     
-    
+    public Comment selectallByIdcomment(String iddanhgia) {
+        String sql = "select * from comment where iddanhgia = ?";
+        ArrayList<Comment> list = select(sql, iddanhgia);
+        return !list.isEmpty() ? list.get(0): null;
+    }
+
     private ArrayList<Comment> select(String sql, Object... arys) {
         ArrayList<Comment> list = new ArrayList<>();
         try {
