@@ -99,7 +99,7 @@ public class JDialogLogin extends javax.swing.JDialog {
         if (this.user0.getReader()) {
             new JFrameTrangChuKhachHangver2().setVisible(true);
         } else if (!this.user0.getReader()) {
-            new JFrameTrangChuQuanLy(user0.getUserID()).setVisible(true);
+            new JFrameTrangChuQuanLy().setVisible(true);
         }
     }
 //    user0.getUserID()

@@ -15,6 +15,7 @@ UX_UI\JFrameTrangChuKhachHangver2$55.class
 UX_UI\JFrameTrangChuKhachHangver2$39.class
 UX_UI\JFrameTrangChuKhachHangver2$18.class
 UX_UI\JFrameTrangChuKhachHangver2$148.class
+testAPI\ImageDisplay.class
 UX_UI\JFrameTrangChuKhachHangver2$105.class
 UX_UI\JFrameTrangChuKhachHangver2$98.class
 UX_UI\JDialogQuanLyPhongBan$5.class
@@ -45,6 +46,7 @@ UX_UI\JFrameTrangChuKhachHangver2$5.class
 UX_UI\JFrameTrangChuKhachHangver2$121.class
 UX_UI\JFrameTrangChuKhachHangver2$71.class
 UX_UI\JFrameTrangChuKhachHangver2$119.class
+UX_UI\JDialogBinhLuan$5.class
 UX_UI\JFrameTrangChuKhachHangver2$17.class
 UX_UI\JFrameTrangChuKhachHangver2$69.class
 UX_UI\JDialogQuanLyPhongBan$14.class
@@ -64,6 +66,7 @@ UX_UI\JFrameTrangChuKhachHangver2$106.class
 UX_UI\JFrameTrangChuKhachHangver2$118.class
 library\Auth.class
 UX_UI\JDialogQuanLyNhanVien$7.class
+UX_UI\JDialogBinhLuan$4.class
 testAPI\AccuWeatherAPIExample.class
 UX_UI\JFrameTrangChuKhachHangver2$122.class
 dao\WishlistDAO.class
@@ -96,10 +99,13 @@ UX_UI\JDialogGioHang$1.class
 dao\TacGiaDAO.class
 UX_UI\JFrameTrangChuKhachHangver2$112.class
 UX_UI\JFrameTrangChuKhachHangver2$67.class
+UX_UI\JDialogBinhLuan$3.class
 UX_UI\JFrameTrangChuKhachHangver2$123.class
 UX_UI\JDialogQuanLyPhongBan$2.class
 UX_UI\JFrameTrangChuKhachHangver2$128.class
+UX_UI\JDialogBinhLuan$1.class
 UX_UI\JFrameTrangChuKhachHangver2$125.class
+testAPI\ReadableBooksExample02.class
 testAPI\GoogleBooksApiExample.class
 UX_UI\JDialogDoiMK$2.class
 dao\UserDAO.class
@@ -138,6 +144,7 @@ UX_UI\JDialogEditBinhLuan$1.class
 UX_UI\JDialogQuanLyPhongBan$6.class
 UX_UI\JDialogGioHang$3$1.class
 UX_UI\JFrameTrangChuKhachHangver2$89.class
+UX_UI\JDialogBinhLuan$6$1.class
 UX_UI\JFrameTrangChuKhachHangver2$83.class
 UX_UI\JDialogAccess$15.class
 UX_UI\JFrameTrangChuKhachHangver2$147.class
@@ -185,6 +192,7 @@ model\User.class
 UX_UI\JDialogLogin$5.class
 UX_UI\JDialogQuanLyPhongBan$3.class
 UX_UI\JFrameTrangChuKhachHangver2$124.class
+UX_UI\JDialogBinhLuan$2.class
 dao\SachDAO.class
 UX_UI\JFrameTrangChuKhachHangver2$2.class
 UX_UI\JFrameTrangChuKhachHangver2$116.class
@@ -227,6 +235,7 @@ UX_UI\JFrameTrangChuKhachHangver2$24.class
 UX_UI\JFrameTrangChuKhachHangver2$11.class
 UX_UI\JDialogAccess$8.class
 UX_UI\JDialogQuenMatKhau$3.class
+testAPI\ReadableBooksExample.class
 UX_UI\JDialogAccess$2.class
 UX_UI\JFrameTrangChuKhachHangver2$57.class
 UX_UI\JDialogChiTietSanPham$5$1.class
@@ -252,6 +261,7 @@ UX_UI\JFrameTrangChuKhachHangver2$65.class
 UX_UI\JFrameTrangChuKhachHangver2$62.class
 UX_UI\JFrameTrangChuKhachHangver2$108.class
 UX_UI\JDialogChiTietSanPham.class
+UX_UI\JDialogBinhLuan$6.class
 UX_UI\JDialogAccess$7.class
 model\WishlistCT.class
 dao\testAllDAO.class
@@ -333,6 +343,7 @@ UX_UI\JFrameTrangChuKhachHangver2$150.class
 UX_UI\JDialogSach$3$1.class
 UX_UI\JDialogXacNhanEmail$4.class
 UX_UI\JFrameTrangChuKhachHang$4.class
+UX_UI\JDialogBinhLuan.class
 UX_UI\JFrameTrangChuKhachHang$3.class
 UX_UI\JDialogGioHang.class
 UX_UI\JDialogQuanLyNhanVien.class

@@ -267,6 +267,7 @@ select * from THELOAI;
 select * from SVTG;
 select * from SVTL;
 
+
 -- châu phát insert 1 access và phòng ban
 INSERT INTO [Access] (idAccess, moTa, fullAccess, rReadList, uReadList, rWishList, uWishList, rUser, uUser, rPhongBan, uPhongBan, rSach, uSach, rReader, uReader, rNoiBo, uNoiBo, rTacGia, uTacGia, rTheLoai, uTheLoai)
 VALUES (1, N'Mô tả quyền truy cập', 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0),
@@ -292,3 +293,29 @@ update noibo set idPB = 1, quanLy =1, ngaySinh = '2004-11-21', gioitinh = 1 wher
 update noibo set idPB = 2, quanLy =1, ngaySinh = '2004-11-11', gioitinh = 0 where userid = N'qlKhoadb';
 
 select * from noiBo
+
+--go
+----create snapshot để lưu lại database dưới dạng snapShot
+--CREATE DATABASE Nerdyers_clone
+--ON
+--(
+--    NAME = Nerdyers,
+--    FILENAME = 'D:\Nerdyers_clone.ss'
+--) AS SNAPSHOT OF Nerdyers;
+
+
+--go
+---- drop nếu không muốn dùng snapShot nữa
+--DROP DATABASE Nerdyers_clone;
+
+--go
+---- backup database về lại bản snapShot đã được tạo
+--USE master;
+--RESTORE DATABASE Nerdyers
+--    FROM DATABASE_SNAPSHOT = 'Nerdyers_clone'
+--    WITH REPLACE;
+
+
+
+
+
