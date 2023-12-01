@@ -60,15 +60,15 @@ public class UserDAO {
         return !users.isEmpty() ? users.get(0) : null;
 
     }
-
-
+   
+    
     public User selectByUsername(String username) {
         //hàm châu phát thêm
         String select = "select * from [user] where username = ?";
         ArrayList<User> users = select(select, username);
         return !users.isEmpty() ? users.get(0) : null;
     }
-        public User selectByEmail(String email) {
+    public User selectByEmail(String email) {
         //hàm châu phát thêm
         String select = "select * from [user] where email = ?";
         ArrayList<User> users = select(select, email);
