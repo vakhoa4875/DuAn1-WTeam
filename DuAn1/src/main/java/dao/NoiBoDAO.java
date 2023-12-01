@@ -34,6 +34,11 @@ public class NoiBoDAO {
         Jdbc.executeUpdate(deleteQuery, noiBo.getIdNoiBo());
     }
 
+    public void deleteByUserID(NoiBo noiBo) {
+        String deleteQuery = "DELETE FROM noibo WHERE userid = ?";
+        Jdbc.executeUpdate(deleteQuery, noiBo.getUserID());
+    }
+
     public void update(NoiBo noiBo) {
         String updateQuery = "update noiBo set idPB = ?, idQuanLy = ?, luong = ?, fullTime = ?, ngayThue = ?, caLam = ?, quanLy = ?, luongbong = ?, ngaySinh = ?, avatar = ?, gioiTinh = ?  where userid = ?";
         Jdbc.executeUpdate(updateQuery,
@@ -67,6 +72,23 @@ public class NoiBoDAO {
     public ArrayList<NoiBo> selectNguoiQuanLy() {
         String query = "select * from noibo where quanLy = 1";
         ArrayList<NoiBo> nb = select(query);
+        return nb;
+
+    }
+
+    public ArrayList<NoiBo> search(String keyword) {
+        String query = "select * from [user] u join noibo nb on u.userID = nb.userID where "
+                + "idNoiBo like ? "
+                + "or nb.userID like ? "
+                + "or u.username like ? "
+                + "or email like ? "
+                + "or nb.hoten like ? "
+                + "or gioitinh like ? "
+                + "or idpb like ? "
+                + "or ngaythue like ? "
+                + "or calam like ? ";
+        ArrayList<NoiBo> nb = select(query, "%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%",
+                "%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%");
         return nb;
 
     }
