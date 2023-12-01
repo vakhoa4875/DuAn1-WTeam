@@ -24,6 +24,7 @@ import model.Sach;
  */
 public class JDialogEditBinhLuan extends javax.swing.JDialog {
 
+    Sach sachh = new Sach();
     Comment cm = new Comment();
     CommentDAO dao = new CommentDAO();
     readerDao daoreader = new readerDao();
@@ -37,11 +38,12 @@ public class JDialogEditBinhLuan extends javax.swing.JDialog {
         initComponents();
     }
 
-    public JDialogEditBinhLuan(javax.swing.JDialog parent, boolean modal, Comment comment) {
+    public JDialogEditBinhLuan(javax.swing.JDialog parent, boolean modal, Comment comment, Sach sach) {
         super(parent, modal);
         initComponents();
         cm = comment;
         sao = cm.getSao();
+        sachh = sach;
 //        System.out.println(cm.getIdReader() + cm.getContent());
         init();
     }
@@ -239,26 +241,32 @@ public class JDialogEditBinhLuan extends javax.swing.JDialog {
     private void btnUserStar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar1ActionPerformed
         // TODO add your handling code here:
         sao = 1;
+        setfromUserComment();
+       
     }//GEN-LAST:event_btnUserStar1ActionPerformed
 
     private void btnUserStar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar2ActionPerformed
         // TODO add your handling code here:
         sao = 2;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar2ActionPerformed
 
     private void btnUserStar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar3ActionPerformed
         // TODO add your handling code here:
         sao = 3;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar3ActionPerformed
 
     private void btnUserStar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar4ActionPerformed
         // TODO add your handling code here:
         sao = 4;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar4ActionPerformed
 
     private void btnUserStar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar5ActionPerformed
         // TODO add your handling code here:
         sao = 5;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar5ActionPerformed
 
     private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
@@ -268,7 +276,7 @@ public class JDialogEditBinhLuan extends javax.swing.JDialog {
 
     private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
         // TODO add your handling code here:
-
+        openComment();
     }//GEN-LAST:event_btnBack1ActionPerformed
 
     /**
@@ -395,9 +403,9 @@ public class JDialogEditBinhLuan extends javax.swing.JDialog {
     }
 
     Comment getFrom() {
-        Comment comment = cm;
-        comment.setIdDanhGia(Auth.user.getUserID() + cm.getIdSach());
-        comment.setIdReader(Auth.user.getUserID());
+        Comment comment = new Comment();
+        comment.setIdDanhGia(cm.getIdDanhGia());
+        comment.setIdReader(cm.getIdReader());
         comment.setIdSach(cm.getIdSach());
         comment.setSao(sao);
         comment.setContent(txtUserComment.getText());
@@ -406,7 +414,7 @@ public class JDialogEditBinhLuan extends javax.swing.JDialog {
         comment.setEditable(true);
         comment.setEnable(true);
 
-        return cm;
+        return comment;
     }
 
     void update() {
@@ -418,6 +426,67 @@ public class JDialogEditBinhLuan extends javax.swing.JDialog {
         } catch (Exception e) {
             e.printStackTrace();
             MsgBox.alert(this, "Update thành công");
+        }
+    }
+
+    void openComment() {
+        this.dispose();
+        new JDialogBinhLuan(this, true, sachh).setVisible(true);
+    }
+
+    void setfromUserComment() {
+        Reader rd = daoreader.selectByID(Auth.user.getUserID());
+        if (rd.getAvatar() != null) {
+            ImageIcon icon = XImage.read(rd.getAvatar());
+            Image img = icon.getImage().getScaledInstance(lblUserIMG.getWidth(), lblUserIMG.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(img);
+            lblUserIMG.setIcon(scaledIcon);
+            lblUserIMG.setToolTipText(rd.getAvatar());
+        };
+        lblUserName.setText(rd.getHoTen());
+        switch (sao) {
+            case 0 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 1 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 2 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 3 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 4 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 5 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+            }
         }
     }
 

@@ -487,26 +487,31 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
     private void btnUserStar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar1ActionPerformed
         // TODO add your handling code here:
         sao = 1;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar1ActionPerformed
 
     private void btnUserStar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar2ActionPerformed
         // TODO add your handling code here:
         sao = 2;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar2ActionPerformed
 
     private void btnUserStar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar3ActionPerformed
         // TODO add your handling code here:
         sao = 3;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar3ActionPerformed
 
     private void btnUserStar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar4ActionPerformed
         // TODO add your handling code here:
         sao = 4;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar4ActionPerformed
 
     private void btnUserStar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar5ActionPerformed
         // TODO add your handling code here:
         sao = 5;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar5ActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
@@ -649,7 +654,50 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
             lblUserIMG.setToolTipText(rd.getAvatar());
         };
         lblUserName.setText(rd.getHoTen());
-
+        switch (sao) {
+            case 0 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 1 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 2 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 3 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 4 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 5 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+            }
+        }
     }
 
     void loadCommentBySach() {
@@ -852,10 +900,10 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         }
     }
 
-    void openeditcomment(){
-        Comment comment = dao.selectallByIdcomment(Auth.user.getUserID()+sachbl.getIdSach());
+    void openeditcomment() {
+        Comment comment = dao.selectallByIdcomment(Auth.user.getUserID() + sachbl.getIdSach());
         this.dispose();
-        new JDialogEditBinhLuan(this, true,  comment).setVisible(true);
+        new JDialogEditBinhLuan(this, true, comment, sachbl).setVisible(true);
     }
 
 }
