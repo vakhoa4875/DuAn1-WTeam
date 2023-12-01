@@ -369,6 +369,7 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
 
     private void btnCommentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommentsActionPerformed
         // TODO add your handling code here:
+        openComment();
     }//GEN-LAST:event_btnCommentsActionPerformed
 
     private void btnAddWishlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddWishlistActionPerformed
@@ -461,6 +462,7 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
     private void init() {
         setForm();
         checkLL();
+        setLocationRelativeTo(null);
     }
     private void readBook() {
          Sach temp = sachDAO.selectByID(idSach);
@@ -537,5 +539,12 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
             wltemp.setIdWishlist(Auth.user.getUserID());
             wlDAO.delete(wltemp);
         }
+    }
+    
+    void openComment(){
+        Sach sach = sachDAO.selectByID(idSach);
+        
+        System.out.println(sach.getIdSach());
+        new JDialogBinhLuan(this, true, sach).setVisible(true);
     }
 }
