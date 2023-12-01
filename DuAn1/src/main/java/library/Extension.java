@@ -38,6 +38,15 @@ public class Extension {
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         anh.setIcon(scaledIcon);
     }
+    public static void scaleImage(JLabel anh, String fileName) {
+        ImageIcon icon = XImage.getImageIcon(fileName);
+        //scale image
+        Image image = icon.getImage();
+        Image scaledImage = image.getScaledInstance(anh.getWidth(), anh.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        anh.setIcon(scaledIcon);
+    }
+    
 
     // Tạo placeholder cho textField
     public static void setPlaceholder(JTextField textField, String placeholder) {

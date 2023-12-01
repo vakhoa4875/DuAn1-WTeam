@@ -43,7 +43,7 @@ public class URL_Dealer {
     }
 
     public static void downloadImage(String imageUrl, boolean overwrite) {
-        String destinationDirectory = "/images/";
+        String destinationDirectory = "images/";
         try {
             URL url = new URL(imageUrl);
 

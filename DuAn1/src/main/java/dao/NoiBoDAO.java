@@ -68,6 +68,12 @@ public class NoiBoDAO {
         ArrayList<NoiBo> nb = select(query, id);
         return !nb.isEmpty() ? nb.get(0) : null;
     }
+    
+    public NoiBo selectByUserID(String id) {
+        String query = "select * from noibo where userID = ?";
+        ArrayList<NoiBo> nb = select(query, id);  
+        return !nb.isEmpty() ? nb.get(0) : null;      
+    }
 
     public ArrayList<NoiBo> selectNguoiQuanLy() {
         String query = "select * from noibo where quanLy = 1";
