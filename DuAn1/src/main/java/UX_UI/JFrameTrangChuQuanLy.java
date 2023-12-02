@@ -52,14 +52,14 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
                 new JDialogLogin(this, true).setVisible(true);
             }
         }
-        
+
         XImage.setLogoButton(btnLogo);
         resizeColumn();
         getListSach();
         fillToTable();
         fillToLabel();
         checkPage();
-        
+
         cmbTK.addActionListener(e -> {
             load();
             curPage = 1;
@@ -85,7 +85,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             checkPage();
             fillToLabel();
         });
-        
+
         btnAccess.addActionListener(e -> {
             new JDialogAccess(this, true).setVisible(true);
         });
@@ -128,7 +128,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 //        pnlSach2.setVisible(false);
 //        pnlSach1.setVisible(false);
     }
-    
+
     SachDAO dao = new SachDAO();
     NoiBoDAO nbDao = new NoiBoDAO();
     PhongBanDAO pbDao = new PhongBanDAO();
@@ -136,22 +136,29 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
     ArrayList<Sach> listSach;
     final Integer sachCount = 10;
     int curPage = 1;
-    
+
     void setAccess() {
         if (Auth.user == null) {
             return;
         }
         NoiBo nb = nbDao.selectByUserID(Auth.user.getUserID());
+        if (nb == null) {
+            return;
+        }
         if (nb.getAvatar() != null) {
             XImage.setInfoBtn(btnAvatar, nb.getHoTen(), nb.getAvatar());
         } else {
             btnAvatar.setText(nb.getHoTen());
         }
         PhongBan pb = pbDao.selectByID(nb.getIdPB());
+        if (pb == null) {
+            return;
+        }
+
         Integer idAccess = (nb.getQuanLy()) ? pb.getQlAccess() : pb.getNvAccess();
         Auth.access = accDao.selectById(idAccess);
     }
-    
+
     void setEnableBtn() {
         btnAccess.setEnabled(false);
         btnPhongBan.setEnabled(false);
@@ -180,17 +187,17 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         btnTacGia.setEnabled(Auth.access.getrTacGia() || Auth.access.getuTacGia());
         btnTheLoai.setEnabled(Auth.access.getrTheLoai() || Auth.access.getuTheLoai());
     }
-    
+
     void showPersonalInfo() {
-        
+
     }
-    
+
     void load() {
         getListSach();
         fillToLabel();
         fillToTable();
     }
-    
+
     void getListSach() {
         Boolean isView = (cmbTK.getSelectedIndex() == 1 || cmbTK.getSelectedIndex() == 3);
         Boolean isAsc = (cmbTK.getSelectedIndex() == 3 || cmbTK.getSelectedIndex() == 4);
@@ -200,11 +207,11 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             this.listSach = dao.thongKeSach(isView, isView);
         }
     }
-    
+
     void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblThongKe.getModel();
         model.setRowCount(0);
-        
+
         for (Sach sach : this.listSach) {
             Object[] row = {sach.getIdSach(),
                 sach.getTenSach(),
@@ -218,7 +225,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             model.addRow(row);
         }
     }
-    
+
     void checkPage() {
         btnFirst.setEnabled(true);
         btnPrev.setEnabled(true);
@@ -233,7 +240,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             btnLast.setEnabled(false);
         }
     }
-    
+
     void fillToLabel() {
 //        pnlSach10.setVisible(false);
 //        pnlSach9.setVisible(false);
@@ -251,52 +258,52 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             System.out.println(sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1));
             switch (i % sachCount) {
                 case (10 - 1) -> {
-                    Extension.scaleImage(lblCover10,sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1) );
+                    Extension.scaleImage(lblCover10, sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1));
                     lblTenSach10.setText(sach.getTenSach());
                     pnlSach10.setVisible(true);
                 }
                 case (9 - 1) -> {
-                    Extension.scaleImage(lblCover9,sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1) );
+                    Extension.scaleImage(lblCover9, sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1));
                     lblTenSach9.setText(sach.getTenSach());
                     pnlSach9.setVisible(true);
                 }
                 case (8 - 1) -> {
-                    Extension.scaleImage(lblCover8,sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1) );
+                    Extension.scaleImage(lblCover8, sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1));
                     lblTenSach8.setText(sach.getTenSach());
                     pnlSach8.setVisible(true);
                 }
                 case (7 - 1) -> {
-                    Extension.scaleImage(lblCover7,sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1) );
+                    Extension.scaleImage(lblCover7, sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1));
                     lblTenSach7.setText(sach.getTenSach());
                     pnlSach7.setVisible(true);
                 }
                 case (6 - 1) -> {
-                    Extension.scaleImage(lblCover6,sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1) );
+                    Extension.scaleImage(lblCover6, sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1));
                     lblTenSach6.setText(sach.getTenSach());
                     pnlSach6.setVisible(true);
                 }
                 case (5 - 1) -> {
-                    Extension.scaleImage(lblCover5,sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1) );
+                    Extension.scaleImage(lblCover5, sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1));
                     lblTenSach5.setText(sach.getTenSach());
                     pnlSach5.setVisible(true);
                 }
                 case (4 - 1) -> {
-                    Extension.scaleImage(lblCover4,sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1) );
+                    Extension.scaleImage(lblCover4, sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1));
                     lblTenSach4.setText(sach.getTenSach());
                     pnlSach4.setVisible(true);
                 }
                 case (3 - 1) -> {
-                    Extension.scaleImage(lblCover3,sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1) );
+                    Extension.scaleImage(lblCover3, sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1));
                     lblTenSach3.setText(sach.getTenSach());
                     pnlSach3.setVisible(true);
                 }
                 case (2 - 1) -> {
-                    Extension.scaleImage(lblCover2,sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1) );
+                    Extension.scaleImage(lblCover2, sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1));
                     lblTenSach2.setText(sach.getTenSach());
                     pnlSach2.setVisible(true);
                 }
                 case (1 - 1) -> {
-                    Extension.scaleImage(lblCover1,sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1) );
+                    Extension.scaleImage(lblCover1, sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1));
                     lblTenSach1.setText(sach.getTenSach());
                     pnlSach1.setVisible(true);
                 }
@@ -305,14 +312,14 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             }
         }
     }
-    
+
     void logOut() {
         if (DialogHelper.confirm(null, "Bạn có muốn đăng xuất?")) {
             Auth.user = null;
             this.dispose();
         }
     }
-    
+
     private void resizeColumn() {
 //        TableColumn col1 = tblChuyenDe.getColumnModel().getColumn(1);
         TableColumnModel clm = tblThongKe.getColumnModel();
