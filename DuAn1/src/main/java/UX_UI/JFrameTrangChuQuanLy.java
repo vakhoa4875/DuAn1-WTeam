@@ -476,6 +476,11 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         cmbTK.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbTK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Books", "Most Viewed Books", "Most Liked Books", "Least Viewed Books", "Least Liked Books" }));
+        cmbTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTKActionPerformed(evt);
+            }
+        });
 
         pnlSach1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -946,6 +951,10 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
         logOut();
     }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void cmbTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTKActionPerformed
 
     /**
      * @param args the command line arguments
