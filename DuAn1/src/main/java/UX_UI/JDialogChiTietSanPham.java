@@ -464,13 +464,25 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
         checkLL();
         setLocationRelativeTo(null);
     }
+
     private void readBook() {
-         Sach temp = sachDAO.selectByID(idSach);
+        Sach temp = sachDAO.selectByID(idSach);
         URL_Dealer.openURL(temp.getUrlLink());
-        
-        SachPDF pdftemp = new SachPDF(Auth.user.getUserID(), idSach, 0);
-        pdfDAO.insert(pdftemp);
+        sachDAO.updateView(temp);
+
+        ArrayList<SachPDF> pdf = pdfDAO.selectByIdUser(Auth.user.getUserID());
+        int checkRB = 0;
+        for (SachPDF sachPDF : pdf) {
+            if (sachPDF.getIdReadlist().equals(Auth.user.getUserID()) && sachPDF.getIdSach().equals(temp.getIdSach())) {
+                checkRB++;
+            }
+        }
+        if (checkRB == 0) {
+            SachPDF pdftemp = new SachPDF(Auth.user.getUserID(), temp.getIdSach(), 0);
+            pdfDAO.insert(pdftemp);
+        }
     }
+
     private void setForm() {
         Sach sach = sachDAO.selectByID(idSach);
         ArrayList<TacGia> tg = tacgiaDAO.selectByIDSach(idSach);
@@ -526,25 +538,27 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
     }
 
     private void addToLikeList() {
+        Sach temp = sachDAO.selectByID(idSach);
+        
         if (check == 0) {
             btnAddWishlist.setText("Remove from Likelist");
             WishlistCT wltemp = new WishlistCT();
             wltemp.setIdSach(idSach);
             wltemp.setIdWishlist(Auth.user.getUserID());
             wlDAO.insert(wltemp);
+            sachDAO.updateLike(temp);
         } else {
             btnAddWishlist.setText("Add to Likelist");
             WishlistCT wltemp = new WishlistCT();
             wltemp.setIdSach(idSach);
             wltemp.setIdWishlist(Auth.user.getUserID());
             wlDAO.delete(wltemp);
+            sachDAO.updateUnlike(temp);
         }
     }
-    
-    void openComment(){
+
+    void openComment() {
         Sach sach = sachDAO.selectByID(idSach);
-        
-        System.out.println(sach.getIdSach());
         new JDialogBinhLuan(this, true, sach).setVisible(true);
     }
 }
