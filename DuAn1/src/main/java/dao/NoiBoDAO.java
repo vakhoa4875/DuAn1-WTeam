@@ -40,7 +40,7 @@ public class NoiBoDAO {
     }
 
     public void update(NoiBo noiBo) {
-        String updateQuery = "update noiBo set idPB = ?, idQuanLy = ?, luong = ?, fullTime = ?, ngayThue = ?, caLam = ?, quanLy = ?, luongbong = ?, ngaySinh = ?, avatar = ?, gioiTinh = ?  where userid = ?";
+        String updateQuery = "update noiBo set idPB = ?, idQuanLy = ?, luong = ?, fullTime = ?, ngayThue = ?, caLam = ?, quanLy = ?, luongbong = ?, ngaySinh = ?, avatar = ?, gioiTinh = ?, hoTen = ?  where userid = ?";
         Jdbc.executeUpdate(updateQuery,
                 noiBo.getIdPB(),
                 noiBo.getIdQuanLy(),
@@ -53,6 +53,7 @@ public class NoiBoDAO {
                 noiBo.getNgaySinh(),
                 noiBo.getAvatar(),
                 noiBo.getGioiTinh(),
+                noiBo.getHoTen(),
                 noiBo.getUserID()
         );
     }

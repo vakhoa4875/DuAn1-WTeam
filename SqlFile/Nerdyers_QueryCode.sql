@@ -196,7 +196,6 @@ GO
 */
 
 
-
 go
 create or alter TRIGGER tr_comment_update
 ON COMMENT
@@ -220,6 +219,7 @@ FROM INSERTED;
 
 END;
 GO
+drop trigger if exists tr_comment_update
 
 /* Insert rows into table 'COMMENT' in schema '[dbo]'
 INSERT INTO [dbo].[COMMENT]
@@ -241,6 +241,9 @@ insert into [User] values
 ('user', 'reader', '123', 'user@gmail.com', 1, 1);
 insert into [User] values
 ('admin', 'noiBo', '123', 'admin@gmail.com', 0, 1);
+go
+insert into [User] values
+('user03', 'khoa2', '123', 'user03@gmail.com', 1, 1);
 go
 
 --('user1', 'reader1', '123', 'user1@gmail.com', 1, 1),
