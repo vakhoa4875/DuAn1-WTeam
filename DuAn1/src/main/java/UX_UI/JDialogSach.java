@@ -4,11 +4,36 @@
  */
 package UX_UI;
 
+import dao.SachDAO;
+import java.awt.Image;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+import library.Extension;
+import library.XImage;
+import model.Sach;
+
 /**
  *
  * @author TAN LOC
  */
 public class JDialogSach extends javax.swing.JDialog {
+
+    //mảng toàn cục dùng để lấy ảnh dễ hơn 
+    SachDAO dao = new SachDAO();
+    //mảng lishSách có kiểu dữ liệu là Sách
+    ArrayList<Sach> listSach;
+    //phần tử đầu tiên
+    int startSearch = 0, endSearch = 12;
+    int startTD = 0, endTD = 5;
+    int curPage = 1;
+    final Integer sachCount = 5;
 
     /**
      * Creates new form JDialogQuanLySanPham
@@ -17,6 +42,7 @@ public class JDialogSach extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        init();
     }
 
     /**
@@ -63,17 +89,25 @@ public class JDialogSach extends javax.swing.JDialog {
         btnSapXep.setForeground(new java.awt.Color(0, 0, 0));
         btnSapXep.setText("Sắp xếp");
         btnSapXep.setBorder(null);
+        btnSapXep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSapXepActionPerformed(evt);
+            }
+        });
 
         btnThemSach.setBackground(new java.awt.Color(255, 255, 255));
         btnThemSach.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnThemSach.setForeground(new java.awt.Color(0, 0, 0));
         btnThemSach.setText("Thêm Sách");
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setPreferredSize(new java.awt.Dimension(165, 240));
 
+        lblAnh1.setForeground(new java.awt.Color(255, 255, 255));
         lblAnh1.setText("anh");
 
+        lblTenSach1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenSach1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenSach1.setText("Tên Sách");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -97,11 +131,13 @@ public class JDialogSach extends javax.swing.JDialog {
                 .addGap(47, 47, 47))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
         jPanel3.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh3.setText("anh");
 
+        lblTenSach3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenSach3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenSach3.setText("Tên Sách");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -125,11 +161,13 @@ public class JDialogSach extends javax.swing.JDialog {
                 .addGap(41, 41, 41))
         );
 
-        jPanel7.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel7.setBackground(new java.awt.Color(153, 153, 153));
         jPanel7.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh2.setText("anh");
 
+        lblTenSach2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenSach2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenSach2.setText("Tên Sách");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -152,11 +190,13 @@ public class JDialogSach extends javax.swing.JDialog {
                 .addGap(40, 40, 40))
         );
 
-        jPanel6.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel6.setBackground(new java.awt.Color(153, 153, 153));
         jPanel6.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh4.setText("anh");
 
+        lblTenSach4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenSach4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenSach4.setText("Tên Sách");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -180,11 +220,13 @@ public class JDialogSach extends javax.swing.JDialog {
                 .addGap(39, 39, 39))
         );
 
-        jPanel8.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel8.setBackground(new java.awt.Color(153, 153, 153));
         jPanel8.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh5.setText("anh");
 
+        lblTenSach5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTenSach5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenSach5.setText("Tên Sách");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -209,6 +251,16 @@ public class JDialogSach extends javax.swing.JDialog {
         );
 
         btnFirst.setText("<<");
+        btnFirst.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFirstMouseClicked(evt);
+            }
+        });
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
 
         btnPrev.setText("|<");
         btnPrev.addActionListener(new java.awt.event.ActionListener() {
@@ -218,6 +270,11 @@ public class JDialogSach extends javax.swing.JDialog {
         });
 
         btnLast.setText(">>");
+        btnLast.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLastMouseClicked(evt);
+            }
+        });
         btnLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLastActionPerformed(evt);
@@ -236,27 +293,17 @@ public class JDialogSach extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblQuanLySach)
-                                .addGap(193, 193, 193))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(243, 243, 243)
-                                .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72)
-                                .addComponent(btnThemSach, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(btnFirst)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(177, 177, 177))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblQuanLySach)
+                .addGap(370, 370, 370))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(249, 249, 249)
+                .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(btnThemSach, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(206, 206, 206))
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,8 +311,11 @@ public class JDialogSach extends javax.swing.JDialog {
                         .addComponent(jSeparator1)
                         .addGap(19, 19, 19))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnPrev)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnFirst)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnPrev))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -321,7 +371,29 @@ public class JDialogSach extends javax.swing.JDialog {
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
+//        last();
+        endTD();
     }//GEN-LAST:event_btnLastActionPerformed
+
+    private void btnLastMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLastMouseClicked
+        // TODO add your handling code here:
+//        last();
+    }//GEN-LAST:event_btnLastMouseClicked
+
+    private void btnFirstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFirstMouseClicked
+        // TODO add your handling code here:
+//        first();
+    }//GEN-LAST:event_btnFirstMouseClicked
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        // TODO add your handling code here:
+        firstTD();
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
+        // TODO add your handling code here:
+//        clear();
+    }//GEN-LAST:event_btnSapXepActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,4 +464,182 @@ public class JDialogSach extends javax.swing.JDialog {
     private javax.swing.JLabel lblTenSach4;
     private javax.swing.JLabel lblTenSach5;
     // End of variables declaration//GEN-END:variables
+
+    private void init() {
+        loadDataSach();
+//        loadSachEC();
+        loadSachTD();
+    }
+
+    private void loadDataSach() {
+        listSach = dao.select();
+    }
+
+//    private void loadSachEC() {
+//
+//        for (int i = 0; i < 5; i++) {
+//            switch (i) {
+//                case 0 ->
+//                    setBookForm(listSach.get(i), lblAnh1, lblTenSach1);
+//                case 1 ->
+//                    setBookForm(listSach.get(i), lblAnh2, lblTenSach2);
+//                case 2 ->
+//                    setBookForm(listSach.get(i), lblAnh3, lblTenSach3);
+//                case 3 ->
+//                    setBookForm(listSach.get(i), lblAnh4, lblTenSach4);
+//                case 4 ->
+//                    setBookForm(listSach.get(i), lblAnh5, lblTenSach5);
+//                default -> {
+//                }
+//            }
+//        }
+//        
+//     
+//
+////        for (int i = 0; i < 5; i++) {
+////            switch (5 - i) {
+////                case 4 ->
+////                    setBookForm(listSach.get(i), lblAnh5, lblTenSach5);
+////                case 3 ->
+////                    setBookForm(listSach.get(i), lblAnh4, lblTenSach4);
+////                case 2 ->
+////                    setBookForm(listSach.get(i), lblAnh3, lblTenSach3);
+////                case 1 ->
+////                    setBookForm(listSach.get(i), lblAnh2, lblTenSach2);
+////                case 0 ->
+////                    setBookForm(listSach.get(i), lblAnh1, lblTenSach1);
+////                default -> {
+////                }
+////            }
+////        }
+//    }
+    
+    private void loadSachTD() {
+        for (int i = (curPage - 1) * sachCount; i < listSach.size() && i < curPage * sachCount; i++) {
+            Sach sach = listSach.get(i);
+            switch (i % sachCount) {
+                case (5 - 1) -> {
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblAnh5);
+                    lblTenSach5.setText(sach.getTenSach());
+                }
+                case (4 - 1) -> {
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblAnh4);
+                    lblTenSach4.setText(sach.getTenSach());
+                }
+                case (3 - 1) -> {
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblAnh3);
+                    lblTenSach3.setText(sach.getTenSach());
+                }
+                case (2 - 1) -> {
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblAnh2);
+                    lblTenSach2.setText(sach.getTenSach());
+                }
+                case (1 - 1) -> {
+                    Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblAnh1);
+                    lblTenSach1.setText(sach.getTenSach());
+                }
+            }
+        }
+//        for (int i = startTD; i < endTD; i++) {
+//            switch (startTD) {
+//                case 0 ->
+//                    setBookForm(listSach.get(i), lblAnh1, lblTenSach1);
+//                case 1 ->
+//                    setBookForm(listSach.get(i), lblAnh2, lblTenSach2);
+//                case 2 ->
+//                    setBookForm(listSach.get(i), lblAnh3, lblTenSach3);
+//                case 3 ->
+//                    setBookForm(listSach.get(i), lblAnh4, lblTenSach4);
+//                case 4 ->
+//                    setBookForm(listSach.get(i), lblAnh5, lblTenSach5);
+//                default -> {
+//                }
+//            }
+//
+//        }
+    }
+    
+
+    private void clearBookForm(JLabel anh, JLabel ten) {
+        anh.setIcon(new ImageIcon());
+        anh.setText(null);
+        anh.setToolTipText(null);
+        ten.setText("    ");
+    }
+
+    private void setBookForm(Sach sach, JLabel anh, JLabel ten) {
+        ten.setBorder(new TitledBorder(sach.getTenSach()));
+        String name = sach.getTenSach() + ".jpg";
+        File out = new File("logos", name);
+        if (out.exists()) {
+            ten.setText("");
+            ImageIcon icon = XImage.read(name);
+            Image img = icon.getImage().getScaledInstance(anh.getWidth(), anh.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(img);
+            anh.setIcon(scaledIcon);
+            anh.setToolTipText(sach.getIdSach());
+        }
+    }
+    
+    private void firstTD() {
+        startTD = 0;
+        endTD = 5;
+        loadSachTD();
+        System.out.println("First: " + startTD + "-" + endTD);
+    }
+    
+    private void endTD() {
+        startTD = listSach.size() - 5;
+        endTD = listSach.size();
+        loadSachTD();
+        System.out.println("End: " + startTD + "-" + endTD);
+    }
+
+//    private void first() {
+//        this.clear();
+//        //thêm ảnh vào array để chứa 
+//        List<JLabel> anhList = Arrays.asList(lblAnh1, lblAnh2, lblAnh3, lblAnh4, lblAnh5);
+//        //thêm tên vào Array
+//        List<JLabel> tenList = Arrays.asList(lblTenSach1, lblTenSach2, lblTenSach3, lblTenSach4, lblTenSach5);
+//        
+//        //gán tất cả dữ liệu của dao vào list sách
+//        listSach = dao.select();
+//        
+//        for(int i = 0 ; i < 5; i ++){
+//            // trong lish sách lấy phần tử đầu tiên và thực hiện chức năng của entity Sach
+//            Sach sach = listSach.get(i);
+//            //lấy jbl của list và set tên vào
+//            tenList.get(i).setText(sach.getTenSach());
+//            Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), anhList.get(i));
+//        }
+//    }
+//    
+//    void last(){
+//        this.clear();
+//         //thêm ảnh vào array để chứa 
+//        List<JLabel> anhList = Arrays.asList(lblAnh1, lblAnh2, lblAnh3, lblAnh4, lblAnh5);
+//        //thêm tên vào Array
+//        List<JLabel> tenList = Arrays.asList(lblTenSach1, lblTenSach2, lblTenSach3, lblTenSach4, lblTenSach5);
+//        
+//        //gán tất cả dữ liệu của dao vào list sách
+//        listSach = dao.select();
+//        
+//        List<Sach> elementList = listSach.subList(listSach.size()-5, listSach.size());
+//        
+//        for(int i = 0 ; i < 5 ; i ++){
+//            Extension.scaleImage("/images/" + elementList.get(i).getCoverI().substring(elementList.get(i).getCoverI().lastIndexOf('/') + 1), anhList.get(i));
+//        }
+//    }
+//    
+//    void clear(){
+//        //thêm ảnh vào array để chứa 
+//        List<JLabel> anhList = Arrays.asList(lblAnh1, lblAnh2, lblAnh3, lblAnh4, lblAnh5);
+//        //thêm tên vào Array
+//        List<JLabel> tenList = Arrays.asList(lblTenSach1, lblTenSach2, lblTenSach3, lblTenSach4, lblTenSach5);
+//        
+//        for(int i = 0 ; i < 5 ; i ++){
+//            Extension.scaleImage("", anhList.get(i));
+//            tenList.get(i).setText("");
+//        }
+//    }
 }
