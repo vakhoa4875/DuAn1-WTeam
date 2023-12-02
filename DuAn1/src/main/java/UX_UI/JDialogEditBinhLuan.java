@@ -69,7 +69,6 @@ public class JDialogEditBinhLuan extends javax.swing.JDialog {
         btnUserStar3 = new javax.swing.JButton();
         btnUserStar4 = new javax.swing.JButton();
         btnUserStar5 = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnBack1 = new javax.swing.JButton();
 
@@ -137,8 +136,6 @@ public class JDialogEditBinhLuan extends javax.swing.JDialog {
             }
         });
 
-        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backward.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -166,11 +163,6 @@ public class JDialogEditBinhLuan extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUpload)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(466, 466, 466)
-                    .addComponent(btnBack)
-                    .addContainerGap(466, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,11 +182,6 @@ public class JDialogEditBinhLuan extends javax.swing.JDialog {
                     .addComponent(btnUserStar4)
                     .addComponent(btnUserStar5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(27, 27, 27)
-                    .addComponent(btnBack)
-                    .addContainerGap(28, Short.MAX_VALUE)))
         );
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
@@ -322,7 +309,6 @@ public class JDialogEditBinhLuan extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnUpload;

@@ -25,27 +25,37 @@ import model.WishlistCT;
  *
  * @author phamhuy
  */
-public class JDialogChiTietSanPham extends javax.swing.JDialog {
+public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
 
     private String idSach;
     private SachDAO sachDAO = new SachDAO();
     private TacGiaDAO tacgiaDAO = new TacGiaDAO();
     private WishlistDAO wlDAO = new WishlistDAO();
     private SachPDFDAO pdfDAO = new SachPDFDAO();
+    private Sach sach = new Sach();
     ArrayList<WishlistCT> wl = new ArrayList<>();
     int check = 0;
 
     /**
      * Creates new form JDialogChiTietSanPham
      */
-    public JDialogChiTietSanPham(java.awt.Frame parent, boolean modal) {
+    public JDialogChiTietSanPhamQuanLy(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
+    
 
-    public JDialogChiTietSanPham(java.awt.Frame parent, boolean modal, String idSach) {
+    public JDialogChiTietSanPhamQuanLy(java.awt.Frame parent, boolean modal, String idSach) {
         super(parent, modal);
         this.idSach = idSach;
+        initComponents();
+        init();
+    }
+    
+    public JDialogChiTietSanPhamQuanLy(javax.swing.JDialog parent, boolean modal, Sach sachh) {
+        super(parent, modal);
+        this.sach = sachh;
+        System.out.println(sachh.getIdSach());
         initComponents();
         init();
     }
@@ -75,15 +85,6 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         lblPages = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        lblStar1 = new javax.swing.JLabel();
-        lblStar2 = new javax.swing.JLabel();
-        lblStar3 = new javax.swing.JLabel();
-        lblStar4 = new javax.swing.JLabel();
-        lblStar5 = new javax.swing.JLabel();
-        lblStar = new javax.swing.JLabel();
-        btnMua = new javax.swing.JButton();
-        btnComments = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         btnAddWishlist = new javax.swing.JButton();
 
@@ -216,76 +217,12 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lblStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png"))); // NOI18N
-
-        lblStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png"))); // NOI18N
-
-        lblStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png"))); // NOI18N
-
-        lblStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png"))); // NOI18N
-
-        lblStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png"))); // NOI18N
-
-        lblStar.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lblStar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblStar.setText("4");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblStar1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblStar2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblStar3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblStar4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblStar5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblStar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblStar5, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(lblStar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblStar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblStar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblStar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblStar))
-                .addContainerGap())
-        );
-
-        btnMua.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        btnMua.setForeground(new java.awt.Color(0, 0, 0));
-        btnMua.setText("Mua");
-        btnMua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMuaActionPerformed(evt);
-            }
-        });
-
-        btnComments.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        btnComments.setForeground(new java.awt.Color(0, 0, 0));
-        btnComments.setText("Nhận xét từ độc giả");
-        btnComments.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCommentsActionPerformed(evt);
-            }
-        });
-
         jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setText("Mô tả");
 
         btnAddWishlist.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         btnAddWishlist.setForeground(new java.awt.Color(0, 0, 0));
-        btnAddWishlist.setText("Add to Likelist ");
+        btnAddWishlist.setText("Chỉnh sửa thông tin");
         btnAddWishlist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddWishlistActionPerformed(evt);
@@ -303,30 +240,22 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
                         .addComponent(btnBack)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                            .addComponent(btnMua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnComments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jLabel19)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(lblAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnAddWishlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel19)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lblAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)
+                            .addComponent(btnAddWishlist, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -351,41 +280,27 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAddWishlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMua, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnComments, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAddWishlist, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCommentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommentsActionPerformed
-        // TODO add your handling code here:
-        openComment();
-    }//GEN-LAST:event_btnCommentsActionPerformed
-
     private void btnAddWishlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddWishlistActionPerformed
         // TODO add your handling code here:
-        addToLikeList();
+        new JDialogChinhSua(this,true,sach).setVisible(true);
+        if(JDialogChinhSua.clone == 1){
+            this.dispose();
+        }
     }//GEN-LAST:event_btnAddWishlistActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         exit();
     }//GEN-LAST:event_btnBackActionPerformed
-
-    private void btnMuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuaActionPerformed
-        // TODO add your handling code here:
-        readBook();
-    }//GEN-LAST:event_btnMuaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,20 +319,21 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialogChiTietSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogChiTietSanPhamQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialogChiTietSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogChiTietSanPhamQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialogChiTietSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogChiTietSanPhamQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialogChiTietSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogChiTietSanPhamQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogChiTietSanPham dialog = new JDialogChiTietSanPham(new javax.swing.JFrame(), true);
+                JDialogChiTietSanPhamQuanLy dialog = new JDialogChiTietSanPhamQuanLy(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -432,8 +348,6 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddWishlist;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnComments;
-    private javax.swing.JButton btnMua;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
@@ -442,19 +356,12 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAuthor;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblLanguage;
     private javax.swing.JLabel lblPages;
-    private javax.swing.JLabel lblStar;
-    private javax.swing.JLabel lblStar1;
-    private javax.swing.JLabel lblStar2;
-    private javax.swing.JLabel lblStar3;
-    private javax.swing.JLabel lblStar4;
-    private javax.swing.JLabel lblStar5;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextArea txtMoTa;
     // End of variables declaration//GEN-END:variables
@@ -464,27 +371,7 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
         checkLL();
         setLocationRelativeTo(null);
     }
-
-    private void readBook() {
-        Sach temp = sachDAO.selectByID(idSach);
-        URL_Dealer.openURL(temp.getUrlLink());
-        sachDAO.updateView(temp);
-
-        ArrayList<SachPDF> pdf = pdfDAO.selectByIdUser(Auth.user.getUserID());
-        int checkRB = 0;
-        for (SachPDF sachPDF : pdf) {
-            if (sachPDF.getIdReadlist().equals(Auth.user.getUserID()) && sachPDF.getIdSach().equals(temp.getIdSach())) {
-                checkRB++;
-            }
-        }
-        if (checkRB == 0) {
-            SachPDF pdftemp = new SachPDF(Auth.user.getUserID(), temp.getIdSach(), 0);
-            pdfDAO.insert(pdftemp);
-        }
-    }
-
     private void setForm() {
-        Sach sach = sachDAO.selectByID(idSach);
         ArrayList<TacGia> tg = tacgiaDAO.selectByIDSach(idSach);
         String tentg = "";
         int sltg = 1;
@@ -515,16 +402,13 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
             lblImage.setIcon(scaledIcon);
             lblImage.setToolTipText(sach.getIdSach());
         }
-        if (sach.getEbookAccess().equalsIgnoreCase("public")) {
-            btnMua.setText("Read");
-        } else {
-            btnMua.setText("Borrow");
-        }
     }
 
     private void exit() {
         this.dispose();
     }
+    
+    
 
     private void checkLL() {
         wl = wlDAO.search(Auth.user.getUserID());
@@ -535,30 +419,5 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
                 break;
             }
         }
-    }
-
-    private void addToLikeList() {
-        Sach temp = sachDAO.selectByID(idSach);
-        
-        if (check == 0) {
-            btnAddWishlist.setText("Remove from Likelist");
-            WishlistCT wltemp = new WishlistCT();
-            wltemp.setIdSach(idSach);
-            wltemp.setIdWishlist(Auth.user.getUserID());
-            wlDAO.insert(wltemp);
-            sachDAO.updateLike(temp);
-        } else {
-            btnAddWishlist.setText("Add to Likelist");
-            WishlistCT wltemp = new WishlistCT();
-            wltemp.setIdSach(idSach);
-            wltemp.setIdWishlist(Auth.user.getUserID());
-            wlDAO.delete(wltemp);
-            sachDAO.updateUnlike(temp);
-        }
-    }
-
-    void openComment() {
-        Sach sach = sachDAO.selectByID(idSach);
-        new JDialogBinhLuan(this, true, sach).setVisible(true);
     }
 }

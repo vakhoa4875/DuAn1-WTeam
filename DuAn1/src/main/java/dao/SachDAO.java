@@ -77,6 +77,24 @@ public class SachDAO {
                 sach.getDanhGiaTB(),
                 sach.getIdSach());
     }
+    
+    public void updateCt(Sach sach) {
+        String updateQuery = """
+                 UPDATE SACH
+                 SET 
+                     NAMSANGTAC = ?,
+                     SOTRANG = ?,
+                     MOTA = ?,
+                     NGONNGU = ?
+                 WHERE IDSACH = ?;
+                 """;
+        Jdbc.executeUpdate(updateQuery,
+                sach.getNamSangTac(),
+                sach.getSoTrang(),
+                sach.getMoTa(),
+                String.join("|", sach.getNgonNgu()),
+                sach.getIdSach());
+    }
 
     private Sach readFromRS(ResultSet resultSet) throws SQLException {
         Sach sach = new Sach(
@@ -183,7 +201,7 @@ public class SachDAO {
         return select(selectQuery, searchValue);
 
     }
-    
+
     public ArrayList<Sach> thongKeSach(Boolean isView, Boolean isAsc) {
         String exec = "{call thongKeSach (?)}";
         ArrayList<Sach> list = select(exec, isView);
@@ -192,11 +210,11 @@ public class SachDAO {
         }
         return list;
     }
-    
+
     public Sach selectByID(String idSach) {
         String selectQuery = "select * from Sach "
                 + "where idSach = ?";
-        ArrayList<Sach> sachs = select(selectQuery, idSach);        
+        ArrayList<Sach> sachs = select(selectQuery, idSach);
         return sachs.isEmpty() ? null : sachs.get(0);
     }
 
@@ -221,5 +239,17 @@ public class SachDAO {
         }
         return list;
 
+    }
+    public void updateView(Sach sach) {
+        String Query = "UPDATE [dbo].[Sach] SET [viewCount] = [viewCount] + 1 WHERE idsach = ?";
+        Jdbc.executeUpdate(Query, sach.getIdSach());
+    }
+    public void updateLike(Sach sach) {
+        String Query = "UPDATE [dbo].[Sach] SET [likeCount] = [likeCount] + 1 WHERE idsach = ?";
+        Jdbc.executeUpdate(Query, sach.getIdSach());
+    }
+    public void updateUnlike(Sach sach) {
+        String Query = "UPDATE [dbo].[Sach] SET [likeCount] = [likeCount] - 1 WHERE idsach = ?";
+        Jdbc.executeUpdate(Query, sach.getIdSach());
     }
 }

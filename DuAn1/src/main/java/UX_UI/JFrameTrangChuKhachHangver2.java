@@ -4993,9 +4993,17 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     private void readBook(JLabel lb) {
         Sach temp = sachDAO.selectByID(lb.getToolTipText());
         URL_Dealer.openURL(temp.getUrlLink());
-        
-        SachPDF pdftemp = new SachPDF(Auth.user.getUserID(), temp.getIdSach(), 0);
-        pdfDAO.insert(pdftemp);
+        sachDAO.updateView(temp);
+        int check = 0;
+        for (SachPDF sachPDF : pdf) {
+            if (sachPDF.getIdReadlist().equals(Auth.user.getUserID()) && sachPDF.getIdSach().equals(temp.getIdSach())) {
+                check++;
+            }
+        }
+        if (check == 0) {
+            SachPDF pdftemp = new SachPDF(Auth.user.getUserID(), temp.getIdSach(), 0);
+            pdfDAO.insert(pdftemp);
+        }
     }
 
     private void openJDialogThongTinKhachHang() {
@@ -5586,8 +5594,8 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         sachRBList.clear();
         pdf = pdfDAO.selectByIdUser(Auth.user.getUserID());
         for (SachPDF sachPDF : pdf) {
-               Sach sachTEMP = sachDAO.selectByID(sachPDF.getIdSach());
-               sachRBList.add(sachTEMP);
+            Sach sachTEMP = sachDAO.selectByID(sachPDF.getIdSach());
+            sachRBList.add(sachTEMP);
         }
         System.out.println("test: " + sachRBList.size());
         if (sachRBList.size() < 12) {
@@ -5670,6 +5678,7 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
 
         }
     }
+
     private void nextRB() {
         if (endRB < sachRBList.size()) {
             startRB++;

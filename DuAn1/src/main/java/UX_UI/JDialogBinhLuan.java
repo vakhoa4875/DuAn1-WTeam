@@ -861,7 +861,7 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
             try {
                 dao.insert(cm);
                 loadCommentBySach();
-                txtBinhLuan.setText("");
+                txtUserComment.setText("");
                 sao = 0;
                 MsgBox.alert(this, "thêm thành công");
             } catch (Exception e) {
