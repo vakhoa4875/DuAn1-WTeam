@@ -25,38 +25,30 @@ import model.WishlistCT;
  *
  * @author phamhuy
  */
-public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
+public class JDialogChinhSua extends javax.swing.JDialog {
 
     private String idSach;
-    private SachDAO sachDAO = new SachDAO();
+    private SachDAO dao = new SachDAO();
     private TacGiaDAO tacgiaDAO = new TacGiaDAO();
     private WishlistDAO wlDAO = new WishlistDAO();
-    private SachPDFDAO pdfDAO = new SachPDFDAO();
     private Sach sach = new Sach();
     ArrayList<WishlistCT> wl = new ArrayList<>();
     int check = 0;
+    public static int clone = 0;
 
     /**
      * Creates new form JDialogChiTietSanPham
      */
-    public JDialogChiTietSanPhamQuanLy(java.awt.Frame parent, boolean modal) {
+    public JDialogChinhSua(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
     
-
-    public JDialogChiTietSanPhamQuanLy(java.awt.Frame parent, boolean modal, String idSach) {
+    public JDialogChinhSua(javax.swing.JDialog parent, boolean modal, Sach sachh) {
         super(parent, modal);
-        this.idSach = idSach;
         initComponents();
-        init();
-    }
-    
-    public JDialogChiTietSanPhamQuanLy(javax.swing.JDialog parent, boolean modal, Sach sachh) {
-        super(parent, modal);
         this.sach = sachh;
-        System.out.println(sachh.getIdSach());
-        initComponents();
+        setLocationRelativeTo(null);
         init();
     }
 
@@ -72,19 +64,18 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
-        lblImage = new javax.swing.JLabel();
         lblAuthor = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtMoTa = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        lblDate = new javax.swing.JLabel();
+        lblDate = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        lblLanguage = new javax.swing.JLabel();
+        lblLanguage = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        lblPages = new javax.swing.JLabel();
+        lblPages = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         btnAddWishlist = new javax.swing.JButton();
 
@@ -104,16 +95,11 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Court of Mist and Fury");
 
-        lblImage.setBackground(new java.awt.Color(0, 0, 0));
-        lblImage.setForeground(new java.awt.Color(0, 0, 0));
-        lblImage.setText("Image");
-
         lblAuthor.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         lblAuthor.setForeground(new java.awt.Color(0, 0, 0));
         lblAuthor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAuthor.setText("by Sarah J. Maas");
 
-        txtMoTa.setEditable(false);
         txtMoTa.setColumns(20);
         txtMoTa.setLineWrap(true);
         txtMoTa.setRows(5);
@@ -127,9 +113,7 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Publish Date");
 
-        lblDate.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        lblDate.setForeground(new java.awt.Color(0, 0, 0));
-        lblDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lblDate.setText("2020");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -139,8 +123,8 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                    .addComponent(lblDate))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -148,9 +132,9 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblDate)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
@@ -159,10 +143,8 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Language");
 
-        lblLanguage.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        lblLanguage.setForeground(new java.awt.Color(0, 255, 255));
-        lblLanguage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLanguage.setText("ENGLISH");
+        lblLanguage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lblLanguage.setText("Tieng Anh");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -171,8 +153,8 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLanguage, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                    .addComponent(lblLanguage))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -180,9 +162,9 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblLanguage)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 153));
@@ -191,10 +173,8 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Pages");
 
-        lblPages.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        lblPages.setForeground(new java.awt.Color(0, 0, 0));
-        lblPages.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPages.setText("654");
+        lblPages.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lblPages.setText("656");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -203,8 +183,8 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblPages, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                    .addComponent(lblPages))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -212,9 +192,9 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblPages)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         jLabel19.setForeground(new java.awt.Color(0, 0, 0));
@@ -222,7 +202,7 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
 
         btnAddWishlist.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         btnAddWishlist.setForeground(new java.awt.Color(0, 0, 0));
-        btnAddWishlist.setText("Chỉnh sửa thông tin");
+        btnAddWishlist.setText("Lưu thông tin");
         btnAddWishlist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddWishlistActionPerformed(evt);
@@ -237,52 +217,52 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel19)
+                                .addComponent(btnBack)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(lblAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel19)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(btnAddWishlist, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                            .addComponent(lblAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnBack)
+                .addGap(12, 12, 12)
+                .addComponent(lblTitle)
                 .addGap(18, 18, 18)
+                .addComponent(lblAuthor)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitle)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblAuthor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAddWishlist, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAddWishlist, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -291,10 +271,14 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
 
     private void btnAddWishlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddWishlistActionPerformed
         // TODO add your handling code here:
-        new JDialogChinhSua(this,true,sach).setVisible(true);
-        if(JDialogChinhSua.clone == 1){
-            this.dispose();
+        update();
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        clone = 1;
+        this.dispose();
     }//GEN-LAST:event_btnAddWishlistActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -319,21 +303,23 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialogChiTietSanPhamQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogChinhSua.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialogChiTietSanPhamQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogChinhSua.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialogChiTietSanPhamQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogChinhSua.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialogChiTietSanPhamQuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogChinhSua.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialogChiTietSanPhamQuanLy dialog = new JDialogChiTietSanPhamQuanLy(new javax.swing.JFrame(), true);
+                JDialogChinhSua dialog = new JDialogChinhSua(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -358,10 +344,9 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAuthor;
-    private javax.swing.JLabel lblDate;
-    private javax.swing.JLabel lblImage;
-    private javax.swing.JLabel lblLanguage;
-    private javax.swing.JLabel lblPages;
+    private javax.swing.JTextField lblDate;
+    private javax.swing.JTextField lblLanguage;
+    private javax.swing.JTextField lblPages;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextArea txtMoTa;
     // End of variables declaration//GEN-END:variables
@@ -370,6 +355,7 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
         setForm();
         checkLL();
         setLocationRelativeTo(null);
+        System.out.println(sach.getNgonNgu());
     }
     private void setForm() {
         ArrayList<TacGia> tg = tacgiaDAO.selectByIDSach(idSach);
@@ -394,18 +380,20 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
         lblPages.setText(sach.getSoTrang() + "");
         String name = sach.getTenSach() + ".jpg";
         File out = new File("logos", name);
-        if (out.exists()) {
-            lblImage.setText("");
-            ImageIcon icon = XImage.read(name);
-            Image img = icon.getImage().getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon scaledIcon = new ImageIcon(img);
-            lblImage.setIcon(scaledIcon);
-            lblImage.setToolTipText(sach.getIdSach());
-        }
     }
 
     private void exit() {
         this.dispose();
+    }
+    
+    private Sach getform(){
+        Sach getSach = new Sach();
+        getSach.setMoTa(txtMoTa.getText());
+        getSach.setNamSangTac(Integer.parseInt(lblDate.getText()));
+        getSach.setNgonNgu(lblLanguage.getText().split(", "));
+        getSach.setSoTrang(Integer.parseInt(lblPages.getText()));
+        getSach.setIdSach(sach.getIdSach());
+        return getSach;
     }
     
     
@@ -420,4 +408,18 @@ public class JDialogChiTietSanPhamQuanLy extends javax.swing.JDialog {
             }
         }
     }
+    
+    void update(){
+        Sach sh = getform();
+        try {
+            new SachDAO().updateCt(sh);
+            library.MsgBox.alert(this, "Cập nhật sách thành công ");
+            setForm();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    
 }

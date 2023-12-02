@@ -119,6 +119,11 @@ public class JDialogSach extends javax.swing.JDialog {
         jPanel3.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh3.setText("anh");
+        lblAnh3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAnh3MouseClicked(evt);
+            }
+        });
 
         lblTenSach3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTenSach3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -144,6 +149,11 @@ public class JDialogSach extends javax.swing.JDialog {
         jPanel7.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh2.setText("anh");
+        lblAnh2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAnh2MouseClicked(evt);
+            }
+        });
 
         lblTenSach2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTenSach2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -169,6 +179,11 @@ public class JDialogSach extends javax.swing.JDialog {
         jPanel6.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh4.setText("anh");
+        lblAnh4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAnh4MouseClicked(evt);
+            }
+        });
 
         lblTenSach4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTenSach4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -194,6 +209,11 @@ public class JDialogSach extends javax.swing.JDialog {
         jPanel8.setPreferredSize(new java.awt.Dimension(165, 240));
 
         lblAnh5.setText("anh");
+        lblAnh5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAnh5MouseClicked(evt);
+            }
+        });
 
         lblTenSach5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTenSach5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -357,8 +377,28 @@ public class JDialogSach extends javax.swing.JDialog {
 
     private void lblAnh1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnh1MouseClicked
         // TODO add your handling code here:
-        detailBook(lblAnh1);
+        detailBook(lblAnh1.getToolTipText());
     }//GEN-LAST:event_lblAnh1MouseClicked
+
+    private void lblAnh2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnh2MouseClicked
+        // TODO add your handling code here:
+        detailBook(lblAnh2.getToolTipText());
+    }//GEN-LAST:event_lblAnh2MouseClicked
+
+    private void lblAnh3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnh3MouseClicked
+        // TODO add your handling code here:
+        detailBook(lblAnh3.getToolTipText());
+    }//GEN-LAST:event_lblAnh3MouseClicked
+
+    private void lblAnh4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnh4MouseClicked
+        // TODO add your handling code here:
+        detailBook(lblAnh4.getToolTipText());
+    }//GEN-LAST:event_lblAnh4MouseClicked
+
+    private void lblAnh5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnh5MouseClicked
+        // TODO add your handling code here:
+        detailBook(lblAnh5.getToolTipText());
+    }//GEN-LAST:event_lblAnh5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -499,30 +539,36 @@ public class JDialogSach extends javax.swing.JDialog {
             switch (i % sachCount) {
                 case (5 - 1) -> {
                     Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblAnh5);
+                    lblAnh5.setToolTipText(sach.getIdSach());
                     lblTenSach5.setText(sach.getTenSach());
                 }
                 case (4 - 1) -> {
                     Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblAnh4);
+                    lblAnh4.setToolTipText(sach.getIdSach());
                     lblTenSach4.setText(sach.getTenSach());
                 }
                 case (3 - 1) -> {
                     Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblAnh3);
+                    lblAnh3.setToolTipText(sach.getIdSach());
                     lblTenSach3.setText(sach.getTenSach());
                 }
                 case (2 - 1) -> {
                     Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblAnh2);
+                    lblAnh2.setToolTipText(sach.getIdSach());
                     lblTenSach2.setText(sach.getTenSach());
                 }
                 case (1 - 1) -> {
                     Extension.scaleImage("/images/" + sach.getCoverI().substring(sach.getCoverI().lastIndexOf('/') + 1), lblAnh1);
+                    lblAnh1.setToolTipText(sach.getIdSach());
                     lblTenSach1.setText(sach.getTenSach());
                 }
             }
         }
     }
     
-    private void detailBook(JLabel lb) {
-        JDialogChiTietSanPhamQuanLy chiTietSanPhamQuanLy = new JDialogChiTietSanPhamQuanLy(this, true, lb.getToolTipText());
-        chiTietSanPhamQuanLy.setVisible(true);
+    private void detailBook(String idSach) {
+        Sach sach = dao.selectByID(idSach);
+//        System.out.println(lb.getToolTipText());
+       new JDialogChiTietSanPhamQuanLy(this, true, sach).setVisible(true);
     }
 }

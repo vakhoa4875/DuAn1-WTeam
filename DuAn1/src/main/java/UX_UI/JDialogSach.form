@@ -210,6 +210,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="anh"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAnh3MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblTenSach3">
           <Properties>
@@ -255,6 +258,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="anh"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAnh2MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblTenSach2">
           <Properties>
@@ -300,6 +306,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="anh"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAnh4MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblTenSach4">
           <Properties>
@@ -345,6 +354,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="anh"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAnh5MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblTenSach5">
           <Properties>
