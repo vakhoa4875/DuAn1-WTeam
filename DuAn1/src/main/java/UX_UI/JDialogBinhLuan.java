@@ -837,7 +837,7 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
 
 //======================================insert================================================
     boolean check() {
-        if (txtBinhLuan.getText().isEmpty()) {
+        if (txtUserComment.getText().isEmpty()) {
             MsgBox.alert(this, "không được để trống");
             return false;
         }

@@ -669,7 +669,7 @@
                         <Column editable="false" title="rReadList" type="java.lang.Boolean"/>
                         <Column editable="false" title="uReadList" type="java.lang.Boolean"/>
                         <Column editable="false" title="rWishList" type="java.lang.Boolean"/>
-                        <Column editable="true" title="uWishList" type="java.lang.Boolean"/>
+                        <Column editable="false" title="uWishList" type="java.lang.Boolean"/>
                         <Column editable="false" title="rUser" type="java.lang.Boolean"/>
                         <Column editable="false" title="uUser" type="java.lang.Boolean"/>
                         <Column editable="false" title="Xem PB" type="java.lang.Boolean"/>
@@ -684,7 +684,7 @@
                         <Column editable="false" title="uTacGia" type="java.lang.Boolean"/>
                         <Column editable="false" title="rTheLoai" type="java.lang.Boolean"/>
                         <Column editable="false" title="uTheLoai" type="java.lang.Boolean"/>
-                        <Column editable="true" title="M&#xf4; T&#x1ea3;" type="java.lang.String"/>
+                        <Column editable="false" title="M&#xf4; T&#x1ea3;" type="java.lang.String"/>
                       </Table>
                     </Property>
                   </Properties>

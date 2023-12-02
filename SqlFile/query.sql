@@ -99,3 +99,8 @@ gioiTinh = 0 WHERE idReader = 'user'
 =======
 select * from Sach
 where cover_i like '%4986307-L.jpg%'
+
+select * from COMMENT
+
+delete from COMMENT
+where IDDANHGIA = 'user/works/OL10071W.v2'
