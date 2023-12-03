@@ -204,7 +204,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         if (cmbTK.getSelectedIndex() == 0) {
             this.listSach = dao.select();
         } else {
-            this.listSach = dao.thongKeSach(isView, isView);
+            this.listSach = dao.thongKeSach(isView, isAsc);
         }
     }
 
@@ -235,10 +235,12 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             btnFirst.setEnabled(false);
             btnPrev.setEnabled(false);
         }
-        if (curPage * sachCount >= listSach.size()) {
+        int maxPage = (int)Math.ceil((double)listSach.size() / sachCount);
+        if (curPage >= maxPage) {
             btnNext.setEnabled(false);
             btnLast.setEnabled(false);
         }
+        lblPage.setText("Page: " + curPage + "/" + maxPage);
     }
 
     void fillToLabel() {
@@ -385,6 +387,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         pnlSach10 = new javax.swing.JPanel();
         lblCover10 = new javax.swing.JLabel();
         lblTenSach10 = new javax.swing.JLabel();
+        lblPage = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongKe = new javax.swing.JTable();
@@ -527,6 +530,11 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
 
         btnPrev.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         btnPrev.setText("<<");
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
 
         btnNext.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         btnNext.setText(">>");
@@ -800,6 +808,10 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lblPage.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lblPage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPage.setText("Page: 10/10");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -820,21 +832,24 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(pnlSach6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pnlSach7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnFirst))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(pnlSach8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnPrev)
+                                .addComponent(btnFirst)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnNext)))
+                                .addComponent(btnPrev))
+                            .addComponent(pnlSach7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLast)
-                            .addComponent(pnlSach10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, Short.MAX_VALUE)
+                            .addComponent(pnlSach8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPage, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(pnlSach10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnNext)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLast)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(pnlSach9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -867,7 +882,8 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnNext)
-                        .addComponent(btnLast))
+                        .addComponent(lblPage))
+                    .addComponent(btnLast)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnPrev)
                         .addComponent(btnFirst)))
@@ -978,6 +994,10 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbTKActionPerformed
 
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPrevActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1043,6 +1063,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel lblCover7;
     private javax.swing.JLabel lblCover8;
     private javax.swing.JLabel lblCover9;
+    private javax.swing.JLabel lblPage;
     private javax.swing.JLabel lblTenSach1;
     private javax.swing.JLabel lblTenSach10;
     private javax.swing.JLabel lblTenSach2;
