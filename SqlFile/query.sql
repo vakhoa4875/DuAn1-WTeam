@@ -104,3 +104,5 @@ select * from COMMENT
 
 delete from COMMENT
 where IDDANHGIA = 'user/works/OL10071W.v2'
+
+select * from noiBo
