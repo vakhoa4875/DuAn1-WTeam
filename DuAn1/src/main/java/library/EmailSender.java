@@ -55,7 +55,7 @@ public class EmailSender {
                     + "\n"
                     + "Trân trọng,\n"
                     + "CEO Nerdyers: Vũ Anh Khoa\n"
-                    + "kaisamaslain+Nerdyers@gmail.com\n"
+                    + "kaisamaslain@gmail.com\n"
                     + "0363457017");
 
             // Send the message
