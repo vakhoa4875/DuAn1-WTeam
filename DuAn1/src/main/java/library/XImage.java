@@ -34,7 +34,7 @@ public class XImage {
         // set dài rộng cho btn
         btn.setSize(135, 50);
         //set font
-        Font segoeUIFont = new Font("Segoe UI Black", Font.PLAIN, 16);
+        Font segoeUIFont = new Font("Segoe UI Black", Font.PLAIN, 24);
         btn.setFont(segoeUIFont);
 
         ImageIcon icon = new ImageIcon(Extension.class.getResource(nerdyersLogo));
