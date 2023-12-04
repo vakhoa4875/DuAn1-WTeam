@@ -8,6 +8,7 @@ import dao.PhongBanDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import library.Auth;
 import library.Extension;
 import library.MsgBox;
 import model.PhongBan;
@@ -40,7 +41,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabs = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblQuanLyPhongBan = new javax.swing.JTable();
@@ -173,7 +174,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Quản Lý", jPanel2);
+        tabs.addTab("Quản Lý", jPanel2);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Thông Tin Phòng Ban");
@@ -352,18 +353,18 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
                                 .addContainerGap())))))
         );
 
-        jTabbedPane1.addTab("Thêm", jPanel1);
+        tabs.addTab("Thêm", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabs)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 27, Short.MAX_VALUE))
         );
 
@@ -495,12 +496,12 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblFirst;
     private javax.swing.JLabel lblLast;
     private javax.swing.JLabel lblNext;
     private javax.swing.JLabel lblTimKiem;
+    private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblQuanLyPhongBan;
     private javax.swing.JTextField txtIDPhongBan;
     private javax.swing.JTextArea txtMoTa;
@@ -517,6 +518,9 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         Extension.setPlaceholder(txtIDPhongBan, "Nhập ID");
         Extension.setPlaceholder(txtQuanLiAccess, "Nhập quản lý access");
         Extension.setPlaceholder(txtTenPhongBan, "Nhập tên phòng ban");
+        if (!Auth.access.getuPhongBan()) {
+            tabs.setEnabledAt(1, false);
+        }
     }
     
     private void fillTable() {
@@ -568,7 +572,7 @@ public class JDialogQuanLyPhongBan extends javax.swing.JDialog {
         PhongBan pb = new PhongBanDAO().selectByID(idPhongBan);
         this.setForm(pb);
         btnSave.setEnabled(false);
-        jTabbedPane1.setSelectedIndex(1);
+        tabs.setSelectedIndex(1);
     }
     
     private boolean check() {
