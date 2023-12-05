@@ -5,6 +5,7 @@
 package UX_UI;
 
 import dao.AccessDAO;
+import dao.NoiBoDAO;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.event.DocumentEvent;
@@ -13,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import library.Auth;
 import library.MsgBox;
 import model.Access;
+import model.NoiBo;
 
 /**
  *
@@ -773,6 +775,8 @@ public class JDialogAccess extends javax.swing.JDialog {
     private javax.swing.JTextField txtidAccess;
     // End of variables declaration//GEN-END:variables
 
+    NoiBoDAO nbDao = new NoiBoDAO();
+    
     void init() {
         filltable();
         updateStatus();
@@ -804,6 +808,9 @@ public class JDialogAccess extends javax.swing.JDialog {
                 }
             }
         });
+        NoiBo nb = nbDao.selectByUserID(Auth.user.getUserID());
+        lblName.setText(nb.getHoTen());
+        lblRole.setText(nb.getQuanLy() ? "Quản lý" : "Nhân Viên");
     }
 
     void filltable() {

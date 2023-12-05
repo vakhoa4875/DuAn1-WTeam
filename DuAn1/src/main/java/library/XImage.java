@@ -4,7 +4,8 @@
  */
 package library;
 
-import UX_UI.JFrameTrangChuKhachHang;
+//import UX_UI.JFrameTrangChuKhachHang;
+import UX_UI.JFrameTrangChuKhachHangver2;
 import UX_UI.JFrameTrangChuQuanLy;
 import java.awt.Font;
 import java.awt.Image;
@@ -73,7 +74,7 @@ public class XImage {
         if (Auth.isReader()) {
             btn.addActionListener(e -> {
                 parentWindow.dispose();
-                new JFrameTrangChuKhachHang().setVisible(true);
+                new JFrameTrangChuKhachHangver2().setVisible(true);
             });
         } else {
             btn.addActionListener(e -> {
