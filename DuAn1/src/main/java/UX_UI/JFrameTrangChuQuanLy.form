@@ -386,12 +386,10 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="btnNext" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnLast" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="btnPrev" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnNext" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLast" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnPrev" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnFirst" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblPage" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
