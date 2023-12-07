@@ -418,7 +418,7 @@ public class JDialogThongTinKhachHang extends javax.swing.JDialog {
     Reader getFrom() {
         Reader rd = new Reader(); 
         
-        rd.setThanThiet(lblTrangThai.getText() == "Đọc giả thân thiết" ? true : false);
+        rd.setThanThiet(("Đọc giả thân thiết".equals(lblTrangThai.getText())));
         rd.setTichDiem(Integer.parseInt(txtTichDiem.getText()));
         rd.setNgaySinh(XDate.toDate(txtDate.getText()));
         rd.setAvatar(lblChooseImage.getToolTipText());
