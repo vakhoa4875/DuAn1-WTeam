@@ -202,6 +202,7 @@ public class JDialogAccess extends javax.swing.JDialog {
         txtMota.setRows(5);
         jScrollPane2.setViewportView(txtMota);
 
+        btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Add.png"))); // NOI18N
         btnInsert.setText("Insert");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,6 +210,7 @@ public class JDialogAccess extends javax.swing.JDialog {
             }
         });
 
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Edit.png"))); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,6 +218,7 @@ public class JDialogAccess extends javax.swing.JDialog {
             }
         });
 
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Delete.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +226,7 @@ public class JDialogAccess extends javax.swing.JDialog {
             }
         });
 
+        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Document.png"))); // NOI18N
         btnNew.setText("New");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -461,7 +465,7 @@ public class JDialogAccess extends javax.swing.JDialog {
                     .addComponent(btnprev)
                     .addComponent(btnnext)
                     .addComponent(btnlast))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         tabs.addTab("Chi tiết Quyền Truy Cập", jPanel2);
