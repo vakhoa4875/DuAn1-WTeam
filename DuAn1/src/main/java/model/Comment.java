@@ -11,7 +11,7 @@ package model;
  */
 public class Comment {
     private String idDanhGia;
-    private Integer idReader;
+    private String idReader;
     private String idSach;
     private Integer sao;
     private String content;
@@ -21,7 +21,7 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String idDanhGia, Integer idReader, String idSach, Integer sao, String content, String images, String videos, Boolean editable, Boolean enable) {
+    public Comment(String idDanhGia, String idReader, String idSach, Integer sao, String content, String images, String videos, Boolean editable, Boolean enable) {
         this.idDanhGia = idDanhGia;
         this.idReader = idReader;
         this.idSach = idSach;
@@ -41,11 +41,11 @@ public class Comment {
         this.idDanhGia = idDanhGia;
     }
 
-    public Integer getIdReader() {
+    public String getIdReader() {
         return idReader;
     }
 
-    public void setIdReader(Integer idReader) {
+    public void setIdReader(String idReader) {
         this.idReader = idReader;
     }
 

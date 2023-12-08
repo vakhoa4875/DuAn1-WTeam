@@ -4,7 +4,8 @@
  */
 package library;
 
-import UX_UI.JFrameTrangChuKhachHang;
+//import UX_UI.JFrameTrangChuKhachHang;
+import UX_UI.JFrameTrangChuKhachHangver2;
 import UX_UI.JFrameTrangChuQuanLy;
 import java.awt.Font;
 import java.awt.Image;
@@ -34,9 +35,9 @@ public class XImage {
         // set dài rộng cho btn
         btn.setSize(135, 50);
         //set font
-        Font segoeUIFont = new Font("Segoe UI Black", Font.PLAIN, 16);
+        Font segoeUIFont = new Font("Segoe UI Black", Font.PLAIN, 24);
         btn.setFont(segoeUIFont);
-        
+
         ImageIcon icon = new ImageIcon(Extension.class.getResource(nerdyersLogo));
         //scale image
         Image image = icon.getImage();
@@ -48,9 +49,22 @@ public class XImage {
             returnToMain(btn);
         }
     }
+    
+    public static void setInfoBtn(JButton btn, String name, String avatar) {
+        ImageIcon icon = new ImageIcon(Extension.class.getResource(avatar));
+        //scale image
+        Image image = icon.getImage();
+        Image scaledImage = image.getScaledInstance(btn.getHeight(), btn.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        btn.setIcon(scaledIcon);   
+        btn.setText(name);     
+    }
 
     // set button event
     public static void returnToMain(JButton btn) {
+        if (!Auth.isLogin()) {
+            return;
+        }
         // lấy form chứa button logo
         Window parentWindow = SwingUtilities.getWindowAncestor(btn);
 
@@ -60,7 +74,7 @@ public class XImage {
         if (Auth.isReader()) {
             btn.addActionListener(e -> {
                 parentWindow.dispose();
-                new JFrameTrangChuKhachHang().setVisible(true);
+                new JFrameTrangChuKhachHangver2().setVisible(true);
             });
         } else {
             btn.addActionListener(e -> {
@@ -93,6 +107,11 @@ public class XImage {
 
     public static ImageIcon read(String filename) {
         File path = new File("logos", filename);
+        return new ImageIcon(path.getAbsolutePath());
+    }
+    
+    public static ImageIcon getImageIcon(String filename) {
+        File path = new File("images", filename);
         return new ImageIcon(path.getAbsolutePath());
     }
 

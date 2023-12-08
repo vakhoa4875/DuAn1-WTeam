@@ -4,11 +4,36 @@
  */
 package UX_UI;
 
+import dao.CommentDAO;
+import dao.SachDAO;
+import dao.readerDao;
+import java.awt.Image;
+import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import kotlin.coroutines.CombinedContext;
+import library.Auth;
+import library.DialogHelper;
+import library.MsgBox;
+import model.Comment;
+import model.Reader;
+import model.Sach;
+import library.XImage;
+
 /**
  *
  * @author phamhuy
  */
 public class JDialogBinhLuan extends javax.swing.JDialog {
+
+    Sach sachbl = new Sach();
+    CommentDAO dao = new CommentDAO();
+    readerDao daoreader = new readerDao();
+    ArrayList<Comment> list = new ArrayList<>();
+    int start = 0, end = 2, sao = 0;
 
     /**
      * Creates new form JDialogBinhLuan
@@ -16,6 +41,16 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
     public JDialogBinhLuan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        init();
+    }
+
+    public JDialogBinhLuan(javax.swing.JDialog parent, boolean modal, Sach sach) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        this.sachbl = sach;
+        init();
     }
 
     /**
@@ -96,6 +131,11 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         jScrollPane2.setViewportView(txtUserComment);
 
         btnUpload.setText("Bình luận");
+        btnUpload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUploadActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Huỷ");
 
@@ -213,6 +253,11 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         lblBLStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png"))); // NOI18N
 
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -244,13 +289,17 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addGap(12, 12, 12)
                         .addComponent(lblBLName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(lblBLIMG, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblBLStar1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -259,20 +308,39 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
                             .addComponent(lblBLStar4, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblBLStar5, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(0, 8, Short.MAX_VALUE))
-                    .addComponent(lblBLIMG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEdit)))
                 .addContainerGap())
         );
 
         btnStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skip-to-start-16.png"))); // NOI18N
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
+            }
+        });
 
         btnPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rewind-16.png"))); // NOI18N
+        btnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousActionPerformed(evt);
+            }
+        });
 
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fast-forward-16.png"))); // NOI18N
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         btnEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/end-16.png"))); // NOI18N
+        btnEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEndActionPerformed(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -300,17 +368,22 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         lblBLStar10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png"))); // NOI18N
 
         btnEdit1.setText("Edit");
+        btnEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEdit1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(lblBLIMG1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(lblBLName1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -331,14 +404,15 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addGap(12, 12, 12)
                         .addComponent(lblBLName1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblBLIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblBLStar6, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblBLStar7, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -346,9 +420,8 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
                             .addComponent(lblBLStar9, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblBLStar10, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(0, 8, Short.MAX_VALUE))
-                    .addComponent(lblBLIMG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEdit1)))
                 .addContainerGap())
         );
@@ -413,23 +486,68 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
 
     private void btnUserStar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar1ActionPerformed
         // TODO add your handling code here:
+        sao = 1;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar1ActionPerformed
 
     private void btnUserStar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar2ActionPerformed
         // TODO add your handling code here:
+        sao = 2;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar2ActionPerformed
 
     private void btnUserStar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar3ActionPerformed
         // TODO add your handling code here:
+        sao = 3;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar3ActionPerformed
 
     private void btnUserStar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar4ActionPerformed
         // TODO add your handling code here:
+        sao = 4;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar4ActionPerformed
 
     private void btnUserStar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserStar5ActionPerformed
         // TODO add your handling code here:
+        sao = 5;
+        setfromUserComment();
     }//GEN-LAST:event_btnUserStar5ActionPerformed
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        // TODO add your handling code here:
+        firstTD();
+    }//GEN-LAST:event_btnStartActionPerformed
+
+    private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
+        // TODO add your handling code here:
+        preTD();
+    }//GEN-LAST:event_btnPreviousActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        nextTD();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
+        // TODO add your handling code here:
+        endTD();
+    }//GEN-LAST:event_btnEndActionPerformed
+
+    private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
+        // TODO add your handling code here:
+        insertComment();
+    }//GEN-LAST:event_btnUploadActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        openeditcomment();
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
+        // TODO add your handling code here:
+        openeditcomment();
+    }//GEN-LAST:event_btnEdit1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,6 +574,9 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JDialogBinhLuan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
@@ -488,33 +609,12 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
     private javax.swing.JButton btnUserStar3;
     private javax.swing.JButton btnUserStar4;
     private javax.swing.JButton btnUserStar5;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -536,8 +636,274 @@ public class JDialogBinhLuan extends javax.swing.JDialog {
     private javax.swing.JLabel lblUserName;
     private javax.swing.JTextArea txtBinhLuan;
     private javax.swing.JTextArea txtBinhLuan1;
-    private javax.swing.JTextArea txtMoTa1;
-    private javax.swing.JTextArea txtMoTa3;
     private javax.swing.JTextArea txtUserComment;
     // End of variables declaration//GEN-END:variables
+
+    void init() {
+        setfromUserComment();
+        loadCommentBySach();
+    }
+
+    void setfromUserComment() {
+        Reader rd = daoreader.selectByID(Auth.user.getUserID());
+        if (rd.getAvatar() != null) {
+            ImageIcon icon = XImage.read(rd.getAvatar());
+            Image img = icon.getImage().getScaledInstance(lblUserIMG.getWidth(), lblUserIMG.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(img);
+            lblUserIMG.setIcon(scaledIcon);
+            lblUserIMG.setToolTipText(rd.getAvatar());
+        };
+        lblUserName.setText(rd.getHoTen());
+        switch (sao) {
+            case 0 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 1 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 2 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 3 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 4 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+            }
+            case 5 -> {
+                btnUserStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                btnUserStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+            }
+        }
+    }
+
+    void loadCommentBySach() {
+        list.clear();
+        list = dao.selectallByidSach(sachbl.getIdSach());
+        load();
+
+    }
+
+    void load() {
+        for (int j = start; j < end; j++) {
+            switch (end - j) {
+                case 2 ->
+                    clearlFrom(lblBLIMG, lblBLName, txtBinhLuan);
+                case 1 ->
+                    clearlFrom(lblBLIMG1, lblBLName1, txtBinhLuan1);
+                default -> {
+                }
+            }
+        }
+
+        for (int i = start; i < end; i++) {
+            if (i == list.size()) {
+                break;
+            } else {
+                switch (end - i) {
+                    case 2 -> {
+                        setfrom(list.get(i), lblBLIMG, lblBLName, txtBinhLuan, lblBLStar1, lblBLStar2, lblBLStar3, lblBLStar4, lblBLStar5);
+                        btnEdit.setEnabled(Auth.user.getUserID().equals(list.get(i).getIdReader()));
+                    }
+                    case 1 -> {
+                        setfrom(list.get(i), lblBLIMG1, lblBLName1, txtBinhLuan1, lblBLStar6, lblBLStar7, lblBLStar8, lblBLStar9, lblBLStar10);
+                        btnEdit1.setEnabled(Auth.user.getUserID().equals(list.get(i).getIdReader()));
+                    }
+                    default -> {
+                    }
+                }
+            }
+        }
+    }
+
+    void setfrom(Comment cm, JLabel avatar, JLabel idreader, JTextArea noidung, JLabel motsao, JLabel haisao, JLabel basao, JLabel bonsao, JLabel namsao) {
+        noidung.setText(cm.getContent());
+        cm.getSao();
+        Reader rd = daoreader.selectByID(cm.getIdReader());
+        if (rd.getAvatar() != null) {
+            ImageIcon icon = XImage.read(rd.getAvatar());
+            Image img = icon.getImage().getScaledInstance(avatar.getWidth(), avatar.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(img);
+            avatar.setIcon(scaledIcon);
+            avatar.setToolTipText(rd.getAvatar());
+        };
+        idreader.setText(rd.getHoTen());
+        if (cm.getSao() != 0) {
+            switch (cm.getSao()) {
+                case 1 -> {
+                    motsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    haisao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    basao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    bonsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    namsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                }
+                case 2 -> {
+                    motsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    haisao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    basao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    bonsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    namsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                }
+                case 3 -> {
+                    motsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    haisao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    basao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    bonsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                    namsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                }
+                case 4 -> {
+                    motsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    haisao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    basao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    bonsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    namsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-small-star-16.png")));
+                }
+                case 5 -> {
+                    motsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    haisao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    basao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    bonsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                    namsao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-star.png")));
+                }
+            }
+        }
+
+    }
+
+    private void clearlFrom(JLabel avatar, JLabel idreader, JTextArea noidung) {
+        avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/github50.png")));
+        idreader.setText(null);
+        noidung.setText(null);
+    }
+
+    private void nextTD() {
+        if (end < list.size()) {
+            start++;
+            end++;
+            loadCommentBySach();
+            System.out.println("Next: " + start + "-" + end);
+        } else {
+            DialogHelper.alert(this, "Last page");
+        }
+    }
+
+    private void preTD() {
+        if (start > 0) {
+            start--;
+            end--;
+            loadCommentBySach();
+            System.out.println("Pre: " + start + "-" + end);
+        } else {
+            DialogHelper.alert(this, "First page");
+        }
+    }
+
+    private void firstTD() {
+        start = 0;
+        end = 2;
+        loadCommentBySach();
+        System.out.println("First: " + start + "-" + end);
+    }
+
+    private void endTD() {
+        start = list.size() - 2;
+        end = list.size();
+        loadCommentBySach();
+        System.out.println("End: " + start + "-" + end);
+    }
+
+//======================================insert================================================
+    boolean check() {
+        if (txtUserComment.getText().isEmpty()) {
+            MsgBox.alert(this, "không được để trống");
+            return false;
+        }
+        if (sao == 0) {
+            MsgBox.alert(this, "vui lòng chọn sao");
+            return false;
+        }
+
+        for (Comment comment : list) {
+            if (comment.getIdDanhGia().equals(Auth.user.getUserID() + sachbl.getIdSach())) {
+                MsgBox.alert(this, "Bạn đã bình luận");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void insertComment() {
+        if (check()) {
+            Comment cm = getFrom();
+            try {
+                dao.insert(cm);
+                loadCommentBySach();
+                txtUserComment.setText("");
+                sao = 0;
+                MsgBox.alert(this, "thêm thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "thêm thất bại");
+            }
+        }
+
+    }
+
+    Comment getFrom() {
+        Comment cm = new Comment();
+        cm.setIdDanhGia(Auth.user.getUserID() + sachbl.getIdSach());
+        cm.setIdReader(Auth.user.getUserID());
+        cm.setIdSach(sachbl.getIdSach());
+        cm.setSao(sao);
+        cm.setContent(txtUserComment.getText());
+        cm.setImages(null);
+        cm.setVideos(null);
+        cm.setEditable(true);
+        cm.setEnable(true);
+
+        return cm;
+    }
+//====================================Update==========================================
+
+    void update() {
+        Comment cm = getFrom();
+        try {
+            dao.update(cm);
+            loadCommentBySach();
+            MsgBox.alert(this, "Update thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Update thành công");
+        }
+    }
+
+    void openeditcomment() {
+        Comment comment = dao.selectallByIdcomment(Auth.user.getUserID() + sachbl.getIdSach());
+        this.dispose();
+        new JDialogEditBinhLuan(this, true, comment, sachbl).setVisible(true);
+    }
+
 }

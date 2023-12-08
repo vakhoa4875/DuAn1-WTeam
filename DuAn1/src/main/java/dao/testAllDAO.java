@@ -20,7 +20,7 @@ public class testAllDAO {
         ArrayList<Sach> sachs = dao.select();
         
         for (Sach sach : sachs) {
-            sach.toString();
+            System.out.println(sach.toString());;
         }
     }
 

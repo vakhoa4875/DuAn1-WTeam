@@ -56,6 +56,9 @@ public class Sach {
         this.danhGiaTB = danhGiaTB;
     }
 
+    public Sach() {
+    }
+
     public String getIdSach() {
         return idSach;
     }
