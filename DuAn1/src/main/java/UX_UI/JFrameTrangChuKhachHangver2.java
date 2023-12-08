@@ -48,6 +48,7 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     WishlistDAO wlDAO = new WishlistDAO();
     private SachPDFDAO pdfDAO = new SachPDFDAO();
     ArrayList<Sach> sachTDList;
+    ArrayList<Sach> sachECList;
     ArrayList<Sach> sachSearchList;
     ArrayList<TheLoai> theloaiList;
     ArrayList<Sach> sachTLList;
@@ -5084,7 +5085,8 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     }
 
     private void loadSach() {
-        sachTDList = sachDAO.select();
+        sachTDList = sachDAO.selectView();
+        sachECList = sachDAO.selectLike();
         sachSearchList = sachDAO.select();
         for (Sach sach : sachTDList) {
             String name = sach.getTenSach() + ".jpg";
@@ -5158,17 +5160,17 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         for (int i = startEC; i < endEC; i++) {
             switch (endEC - i) {
                 case 6 ->
-                    setBookForm(sachTDList.get(i), lblECIMG1, pnEC1);
+                    setBookForm(sachECList.get(i), lblECIMG1, pnEC1);
                 case 5 ->
-                    setBookForm(sachTDList.get(i), lblECIMG2, pnEC2);
+                    setBookForm(sachECList.get(i), lblECIMG2, pnEC2);
                 case 4 ->
-                    setBookForm(sachTDList.get(i), lblECIMG3, pnEC3);
+                    setBookForm(sachECList.get(i), lblECIMG3, pnEC3);
                 case 3 ->
-                    setBookForm(sachTDList.get(i), lblECIMG4, pnEC4);
+                    setBookForm(sachECList.get(i), lblECIMG4, pnEC4);
                 case 2 ->
-                    setBookForm(sachTDList.get(i), lblECIMG5, pnEC5);
+                    setBookForm(sachECList.get(i), lblECIMG5, pnEC5);
                 case 1 ->
-                    setBookForm(sachTDList.get(i), lblECIMG6, pnEC6);
+                    setBookForm(sachECList.get(i), lblECIMG6, pnEC6);
                 default -> {
                 }
             }
