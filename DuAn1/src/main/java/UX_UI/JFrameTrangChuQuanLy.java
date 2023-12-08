@@ -144,6 +144,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             return;
         }
         if (nb.getAvatar() != null) {
+            System.out.println(nb.getAvatar());
             XImage.setInfoBtn(btnAvatar, nb.getHoTen(), nb.getAvatar());
         } else {
             btnAvatar.setText(nb.getHoTen());
