@@ -77,6 +77,24 @@ public class SachDAO {
                 sach.getDanhGiaTB(),
                 sach.getIdSach());
     }
+    
+    public void updateCt(Sach sach) {
+        String updateQuery = """
+                 UPDATE SACH
+                 SET 
+                     NAMSANGTAC = ?,
+                     SOTRANG = ?,
+                     MOTA = ?,
+                     NGONNGU = ?
+                 WHERE IDSACH = ?;
+                 """;
+        Jdbc.executeUpdate(updateQuery,
+                sach.getNamSangTac(),
+                sach.getSoTrang(),
+                sach.getMoTa(),
+                String.join("|", sach.getNgonNgu()),
+                sach.getIdSach());
+    }
 
     private Sach readFromRS(ResultSet resultSet) throws SQLException {
         Sach sach = new Sach(

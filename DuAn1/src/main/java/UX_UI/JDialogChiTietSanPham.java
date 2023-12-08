@@ -4,6 +4,7 @@
  */
 package UX_UI;
 
+import dao.CommentDAO;
 import dao.SachDAO;
 import dao.SachPDFDAO;
 import dao.TacGiaDAO;
@@ -16,6 +17,7 @@ import javax.swing.JLabel;
 import library.Auth;
 import library.URL_Dealer;
 import library.XImage;
+import model.Comment;
 import model.Sach;
 import model.SachPDF;
 import model.TacGia;
@@ -462,6 +464,7 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
     private void init() {
         setForm();
         checkLL();
+        checkStar();
         setLocationRelativeTo(null);
     }
 
@@ -539,7 +542,7 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
 
     private void addToLikeList() {
         Sach temp = sachDAO.selectByID(idSach);
-        
+
         if (check == 0) {
             btnAddWishlist.setText("Remove from Likelist");
             WishlistCT wltemp = new WishlistCT();
@@ -560,5 +563,70 @@ public class JDialogChiTietSanPham extends javax.swing.JDialog {
     void openComment() {
         Sach sach = sachDAO.selectByID(idSach);
         new JDialogBinhLuan(this, true, sach).setVisible(true);
+    }
+
+    void checkStar() {
+        CommentDAO dao = new CommentDAO();
+        ArrayList<Comment> list = dao.selectallByidSach(idSach);
+
+        int sao = 0;
+        if (!list.isEmpty()) {
+            for (Comment comment : list) {
+                sao += comment.getSao();
+            }
+            sao = sao / list.size();
+        }
+
+        System.out.println("test sao: " + sao);
+        switch (sao) {
+            case 0 -> {
+                lblStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar.setText("0");
+            }
+            case 1 -> {
+                lblStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar.setText("1");
+            }
+            case 2 -> {
+                lblStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar.setText("2");
+            }
+            case 3 -> {
+                lblStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar.setText("3");
+            }
+            case 4 -> {
+                lblStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/empty-star.png")));
+                lblStar.setText("4");
+            }
+            case 5 -> {
+                lblStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/star.png")));
+                lblStar.setText("5");
+            }
+        }
     }
 }
