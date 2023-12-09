@@ -98,6 +98,7 @@ public class JDialogLogin extends javax.swing.JDialog {
 
     void toMainForm() {
         this.dispose();
+        new HiForm(new JFrame(), true).setVisible(true);
         if (this.user0.getReader()) {
             new JFrameTrangChuKhachHangver2().setVisible(true);
         } else if (!this.user0.getReader()) {
