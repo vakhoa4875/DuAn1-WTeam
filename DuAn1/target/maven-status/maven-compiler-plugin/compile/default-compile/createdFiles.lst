@@ -13,6 +13,7 @@ UX_UI\JDialogBinhLuan$11.class
 UX_UI\JDialogBinhLuan$9.class
 UX_UI\JDialogChiTietSanPhamQuanLy$1.class
 UX_UI\JFrameTrangChuKhachHangver2$55.class
+UX_UI\HiForm$LoadingProcess.class
 UX_UI\JFrameTrangChuKhachHangver2$39.class
 UX_UI\JFrameTrangChuKhachHangver2$18.class
 UX_UI\JFrameTrangChuKhachHangver2$148.class
@@ -59,6 +60,7 @@ UX_UI\JDialogQuenMatKhau$4.class
 UX_UI\JFrameTrangChuQuanLy$1.class
 UX_UI\JDialogQuanLyNhanVien$6.class
 library\XDate.class
+UX_UI\HiForm.class
 UX_UI\JDialogAccess$9.class
 UX_UI\JDialogQuanLyPhongBan$1.class
 UX_UI\JDialogQuanLyPhongBan$13.class
@@ -182,6 +184,7 @@ UX_UI\JDialogAccess$11.class
 model\TheLoai.class
 UX_UI\JFrameTrangChuKhachHangver2$36.class
 UX_UI\JFrameTrangChuKhachHangver2$86.class
+UX_UI\HiForm$1$1.class
 UX_UI\JDialogXacNhanMatKhau$4.class
 UX_UI\JFrameTrangChuKhachHangver2.class
 UX_UI\JDialogAccess$12.class
@@ -273,6 +276,7 @@ UX_UI\JFrameTrangChuKhachHangver2$62.class
 UX_UI\JFrameTrangChuKhachHangver2$108.class
 UX_UI\JDialogChiTietSanPham.class
 UX_UI\JDialogBinhLuan$6.class
+UX_UI\HiForm$1.class
 UX_UI\JDialogQuanLyNhanVien$9.class
 UX_UI\JDialogAccess$7.class
 UX_UI\JDialogBinhLuan$7.class

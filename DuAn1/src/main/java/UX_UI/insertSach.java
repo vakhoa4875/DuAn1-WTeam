@@ -50,8 +50,6 @@ public class insertSach {
             if (response.isSuccessful()) {
                 // Get the JSON data as a string
                 String jsonData = response.body().string();
-//                System.out.println("JSON Response:");
-//                System.out.println(jsonData);                
 
                 JsonObject jsonResponse = gson.fromJson(jsonData, JsonObject.class);
 
