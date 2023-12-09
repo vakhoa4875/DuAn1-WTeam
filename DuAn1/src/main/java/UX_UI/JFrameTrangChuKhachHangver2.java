@@ -48,6 +48,7 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     WishlistDAO wlDAO = new WishlistDAO();
     private SachPDFDAO pdfDAO = new SachPDFDAO();
     ArrayList<Sach> sachTDList;
+    ArrayList<Sach> sachECList;
     ArrayList<Sach> sachSearchList;
     ArrayList<TheLoai> theloaiList;
     ArrayList<Sach> sachTLList;
@@ -85,8 +86,6 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         lblReaderIMG = new javax.swing.JLabel();
         testpanel = new javax.swing.JPanel();
-        lblTichDiem = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         btnThongTin = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
@@ -396,13 +395,6 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
             }
         });
 
-        lblTichDiem.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
-        lblTichDiem.setForeground(new java.awt.Color(0, 153, 153));
-        lblTichDiem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTichDiem.setText("1000");
-
-        jLabel4.setText("Tích điểm:");
-
         btnThongTin.setBackground(new java.awt.Color(204, 204, 204));
         btnThongTin.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         btnThongTin.setText("Thông tin");
@@ -428,15 +420,12 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
             .addGroup(testpanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(testpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator4)
                     .addGroup(testpanelLayout.createSequentialGroup()
-                        .addGroup(testpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(testpanelLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblTichDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addComponent(btnThongTin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
+                    .addGroup(testpanelLayout.createSequentialGroup()
+                        .addComponent(btnThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -444,15 +433,14 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
             testpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testpanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(testpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lblTichDiem))
-                .addGap(5, 5, 5)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
                 .addComponent(btnThongTin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDangXuat)
+                .addGroup(testpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(testpanelLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(testpanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDangXuat)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -4811,7 +4799,6 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     private javax.swing.JButton btnThongTin;
     private javax.swing.JComboBox<String> cboTheLoai;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -4890,7 +4877,6 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     private javax.swing.JLabel lblTLIMG7;
     private javax.swing.JLabel lblTLIMG8;
     private javax.swing.JLabel lblTLIMG9;
-    private javax.swing.JLabel lblTichDiem;
     private javax.swing.JPanel pnEC1;
     private javax.swing.JPanel pnEC2;
     private javax.swing.JPanel pnEC3;
@@ -5017,7 +5003,7 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         if (!cUser.getThanThiet()) {
             lblReaderName.setIcon(new ImageIcon());
         }
-        lblTichDiem.setText(cUser.getTichDiem() + "");
+//        lblTichDiem.setText(cUser.getTichDiem() + "");
         if (cUser.getAvatar() != null) {
             ImageIcon icon = XImage.read(cUser.getAvatar());
             Image img = icon.getImage().getScaledInstance(lblReaderIMG.getWidth(), lblReaderIMG.getHeight(), Image.SCALE_SMOOTH);
@@ -5084,7 +5070,8 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
     }
 
     private void loadSach() {
-        sachTDList = sachDAO.select();
+        sachTDList = sachDAO.selectView();
+        sachECList = sachDAO.selectLike();
         sachSearchList = sachDAO.select();
         for (Sach sach : sachTDList) {
             String name = sach.getTenSach() + ".jpg";
@@ -5158,17 +5145,17 @@ public class JFrameTrangChuKhachHangver2 extends javax.swing.JFrame {
         for (int i = startEC; i < endEC; i++) {
             switch (endEC - i) {
                 case 6 ->
-                    setBookForm(sachTDList.get(i), lblECIMG1, pnEC1);
+                    setBookForm(sachECList.get(i), lblECIMG1, pnEC1);
                 case 5 ->
-                    setBookForm(sachTDList.get(i), lblECIMG2, pnEC2);
+                    setBookForm(sachECList.get(i), lblECIMG2, pnEC2);
                 case 4 ->
-                    setBookForm(sachTDList.get(i), lblECIMG3, pnEC3);
+                    setBookForm(sachECList.get(i), lblECIMG3, pnEC3);
                 case 3 ->
-                    setBookForm(sachTDList.get(i), lblECIMG4, pnEC4);
+                    setBookForm(sachECList.get(i), lblECIMG4, pnEC4);
                 case 2 ->
-                    setBookForm(sachTDList.get(i), lblECIMG5, pnEC5);
+                    setBookForm(sachECList.get(i), lblECIMG5, pnEC5);
                 case 1 ->
-                    setBookForm(sachTDList.get(i), lblECIMG6, pnEC6);
+                    setBookForm(sachECList.get(i), lblECIMG6, pnEC6);
                 default -> {
                 }
             }

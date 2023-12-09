@@ -252,4 +252,12 @@ public class SachDAO {
         String Query = "UPDATE [dbo].[Sach] SET [likeCount] = [likeCount] - 1 WHERE idsach = ?";
         Jdbc.executeUpdate(Query, sach.getIdSach());
     }
+    public ArrayList<Sach> selectLike() {
+        String selectQuery = "SELECT * FROM SACH ORDER BY likeCount DESC";
+        return select(selectQuery);
+    }
+    public ArrayList<Sach> selectView() {
+        String selectQuery = "SELECT * FROM SACH ORDER BY viewCount DESC";
+        return select(selectQuery);
+    }
 }
