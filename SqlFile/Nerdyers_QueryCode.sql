@@ -294,8 +294,8 @@ update noibo set idPB = 2, quanLy =1, ngaySinh = '2004-11-11', gioitinh = 0 wher
 
 select * from noiBo
 
---go
-----create snapshot để lưu lại database dưới dạng snapShot
+go
+--create snapshot để lưu lại database dưới dạng snapShot
 --CREATE DATABASE Nerdyers_clone
 --ON
 --(
