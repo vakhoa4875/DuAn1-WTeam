@@ -51,7 +51,7 @@ public class XImage {
     }
     
     public static void setInfoBtn(JButton btn, String name, String avatar) {
-        ImageIcon icon = new ImageIcon(Extension.class.getResource(avatar));
+        ImageIcon icon = read(avatar);
         //scale image
         Image image = icon.getImage();
         Image scaledImage = image.getScaledInstance(btn.getHeight(), btn.getHeight(), Image.SCALE_SMOOTH);

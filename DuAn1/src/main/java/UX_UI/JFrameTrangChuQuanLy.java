@@ -99,12 +99,12 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         btnSach.addActionListener(e -> {
             new JDialogSach(this, true).setVisible(true);
         });
-        btnTacGia.addActionListener(e -> {
-//            new JDialogAccess(this, true).setVisible(true);
-        });
-        btnTheLoai.addActionListener(e -> {
-//            new JDialogAccess(this, true).setVisible(true);
-        });
+//        btnTacGia.addActionListener(e -> {
+////            new JDialogAccess(this, true).setVisible(true);
+//        });
+//        btnTheLoai.addActionListener(e -> {
+////            new JDialogAccess(this, true).setVisible(true);
+//        });
 
         //
         setAccess();
@@ -144,6 +144,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             return;
         }
         if (nb.getAvatar() != null) {
+            System.out.println(nb.getAvatar());
             XImage.setInfoBtn(btnAvatar, nb.getHoTen(), nb.getAvatar());
         } else {
             btnAvatar.setText(nb.getHoTen());
@@ -163,8 +164,8 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         btnNoiBo.setEnabled(false);
         btnNguoiDoc.setEnabled(false);
         btnSach.setEnabled(false);
-        btnTacGia.setEnabled(false);
-        btnTheLoai.setEnabled(false);
+//        btnTacGia.setEnabled(false);
+//        btnTheLoai.setEnabled(false);
         if (Auth.access == null) {
             return;
         }
@@ -174,16 +175,16 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
             btnNoiBo.setEnabled(true);
             btnNguoiDoc.setEnabled(true);
             btnSach.setEnabled(true);
-            btnTacGia.setEnabled(true);
-            btnTheLoai.setEnabled(true);
+//            btnTacGia.setEnabled(true);
+//            btnTheLoai.setEnabled(true);
             return;
         }
         btnPhongBan.setEnabled(Auth.access.getrPhongBan() || Auth.access.getuPhongBan());
         btnNoiBo.setEnabled(Auth.access.getrNoiBo() || Auth.access.getuNoiBo());
         btnNguoiDoc.setEnabled(Auth.access.getrReader() || Auth.access.getuReader());
         btnSach.setEnabled(Auth.access.getrSach() || Auth.access.getuSach());
-        btnTacGia.setEnabled(Auth.access.getrTacGia() || Auth.access.getuTacGia());
-        btnTheLoai.setEnabled(Auth.access.getrTheLoai() || Auth.access.getuTheLoai());
+//        btnTacGia.setEnabled(Auth.access.getrTacGia() || Auth.access.getuTacGia());
+//        btnTheLoai.setEnabled(Auth.access.getrTheLoai() || Auth.access.getuTheLoai());
     }
 
     void showPersonalInfo() {
@@ -344,8 +345,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         btnNoiBo = new javax.swing.JButton();
         btnNguoiDoc = new javax.swing.JButton();
         btnSach = new javax.swing.JButton();
-        btnTacGia = new javax.swing.JButton();
-        btnTheLoai = new javax.swing.JButton();
         btnAvatar = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
         cmbTK = new javax.swing.JComboBox<>();
@@ -424,16 +423,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
         btnSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Book.png"))); // NOI18N
         btnSach.setText("Quản Lý Sách");
 
-        btnTacGia.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N
-        btnTacGia.setForeground(new java.awt.Color(204, 153, 0));
-        btnTacGia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Unknown person.png"))); // NOI18N
-        btnTacGia.setText("Quản Lý Tác Giả");
-
-        btnTheLoai.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N
-        btnTheLoai.setForeground(new java.awt.Color(204, 153, 0));
-        btnTheLoai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Lists.png"))); // NOI18N
-        btnTheLoai.setText("Quản Lý Thể Loại");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -445,9 +434,7 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
                     .addComponent(btnPhongBan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNoiBo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNguoiDoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTacGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTheLoai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -463,10 +450,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
                 .addComponent(btnNguoiDoc)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSach)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTacGia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTheLoai)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -965,8 +948,8 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
                             .addComponent(cmbTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tabTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tabTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1027,8 +1010,6 @@ public class JFrameTrangChuQuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btnPhongBan;
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnSach;
-    private javax.swing.JButton btnTacGia;
-    private javax.swing.JButton btnTheLoai;
     private javax.swing.JComboBox<String> cmbTK;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

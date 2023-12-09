@@ -10,7 +10,7 @@ import dao.SachDAO;
 import dao.TacGiaDAO;
 import dao.TheLoaiDAO;
 import java.io.IOException;
-import library.URL_Dealer;
+//import library.URL_Dealer;
 import model.Sach;
 import model.TacGia;
 import model.TheLoai;
@@ -50,8 +50,6 @@ public class insertSach {
             if (response.isSuccessful()) {
                 // Get the JSON data as a string
                 String jsonData = response.body().string();
-//                System.out.println("JSON Response:");
-//                System.out.println(jsonData);                
 
                 JsonObject jsonResponse = gson.fromJson(jsonData, JsonObject.class);
 
