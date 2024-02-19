@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="06c9a2da-3a89-4ef6-bd74-83f305ffafe3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/DuAn1/src/main/java/UX_UI/JDialogThongTinKhachHang.form" beforeDir="false" afterPath="$PROJECT_DIR$/DuAn1/src/main/java/UX_UI/JDialogThongTinKhachHang.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DuAn1/src/main/java/UX_UI/JDialogThongTinKhachHang.java" beforeDir="false" afterPath="$PROJECT_DIR$/DuAn1/src/main/java/UX_UI/JDialogThongTinKhachHang.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +48,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/programming_folder/java_folder/DuAn1-WTeam"
+    "last_opened_file_path": "D:/programming_folder/java_folder/algorithm_code"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
