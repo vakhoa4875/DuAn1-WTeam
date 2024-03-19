@@ -10,6 +10,7 @@ import dao.PhongBanDAO;
 import dao.SachDAO;
 import java.util.ArrayList;
 import java.util.List;
+import library.DialogHelper;
 import library.Extension;
 import model.Sach;
 
@@ -23,44 +24,62 @@ public class testAPI extends javax.swing.JFrame {
      * Creates new form testAPI
      */
     List<Sach> listSach = new ArrayList<>();
+    SachDAO dao = new SachDAO();
 
     public testAPI() {
         initComponents();
+        setLocationRelativeTo(null);
         btnSearch.addActionListener(e -> {
             String keyword = txtSearch.getText();
-            Extension.getSachfromOpenLibrary(keyword, listSach, 5 , false);
+            listSach = Extension.getListSachfromOpenLibrary(keyword, 5, false, false);
+            for (Sach s : listSach) {
+                System.out.println(s.toString());
+            }
             fillToLabel();
         });
-        
+
         jButton1.addActionListener(e -> {
-            if (listSach.get(1 - 1) ==  null) return;
-            new SachDAO().insert(listSach.get(0));
+            addBook(1);
         });
-        
+
         jButton2.addActionListener(e -> {
-            if (listSach.get(2 - 1) ==  null) return;
-            new SachDAO().insert(listSach.get(0));
+            addBook(2);
         });
-        
+
         jButton3.addActionListener(e -> {
-            if (listSach.get(3 - 1) ==  null) return;
-            new SachDAO().insert(listSach.get(0));
+            addBook(3);
         });
-        
+
         jButton4.addActionListener(e -> {
-            if (listSach.get(4 - 1) ==  null) return;
-            new SachDAO().insert(listSach.get(0));
+            addBook(4);
         });
-        
+
         jButton5.addActionListener(e -> {
-            if (listSach.get(5 - 1) ==  null) return;
-            new SachDAO().insert(listSach.get(0));
+            addBook(5);
         });
     }
 
-
     final Integer sachCount = 5;
     int curPage = 1;
+
+    private void addBook(int index) {
+        if (listSach.get(index - 1) == null) {
+            return;
+        }
+        Sach temp = listSach.get(index - 1);
+        if (dao.selectByID(temp.getIdSach()) != null) {
+            DialogHelper.alert(null, "Already existed!!");
+            return;
+        }
+
+        dao.insert(temp);
+
+        if (dao.selectByID(temp.getIdSach()) != null) {
+            DialogHelper.alert(null, "Insert the book named: " + temp.getTenSach() + " successfully!!");
+        } else {
+            DialogHelper.alert(null, "The insertion should be successfully!");
+        }
+    }
 
     void fillToLabel() {
         for (int i = (curPage - 1) * sachCount; i < listSach.size() && i < curPage * sachCount; i++) {
@@ -109,7 +128,6 @@ public class testAPI extends javax.swing.JFrame {
 
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        tabTK = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         pnlSach1 = new javax.swing.JPanel();
         lblCover1 = new javax.swing.JLabel();
@@ -133,6 +151,7 @@ public class testAPI extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("INSERT BOOK FORM");
 
         btnSearch.setText("Search");
 
@@ -340,10 +359,8 @@ public class testAPI extends javax.swing.JFrame {
                     .addComponent(pnlSach3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlSach4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlSach5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        tabTK.addTab("Items View", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -352,12 +369,13 @@ public class testAPI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtSearch)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSearch))
-                    .addComponent(tabTK))
-                .addContainerGap())
+                        .addGap(205, 205, 205)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSearch)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,8 +385,8 @@ public class testAPI extends javax.swing.JFrame {
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tabTK, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(263, 263, 263))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -385,7 +403,7 @@ public class testAPI extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -432,7 +450,6 @@ public class testAPI extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSach3;
     private javax.swing.JPanel pnlSach4;
     private javax.swing.JPanel pnlSach5;
-    private javax.swing.JTabbedPane tabTK;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

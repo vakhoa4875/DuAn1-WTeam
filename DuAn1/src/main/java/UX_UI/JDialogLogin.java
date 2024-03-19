@@ -89,6 +89,7 @@ public class JDialogLogin extends javax.swing.JDialog {
         return false;
     }
 
+
     void login() {
         if (checkUser()) {
             DialogHelper.alert(null, "Đăng nhập thành công!");
