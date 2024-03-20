@@ -47,6 +47,8 @@ public class JDialogLogin extends javax.swing.JDialog {
         btnToSignUp.addActionListener(e -> {
             toSignUpForm();
         });
+        btnLoginGG.setEnabled(false);
+        rdoNhoMatKhau.setEnabled(false);
     }
 
     UserDAO dao = new UserDAO();
@@ -87,6 +89,7 @@ public class JDialogLogin extends javax.swing.JDialog {
         return false;
     }
 
+
     void login() {
         if (checkUser()) {
             DialogHelper.alert(null, "Đăng nhập thành công!");
@@ -96,6 +99,7 @@ public class JDialogLogin extends javax.swing.JDialog {
 
     void toMainForm() {
         this.dispose();
+        new HiForm(new JFrame(), true).setVisible(true);
         if (this.user0.getReader()) {
             new JFrameTrangChuKhachHangver2().setVisible(true);
         } else if (!this.user0.getReader()) {
@@ -125,7 +129,7 @@ public class JDialogLogin extends javax.swing.JDialog {
         txtTaiKhoan = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btnDangNhap = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        rdoNhoMatKhau = new javax.swing.JRadioButton();
         txtMatKhau = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
@@ -160,11 +164,11 @@ public class JDialogLogin extends javax.swing.JDialog {
             }
         });
 
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI Semilight", 2, 14)); // NOI18N
-        jRadioButton1.setText("Nhớ mật khẩu cho lần sau");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        rdoNhoMatKhau.setFont(new java.awt.Font("Segoe UI Semilight", 2, 14)); // NOI18N
+        rdoNhoMatKhau.setText("Nhớ mật khẩu cho lần sau");
+        rdoNhoMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rdoNhoMatKhauActionPerformed(evt);
             }
         });
 
@@ -226,7 +230,7 @@ public class JDialogLogin extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnToSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(rdoNhoMatKhau)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnQuenMK, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtTaiKhoan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
@@ -260,7 +264,7 @@ public class JDialogLogin extends javax.swing.JDialog {
                 .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
+                    .addComponent(rdoNhoMatKhau)
                     .addComponent(btnQuenMK))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -290,9 +294,9 @@ public class JDialogLogin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rdoNhoMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNhoMatKhauActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rdoNhoMatKhauActionPerformed
 
     private void btnQuenMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuenMKActionPerformed
         // TODO add your handling code here:
@@ -360,8 +364,8 @@ public class JDialogLogin extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JRadioButton rdoNhoMatKhau;
     private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JTextField txtTaiKhoan;
     // End of variables declaration//GEN-END:variables

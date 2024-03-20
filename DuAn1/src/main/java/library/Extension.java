@@ -4,6 +4,15 @@
  */
 package library;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+import dao.SachDAO;
+import dao.TacGiaDAO;
+import dao.TheLoaiDAO;
+import dao.UserDAO;
 import java.awt.Image;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -12,6 +21,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +32,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import model.Sach;
+import model.TacGia;
+import model.TheLoai;
+import model.User;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  *
@@ -38,6 +56,7 @@ public class Extension {
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         anh.setIcon(scaledIcon);
     }
+
     public static void scaleImage(JLabel anh, String fileName) {
         ImageIcon icon = XImage.getImageIcon(fileName);
         //scale image
@@ -46,7 +65,29 @@ public class Extension {
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         anh.setIcon(scaledIcon);
     }
-    
+
+    public static int checkUser(String username, String pass) {
+
+        UserDAO dao = new UserDAO();
+        ArrayList<User> userList = dao.select();
+
+        for (User user : userList) {
+            if ((username.equals(user.getUserName()) || username.equals(user.getEmail()))) {
+                if (pass.equals(user.getPassword())) {
+//                    Auth.user = user0;
+//                    System.out.println(user0.getUserID());
+//                    System.out.println(user0.getPassword());
+                    System.out.println("login successfully");
+                    return 1;
+                } else {
+                    System.out.println("Sai Mật Khẩu! Vui lòng thử lại");
+                    return 0;
+                }
+            }
+        }
+        System.out.println("Tài khoản không tồn tại! Vui lòng kiểm tra thông tin đăng nhập!");
+        return -1;
+    }
 
     // Tạo placeholder cho textField
     public static void setPlaceholder(JTextField textField, String placeholder) {
@@ -163,4 +204,314 @@ public class Extension {
 //
 //        return randomString.toString();
 //    }
+    public static ArrayList<Sach> getListSachfromOpenLibrary(String keyword, int lim, boolean insertable, boolean truncated) {
+        ArrayList<Sach> ds = new ArrayList<>();
+        SachDAO sachDao = new SachDAO();
+        TacGiaDAO tacGiaDao = new TacGiaDAO();
+        TheLoaiDAO theLoaiDao = new TheLoaiDAO();
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            Gson gson = new Gson();
+
+            // Specify the search query to get readable books
+            String query = "has_fulltext:true";
+
+            // Build the URL for the OpenLibrary Search API
+            String url = "http://openlibrary.org/search.json?q=" + query + "&title=" + keyword;
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+
+            // Perform the HTTP GET request
+            Response response = client.newCall(request).execute();
+
+            // Check if the request was successful (HTTP status code 200)
+            if (response.isSuccessful()) {
+                // Get the JSON data as a string
+                String jsonData = response.body().string();
+
+                JsonObject jsonResponse = gson.fromJson(jsonData, JsonObject.class);
+
+                JsonArray docs = jsonResponse.getAsJsonArray("docs");
+
+                if (!docs.isEmpty()) {
+                    System.out.println("a");
+
+                    // lặp qua jsonArray với mỗi phần từ trong array là jsonElement
+                    // JsonElement không thể auto parse quan JsonObject
+                    for (JsonElement book : docs) {
+                        System.out.println("b");
+                        JsonObject bookObj = book.getAsJsonObject();
+                        System.out.println("c");
+
+                        String idSach = bookObj.get("key").getAsString();
+                        System.out.println(idSach);
+                        if (sachDao.selectByID(idSach) != null && !truncated) {
+                            continue;
+                        }
+                        String tenSach = bookObj.get("title").getAsString();
+                        int namXB = bookObj.getAsJsonArray("publish_year").get(0).getAsInt();
+                        int namSangTac = bookObj.get("first_publish_year") == null ? 0 : bookObj.get("first_publish_year").getAsInt();
+                        int soTrang = bookObj.get("number_of_pages_median") == null ? 0 : bookObj.get("number_of_pages_median").getAsInt();
+                        String ebookAccess = bookObj.get("ebook_access").getAsString();
+                        boolean hasFulltext = bookObj.get("has_fulltext").getAsBoolean();
+                        boolean publicScanB = bookObj.get("public_scan_b").getAsBoolean();
+
+                        //urlLink chỉ để địa chỉ đọc eBook
+                        String urlLink = "https://archive.org/details/" + bookObj.getAsJsonArray("ia").get(0).getAsString() + "/mode/2up?ref=ol&view=theater";
+                        // coverI là ảnh bìa quyển sách
+                        String coverI = "http://covers.openlibrary.org/b/id/" + bookObj.get("cover_i").getAsString() + "-L.jpg";
+
+                        // nếu muốn tải ảnh khi pull data từ api
+                        URL_Dealer.downloadImage(coverI, false);
+
+                        // tìm trên json méo thấy mô tả nên lấy câu đầu tiên thay thế :>>
+                        JsonArray firstSentence = bookObj.get("first_sentence") == null ? null : bookObj.get("first_sentence").getAsJsonArray();
+                        String moTa = "", cauDau[];
+                        if (firstSentence != null) {
+                            cauDau = new String[firstSentence.size()];
+                            for (int i = 0; i < firstSentence.size(); i++) {
+                                cauDau[i] = firstSentence.get(i).getAsString();
+                            }
+                            moTa = String.join(".", cauDau);
+                        }
+
+                        // do một quyển sách có thể trình bày bằng nhiều ngôn ngữ
+                        JsonArray languages = bookObj.getAsJsonArray("language");
+                        String[] ngonNgu = {};
+                        if (languages != null) {
+                            ngonNgu = new String[languages.size()];
+                            for (int i = 0; i < languages.size(); i++) {
+                                ngonNgu[i] = languages.get(i).getAsString();
+                            }
+                        }
+
+                        // array tác giả
+                        JsonArray author_key = bookObj.getAsJsonArray("author_key");
+                        JsonArray author_name = bookObj.getAsJsonArray("author_name");
+
+                        // array thể loại
+                        JsonArray subject_key = bookObj.getAsJsonArray("subject_key");
+                        JsonArray subject = bookObj.getAsJsonArray("subject");
+
+                        String phienBan = bookObj.get("_version_").getAsString();
+
+                        Sach sach = new Sach(idSach, tenSach, namXB, namSangTac, soTrang, ebookAccess, hasFulltext, publicScanB, urlLink, coverI, moTa, ngonNgu, phienBan, 0, 0, null);
+                        System.out.println(sach.toString());
+                        ds.add(sach);
+
+                        if (ds.size() >= lim) {
+                            return ds;
+                        }
+
+                        if (insertable) {
+
+                            sachDao.insert(sach);
+                            if (author_key != null) {
+                                for (int i = 0; i < author_key.size(); i++) {
+                                    String idTacGia = author_key.get(i).getAsString();
+                                    String tenTacGia = author_name.get(i).getAsString();
+                                    TacGia tacGia;
+
+                                    if (tacGiaDao.selectByID(idTacGia) == null) {
+                                        tacGia = new TacGia(idTacGia, tenTacGia);
+                                        tacGiaDao.insert(tacGia);
+                                    } else {
+                                        tacGia = tacGiaDao.selectByID(idTacGia);
+                                    }
+
+                                    System.out.println(tacGia.toString());
+                                    sachDao.insertSvTG(sach, tacGia);
+                                }
+                            }
+
+                            if (subject_key != null) {
+                                for (int i = 0; i < subject_key.size(); i++) {
+                                    String idTheLoai = subject_key.get(i).getAsString();
+                                    String tenTheLoai = subject.get(i).getAsString();
+
+                                    TheLoai theLoai;
+
+                                    if (theLoaiDao.selectByID(idTheLoai) == null) {
+                                        theLoai = new TheLoai(idTheLoai, tenTheLoai);
+                                        theLoaiDao.insert(theLoai);
+                                    } else {
+                                        theLoai = theLoaiDao.selectByID(idTheLoai);
+                                    }
+
+                                    System.out.println(theLoai.toString());
+                                    sachDao.insertSvTL(sach, theLoai);
+                                }
+
+                            }
+                        }
+
+                    }
+                    return ds;
+                }
+
+            } else {
+                System.out.println("Error: " + response.code() + " - " + response.message());
+            }
+        } catch (JsonSyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+        return ds;
+    }
+
+    public static void getSachfromOpenLibrary(String keyword, List<Sach> ds, int lim, boolean insertable, boolean truncated) {
+        ds = new ArrayList<>();
+        SachDAO sachDao = new SachDAO();
+        TacGiaDAO tacGiaDao = new TacGiaDAO();
+        TheLoaiDAO theLoaiDao = new TheLoaiDAO();
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            Gson gson = new Gson();
+
+            // Specify the search query to get readable books
+            String query = "has_fulltext:true";
+
+            // Build the URL for the OpenLibrary Search API
+            String url = "http://openlibrary.org/search.json?q=" + query + "&title=" + keyword;
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+
+            // Perform the HTTP GET request
+            Response response = client.newCall(request).execute();
+
+            // Check if the request was successful (HTTP status code 200)
+            if (response.isSuccessful()) {
+                // Get the JSON data as a string
+                String jsonData = response.body().string();
+
+                JsonObject jsonResponse = gson.fromJson(jsonData, JsonObject.class);
+
+                JsonArray docs = jsonResponse.getAsJsonArray("docs");
+
+                if (!docs.isEmpty()) {
+                    System.out.println("a");
+
+                    // lặp qua jsonArray với mỗi phần từ trong array là jsonElement
+                    // JsonElement không thể auto parse quan JsonObject
+                    for (JsonElement book : docs) {
+                        System.out.println("b");
+                        JsonObject bookObj = book.getAsJsonObject();
+                        System.out.println("c");
+
+                        String idSach = bookObj.get("key").getAsString();
+                        System.out.println(idSach);
+                        if (sachDao.selectByID(idSach) != null && !truncated) {
+                            continue;
+                        }
+                        String tenSach = bookObj.get("title").getAsString();
+                        int namXB = bookObj.getAsJsonArray("publish_year").get(0).getAsInt();
+                        int namSangTac = bookObj.get("first_publish_year") == null ? 0 : bookObj.get("first_publish_year").getAsInt();
+                        int soTrang = bookObj.get("number_of_pages_median") == null ? 0 : bookObj.get("number_of_pages_median").getAsInt();
+                        String ebookAccess = bookObj.get("ebook_access").getAsString();
+                        boolean hasFulltext = bookObj.get("has_fulltext").getAsBoolean();
+                        boolean publicScanB = bookObj.get("public_scan_b").getAsBoolean();
+
+                        //urlLink chỉ để địa chỉ đọc eBook
+                        String urlLink = "https://archive.org/details/" + bookObj.getAsJsonArray("ia").get(0).getAsString() + "/mode/2up?ref=ol&view=theater";
+                        // coverI là ảnh bìa quyển sách
+                        String coverI = "http://covers.openlibrary.org/b/id/" + bookObj.get("cover_i").getAsString() + "-L.jpg";
+
+                        // nếu muốn tải ảnh khi pull data từ api
+                        URL_Dealer.downloadImage(coverI, false);
+
+                        // tìm trên json méo thấy mô tả nên lấy câu đầu tiên thay thế :>>
+                        JsonArray firstSentence = bookObj.get("first_sentence") == null ? null : bookObj.get("first_sentence").getAsJsonArray();
+                        String moTa = "", cauDau[];
+                        if (firstSentence != null) {
+                            cauDau = new String[firstSentence.size()];
+                            for (int i = 0; i < firstSentence.size(); i++) {
+                                cauDau[i] = firstSentence.get(i).getAsString();
+                            }
+                            moTa = String.join(".", cauDau);
+                        }
+
+                        // do một quyển sách có thể trình bày bằng nhiều ngôn ngữ
+                        JsonArray languages = bookObj.getAsJsonArray("language");
+                        String[] ngonNgu = {};
+                        if (languages != null) {
+                            ngonNgu = new String[languages.size()];
+                            for (int i = 0; i < languages.size(); i++) {
+                                ngonNgu[i] = languages.get(i).getAsString();
+                            }
+                        }
+
+                        // array tác giả
+                        JsonArray author_key = bookObj.getAsJsonArray("author_key");
+                        JsonArray author_name = bookObj.getAsJsonArray("author_name");
+
+                        // array thể loại
+                        JsonArray subject_key = bookObj.getAsJsonArray("subject_key");
+                        JsonArray subject = bookObj.getAsJsonArray("subject");
+
+                        String phienBan = bookObj.get("_version_").getAsString();
+
+                        Sach sach = new Sach(idSach, tenSach, namXB, namSangTac, soTrang, ebookAccess, hasFulltext, publicScanB, urlLink, coverI, moTa, ngonNgu, phienBan, 0, 0, null);
+                        System.out.println(sach.toString());
+                        ds.add(sach);
+                        if (ds.size() >= 5) {
+                            return;
+                        }
+
+                        if (insertable) {
+
+                            sachDao.insert(sach);
+                            if (author_key != null) {
+                                for (int i = 0; i < author_key.size(); i++) {
+                                    String idTacGia = author_key.get(i).getAsString();
+                                    String tenTacGia = author_name.get(i).getAsString();
+                                    TacGia tacGia;
+
+                                    if (tacGiaDao.selectByID(idTacGia) == null) {
+                                        tacGia = new TacGia(idTacGia, tenTacGia);
+                                        tacGiaDao.insert(tacGia);
+                                    } else {
+                                        tacGia = tacGiaDao.selectByID(idTacGia);
+                                    }
+
+                                    System.out.println(tacGia.toString());
+                                    sachDao.insertSvTG(sach, tacGia);
+                                }
+                            }
+
+                            if (subject_key != null) {
+                                for (int i = 0; i < subject_key.size(); i++) {
+                                    String idTheLoai = subject_key.get(i).getAsString();
+                                    String tenTheLoai = subject.get(i).getAsString();
+
+                                    TheLoai theLoai;
+
+                                    if (theLoaiDao.selectByID(idTheLoai) == null) {
+                                        theLoai = new TheLoai(idTheLoai, tenTheLoai);
+                                        theLoaiDao.insert(theLoai);
+                                    } else {
+                                        theLoai = theLoaiDao.selectByID(idTheLoai);
+                                    }
+
+                                    System.out.println(theLoai.toString());
+                                    sachDao.insertSvTL(sach, theLoai);
+                                }
+
+                            }
+                        }
+
+                    }
+                }
+
+            } else {
+                System.out.println("Error: " + response.code() + " - " + response.message());
+            }
+        } catch (JsonSyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

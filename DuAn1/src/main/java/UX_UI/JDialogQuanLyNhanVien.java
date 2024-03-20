@@ -501,8 +501,8 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
                         .addGap(4, 4, 4)))
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Quản lý", jPanel1);
@@ -515,7 +515,7 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -714,6 +714,7 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         btnDelete.setEnabled(false);
         Extension.togglePassword(txtPass);
         Extension.setPlaceholder(txtUsername, "Nhập username");
+        Extension.setPlaceholder(txtHoTen, "Nhập họ tên");
 //        Extension.setPlaceholder(txtPass, "Nhập pass");
         Extension.setPlaceholder(txtEmail, "example@gmail.com");
         Extension.setPlaceholder(txtLuong, "Nhập lương");
@@ -838,6 +839,7 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         }
         cboNguoiQuanLi.setSelectedItem(nb.getIdQuanLy());
         txtLuong.setText(nb.getLuong() + "");
+        txtHoTen.setText(nb.getHoTen());
         if (nb.getFulltime()) {
             rdoYesFulltime.setSelected(true);
         } else {
@@ -922,7 +924,7 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         } else {
             gioiTinh = false;
         }
-        
+
         String hoTen = txtHoTen.getText();
 
         int luongThuong = Integer.parseInt(txtLuongThuong.getText());
@@ -960,18 +962,21 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
         if (txtUsername.getText().trim().isEmpty() || txtUsername.getText().trim().equals("Nhập username")) {
             thongBao += "Bạn chưa nhập Username\n";
         }
+        if (txtHoTen.getText().trim().isEmpty() || txtHoTen.getText().trim().equals("Nhập họ tên")) {
+            thongBao += "Bạn chưa nhập họ tên\n";
+        }
         String pass = String.valueOf(txtPass.getPassword());
         if (pass.trim().isEmpty()) {
             thongBao += "Bạn chưa nhập Pass\n";
         }
-        if (txtEmail.getText().trim().isEmpty() || txtEmail.getText().trim().equals("Nhập email")) {
+        if (txtEmail.getText().trim().isEmpty() || txtEmail.getText().trim().equals("example@gmail.com")) {
             thongBao += "Bạn chưa nhập Email\n";
         }
         if (txtLuong.getText().trim().isEmpty() || txtLuong.getText().trim().equals("Nhập lương")) {
             thongBao += "Bạn chưa nhập Lương\n";
         }
         String ngayThue = txtNgayThue.getText().trim();
-        if (ngayThue.isEmpty() || ngayThue.equals("Nhập ngày thuê")) {
+        if (ngayThue.isEmpty() || ngayThue.equals("DD-MM-YYYY")) {
             thongBao += "Bạn chưa nhập ngày thuê\n";
         } else if (!ngayThue.matches("\\d{1,2}-\\d{1,2}-\\d{4}")) {
             thongBao += "Ngày thuê phải có định dạng ngày-tháng-năm\n";
@@ -1000,12 +1005,12 @@ public class JDialogQuanLyNhanVien extends javax.swing.JDialog {
                 }
             }
         }
-        if (txtCaLam.getText().trim().isEmpty() || txtCaLam.getText().trim().equals("Nhập ca làm")) {
+        if (txtCaLam.getText().trim().isEmpty() || txtCaLam.getText().trim().equals("ca123-weekdays, ca456-weekends")) {
             thongBao += "Bạn chưa nhập ca làm\n";
         }
 
         String ngaySinh = txtNgaySinh.getText().trim();
-        if (ngaySinh.isEmpty() || ngaySinh.equals("Nhập ngày sinh")) {
+        if (ngaySinh.isEmpty() || ngaySinh.equals("DD-MM-YYYY")) {
             thongBao += "Bạn chưa nhập ngày sinh\n";
         } else if (!ngaySinh.matches("\\d{1,2}-\\d{1,2}-\\d{4}")) {
             thongBao += "Ngày sinh phải có định dạng ngày-tháng-năm\n";
