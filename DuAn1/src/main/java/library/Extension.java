@@ -160,6 +160,7 @@ public class Extension {
 
 		return matcher.matches();
 	}
+
 	public static boolean isEmail(String email) {
 		String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
 
