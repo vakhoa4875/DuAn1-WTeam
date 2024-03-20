@@ -10,6 +10,7 @@ import dao.SachDAO;
 import dao.TacGiaDAO;
 import dao.TheLoaiDAO;
 import java.io.IOException;
+import library.URL_Dealer;
 //import library.URL_Dealer;
 import model.Sach;
 import model.TacGia;
@@ -68,6 +69,7 @@ public class insertSach {
                         String idSach = bookObj.get("key").getAsString();
                         System.out.println(idSach);
                         if (sachDao.selectByID(idSach) != null) {
+                            System.out.println(idSach);
                             continue;
                         }
                         String tenSach = bookObj.get("title").getAsString();
@@ -84,7 +86,7 @@ public class insertSach {
                         String coverI = "http://covers.openlibrary.org/b/id/" + bookObj.get("cover_i").getAsString() + "-L.jpg";
                         
                         // nếu muốn tải ảnh khi pull data từ api
-//                        URL_Dealer.downloadImage(coverI, false);
+                        URL_Dealer.downloadImage(coverI, false);
 
 
                         // tìm trên json méo thấy mô tả nên lấy câu đầu tiên thay thế :>>

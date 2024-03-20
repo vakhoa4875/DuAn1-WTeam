@@ -71,4 +71,33 @@ public class URL_Dealer {
             System.err.println("Error downloading image: " + e.getMessage());
         }
     }
+    public static void downloadImageToLogo(String imageUrl, boolean overwrite) {
+        String destinationDirectory = "logos/";
+        try {
+            URL url = new URL(imageUrl);
+
+            // Open a stream to read data from the URL
+            try (InputStream in = url.openStream()) {
+                // Create the destination directory if it doesn't exist
+                Path destinationPath = Path.of(destinationDirectory);
+                Files.createDirectories(destinationPath);
+
+                // Extract the file name from the URL
+                String fileName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+
+                // Save the image to the destination directory
+                Path destinationFile = destinationPath.resolve(fileName);
+
+                if (Files.exists(destinationFile) && !overwrite) {
+                    System.out.println("File already exists: " + destinationFile);
+                } else {
+                    Files.copy(in, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+                    System.out.println("Image downloaded successfully to: " + destinationFile);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error downloading image: " + e.getMessage());
+        }
+    }
 }
