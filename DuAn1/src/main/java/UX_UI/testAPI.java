@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import library.DialogHelper;
 import library.Extension;
+import library.URL_Dealer;
 import model.Sach;
 
 /**
@@ -31,7 +32,7 @@ public class testAPI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         btnSearch.addActionListener(e -> {
             String keyword = txtSearch.getText();
-            listSach = Extension.getListSachfromOpenLibrary(keyword, 5, false, false);
+            listSach = Extension.getListSachfromOpenLibrary(keyword, 25, true, false);
             for (Sach s : listSach) {
                 System.out.println(s.toString());
             }
@@ -73,6 +74,7 @@ public class testAPI extends javax.swing.JFrame {
         }
 
         dao.insert(temp);
+        URL_Dealer.downloadImage(temp.getCoverI(), false);
 
         if (dao.selectByID(temp.getIdSach()) != null) {
             DialogHelper.alert(null, "Insert the book named: " + temp.getTenSach() + " successfully!!");
