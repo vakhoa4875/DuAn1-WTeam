@@ -74,18 +74,15 @@ public class Extension {
 		for (User user : userList) {
 			if ((username.equals(user.getUserName()) || username.equals(user.getEmail()))) {
 				if (pass.equals(user.getPassword())) {
-//                    Auth.user = user0;
-//                    System.out.println(user0.getUserID());
-//                    System.out.println(user0.getPassword());
-					System.out.println("login successfully");
+//					System.out.println("login successfully");
 					return 1;
 				} else {
-					System.out.println("Sai Mật Khẩu! Vui lòng thử lại");
+//					System.out.println("Sai Mật Khẩu! Vui lòng thử lại");
 					return 0;
 				}
 			}
 		}
-		System.out.println("Tài khoản không tồn tại! Vui lòng kiểm tra thông tin đăng nhập!");
+//		System.out.println("Tài khoản không tồn tại! Vui lòng kiểm tra thông tin đăng nhập!");
 		return -1;
 	}
 

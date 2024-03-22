@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized;
 class TestExtension {
 	
 	@Parameterized.Parameters
-	public static Collection input() {
+	public static Collection<Object[]> input() {
 		return null;
 	}
 
