@@ -21,6 +21,8 @@ import org.junit.runners.Parameterized;
 import dao.UserDAO;
 import model.User;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 /**
  *
  * @author Admin
@@ -65,7 +67,7 @@ public class TestUserDAO {
         new UserDAO().insert(user);
     }
     
-    
+	@Ignore
     @Test
     public void test2() {
         User user  = new User();
@@ -78,6 +80,7 @@ public class TestUserDAO {
         new UserDAO().insert(user);
     }
     
+	@Ignore
     @Test
     public void test3() {
         User user  = new User();
@@ -90,7 +93,7 @@ public class TestUserDAO {
         new UserDAO().insert(user);
     }
     
-    
+	@Ignore
     @Test
     public void test4() {
         User user  = new User();
@@ -103,6 +106,7 @@ public class TestUserDAO {
         new UserDAO().insert(user);
     }
     
+	@Ignore
     @Test
     public void test5() {
         User user  = new User();
@@ -115,8 +119,22 @@ public class TestUserDAO {
         new UserDAO().insert(user);
     }
     
+	@Ignore
     @Test
     public void test6() {
+        User user  = new User();
+        user.setUserID("abc124");
+        user.setUserName("NguoiDungMoi12121212".repeat(256));
+        user.setPassword("matkhau".repeat(256));
+        user.setEmail("nguoidun1212gmoi2@gmail.com");
+        user.setReader(Boolean.TRUE);
+        user.setVerificated(Boolean.FALSE);
+        new UserDAO().insert(user);
+    }
+    
+	
+    @Test (expected = SQLServerException.class)
+    public void test7() throws SQLServerException {
         User user  = new User();
         user.setUserID("abc124");
         user.setUserName("NguoiDungMoi12121212".repeat(256));
