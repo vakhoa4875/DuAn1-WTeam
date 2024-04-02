@@ -4,12 +4,22 @@
  */
 package testchauphat;
 
-import UX_UI.JDialogQuanLyPhongBan;
-import dao.UserDAO;
-import model.User;
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import dao.UserDAO;
+import model.User;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -17,8 +27,33 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
  *
  * @author Admin
  */
+@RunWith(Parameterized.class)
 public class TestUserDAO {
+	
+	private String userID;
+    private String userName;
+    private String password;
+    private String email;
+    private Boolean reader, verificated;
     
+    
+    
+//    public static Collection input() {
+//    	
+//    }
+    
+	public TestUserDAO(String userID, String userName, String password, String email, Boolean reader,
+			Boolean verificated) {
+		super();
+		this.userID = userID;
+		this.userName = userName;
+		this.password = password;
+		this.email = email;
+		this.reader = reader;
+		this.verificated = verificated;
+	}
+
+
 	@Ignore
     @Test
     public void test1() {
