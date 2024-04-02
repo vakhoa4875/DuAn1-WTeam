@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="21" passed="19" failed="2" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-03-21T07:51:35 ICT" name="Default suite" finished-at="2024-03-21T07:52:44 ICT" duration-ms="69012">
+    <groups>
+    </groups>
+    <test started-at="2024-03-21T07:51:35 ICT" name="Default test" finished-at="2024-03-21T07:52:44 ICT" duration-ms="69012">
+      <class name="ui.TestGetData">
+        <test-method is-config="true" signature="start()[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:51:35 ICT" name="start" finished-at="2024-03-21T07:51:35 ICT" duration-ms="18" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- start -->
+        <test-method signature="testGetListSach(java.lang.String,int,boolean,boolean)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:51:35 ICT" name="testGetListSach" data-provider="BookData" finished-at="2024-03-21T07:51:47 ICT" duration-ms="11963" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[dune]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetListSach -->
+        <test-method signature="testGetListSach(java.lang.String,int,boolean,boolean)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:51:47 ICT" name="testGetListSach" data-provider="BookData" finished-at="2024-03-21T07:51:48 ICT" duration-ms="523" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Headfirst Java]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetListSach -->
+        <test-method signature="testGetListSach(java.lang.String,int,boolean,boolean)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:51:48 ICT" name="testGetListSach" data-provider="BookData" finished-at="2024-03-21T07:52:05 ICT" duration-ms="17516" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Witch]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetListSach -->
+        <test-method signature="testGetListSach(java.lang.String,int,boolean,boolean)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:05 ICT" name="testGetListSach" data-provider="BookData" finished-at="2024-03-21T07:52:17 ICT" duration-ms="11519" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Rune]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetListSach -->
+        <test-method signature="testGetListSach(java.lang.String,int,boolean,boolean)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:17 ICT" name="testGetListSach" data-provider="BookData" finished-at="2024-03-21T07:52:34 ICT" duration-ms="16847" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[sense]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetListSach -->
+        <test-method signature="testGetListSach(java.lang.String,int,boolean,boolean)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:34 ICT" name="testGetListSach" data-provider="BookData" finished-at="2024-03-21T07:52:43 ICT" duration-ms="9898" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[humour]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetListSach -->
+        <test-method signature="testLogin(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:43 ICT" name="testLogin" data-provider="LoginData1" finished-at="2024-03-21T07:52:44 ICT" duration-ms="62" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[noiBo]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[123]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin -->
+        <test-method signature="testLogin(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLogin" data-provider="LoginData1" finished-at="2024-03-21T07:52:44 ICT" duration-ms="58" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[nvqlsach]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Get book failed expected [false] but found [true]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Get book failed expected [false] but found [true]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1578)
+at org.testng.Assert.assertFalse(Assert.java:79)
+at ui.TestGetData.testLogin(TestGetData.java:79)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:228)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:819)
+at org.testng.TestRunner.run(TestRunner.java:619)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+at org.testng.TestNG.runSuites(TestNG.java:1134)
+at org.testng.TestNG.run(TestNG.java:1101)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin -->
+        <test-method signature="testLogin(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLogin" data-provider="LoginData1" finished-at="2024-03-21T07:52:44 ICT" duration-ms="37" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chauphat2111]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[123]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin -->
+        <test-method signature="testLogin(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLogin" data-provider="LoginData1" finished-at="2024-03-21T07:52:44 ICT" duration-ms="42" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[khoa123]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[123]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin -->
+        <test-method signature="testLogin(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLogin" data-provider="LoginData1" finished-at="2024-03-21T07:52:44 ICT" duration-ms="32" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[reader]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[123]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin -->
+        <test-method signature="testLogin0(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLogin0" data-provider="LoginData0" finished-at="2024-03-21T07:52:44 ICT" duration-ms="31" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[noiBo]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin0 -->
+        <test-method signature="testLogin0(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLogin0" data-provider="LoginData0" finished-at="2024-03-21T07:52:44 ICT" duration-ms="33" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[nvqlsach]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[123]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Get book failed expected [false] but found [true]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Get book failed expected [false] but found [true]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1578)
+at org.testng.Assert.assertFalse(Assert.java:79)
+at ui.TestGetData.testLogin0(TestGetData.java:101)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:228)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:819)
+at org.testng.TestRunner.run(TestRunner.java:619)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+at org.testng.TestNG.runSuites(TestNG.java:1134)
+at org.testng.TestNG.run(TestNG.java:1101)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin0 -->
+        <test-method signature="testLogin0(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLogin0" data-provider="LoginData0" finished-at="2024-03-21T07:52:44 ICT" duration-ms="37" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chauphat2111]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin0 -->
+        <test-method signature="testLogin0(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLogin0" data-provider="LoginData0" finished-at="2024-03-21T07:52:44 ICT" duration-ms="39" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[khoa123]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin0 -->
+        <test-method signature="testLogin0(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLogin0" data-provider="LoginData0" finished-at="2024-03-21T07:52:44 ICT" duration-ms="32" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[reader]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLogin0 -->
+        <test-method signature="testLoginMinus1(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLoginMinus1" data-provider="LoginDataMinus1" finished-at="2024-03-21T07:52:44 ICT" duration-ms="35" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[noiBox]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoginMinus1 -->
+        <test-method signature="testLoginMinus1(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLoginMinus1" data-provider="LoginDataMinus1" finished-at="2024-03-21T07:52:44 ICT" duration-ms="31" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[xnvqlsach]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[123]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoginMinus1 -->
+        <test-method signature="testLoginMinus1(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLoginMinus1" data-provider="LoginDataMinus1" finished-at="2024-03-21T07:52:44 ICT" duration-ms="38" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[xchauphat2111]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoginMinus1 -->
+        <test-method signature="testLoginMinus1(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLoginMinus1" data-provider="LoginDataMinus1" finished-at="2024-03-21T07:52:44 ICT" duration-ms="33" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[xkhoa123]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoginMinus1 -->
+        <test-method signature="testLoginMinus1(java.lang.String,java.lang.String)[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="testLoginMinus1" data-provider="LoginDataMinus1" finished-at="2024-03-21T07:52:44 ICT" duration-ms="29" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[xreader]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoginMinus1 -->
+        <test-method is-config="true" signature="end()[pri:0, instance:ui.TestGetData@3cce5371]" started-at="2024-03-21T07:52:44 ICT" name="end" finished-at="2024-03-21T07:52:44 ICT" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- end -->
+      </class> <!-- ui.TestGetData -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
